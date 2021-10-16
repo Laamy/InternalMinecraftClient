@@ -4,8 +4,7 @@
 
 // SDK
 #include "SDK/Actor.h"
-#include "Client/Hooks/Actor.h"
-#include "dllmain.h"
+#include "Utils/Utils.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -33,11 +32,8 @@ void callback(Actor* player) {
 
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
-
-        uintptr_t baseAddr = (uintptr_t)GetModuleHandleA("Minecraft.Windows.exe");
-
-        uintptr_t hookAddr = (uintptr_t)(baseAddr + 0x1D6A220); // F3 0F 10 81 ? ? ? ? 41 0F 2F 00
-        uintptr_t keymapAddr = (uintptr_t)(baseAddr + 0x775230);// 48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA
+        uintptr_t hookAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00");
+        uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA");
 
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
