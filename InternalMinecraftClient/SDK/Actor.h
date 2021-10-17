@@ -30,10 +30,11 @@ public: // Functions
         Position()->upper.z = v.z + 0.6f;
     };
 
-    void setFieldOfView(float v) { // this sig doesnt work rn
-        static unsigned int offset = 0x1140;
-        offset = *reinterpret_cast<int*>(addrMap[0]);
-        *(float*)((uintptr_t)(this) + offset) = v;
+    void setFieldOfView(float v) {
+        //static unsigned int offset = addrMap[0]; // 0x1140
+        //if (manualOffset != 0x07) offset = manualOffset;
+        *(float*)((uintptr_t)(this) + 0x10F0) = v;
+        *(float*)((uintptr_t)(this) + 0x1140) = v;
     }
 public: // Vars
     Vector2* BodyRots() {

@@ -26,7 +26,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
 bool wasHeld = false;
 
 void callback(Actor* player) {
-    player->InitOffsets(map);
+    player->InitOffsets(map); // offset init doesnt work
 
     if (keymap[(int)'C'])
         player->setFieldOfView(0.2f);
@@ -41,7 +41,7 @@ void Init(HMODULE c) {
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA");
 
         // Offset scanning
-        map[0] = Mem::findSig("F3 0F 59 B3 ? ? ? ? 0F") + 4;
+        map[0] = *reinterpret_cast<int*>(Mem::findSig("F3 0F 59 B3 ? ? ? ? 0F") + 4);
 
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
