@@ -155,6 +155,7 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SDK\MinecraftUIRenderContext.h" />
     <ClInclude Include="Utils\Math.h" />
     <ClInclude Include="SDK\Actor.h" />
     <ClInclude Include="SDK\Dimension.h" />

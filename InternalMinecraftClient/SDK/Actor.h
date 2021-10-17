@@ -1,12 +1,14 @@
-#include <Windows.h>
 #include "../Utils/Math.h"
-#include <bitset>
-#include <vector>
-#include <functional>
-#include "Dimension.h"
-#include "Level.h"
+#include "../SDK/Dimension.h"
+#include "../SDK/Level.h"
 
 class Actor {
+public:
+    void InitOffsets(std::map<uint64_t, uint64_t> map) {
+        addrMap = map;
+    }
+
+    std::map<uint64_t, uint64_t> addrMap;
 private: // Large chunks of offsets to shorten updating
     uintptr_t onground() {
         return 0x1D8;
@@ -28,8 +30,10 @@ public: // Functions
         Position()->upper.z = v.z + 0.6f;
     };
 
-    void setFieldOfView(float v) {
-        *(float*)((uintptr_t)(this) + 0x1140) = v; // 0x1140
+    void setFieldOfView(float v) { // this sig doesnt work rn
+        static unsigned int offset = 0x1140;
+        offset = *reinterpret_cast<int*>(addrMap[0]);
+        *(float*)((uintptr_t)(this) + offset) = v;
     }
 public: // Vars
     Vector2* BodyRots() {

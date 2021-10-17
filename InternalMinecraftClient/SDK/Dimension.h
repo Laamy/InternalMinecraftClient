@@ -1,3 +1,5 @@
+#include <string>
+
 class Dimension {
 public: // Vars
     std::string* DimensionName() {

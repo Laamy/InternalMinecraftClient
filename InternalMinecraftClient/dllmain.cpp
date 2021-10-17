@@ -16,6 +16,8 @@ key _key;
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 
+std::map<uint64_t, uint64_t> map = std::map<uint64_t, uint64_t>();
+
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     keymap[c] = v;
     _key(c, v);
@@ -24,6 +26,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
 bool wasHeld = false;
 
 void callback(Actor* player) {
+    player->InitOffsets(map);
 
     if (keymap[(int)'C'])
         player->setFieldOfView(0.2f);
@@ -31,9 +34,14 @@ void callback(Actor* player) {
 };
 
 void Init(HMODULE c) {
-    if (MH_Initialize() == MH_OK) {
+    if (MH_Initialize() == MH_OK) { // CROSS VERSION! (time to test omfg)
+
+        // Function hooks
         uintptr_t hookAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA");
+
+        // Offset scanning
+        map[0] = Mem::findSig("F3 0F 59 B3 ? ? ? ? 0F") + 4;
 
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
