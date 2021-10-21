@@ -144,7 +144,7 @@ public: // Functions
 		Camera.upper = v;
 	};
 
-	void ExitPortalAnimation() {
+	void PortalAnimation() {
 		this->NetherPortalAnimation = Vector2(1, 1);
 	};
 
