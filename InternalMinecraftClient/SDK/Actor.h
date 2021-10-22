@@ -3,7 +3,26 @@
 #include "../SDK/Level.h"
 
 class Actor {
-private:
+private: // VTable
+	virtual void Function0(); //
+	virtual void Function1(); //
+	virtual void Function2(); //
+	virtual void Function3(); //
+	virtual void Function4(); //
+	virtual void Function5(); //
+	virtual void Function6(); //
+	virtual void Function7(); //
+	virtual void Function8(); //
+	virtual void Function9(); //
+	virtual void Function10(); //
+	virtual void Function11(); //
+	virtual void Function12(); //
+	virtual void Function13(); //
+	virtual void Function14(); //
+public:
+	virtual Vector3* getPos(); //
+
+private: // Variables
 	char pad_0x0000[0x138]; //0x0000
 public:
 	Vector2 CameraRots; //0x0138
