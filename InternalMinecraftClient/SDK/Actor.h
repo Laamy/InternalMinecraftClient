@@ -3,7 +3,7 @@
 #include "../SDK/Level.h"
 
 class Actor {
-private: // VTable
+public: // VTable
 	virtual void Function0(); //
 	virtual void Function1(); //
 	virtual void Function2(); //
