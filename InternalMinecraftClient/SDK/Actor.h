@@ -1,27 +1,10 @@
 #include "../Utils/Math.h"
 #include "../SDK/Dimension.h"
 #include "../SDK/Level.h"
+#include "BlockSource.h"
+#include "GameMode.h"
 
 class Actor {
-public: // VTable
-	virtual void Function0(); //
-	virtual void Function1(); //
-	virtual void Function2(); //
-	virtual void Function3(); //
-	virtual void Function4(); //
-	virtual void Function5(); //
-	virtual void Function6(); //
-	virtual void Function7(); //
-	virtual void Function8(); //
-	virtual void Function9(); //
-	virtual void Function10(); //
-	virtual void Function11(); //
-	virtual void Function12(); //
-	virtual void Function13(); //
-	virtual void Function14(); //
-public:
-	virtual Vector3* getPos(); //
-
 private: // Variables
 	char pad_0x0000[0x138]; //0x0000
 public:
@@ -73,8 +56,9 @@ public:
 	__int32 SpeedCalc2; //0x0348
 	float MoveTick; //0x034C
 private:
-	char pad_0x0350[0x18]; //0x0350
+	char pad_0x0350[0x10]; //0x0350
 public:
+	BlockSource* blockSource; //0x0360
 	Dimension* dimension; //0x0368
 	Level* level; //0x0370
 private:
@@ -106,7 +90,11 @@ private:
 public:
 	unsigned char CanFly; //0x098C 
 private:
-	char pad_0x098D[0x6CB]; //0x098D
+	char pad_0x098D[0x23F]; //0x098D
+public: // 1.17.34 im unsure how to find nor where gamemode is rn sorry lol
+	GameMode* gameMode; //0x0BCC 
+private:
+	char pad_0x0BD4[0x484]; //0x0BD4
 	float N0000020C; //0x1058 
 	char pad_0x105C[0xEC]; //0x105C
 public:
