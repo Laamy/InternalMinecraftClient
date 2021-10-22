@@ -110,10 +110,10 @@ public:
 private:
 	char pad_0x2208[0x2C]; //0x2208
 public:
-	//Vector3 Position2; //0x2200
-	__int32 PosX; //0x2234
-	__int32 PosY; //0x2238
-	__int32 PosZ; //0x223C
+	Vector3i Position2; //0x2200
+	//__int32 PosX; //0x2234
+	//__int32 PosY; //0x2238
+	//__int32 PosZ; //0x223C
 private:
 	char pad_0x2240[0x40]; //0x2240
 public:
