@@ -31,6 +31,8 @@ void callback(Actor* player, void* a2) {
         player->SetFieldOfView(0.2f);
     else player->SetFieldOfView(1);
 
+    player->fallDistance = 0;
+
 
     _tick(player, a2);
 };

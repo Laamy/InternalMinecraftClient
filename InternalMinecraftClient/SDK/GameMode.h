@@ -1,6 +1,6 @@
 #include "../Utils/Math.h"
 
-struct GameMode {
+class GameMode {
 public: // VTable
 	virtual void destructorGameMode();
 	virtual bool startDestroyBlock(Vector3i* pos, char blockFace, bool a3);
@@ -15,8 +15,10 @@ public: // VTable
 	virtual float getPickRange(__int64* inputMode, bool a2);
 	virtual bool useItem(__int64* itemStack);
 	virtual bool useItemOn(__int64* itemStack, Vector3i* pos, char blockFace, Vector3* a4, __int64* block);
-	virtual bool interact(Actor* actor, Vector3* pos);
-	virtual bool attack(Actor* actor);
+private:
+	virtual bool interact(class Actor* actor, Vector3* pos);
+	virtual bool attack(class  Actor* actor);
+public:
 	virtual void releaseUsingItem();
 	// Im aware there are 3 functions down here aswell but they seem fucking useless tbh
 

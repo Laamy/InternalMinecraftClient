@@ -155,7 +155,6 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SDK\BlockSource.h" />
     <ClInclude Include="SDK\GameMode.h" />
     <ClInclude Include="SDK\MinecraftUIRenderContext.h" />
     <ClInclude Include="Utils\Math.h" />

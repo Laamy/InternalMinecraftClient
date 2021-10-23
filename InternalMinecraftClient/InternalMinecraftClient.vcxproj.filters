@@ -41,9 +41,6 @@
     <ClInclude Include="SDK\MinecraftUIRenderContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\BlockSource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SDK\GameMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -1,8 +1,9 @@
 #include "../Utils/Math.h"
 #include "../SDK/Dimension.h"
 #include "../SDK/Level.h"
-#include "BlockSource.h"
 #include "GameMode.h"
+
+class BlockSource {};
 
 class Actor {
 private: // Variables
@@ -16,8 +17,8 @@ public:
 	Vector3 EyeHeight; //0x0158
 private:
 	char pad_0x0164[0x70]; //0x0164
-public:
-	float JumpAnimation; //0x01D4
+public: // 0x1BC
+	float fallDistance; //0x01D4
 	unsigned char onGround; //0x01D8
 	unsigned char onGround2; //0x01D9
 	unsigned char WalkingIntoBlock;
@@ -137,19 +138,19 @@ public:
 	Vector2 SetRotations2; //0x2418
 
 public: // Functions
-	void SetPos(Vector3 v) {
-		Position.lower.x = v.x;
-		Position.lower.y = v.y;
-		Position.lower.z = v.z;
-
-		Position.upper.x = v.x + 0.6f;
-		Position.upper.y = v.y + 1.8f;
-		Position.upper.z = v.z + 0.6f;
-	};
-
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
 		Camera.upper = v;
+	};
+
+	void SetPos(Vector3 v) {
+		this->Position.lower.x = v.x;
+		this->Position.lower.y = v.y;
+		this->Position.lower.z = v.z;
+
+		this->Position.upper.x = v.x + 0.6f;
+		this->Position.upper.y = v.y + 1.8f;
+		this->Position.upper.z = v.z + 0.6f;
 	};
 
 	void PortalAnimation() {
