@@ -46,6 +46,32 @@ struct Vector3 {
 	}
 };
 
+struct Vector4 {
+	union {
+		struct {
+			float w, x, y, z;
+		};
+		float arr[3];
+	};
+
+	Vector4(float w = 0, float x = 0, float y = 0, float z = 0) {
+		this->w = w;
+		this->x = x;
+		this->y = y;
+		this->z = z;
+	};
+
+	bool operator == (Vector4 v) { return v.w == w && v.x == x && v.y == y && v.z == z; };
+	bool operator != (Vector4 v) { return v.w != w || v.x != x || v.y != y || v.z != z; };
+
+	float Distance(Vector4 v) {
+		float dX = x - v.x;
+		float dY = y - v.y;
+		float dZ = z - v.z;
+		return std::sqrt(dX * dX + dY * dY + dZ * dZ);
+	}
+};
+
 
 struct Vector3i {
 	union {

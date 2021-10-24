@@ -5,6 +5,7 @@
 // SDK
 #include "SDK/Actor.h"
 #include "Utils/Utils.h"
+#include "SDK/MinecraftUIRenderContext.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -13,6 +14,11 @@ tick _tick;
 
 typedef void(__thiscall* key)(uint64_t, bool);
 key _key;
+
+class tRender {};
+ 
+typedef void(__thiscall* render)(MinecraftUIRenderContext* ctx, tRender* a2);
+render _render;
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 std::map<uint64_t, bool> cancelKeymap = std::map<uint64_t, bool>();
@@ -23,7 +29,10 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         _key(c, v);
 };
 
-bool wasHeld = false;
+void tCallback(MinecraftUIRenderContext* ctx, tRender* a2) {
+
+    _render(ctx, a2);
+};
 
 void callback(Actor* player, void* a2) {
 
@@ -40,12 +49,16 @@ void Init(HMODULE c) {
         // Function hooks
         uintptr_t hookAddr = Mem::findSig("48 83 EC ? 80 B9 ? ? ? ? ? 75 23");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89"); // 48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B
+        uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
         };
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
+        };
+        if (MH_CreateHook((void*)renderCtx, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
+            MH_EnableHook((void*)renderCtx);
         };
     };
 }
