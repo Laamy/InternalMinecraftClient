@@ -35,10 +35,13 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
     renderUtil.Init(ctx);
 
-    renderUtil.Draw(Vector2(10, 10), Vector2(50, 50), _RGB(33, 33, 33, 178));
+    //renderUtil.DrawOutline(Vector2(10, 10), Vector2(52, 80), _RGB(33, 33, 33, 128), 2);
 
     if (cancelUiRender == false)
         _render(a1, ctx);
+
+    renderUtil.Draw(Vector2(10, 10), Vector2(52, 20), _RGB(44, 44, 44, 128));
+    renderUtil.Draw(Vector2(10, 30), Vector2(52, 20), _RGB(55, 55, 55, 128));
 
 };
 
