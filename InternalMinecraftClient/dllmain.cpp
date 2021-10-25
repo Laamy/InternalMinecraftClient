@@ -5,7 +5,7 @@
 // SDK
 #include "SDK/Actor.h"
 #include "Utils/Utils.h"
-#include "SDK/MinecraftUIRenderContext.h"
+#include "Utils/RenderUtils.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -14,10 +14,8 @@ tick _tick;
 
 typedef void(__thiscall* key)(uint64_t, bool);
 key _key;
-
-class tRender {};
  
-typedef void(__thiscall* render)(MinecraftUIRenderContext* ctx, tRender* a2);
+typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
@@ -29,16 +27,33 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         _key(c, v);
 };
 
-void tCallback(MinecraftUIRenderContext* ctx, tRender* a2) {
+bool cancelUiRender = false;
 
-    _render(ctx, a2);
+RenderUtils renderUtil = RenderUtils();
+
+void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
+
+    renderUtil.Init(ctx);
+
+    renderUtil.Draw(Vector2(10, 10), Vector2(50, 50), _RGB(33, 33, 33, 178));
+
+    if (cancelUiRender == false)
+        _render(a1, ctx);
+
 };
 
 void callback(Actor* player, void* a2) {
 
-    if (keymap[(int)'C'])
+    if (keymap[(int)'C']) {
         player->SetFieldOfView(0.2f);
-    else player->SetFieldOfView(1);
+        cancelUiRender = true;
+    }
+    else {
+        player->SetFieldOfView(1);
+        cancelUiRender = false;
+    }
+
+    _key(0x11, true);
 
     _tick(player, a2);
 };
