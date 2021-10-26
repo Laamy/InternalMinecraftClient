@@ -34,25 +34,19 @@ RenderUtils renderUtil = RenderUtils();
 int frame = 0;
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
-
-    if (cancelUiRender == false)
-        _render(a1, ctx);
+    _render(a1, ctx);
 
     if (renderUtil.ctx == nullptr)
         renderUtil.Init(ctx);
 
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
-        renderUtil.Clear(_RGB(33, 33, 33, 100));
+        //renderUtil.Clear(_RGB(33, 33, 33, 100));
         frame = 0;
     }
 };
 
-int flicker = 0;
-
 void callback(Actor* player, void* a2) {
-
-    if (player == nullptr) return;
 
     if (keymap[(int)'C']) {
         player->SetFieldOfView(0.2f);
@@ -64,21 +58,19 @@ void callback(Actor* player, void* a2) {
     }
 
     //_key(0x11, true);
-
-    _tick(player, a2);
 };
 
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
 
         // Function hooks
-        uintptr_t hookAddr = Mem::findSig("48 83 EC ? 80 B9 ? ? ? ? ? 75 23");
+        //uintptr_t hookAddr = Mem::findSig("48 83 EC ? 80 B9 ? ? ? ? ? 75 23");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89"); // 48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         
-        if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
-            MH_EnableHook((void*)hookAddr);
-        };
+        //if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
+        //    MH_EnableHook((void*)hookAddr);
+        //};
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
         };
