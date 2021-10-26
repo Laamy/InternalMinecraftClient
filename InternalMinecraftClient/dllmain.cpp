@@ -21,26 +21,7 @@ render _render;
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 std::map<uint64_t, bool> cancelKeymap = std::map<uint64_t, bool>();
 
-Actor* plr = nullptr;
-
-void keyUp(uint64_t c) {
-    if (plr == nullptr) return;
-    if (c == (int)'F') {
-        plr->Velocity = Vector3(0, 0, 0);
-    }
-};
-
-void keyDown(uint64_t c) {
-    if (plr == nullptr) return;
-};
-
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
-    if (v == false) {
-        keyUp(c);
-    }
-    else
-    { keyDown(c); }
-
     keymap[c] = v;
     if (cancelKeymap[c] == false)
         _key(c, v);
@@ -50,40 +31,21 @@ bool cancelUiRender = false;
 
 RenderUtils renderUtil = RenderUtils();
 
-Vector2 offsetStokes = Vector2(25, 25);
+int frame = 0;
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
-    if (ctx != nullptr && a1 != nullptr)
-        if (cancelUiRender == false)
-            _render(a1, ctx);
-
-    if (plr == nullptr || ctx == nullptr || a1 == nullptr) {
-        renderUtil.ctx == nullptr;
-        return;
-    }
+    if (cancelUiRender == false)
+        _render(a1, ctx);
 
     if (renderUtil.ctx == nullptr)
         renderUtil.Init(ctx);
 
-    //renderUtil.DrawOutline(Vector2(10, 10), Vector2(52, 80), _RGB(33, 33, 33, 128), 2);
-
-    if (keymap[38])  offsetStokes.y--;
-    if (keymap[40])  offsetStokes.y++;
-    if (keymap[37])  offsetStokes.x--;
-    if (keymap[39])  offsetStokes.x++;
-
-    if (keymap[(int)'W']) { renderUtil.Draw(Vector2(21 + offsetStokes.x, offsetStokes.y), Vector2(20, 20), _RGB(55, 55, 55, 160)); }
-    else { renderUtil.Draw(Vector2(21 + offsetStokes.x, offsetStokes.y), Vector2(20, 20), _RGB(44, 44, 44, 160)); }
-    if (keymap[(int)'A']) { renderUtil.Draw(Vector2(offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(55, 55, 55, 160)); }
-    else { renderUtil.Draw(Vector2(offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(44, 44, 44, 160)); }
-    if (keymap[(int)'S']) { renderUtil.Draw(Vector2(21 + offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(55, 55, 55, 160)); }
-    else { renderUtil.Draw(Vector2(21 + offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(44, 44, 44, 160)); }
-    if (keymap[(int)'D']) { renderUtil.Draw(Vector2(21 * 2 + offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(55, 55, 55, 160)); }
-    else { renderUtil.Draw(Vector2(21 * 2 + offsetStokes.x, 21 + offsetStokes.y), Vector2(20, 20), _RGB(44, 44, 44, 160)); }
-    if (keymap[(int)' ']) { renderUtil.Draw(Vector2(offsetStokes.x, 42 + offsetStokes.y), Vector2(62, 20), _RGB(55, 55, 55, 160)); }
-    else { renderUtil.Draw(Vector2(offsetStokes.x, 42 + offsetStokes.y), Vector2(62, 20), _RGB(44, 44, 44, 160)); }
-
+    frame++;
+    if (frame == 3) { // stop from rendering 3 times a frame
+        renderUtil.Clear(_RGB(33, 33, 33, 100));
+        frame = 0;
+    }
 };
 
 int flicker = 0;
@@ -101,25 +63,7 @@ void callback(Actor* player, void* a2) {
         cancelUiRender = false;
     }
 
-    if (keymap[(int)'F']) {
-        auto speedMod = 4.0f;
-
-        float calcYaw = (player->CameraRots.y + 90.0f) * (PI / 180.0f);
-        
-        player->Velocity.x = cos(calcYaw) * speedMod;
-        player->Velocity.y = 0.05f * speedMod;
-        player->Velocity.z = sin(calcYaw) * speedMod;
-
-        if (flicker >= 100) {
-            player->Velocity.y = -1.25f;
-            flicker = 0;
-        }
-        flicker++;
-    }
-
     //_key(0x11, true);
-
-    plr = player;
 
     _tick(player, a2);
 };
