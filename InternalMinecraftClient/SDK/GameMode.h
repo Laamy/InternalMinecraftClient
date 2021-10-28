@@ -15,10 +15,8 @@ public: // VTable
 	virtual float getPickRange(__int64* inputMode, bool a2);
 	virtual bool useItem(__int64* itemStack);
 	virtual bool useItemOn(__int64* itemStack, Vector3i* pos, char blockFace, Vector3* a4, __int64* block);
-private:
 	virtual bool interact(class Actor* actor, Vector3* pos);
 	virtual bool attack(class  Actor* actor);
-public:
 	virtual void releaseUsingItem();
 	// Im aware there are 3 functions down here aswell but they seem fucking useless tbh
 

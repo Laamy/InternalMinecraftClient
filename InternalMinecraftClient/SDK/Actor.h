@@ -166,4 +166,8 @@ public: // Functions
 		*(float*)((uintptr_t)(this) + 0x1058) = v;
 		//*(float*)((uintptr_t)(this) + 0x1140) = v;
 	}
+
+	float FieldOfView() {
+		return *reinterpret_cast<float*>(this + 0x1058);
+	}
 };

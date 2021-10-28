@@ -1,6 +1,6 @@
 #include "../Utils/Math.h"
 
-class GameMode {
+class ClientInstance {
 public:
 	char pad_0x0000[0x00B8]; //0x0000
 public:
