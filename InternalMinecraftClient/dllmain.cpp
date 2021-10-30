@@ -60,7 +60,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
         if (renderClickUI) {
-            renderUtil.Clear(_RGB(33, 33, 33, 100));
+            renderUtil.Clear(_RGB(33, 33, 33, 150));
 
             int cat = 0;
             for (std::string x : categories) {
@@ -69,6 +69,11 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                 cat++;
             }
         }
+
+        for (float modId = 0; modId < 5; ++modId) {
+            renderUtil.Draw(Vector2(10 + (13 * modId), 10), Vector2(10, 10), _RGB(33, 33, 33, 255));
+        }
+
         frame = 0;
     }
 };
@@ -93,9 +98,7 @@ void callback(Actor* player, void* a2) {
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
 
-        categories.push_back("Player");
-        categories.push_back("Combat");
-        categories.push_back("World");
+        categories.push_back("Visual");
 
         // Function hooks
         uintptr_t hookAddr = Mem::findSig("48 83 EC ? 80 B9 ? ? ? ? ? 75 23");

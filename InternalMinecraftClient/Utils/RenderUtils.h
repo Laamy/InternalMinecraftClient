@@ -24,5 +24,18 @@ public:
 		if (ctx == nullptr) return;
 		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
 	};
+	void DrawString(Vector2 position, float size, _RGB colour, std::string text) { // i wanna cheat around font repos
+		if (ctx == nullptr) return;
+		int offset = 0;
+		for (char chr : text) {
+			switch (chr)
+			{
+			case 'i': // unsure how i would go about this ill do the font renderer soon
+				//ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
+				break;
+			}
+			offset++;
+		}
+	};
 };
 
