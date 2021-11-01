@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <MinHook.h>
 #include <map>
+#include "dllmain.h"
 
 // SDK
 #include "SDK/Actor.h"
@@ -57,6 +58,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     if (renderUtil.ctx == nullptr)
         renderUtil.Init(ctx);
 
+    if (keymap[(int)'R']) {
+        ctx->fillRectangle(Vector4(0, 1000, 0, 1000), _RGB(counter, counter2, counter3), 0.3f);
+    }
+
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
         if (renderClickUI) {
@@ -76,8 +81,23 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 void callback(Actor* player, void* a2) {
     _tick(player, a2);
 
-    if (player->CameraRots.y == 0) return;
+    if (counter == 255)
+        counter = 0;
+    else
+        counter++;
 
+    if (counter2 == 255)
+        counter2 = 0;
+    else
+        counter2++;
+
+    if (counter3 == 255)
+        counter3 = 0;
+    else
+        counter3++;
+
+    if (player->CameraRots.y == 0) return;
+    
     if (keymap[(int)'C']) {
         player->SetFieldOfView(0.2f);
         cancelUiRender = true;
@@ -102,7 +122,7 @@ void Init(HMODULE c) {
         uintptr_t guiDataAddr = Mem::findSig("48 81 EC ? ? ? ? 48 8B 51");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89"); // 48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
-        
+
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
         };
