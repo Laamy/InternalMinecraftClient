@@ -81,6 +81,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 void callback(Actor* player, void* a2) {
     _tick(player, a2);
 
+    if (player->CameraRots.y == 0) return;
+ 
     if (counter == 255)
         counter = 0;
     else
