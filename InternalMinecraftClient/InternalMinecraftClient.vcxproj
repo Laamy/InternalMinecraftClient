@@ -157,6 +157,9 @@
   <ItemGroup>
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GuiData.h" />
+    <ClInclude Include="SDK\MinecraftGame.h" />
+    <ClInclude Include="SDK\TextHolder.h" />
+    <ClInclude Include="SDK\Weather.h" />
     <ClInclude Include="Utils\RenderUtils.h" />
     <ClInclude Include="SDK\GameMode.h" />
     <ClInclude Include="SDK\MinecraftUIRenderContext.h" />

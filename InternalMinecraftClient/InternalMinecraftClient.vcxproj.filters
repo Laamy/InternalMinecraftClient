@@ -53,6 +53,15 @@
     <ClInclude Include="SDK\GuiData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SDK\TextHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Weather.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\MinecraftGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

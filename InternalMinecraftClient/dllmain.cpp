@@ -8,17 +8,15 @@
 #include "Utils/RenderUtils.h"
 #include <vector>
 #include "SDK/GuiData.h"
+#include "SDK/ClientInstance.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
-typedef void(__thiscall* tick)(Actor*, void* a2);
+typedef void(__thiscall* tick)(ClientInstance*, void* a2);
 tick _tick;
 
 typedef void(__thiscall* key)(uint64_t, bool);
 key _key;
-
-typedef void(__thiscall* guiDataC)(GuiData*);
-guiDataC _guiData;
  
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
@@ -32,12 +30,6 @@ bool cancelUiRender = false;
 bool renderClickUI = false;
 
 RenderUtils renderUtil = RenderUtils();
-GuiData* guiData;
-
-void guiDataCallback(GuiData* guiD) {
-    guiData = guiD;
-    _guiData(guiD);
-};
 
 int frame = 0;
 
@@ -69,30 +61,24 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                 cat++;
             }
         }
-
-        for (float modId = 0; modId < 5; ++modId) {
-            renderUtil.Draw(Vector2(10 + (13 * modId), 10), Vector2(10, 10), _RGB(33, 33, 33, 255));
+        else
+        {
+            renderUtil.Draw(Vector2((float)(10), 10), Vector2(48, 120), _RGB(33, 33, 33));
         }
 
         frame = 0;
     }
 };
 
-void callback(Actor* player, void* a2) {
-    _tick(player, a2);
+void callback(ClientInstance* ci, void* a2) {
+    auto player = ci->localPlayer;
 
-    if (player->CameraRots.y == 0) return;
-
-    if (keymap[(int)'C']) {
-        player->SetFieldOfView(0.2f);
-        cancelUiRender = true;
-    }
-    else {
-        player->SetFieldOfView(1);
-        cancelUiRender = false;
+    if (player != nullptr && player->CameraRots.x != 0) {
+        player->SetFieldOfView(0);
+        //ci->guiData
     }
 
-    //_key(0x11, true);
+    _tick(ci, a2);
 };
 
 void Init(HMODULE c) {
@@ -101,16 +87,12 @@ void Init(HMODULE c) {
         categories.push_back("Visual");
 
         // Function hooks
-        uintptr_t hookAddr = Mem::findSig("48 83 EC ? 80 B9 ? ? ? ? ? 75 23");
-        uintptr_t guiDataAddr = Mem::findSig("48 81 EC ? ? ? ? 48 8B 51");
+        uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89"); // 48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
-        };
-        if (MH_CreateHook((void*)guiDataAddr, &guiDataCallback, reinterpret_cast<LPVOID*>(&_guiData)) == MH_OK) {
-            MH_EnableHook((void*)guiDataAddr);
         };
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);

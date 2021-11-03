@@ -2,7 +2,7 @@
 
 class GameMode {
 public: // VTable
-	virtual void destructorGameMode();
+	virtual void structGameMode();
 	virtual bool startDestroyBlock(Vector3i* pos, char blockFace, bool a3);
 	virtual bool destroyBlock(Vector3i* pos, char blockFace);
 	virtual bool continueDestroyBlock(Vector3i* pos, char blockFace, Vector3* a3, bool a4);
@@ -18,8 +18,10 @@ public: // VTable
 	virtual bool interact(class Actor* actor, Vector3* pos);
 	virtual bool attack(class  Actor* actor);
 	virtual void releaseUsingItem();
-	// Im aware there are 3 functions down here aswell but they seem fucking useless tbh
+	virtual void setTrialMode(bool); // purely for the sake of adding them their now here.
+	virtual bool isInTrialMode(void);
+	virtual void registerUpsellScreenCallback(void);
 
 public: // Variables
-	class Actor* player;
+	Actor* player;
 };
