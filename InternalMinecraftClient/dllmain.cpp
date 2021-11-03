@@ -30,6 +30,8 @@ bool cancelUiRender = false;
 bool renderClickUI = false;
 
 RenderUtils renderUtil = RenderUtils();
+GuiData* guiDat;
+class BitmapFont* font;
 
 int frame = 0;
 
@@ -52,7 +54,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
         if (renderClickUI) {
-            renderUtil.Clear(_RGB(33, 33, 33, 150));
+            renderUtil.Draw(Vector2(0, 0), guiDat->scaledResolution, _RGB(33, 33, 33, 150));
 
             int cat = 0;
             for (std::string x : categories) {
@@ -64,6 +66,11 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         else
         {
             renderUtil.Draw(Vector2((float)(10), 10), Vector2(48, 120), _RGB(33, 33, 33));
+            //renderUtil.DrawString(Vector2(10, 10), _RGB(33, 33, 33), TextHolder("Hello, World!"), font);
+        }
+
+        if (guiDat != nullptr) {
+            renderUtil.Draw(guiDat->scaledMousePos(), Vector2(0, 0), _RGB(33, 33, 33));
         }
 
         frame = 0;
@@ -75,8 +82,13 @@ void callback(ClientInstance* ci, void* a2) {
 
     if (player != nullptr && player->CameraRots.x != 0) {
         player->SetFieldOfView(0);
-        //ci->guiData
     }
+
+    if (guiDat == nullptr && ci->guiData != nullptr)
+        guiDat = ci->guiData;
+
+    if (font == nullptr && ci->mcGame != nullptr)
+        font = ci->mcGame->mcFontC;
 
     _tick(ci, a2);
 };

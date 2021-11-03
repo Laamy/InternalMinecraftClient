@@ -8,34 +8,34 @@ public:
 	void Init(MinecraftUIRenderContext* context) {
 		ctx = context;
 	};
+
+	auto MeasureText(std::string text, class BitmapFont* font, float scale) {
+		TextHolder tekts = TextHolder(text);
+		return ctx->getLineLength(font, &tekts, scale);
+	};
+
+	auto MeasureText(std::string text, class BitmapFont* font) {
+		return this->MeasureText(text, font, 1.0f);
+	};
+
 	void Draw(Vector2 position, Vector2 size, _RGB colour) {
 		if (ctx == nullptr) return;
 		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
 	};
-	void Clear(_RGB colour) {
-		if (ctx == nullptr) return;
-		for (float vX = 0; vX < 4; ++vX) {
-			for (float vY = 0; vY < 4; ++vY) {
-				Draw(Vector2((float)(300 * vX), (float)(300 * vY)), Vector2(300, 300), colour);
-			}
-		}
-	};
+
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour, float width) {
 		if (ctx == nullptr) return;
 		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
 	};
-	void DrawString(Vector2 position, float size, _RGB colour, std::string text) { // i wanna cheat around font repos
+
+	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font) {
 		if (ctx == nullptr) return;
-		int offset = 0;
-		for (char chr : text) {
-			switch (chr)
-			{
-			case 'i': // unsure how i would go about this ill do the font renderer soon
-				//ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
-				break;
-			}
-			offset++;
-		}
+		position.x = position.x * 1;
+		position.y = position.y * 1 / 2;
+		auto calc = Vector4(position.x, position.x+ 1000, position.y, position.y + 1000);
+		float measureCalc = 1;
+		CaretMeasureData measureCalc2 = CaretMeasureData();
+		ctx->drawText(font, &calc, &text, colour, colour.a, nullptr, &measureCalc, &measureCalc2);
+		ctx->flushText(0);
 	};
 };
-

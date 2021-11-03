@@ -19,7 +19,7 @@ private:
 public:
 	Actor* localPlayer; //0x0138 
 private:
-	char pad_0x0140[0x3A0]; //0x0140
+	char pad_0x0140[0x3A8]; //0x0140
 public:
-	GuiData* guiData; //0x04E0 
+	GuiData* guiData; //0x04E8
 };

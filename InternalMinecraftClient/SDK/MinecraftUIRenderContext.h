@@ -11,11 +11,11 @@ class MinecraftUIRenderContext {
 private:
     virtual void Constructor(void);
 public:
-    virtual float getLineLength(BitmapFont* font, TextHolder* text, float textSize, bool unknown);
+    virtual float getLineLength(BitmapFont* font, TextHolder* text, float textSize); // , bool unknown
     virtual float getTextAlpha();
     virtual void setTextAlpha(float alpha);
     virtual __int64 drawDebugText(const float* pos, TextHolder* text, float* color, float alpha, unsigned int textAlignment, const float* textMeasureData, const void* caretMeasureData);
-    virtual __int64 drawText(BitmapFont* font, Vector4* position, TextHolder* text, _RGB colour, float alpha, unsigned int textAlignment, const float* textMeasureData, const uintptr_t* caretMeasureData);
+    virtual __int64 drawText(BitmapFont* font, Vector4* position, TextHolder* text, _RGB colour, float alpha, unsigned int* textAlignment, const float* textMeasureData, const CaretMeasureData* caretMeasureData);
     virtual void flushText(float timeSinceLastFlush);
     virtual void drawImage(TexturePtr* const& texture, Vector4 _1, Vector4 _2, Vector4 _3, Vector4 _4);
 private:

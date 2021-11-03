@@ -16,4 +16,9 @@ private:
 public:
     short MouseX; //0x0052
 	short MouseY; //0x0054
+
+public:
+	Vector2 scaledMousePos() {
+		return Vector2((this->MouseX) * this->guiScale, (this->MouseY) * this->guiScale);
+	};
 };
