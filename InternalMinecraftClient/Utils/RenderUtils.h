@@ -23,6 +23,15 @@ public:
 		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
 	};
 
+	void DrawButton(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, Vector2 curMousePos) {
+		if (ctx == nullptr) return;
+		auto rect = Vector4(position.x, position.x + size.x, position.y, position.y + size.y);
+		if (curMousePos.x < rect.x && curMousePos.x > rect.w && curMousePos.y < rect.z && curMousePos.y > rect.y) {
+			ctx->fillRectangle(rect, hoverColour, colour.a);
+		}
+		else ctx->fillRectangle(rect, colour, colour.a);
+	};
+
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour, float width) {
 		if (ctx == nullptr) return;
 		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);

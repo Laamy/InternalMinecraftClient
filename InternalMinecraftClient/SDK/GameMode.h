@@ -18,9 +18,9 @@ public: // VTable
 	virtual bool interact(class Actor* actor, Vector3* pos);
 	virtual bool attack(class  Actor* actor);
 	virtual void releaseUsingItem();
-	virtual void setTrialMode(bool); // purely for the sake of adding them their now here.
-	virtual bool isInTrialMode(void);
-	virtual void registerUpsellScreenCallback(void);
+	virtual bool setTrialMode(); // purely for the sake of adding them their now here.
+	virtual bool isInTrialMode();
+	virtual void registerUpsellScreenCallback();
 
 public: // Variables
 	Actor* player;

@@ -3,12 +3,9 @@
 
 class ClientInstance {
 private:
-	char pad_0x0000[0xA0]; //0x0000
+	char pad_0x0000[0xA8]; //0x0000
 public:
-	MinecraftGame* mcGame; //0x00A0 
-private:
-	char pad_0x00A8[0x8]; //0x00A8
-public:
+	MinecraftGame* mcGame; //0x00A8
 	class LoopbackSender* loopbackSender; //0x00B0 
 private:
 	char pad_0x00B8[0x18]; //0x00B8
