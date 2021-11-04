@@ -62,6 +62,12 @@
     <ClInclude Include="SDK\MinecraftGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientBase\ModuleHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientBase\Module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
