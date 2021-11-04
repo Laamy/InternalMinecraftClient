@@ -3,6 +3,7 @@
 #include "../Utils/RenderUtils.h"
 #include "../SDK/ClientInstance.h"
 #include "../SDK/Actor.h"
+#include "../SDK/GuiData.h"
 
 class Module {
 public:

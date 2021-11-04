@@ -21,7 +21,7 @@ class MinecraftGame {
 private:
 	char pad_0x000[0x108];  //0x0000
 public:
-	class BitmapFont* font; //0x0108
+	class BitmapFont* defaultGameFont; //0x0108
 
 	//FontRepos* fontRepos; // 0xF8
 

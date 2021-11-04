@@ -86,7 +86,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         }
         else
         {
-            renderUtil.DrawString(Vector2(10, 10), _RGB(33, 33, 33), TextHolder("Trero Internal"), font);
+            auto vText1 = TextHolder("Trero Internal");
+            renderUtil.DrawString(Vector2(guiDat->scaledResolution.x - ctx->getLineLength(font, &vText1, 1) - 5, guiDat->scaledResolution.y * 2 - 25), _RGB(33, 33, 33), vText1, font);
         }
 
         renderUtil.Draw(guiDat->scaledMousePos(), Vector2(5,5), _RGB(33, 33, 33)); // debug cursor
@@ -98,17 +99,11 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 void callback(ClientInstance* ci, void* a2) {
     auto player = ci->localPlayer;
 
-    if (player != nullptr && player->CameraRots.x != 0) {
-        if (keymap[(int)'C'])
-            player->SetFieldOfView(0.2);
-        else player->SetFieldOfView(1);
-    }
-
     if (guiDat == nullptr && ci->guiData != nullptr)
         guiDat = ci->guiData;
 
     if (font == nullptr && ci->mcGame != nullptr)
-        font = ci->mcGame1->font;
+        font = ci->mcGame->defaultGameFont;
 
     _tick(ci, a2);
 };

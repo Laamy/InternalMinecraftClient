@@ -14,16 +14,17 @@ public:
     virtual float getLineLength(BitmapFont* font, TextHolder* text, float textSize); // , bool unknown
     virtual float getTextAlpha();
     virtual void setTextAlpha(float alpha);
-    virtual __int64 drawDebugText(const float* pos, TextHolder* text, float* color, float alpha, unsigned int textAlignment, const float* textMeasureData, const void* caretMeasureData);
-    virtual __int64 drawText(BitmapFont* font, Vector4* position, TextHolder* text, _RGB colour, float alpha, unsigned int* textAlignment, const float* textMeasureData, const CaretMeasureData* caretMeasureData);
+    virtual void drawDebugText(const float* pos, TextHolder* text, float* color, float alpha, unsigned int textAlignment, const float* textMeasureData, const void* caretMeasureData);
+    virtual void drawText(BitmapFont* font, Vector4* position, TextHolder* text, _RGB colour, float alpha, unsigned int* textAlignment, const float* textMeasureData, const CaretMeasureData* caretMeasureData);
     virtual void flushText(float timeSinceLastFlush);
     virtual void drawImage(TexturePtr* const& texture, Vector4 _1, Vector4 _2, Vector4 _3, Vector4 _4);
 private:
-    // virtual __int64 Function7(); // drawImage
-    virtual __int64 Function8(); // drawNineslice
-    virtual void flushImages(); // flushImages
-    virtual __int64 Function10(); // beginSharedMeshBatch
-    virtual void beginSharedMeshBatch(); // endSharedMeshBatch
+    virtual void drawNineslice();
+public:
+    virtual void flushImages(float timeSinceLastFlush); // flushImages
+    virtual void beginSharedMeshBatch(); // beginSharedMeshBatch
+private:
+    virtual void endSharedMeshBatch();
 public:
     virtual void drawRectangle(Vector4 position, _RGB colour, float alpha, int lineWidth);
     virtual void fillRectangle(Vector4 position, _RGB colour, float alpha);
