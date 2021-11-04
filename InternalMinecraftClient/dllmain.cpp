@@ -73,16 +73,20 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
             int cat = 0;
             for (std::string x : categories) {
-                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10 ), _RGB(33, 33, 33));
+                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10), _RGB(33, 33, 33));
+                renderUtil.DrawString(Vector2((float)(80 + (cat * 60)), 165), _RGB(255, 255, 255), TextHolder(x), font, 0.6f);
                 for (int i = 0; i < 12; ++i) {
-                    renderUtil.DrawButton(Vector2((float)(70 + (cat * 60)), 90 + (i * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(33, 33, 33), guiDat->scaledMousePos(), keymap[(int)' ']);
+                    renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (i * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(33, 33, 33), guiDat->scaledMousePos(), keymap[(int)' '],
+                        TextHolder("TestModule"),
+                        font,
+                        0.6f, Vector2(7, 4));
                 }
                 cat++;
             }
         }
         else
         {
-            renderUtil.DrawString(Vector2(10, 10), _RGB(33, 33, 33), TextHolder("Hello, World!"), font);
+            renderUtil.DrawString(Vector2(10, 10), _RGB(33, 33, 33), TextHolder("Trero Internal"), font);
         }
 
         renderUtil.Draw(guiDat->scaledMousePos(), Vector2(5,5), _RGB(33, 33, 33)); // debug cursor
@@ -117,8 +121,6 @@ void Init(HMODULE c) {
         categories.push_back("TestCat3");
         categories.push_back("TestCat4");
         categories.push_back("TestCat5");
-        categories.push_back("TestCat6");
-        categories.push_back("TestCat7");
 
         // Function hooks
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");

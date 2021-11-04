@@ -21,6 +21,7 @@ struct Vector2 {
 
 	bool operator == (Vector2 v) { return v.x == x && v.y == y; };
 	bool operator != (Vector2 v) { return v.x != x || v.y != y; };
+	Vector2 operator *= (Vector2 v) { return Vector2(v.x * x, v.y * y); };
 };
 
 struct Vector3 {
@@ -37,6 +38,7 @@ struct Vector3 {
 
 	bool operator == (Vector3 v) { return v.x == x && v.y == y && v.z == z; };
 	bool operator != (Vector3 v) { return v.x != x || v.y != y || v.z != z; };
+	Vector3 operator *= (Vector3 v) { return Vector3(v.x * x, v.y * y, v.z * z); };
 
 	float Distance(Vector3 v) {
 		float dX = x - v.x;
