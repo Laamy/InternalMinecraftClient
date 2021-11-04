@@ -61,15 +61,15 @@ struct Vector4 {
 		this->z = z;
 	};
 
+	Vector4(Vector2 position, Vector2 size) {
+		this->w = position.x;
+		this->x = position.x + size.x;
+		this->y = position.y;
+		this->z = position.y + size.y;
+	};
+
 	bool operator == (Vector4 v) { return v.w == w && v.x == x && v.y == y && v.z == z; };
 	bool operator != (Vector4 v) { return v.w != w || v.x != x || v.y != y || v.z != z; };
-
-	float Distance(Vector4 v) {
-		float dX = x - v.x;
-		float dY = y - v.y;
-		float dZ = z - v.z;
-		return std::sqrt(dX * dX + dY * dY + dZ * dZ);
-	}
 };
 
 
@@ -90,8 +90,19 @@ struct Vector3i {
 };
 
 struct AABB {
-	Vector3 lower;
-	Vector3 upper;
+	union {
+		struct { Vector3 lower, upper; };
+		Vector3 arr[2]{};
+	};
+
+	AABB(Vector3 position, Vector3 size) {
+		this->upper.x = position.x;
+		this->lower.x = position.x + size.x;
+		this->upper.y = position.y;
+		this->lower.y = position.y + size.y;
+		this->upper.z = position.z;
+		this->lower.z = position.z + size.z;
+	};
 };
 
 struct _RGB {

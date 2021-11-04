@@ -95,7 +95,9 @@ void callback(ClientInstance* ci, void* a2) {
     auto player = ci->localPlayer;
 
     if (player != nullptr && player->CameraRots.x != 0) {
-        player->SetFieldOfView(0);
+        if (keymap[(int)'C'])
+            player->SetFieldOfView(0.2);
+        else player->SetFieldOfView(1);
     }
 
     if (guiDat == nullptr && ci->guiData != nullptr)
