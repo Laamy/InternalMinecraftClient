@@ -19,7 +19,7 @@ public: // functions
     virtual void OnEnable(ClientInstance* ci) {};
     virtual void OnDisable(ClientInstance* ci) {};
 
-    virtual void OnFrameRender(RenderUtils* ctx, GuiData* guiDat) {};
+    virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
 
     //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};

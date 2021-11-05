@@ -4,6 +4,9 @@
 #include "MinecraftGame.h"
 
 class ClientInstance {
+public:
+	//static std::map<uint64_t, bool> ciKeymap;
+
 private:
 	char pad_0x0000[0xA8]; //0x0000
 public:
@@ -27,5 +30,11 @@ public: // Custom Voids
 		if (localPlayer != nullptr && localPlayer->CameraRots.x != 0)
 			return true;
 		return false;
-	}
+	};
+	/*bool getKeyDown(uint64_t keyId) {
+		return ciKeymap[keyId];
+	};
+	void setKeymap(std::map<uint64_t, bool> map) {
+		ciKeymap = map;
+	}*/
 };

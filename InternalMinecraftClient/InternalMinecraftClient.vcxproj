@@ -158,6 +158,10 @@
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
+    <ClInclude Include="ClientBase\Modules\AirStuck.h" />
+    <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
+    <ClInclude Include="ClientBase\Modules\DebugCursor.h" />
+    <ClInclude Include="ClientBase\Modules\OGMFlight.h" />
     <ClInclude Include="ClientBase\Modules\TestModule.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />
     <ClInclude Include="SDK\ClientInstance.h" />

@@ -47,7 +47,7 @@ bool cancelUiRender = false;
 bool renderClickUI = false;
 
 RenderUtils renderUtil = RenderUtils();
-GuiData* guiDat;
+GuiData* acs;
 class BitmapFont* font;
 
 int frame = 0;
@@ -67,25 +67,19 @@ void mouseCallback(bool held, uintptr_t keyId, void* a3) {
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     if (renderUtil.ctx == nullptr && font != nullptr)
-        renderUtil.Init(ctx, font);
+        renderUtil.Init(ctx, acs, font);
 
     if (renderUtil.ctx == nullptr || font == nullptr) return;
 
     if (cancelUiRender == false)
         _render(a1, ctx);
 
-    handler.FrameRender(&renderUtil, guiDat);
-
-    for (auto mod : handler.modules) {
-        if (mod->enabled) {
-            mod->OnEnable(nullptr);
-        }
-    }
+    handler.FrameRender(&renderUtil);
 
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
         if (renderClickUI) {
-            renderUtil.Draw(Vector2(0, 0), guiDat->scaledResolution, _RGB(33, 33, 33, 150));
+            renderUtil.Draw(Vector2(0, 0), renderUtil.guiData->scaledResolution, _RGB(33, 33, 33, 150));
 
             int cat = 0;
             for (std::string x : categories) {
@@ -96,7 +90,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
                         auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
-                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), guiDat->scaledMousePos(), keymap[(int)' '],
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
                             handler.modules[i]->enabled = !handler.modules[i]->enabled;
@@ -108,7 +102,6 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                 cat++;
             }
         }
-        //renderUtil.Draw(guiDat->scaledMousePos(), Vector2(5,5), _RGB(33, 33, 33)); // debug cursor
 
         frame = 0;
     }
@@ -118,16 +111,16 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 };
 
 void callback(ClientInstance* ci, void* a2) {
-    auto player = ci->localPlayer;
 
-    if (guiDat == nullptr && ci->guiData != nullptr)
-        guiDat = ci->guiData;
+    if (acs == nullptr && ci->guiData != nullptr)
+        acs = ci->guiData;
 
     if (font == nullptr && ci->mcGame != nullptr)
         font = ci->mcGame->defaultGameFont;
 
     for (auto mod : handler.modules)
-        mod->OnTick(ci);
+        if (ci->isInGame() && mod->enabled)
+            mod->OnTick(ci);
 
     _tick(ci, a2);
 };
@@ -147,20 +140,20 @@ void Init(HMODULE c) {
         }
 
         // Function hooks
-        uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
+        uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         //uintptr_t mouseAddr = Mem::findSig("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 57 41 54 41 55 41 56 41 57 48 83 EC ? 44 0F B7 BC 24 ? ? ? ? 48 8B ");
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
 
         _logf(L"[TreroInternal]: Hooking functions...\n");
 
-        if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
-            MH_EnableHook((void*)hookAddr);
-            _logf(L"[TreroInternal]: ClientInstance hooked!\n");
-        };
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
             _logf(L"[TreroInternal]: Keymap hooked!\n");
+        };
+        if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
+            MH_EnableHook((void*)hookAddr);
+            _logf(L"[TreroInternal]: ClientInstance hooked!\n");
         };
         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
         //    MH_EnableHook((void*)mouseAddr);

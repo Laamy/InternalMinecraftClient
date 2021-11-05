@@ -5,9 +5,11 @@ class RenderUtils
 {
 public:
 	MinecraftUIRenderContext* ctx = nullptr;
+	GuiData* guiData = nullptr;
 	class BitmapFont* font = nullptr;
-	void Init(MinecraftUIRenderContext* ctx, class BitmapFont* font) {
+	void Init(MinecraftUIRenderContext* ctx, GuiData* guiData, class BitmapFont* font) {
 		this->ctx = ctx;
+		this->guiData = guiData;
 		this->font = font;
 	};
 
