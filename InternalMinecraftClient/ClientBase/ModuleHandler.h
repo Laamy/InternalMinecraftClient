@@ -86,7 +86,8 @@ public:
         // RainbowEffects
         // Zoom
 
-        modules.push_back(new Module("Premium (D)", "", 0x07));
+        modules.push_back(new Module("Debug", "", 0x07));
+        modules.push_back(new TestModule("Debug"));
         // HiveBhop
 
         _logf(L"[TreroInternal]: Registered modules!\n");

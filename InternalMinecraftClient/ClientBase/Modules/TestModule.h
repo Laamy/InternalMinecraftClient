@@ -7,6 +7,6 @@ public:
 	void OnTick(ClientInstance* ci) override {
 		if (!ci->isInGame() && this->enabled) return;
 
-		//_logf(L"[TreroInternal]: ticking\n");
+		//ci->localPlayer->
 	};
 };
