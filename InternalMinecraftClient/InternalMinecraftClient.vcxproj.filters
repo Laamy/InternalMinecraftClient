@@ -68,6 +68,15 @@
     <ClInclude Include="ClientBase\Module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientBase\Modules\AirJump.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientBase\Modules\TestModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientBase\Modules\Watermark.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

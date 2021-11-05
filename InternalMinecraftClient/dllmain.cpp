@@ -2,6 +2,8 @@
 #include <MinHook.h>
 #include <map>
 #include <vector>
+#include <Psapi.h>
+#include <string>
 
 #define _logf(str)  OutputDebugString(str)
 
@@ -13,6 +15,8 @@
 // Utils
 #include "Utils/Utils.h"
 #include "Utils/RenderUtils.h"
+#include "ClientBase/Module.h"
+#include "ClientBase/ModuleHandler.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -29,12 +33,15 @@ typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
-std::map<uint64_t, bool> cancelKeymap = std::map<uint64_t, bool>();
+std::map<uint64_t, bool> beforeKeymap = std::map<uint64_t, bool>();
 
 std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
 
 std::vector<std::string> categories = std::vector<std::string>();
 std::vector<Vector2> categoryPos = std::vector<Vector2>();
+ModuleHandler handler = ModuleHandler();
+
+std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 
 bool cancelUiRender = false;
 bool renderClickUI = false;
@@ -50,8 +57,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         renderClickUI = !renderClickUI;
     }
     keymap[c] = v;
-    if (cancelKeymap[c] == false)
-        _key(c, v);
+    _key(c, v);
 };
 
 void mouseCallback(bool held, uintptr_t keyId, void* a3) {
@@ -60,11 +66,12 @@ void mouseCallback(bool held, uintptr_t keyId, void* a3) {
 };
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
-   if (cancelUiRender == false)
-       _render(a1, ctx);
+    if (renderUtil.ctx == nullptr && font != nullptr)
+        renderUtil.Init(ctx, font);
+    else return;
 
-    if (renderUtil.ctx == nullptr)
-        renderUtil.Init(ctx);
+    if (cancelUiRender == false && handler.FrameRender(&renderUtil, guiDat))
+        _render(a1, ctx);
 
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
@@ -74,26 +81,31 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
             int cat = 0;
             for (std::string x : categories) {
                 renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10), _RGB(33, 33, 33));
-                renderUtil.DrawString(Vector2((float)(80 + (cat * 60)), 165), _RGB(255, 255, 255), TextHolder(x), font, 0.6f);
-                for (int i = 0; i < 12; ++i) {
-                    renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (i * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(33, 33, 33), guiDat->scaledMousePos(), keymap[(int)' '],
-                        TextHolder("TestModule"),
-                        font,
-                        0.6f, Vector2(7, 4));
+                auto catText = TextHolder(x); // (ctx->getLineLength(font, &catText, 1) / 2)
+                renderUtil.DrawString(Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165), _RGB(255, 255, 255), catText, font, 0.6f);
+                int catMod = 0;
+                for (int i = 0; i < handler.modules.size(); ++i) {
+                    if (handler.modules[i].category == x) {
+                        auto moduleBtnInfo = TextHolder(handler.modules[i].name);
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), guiDat->scaledMousePos(), keymap[(int)' '],
+                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i].enabled);
+                        if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
+                            handler.modules[i].enabled = !handler.modules[i].enabled;
+                        }
+                        beforeKeymap[i] = keymap[(int)' '];
+                        catMod++;
+                    }
                 }
                 cat++;
             }
         }
-        else
-        {
-            auto vText1 = TextHolder("Trero Internal");
-            renderUtil.DrawString(Vector2(guiDat->scaledResolution.x - ctx->getLineLength(font, &vText1, 1) - 5, guiDat->scaledResolution.y * 2 - 25), _RGB(33, 33, 33), vText1, font);
-        }
-
-        renderUtil.Draw(guiDat->scaledMousePos(), Vector2(5,5), _RGB(33, 33, 33)); // debug cursor
+        //renderUtil.Draw(guiDat->scaledMousePos(), Vector2(5,5), _RGB(33, 33, 33)); // debug cursor
 
         frame = 0;
     }
+
+    for (int i = 0; i < handler.modules.size(); i++)
+        modulesEnabled[i] = handler.modules[i].enabled;
 };
 
 void callback(ClientInstance* ci, void* a2) {
@@ -105,17 +117,28 @@ void callback(ClientInstance* ci, void* a2) {
     if (font == nullptr && ci->mcGame != nullptr)
         font = ci->mcGame->defaultGameFont;
 
+    if (handler.modules.size() > 1) {
+        for (int i = 0; i < handler.modules.size(); ++i)
+            if (handler.modules[i].enabled && ci->isInGame())
+                handler.modules[i].OnGameTick(ci->localPlayer);
+    }
+
     _tick(ci, a2);
 };
 
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
 
-        categories.push_back("TestCat1");
-        categories.push_back("TestCat2");
-        categories.push_back("TestCat3");
-        categories.push_back("TestCat4");
-        categories.push_back("TestCat5");
+        handler.InitModules();
+
+        for (auto mod : handler.modules) {
+            bool addCategory = true;
+            for (auto cat : categories) {
+                if (mod.category == cat) addCategory = false;
+            }
+            if (addCategory)
+                categories.push_back(mod.category);
+        }
 
         // Function hooks
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");

@@ -19,4 +19,11 @@ private:
 	char pad_0x0140[0x3A8]; //0x0140
 public:
 	GuiData* guiData; //0x04E8
+
+public: // Custom Voids
+	bool isInGame() {
+		if (localPlayer != nullptr && localPlayer->CameraRots.x != 0)
+			return true;
+		return false;
+	}
 };

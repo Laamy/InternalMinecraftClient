@@ -1,59 +1,52 @@
-#include <windows.h>
-#include <vector>
-#include "Module.h"
+#include "Modules/AirJump.h"
+#include "Modules/TestModule.h"
+#include "Modules/Watermark.h"
 
 class ModuleHandler {
 public:
-    static std::vector<Module> modules;
+    std::vector<Module> modules;
 
 public:
-    static void InitModules() {
+    void InitModules() {
         _logf(L"[TreroInternal]: Registering modules...\n");
 
-        modules.push_back(Module("Debug", "TestModule", (int)'R'));
+        modules.push_back(AirJump("Debug"));
+        modules.push_back(TestModule("Debug"));
+
+        modules.push_back(Watermark("Visual"));
 
         _logf(L"[TreroInternal]: Registered modules!\n");
     }
 
-    static bool* Tick(ClientInstance* ci) {
+    bool* FrameRender(RenderUtils* ctx, GuiData* guiDat) {
         bool cancel = false;
         for (Module mod : modules)
-            mod.OnTick(ci, &cancel);
+            if (mod.enabled)
+                mod.OnFrameRender(ctx, guiDat, &cancel);
         return &cancel;
     }
 
-    static void GameTick(Actor* lp) {
+    bool* KeyDown(uintptr_t keyId) {
         bool cancel = false;
         for (Module mod : modules)
-            mod.OnGameTick(lp, &cancel);
-        //return &cancel;
-    }
-
-    static bool* FrameRender(RenderUtils* ctx, GuiData* guiDat) {
-        bool cancel = false;
-        for (Module mod : modules)
-            mod.OnFrameRender(ctx, guiDat, &cancel);
+            if (mod.enabled)
+                mod.OnKeyDown(keyId, &cancel);
         return &cancel;
     }
 
-    static bool* KeyDown(uintptr_t keyId) {
+    bool* KeyUp(uintptr_t keyId) {
         bool cancel = false;
         for (Module mod : modules)
-            mod.OnKeyDown(keyId, &cancel);
+            if (mod.enabled)
+                mod.OnKeyUp(keyId, &cancel);
         return &cancel;
     }
 
-    static bool* KeyUp(uintptr_t keyId) {
+    bool* KeyHeld(uintptr_t keyId) {
         bool cancel = false;
         for (Module mod : modules)
-            mod.OnKeyUp(keyId, &cancel);
-        return &cancel;
-    }
-
-    static bool* KeyHeld(uintptr_t keyId) {
-        bool cancel = false;
-        for (Module mod : modules)
-            mod.OnKeyHeld(keyId, &cancel);
+            if (mod.enabled)
+                mod.OnKeyHeld(keyId, &cancel);
         return &cancel;
     }
 };

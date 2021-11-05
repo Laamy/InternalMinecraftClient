@@ -1,10 +1,3 @@
-#include <Psapi.h>
-#include <string>
-#include "../Utils/RenderUtils.h"
-#include "../SDK/ClientInstance.h"
-#include "../SDK/Actor.h"
-#include "../SDK/GuiData.h"
-
 class Module {
 public:
     Module(std::string category, std::string name, uintptr_t keybind, bool enabled = false) { // Constructor
@@ -21,9 +14,12 @@ public:
     bool enabled;
 
 public: // functions
+    virtual auto OnEnable(ClientInstance* ci) -> void {};
+    virtual auto OnDisable(ClientInstance* ci) -> void {};
+
     virtual auto OnFrameRender(RenderUtils* ctx, GuiData* guiDat, bool* cancel) -> void {};
-    virtual auto OnTick(ClientInstance* ci, bool* cancel) -> void {};
-    virtual auto OnGameTick(Actor* lp, bool* cancel) -> void {};
+    virtual auto OnTick(ClientInstance* ci) -> void {};
+    virtual auto OnGameTick(Actor* lp) -> void {};
 
     virtual auto OnKeyDown(uintptr_t keyAddr, bool* cancel) -> void {};
     virtual auto OnKeyUp(uintptr_t keyAddr, bool* cancel) -> void {};
