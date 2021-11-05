@@ -68,10 +68,19 @@ void mouseCallback(bool held, uintptr_t keyId, void* a3) {
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     if (renderUtil.ctx == nullptr && font != nullptr)
         renderUtil.Init(ctx, font);
-    else return;
 
-    if (cancelUiRender == false && handler.FrameRender(&renderUtil, guiDat))
+    if (renderUtil.ctx == nullptr || font == nullptr) return;
+
+    if (cancelUiRender == false)
         _render(a1, ctx);
+
+    handler.FrameRender(&renderUtil, guiDat);
+
+    for (auto mod : handler.modules) {
+        if (mod->enabled) {
+            mod->OnEnable(nullptr);
+        }
+    }
 
     frame++;
     if (frame == 3) { // stop from rendering 3 times a frame
@@ -85,12 +94,12 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                 renderUtil.DrawString(Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165), _RGB(255, 255, 255), catText, font, 0.6f);
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
-                    if (handler.modules[i].category == x) {
-                        auto moduleBtnInfo = TextHolder(handler.modules[i].name);
+                    if (handler.modules[i]->category == x) {
+                        auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
                         auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), guiDat->scaledMousePos(), keymap[(int)' '],
-                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i].enabled);
+                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
-                            handler.modules[i].enabled = !handler.modules[i].enabled;
+                            handler.modules[i]->enabled = !handler.modules[i]->enabled;
                         }
                         beforeKeymap[i] = keymap[(int)' '];
                         catMod++;
@@ -105,7 +114,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     }
 
     for (int i = 0; i < handler.modules.size(); i++)
-        modulesEnabled[i] = handler.modules[i].enabled;
+        modulesEnabled[i] = handler.modules[i]->enabled;
 };
 
 void callback(ClientInstance* ci, void* a2) {
@@ -117,11 +126,8 @@ void callback(ClientInstance* ci, void* a2) {
     if (font == nullptr && ci->mcGame != nullptr)
         font = ci->mcGame->defaultGameFont;
 
-    if (handler.modules.size() > 1) {
-        for (int i = 0; i < handler.modules.size(); ++i)
-            if (handler.modules[i].enabled && ci->isInGame())
-                handler.modules[i].OnGameTick(ci->localPlayer);
-    }
+    for (auto mod : handler.modules)
+        mod->OnTick(ci);
 
     _tick(ci, a2);
 };
@@ -134,10 +140,10 @@ void Init(HMODULE c) {
         for (auto mod : handler.modules) {
             bool addCategory = true;
             for (auto cat : categories) {
-                if (mod.category == cat) addCategory = false;
+                if (mod->category == cat) addCategory = false;
             }
             if (addCategory)
-                categories.push_back(mod.category);
+                categories.push_back(mod->category);
         }
 
         // Function hooks

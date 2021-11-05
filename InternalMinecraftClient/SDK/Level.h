@@ -1,3 +1,5 @@
+#pragma once
+
 class Level {
 private:
 	char pad_0x0000[0x518]; //0x0000

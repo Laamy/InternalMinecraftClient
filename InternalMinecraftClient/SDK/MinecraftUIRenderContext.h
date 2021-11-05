@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdint>
 #include "../Utils/Math.h"
 #include "TextHolder.h"

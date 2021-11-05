@@ -1,8 +1,13 @@
+#pragma once
+
 class AirJump : public Module {
 public:
 	AirJump(std::string cat) : Module(cat, "AirJump", 0x07) {};
 
-	virtual void OnGameTick(Actor* lp) override {
-		lp->Velocity.y = 0.25f;
+	void OnTick(ClientInstance* ci) override {
+		if (!ci->isInGame()) return;
+
+		auto lp = ci->localPlayer;
+		lp->onGround = 1;
 	};
 };

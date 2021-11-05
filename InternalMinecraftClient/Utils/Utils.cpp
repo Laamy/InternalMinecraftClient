@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Utils.h"
 
 uintptr_t Mem::findSig(const char* sig) {

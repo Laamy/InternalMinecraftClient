@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../Utils/Math.h"
 
 class GuiData {

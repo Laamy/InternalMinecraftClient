@@ -1,3 +1,5 @@
+#pragma once
+
 class TextHolder {
 public:
 	union {

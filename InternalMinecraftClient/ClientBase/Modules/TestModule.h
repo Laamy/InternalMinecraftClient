@@ -1,8 +1,12 @@
+#pragma once
+
 class TestModule : public Module {
 public:
 	TestModule(std::string cat) : Module(cat, "TestModule", 0x07) {};
 
-	virtual void OnGameTick(Actor* lp) override {
+	void OnTick(ClientInstance* ci) override {
+		if (!ci->isInGame()) return;
+
 		_logf(L"[TreroInternal]: ticking\n");
 	};
 };

@@ -1,3 +1,5 @@
+#pragma once
+
 class Module {
 public:
     Module(std::string category, std::string name, uintptr_t keybind, bool enabled = false) { // Constructor
@@ -14,16 +16,15 @@ public:
     bool enabled;
 
 public: // functions
-    virtual auto OnEnable(ClientInstance* ci) -> void {};
-    virtual auto OnDisable(ClientInstance* ci) -> void {};
+    virtual void OnEnable(ClientInstance* ci) {};
+    virtual void OnDisable(ClientInstance* ci) {};
 
-    virtual auto OnFrameRender(RenderUtils* ctx, GuiData* guiDat, bool* cancel) -> void {};
-    virtual auto OnTick(ClientInstance* ci) -> void {};
-    virtual auto OnGameTick(Actor* lp) -> void {};
+    virtual void OnFrameRender(RenderUtils* ctx, GuiData* guiDat) {};
+    virtual void OnTick(ClientInstance* ci) {};
 
-    virtual auto OnKeyDown(uintptr_t keyAddr, bool* cancel) -> void {};
-    virtual auto OnKeyUp(uintptr_t keyAddr, bool* cancel) -> void {};
-    virtual auto OnKeyHeld(uintptr_t keyAddr, bool* cancel) -> void {};
+    //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
+    //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};
+    //virtual void OnKeyHeld(uintptr_t keyAddr, bool* cancel) {};
 
     //virtual auto OnMouseDown(uintptr_t mouseKeyAddr, bool* cancel) -> void {};
     //virtual auto OnMouseUp(uintptr_t mouseKeyAddr, bool* cancel) -> void {};
