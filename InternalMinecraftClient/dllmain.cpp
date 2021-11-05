@@ -45,6 +45,8 @@ std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 
 bool cancelUiRender = false;
 bool renderClickUI = false;
+bool justEnabled = true;
+int enabledTicks = 0;
 
 RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
@@ -66,6 +68,17 @@ void mouseCallback(bool held, uintptr_t keyId, void* a3) {
 };
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
+    if (justEnabled) {
+        enabledTicks++;
+        if (enabledTicks > 1 and enabledTicks < 2000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
+            auto catText = TextHolder("Trero Internal has been Injected!");
+            renderUtil.DrawString(Vector2(300 + (0 * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), _RGB(255, 255, 255), catText, font, 1.0f);
+        }
+        else if (enabledTicks > 3000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
+            justEnabled = false;
+            enabledTicks = 0;
+        }
+    }
     if (renderUtil.ctx == nullptr && font != nullptr)
         renderUtil.Init(ctx, acs, font);
 
