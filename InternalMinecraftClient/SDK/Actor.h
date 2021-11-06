@@ -139,6 +139,18 @@ public:
 	Vector2 SetRotations; //0x2410
 	Vector2 SetRotations2; //0x2418
 
+	bool* _onGround() {
+		return reinterpret_cast<bool*>((uintptr_t)(this) + 0x1D8);
+	};
+
+	AABB* _position() {
+		return reinterpret_cast<AABB*>((uintptr_t)(this) + 0x4C0);
+	};
+
+	Vector3* _velocity() {
+		return reinterpret_cast<Vector3*>((uintptr_t)(this) + 0x4F8);
+	};
+
 public: // Functions
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
@@ -167,9 +179,17 @@ public: // Functions
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1058) = v;
 		//*(float*)((uintptr_t)(this) + 0x1140) = v;
-	}
+	};
 
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1058);
-	}
+	};
+
+	void FixReadExcp() { // VirtualUnlock
+		VirtualUnlock(this, 0x2418);
+	};
+
+	Vector2* bodyRots() {
+		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
+	};
 };

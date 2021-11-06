@@ -2,6 +2,22 @@
 
 #include "../Utils/Math.h"
 
+class WindowData
+{
+private:
+	char pad_0x0000[0x1F0]; //0x0000
+public:
+	Vector2 renderWindow; //0x01F0
+private:
+	char pad_0x01F8[0x260]; //0x01F8
+public:
+	Vector2 mousePos; //0x0458
+private:
+	char pad_0x0460[0x54C]; //0x0460
+public:
+	__int8 inWorld; //0x09AC
+}; 
+
 class GuiData {
 private:
 	char pad_0x0000[0x18]; //0x0000
@@ -18,6 +34,15 @@ private:
 public:
     short MouseX; //0x0052
 	short MouseY; //0x0054
+	__int8 IsInGame; //0x0056
+private:
+	char pad_0x0057[0x19]; //0x0057
+public:
+	WindowData* windowData; //0x0070
+private:
+	char pad_0x0078[0xA0]; //0x0078
+public:
+	__int32 gameTicks; //0x0118
 
 public:
 	Vector2 scaledMousePos() {

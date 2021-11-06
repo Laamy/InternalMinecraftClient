@@ -112,11 +112,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
 void callback(ClientInstance* ci, void* a2) {
 
-    if (acs == nullptr && ci->guiData != nullptr)
-        acs = ci->guiData;
-
-    if (font == nullptr && ci->mcGame != nullptr)
-        font = ci->mcGame->defaultGameFont;
+    acs = ci->guiData;
+    font = ci->mcGame->defaultGameFont;
 
     for (auto mod : handler.modules)
         if (ci->isInGame() && mod->enabled)
@@ -149,6 +146,7 @@ void Init(HMODULE c) {
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
+            //memcpy((void*)keymapAddr, copy.inlineText, 0x1000);
             _logf(L"[TreroInternal]: Keymap hooked!\n");
         };
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {

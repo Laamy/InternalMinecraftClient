@@ -9,10 +9,10 @@ public:
 		if (ci->localPlayer != nullptr) {
 			auto lp = ci->localPlayer;
 
-			auto yaw = lp->CameraRots.y;
+			float yaw = (float)lp->bodyRots()->y;
 
-			lp->Velocity.z = sin((yaw + 90) * 0.01745329251) * speed;
-			lp->Velocity.x = cos((yaw + 90) * 0.01745329251) * speed;
+			lp->Velocity.z = sin(((float)yaw + 90) * 0.01745329251) * speed;
+			lp->Velocity.x = cos(((float)yaw + 90) * 0.01745329251) * speed;
 		}
 	};
 };
