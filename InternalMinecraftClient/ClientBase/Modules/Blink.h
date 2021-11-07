@@ -1,19 +1,14 @@
 #pragma once
 
-class NoPacket : public Module { // worked
+class Blink : public Module {
 public:
-	NoPacket(std::string cat) : Module(cat, "NoPacket", 0x07) {};
-	Vector3 savedPos;
+	Blink(std::string cat) : Module(cat, "Blink", 0x07) {};
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		savedPos = lp->Position.lower;
-
 		ci->loopbackSender->RetPacketSender();
 	};
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->SetPos(savedPos);
-
 		ci->loopbackSender->RestorePacketSender();
 	};
 };

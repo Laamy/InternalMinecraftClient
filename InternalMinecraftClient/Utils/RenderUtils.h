@@ -4,13 +4,20 @@
 class RenderUtils
 {
 public:
-	MinecraftUIRenderContext* ctx = nullptr;
-	GuiData* guiData = nullptr;
-	class BitmapFont* font = nullptr;
-	void Init(MinecraftUIRenderContext* ctx, GuiData* guiData, class BitmapFont* font) {
+	MinecraftUIRenderContext* ctx;
+	GuiData* guiData;
+	class BitmapFont* font;
+	class Handle* modHandle;
+
+	void Init(MinecraftUIRenderContext* ctx, GuiData* guiData, class BitmapFont* font, class Handle* handle) {
 		this->ctx = ctx;
 		this->guiData = guiData;
 		this->font = font;
+		this->modHandle = handle;
+	};
+
+	auto realModHandle() {
+		return reinterpret_cast<class ModuleHandler*>(&modHandle);
 	};
 
 	auto MeasureText(std::string text, class BitmapFont* font, float scale) {

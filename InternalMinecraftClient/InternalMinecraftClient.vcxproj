@@ -160,10 +160,13 @@
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
     <ClInclude Include="ClientBase\Modules\Antibot.h" />
+    <ClInclude Include="ClientBase\Modules\ArrayList.h" />
     <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
+    <ClInclude Include="ClientBase\Modules\Blink.h" />
     <ClInclude Include="ClientBase\Modules\DebugCursor.h" />
     <ClInclude Include="ClientBase\Modules\ExpandScreen.h" />
     <ClInclude Include="ClientBase\Modules\FastWater.h" />
+    <ClInclude Include="ClientBase\Modules\Freecam.h" />
     <ClInclude Include="ClientBase\Modules\Freelook.h" />
     <ClInclude Include="ClientBase\Modules\Glide.h" />
     <ClInclude Include="ClientBase\Modules\HighJump.h" />
@@ -172,6 +175,9 @@
     <ClInclude Include="ClientBase\Modules\NoSwing.h" />
     <ClInclude Include="ClientBase\Modules\OGMFlight.h" />
     <ClInclude Include="ClientBase\Modules\Phase.h" />
+    <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
+    <ClInclude Include="ClientBase\Modules\Spider.h" />
+    <ClInclude Include="ClientBase\Modules\Step.h" />
     <ClInclude Include="ClientBase\Modules\TestModule.h" />
     <ClInclude Include="ClientBase\Modules\Timer.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />

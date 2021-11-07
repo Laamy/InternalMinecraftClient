@@ -1,4 +1,6 @@
-#pragma once
+﻿#pragma once
+
+#include <algorithm>
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -21,47 +23,64 @@
 #include "Modules/Timer.h"
 #include "Modules/Noclip.h"
 #include "Modules/Phase.h"
+#include "Modules/Step.h"
+#include "Modules/Freecam.h"
+#include "Modules/ReverseStep.h"
+#include "Modules/ArrayList.h"
+#include "Modules/Blink.h"
+#include "Modules/Spider.h"
 
 class ModuleHandler {
 public:
     std::vector<Module*> modules;
 
 public:
+
+    struct CompareArg { bool operator()(Module* mod1, Module* mod2) { return mod1->name < mod2->name; } };
+
     void InitModules() {
         _logf(L"[TreroInternal]: Registering modules...\n");
 
-        modules.push_back(new AirJump("World"));
-        modules.push_back(new Antibot("World"));
-        modules.push_back(new NoPacket("World")); // got it working but for some reason enable and disable are reversed? OH WAIT I KNOW WHY!
+        std::string world = "World";
+        std::string player = "Player";
+        std::string misc = "Misc";
+        std::string flies = "Flies";
+        std::string visual = "Visual";
+        std::string debug = "Debug";
+
+        modules.push_back(new AirJump(world));
+        modules.push_back(new Antibot(world));
+        modules.push_back(new NoPacket(world)); // got it working but for some reason enable and disable are reversed? OH WAIT I KNOW WHY!
         // Scaffold -- cant do this until i learn GameMode in LP
         // Teleport -- Dont need this due to .tp
-        modules.push_back(new Timer("World"));
+        modules.push_back(new Timer(world));
         // Tower -- Could do
-        // Blink -- NoPacket
-        modules.push_back(new Noclip("World"));
+        modules.push_back(new Blink(world));
+        modules.push_back(new Noclip(world));
 
         // modules.push_back(new Module("Combat", "", 0x07));
         // RapidHit
         // Reach -- I wonder how you would go about reach internally lol? i think i know how actually i would sig scan then covert it to a float*
 
-        modules.push_back(new AirStuck("Player"));
-        modules.push_back(new AutoWalk("Player"));
-        modules.push_back(new FastWater("Player"));
-        modules.push_back(new Glide("Player"));
-        modules.push_back(new HighJump("Player"));
+        modules.push_back(new AirStuck(player));
+        modules.push_back(new AutoWalk(player));
+        modules.push_back(new FastWater(player));
+        modules.push_back(new Glide(player));
+        modules.push_back(new HighJump(player));
         // InventoryMove
         // Jesus
         // LongJump
         // RapidPlace
         // Speed
-        // Spider
-        // Step
+        modules.push_back(new Spider(player));
+        modules.push_back(new Step(player));
+        modules.push_back(new ReverseStep(player));
         // Velocity
         // Bhop
         // Gamemode
-        modules.push_back(new Phase("Player"));
+        modules.push_back(new Phase(player));
 
-        modules.push_back(new DebugCursor("Misc"));
+        modules.push_back(new DebugCursor(misc));
         // Disabler
         // InPvPTower
         // Masturbator
@@ -85,22 +104,25 @@ public:
         // Flight
         // HiveFlight
         // Jetpack
-        modules.push_back(new OGMFlight("Flies"));
+        modules.push_back(new OGMFlight(flies));
         // TeleportPhase
 
-        modules.push_back(new Watermark("Visual"));
-        modules.push_back(new ExpandScreen("Visual"));
-        // ArrayList
+        modules.push_back(new Watermark(visual));
+        modules.push_back(new ExpandScreen(visual));
+        modules.push_back(new ArrayList(visual));
         // ClickGUI
         // CoordsHud
-        modules.push_back(new Freelook("Visual"));
-        // Freecam
-        modules.push_back(new NoSwing("Visual"));
+        modules.push_back(new Freelook(visual));
+        modules.push_back(new Freecam(visual));
+        modules.push_back(new NoSwing(visual));
         // RainbowEffects
-        modules.push_back(new Zoom("Visual"));
+        modules.push_back(new Zoom(visual));
 
-        modules.push_back(new TestModule("Debug"));
+        modules.push_back(new TestModule(debug));
         // HiveBhop
+
+        // Sort modules
+        std::sort(modules.begin(), modules.end(), CompareArg());
 
         _logf(L"[TreroInternal]: Registered modules!\n");
     }

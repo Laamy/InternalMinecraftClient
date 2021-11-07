@@ -15,11 +15,22 @@
 // Utils
 #include "Utils/Utils.h"
 #include "Utils/RenderUtils.h"
+
+std::vector<class Module*> vMods;
+
 #include "ClientBase/Module.h"
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 
 #include "ClientBase/ModuleHandler.h"
+
+RenderUtils renderUtil = RenderUtils();
+GuiData* acs;
+ClientInstance* clientInst;
+Actor* localPlr;
+class BitmapFont* font;
+ModuleHandler handler = ModuleHandler();
+
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -44,18 +55,13 @@ std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
 
 std::vector<std::string> categories = std::vector<std::string>();
 std::vector<Vector2> categoryPos = std::vector<Vector2>();
-ModuleHandler handler = ModuleHandler();
 
 std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 
 bool cancelUiRender = false;
 bool renderClickUI = false;
 
-RenderUtils renderUtil = RenderUtils();
-GuiData* acs;
-ClientInstance* clientInst;
-Actor* localPlr;
-class BitmapFont* font;
+
 
 int frame = 0;
 
@@ -87,7 +93,7 @@ void mouseCallback(bool held, uintptr_t keyId, void* a3) {
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     if (renderUtil.ctx == nullptr && font != nullptr)
-        renderUtil.Init(ctx, acs, font);
+        renderUtil.Init(ctx, acs, font, reinterpret_cast<class Handle*>(&handler));
 
     if (renderUtil.ctx == nullptr || font == nullptr) return;
 
@@ -159,6 +165,8 @@ void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
 
         handler.InitModules();
+
+        vMods = handler.modules;
 
         for (auto mod : handler.modules) {
             bool addCategory = true;
