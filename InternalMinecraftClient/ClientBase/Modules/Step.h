@@ -13,6 +13,6 @@ public:
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 
-		lp->StepHeight = 0.5f;
+		lp->StepHeight = 0.5625f;
 	};
 };
