@@ -29,6 +29,9 @@
 #include "Modules/ArrayList.h"
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
+#include "Modules/Jesus.h"
+#include "Modules/CreativeFly.h"
+#include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
 
 class ModuleHandler {
@@ -64,10 +67,11 @@ public:
         // Reach -- I wonder how you would go about reach internally lol? i think i know how actually i would sig scan then covert it to a float*
 
         modules.push_back(new AirStuck(player));
-        modules.push_back(new AutoWalk(player));
+        //modules.push_back(new AutoWalk(player));//needs a fix for using Cos,...
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));
         modules.push_back(new HighJump(player));
+        modules.push_back(new Jesus(player));
         // InventoryMove
         // Jesus
         // LongJump
@@ -82,7 +86,7 @@ public:
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
 
-        modules.push_back(new DebugCursor(misc));
+        
         // Disabler
         // InPvPTower
         // Masturbator
@@ -106,7 +110,8 @@ public:
         // Flight
         // HiveFlight
         // Jetpack
-        modules.push_back(new OGMFlight(flies));
+        //modules.push_back(new OGMFlight(flies));//needs a fix for using Cos,...
+        modules.push_back(new CreativeFly(flies));
         // TeleportPhase
 
         modules.push_back(new Watermark(visual));
@@ -121,6 +126,8 @@ public:
         modules.push_back(new Zoom(visual));
 
         modules.push_back(new TestModule(debug));
+        modules.push_back(new DebugMenu(debug));
+        modules.push_back(new DebugCursor(debug));
         // HiveBhop
 
         // Sort modules
