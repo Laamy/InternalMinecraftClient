@@ -32,6 +32,7 @@
 #include "Modules/Jesus.h"
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
+#include "Modules/NoFall.h"
 
 class ModuleHandler {
 public:
@@ -83,6 +84,7 @@ public:
         // Bhop
         // Gamemode
         modules.push_back(new Phase(player));
+        modules.push_back(new NoFall(player));
 
         
         // Disabler
