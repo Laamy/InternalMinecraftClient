@@ -108,6 +108,7 @@ public:
         // HiveFlight
         // Jetpack
         //modules.push_back(new OGMFlight(flies));//needs a fix for using Cos,...
+        modules.push_back(new CreativeFly(flies));
         // TeleportPhase
 
         modules.push_back(new Watermark(visual));
