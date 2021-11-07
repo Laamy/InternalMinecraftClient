@@ -143,6 +143,10 @@ public:
 		return reinterpret_cast<bool*>((uintptr_t)(this) + 0x1D8);
 	};
 
+	float* SwingAnimation() {
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
+	};
+
 	AABB* _position() {
 		return reinterpret_cast<AABB*>((uintptr_t)(this) + 0x4C0);
 	};

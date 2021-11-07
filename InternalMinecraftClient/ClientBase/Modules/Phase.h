@@ -1,0 +1,14 @@
+#pragma once
+
+class Phase : public Module {
+public:
+	Phase(std::string cat) : Module(cat, "Phase", 0x07) {};
+
+	void OnGameTick(Actor* lp) override {
+		lp->Position.upper.y = lp->Position.lower.y;
+	};
+
+	void OnDisable(ClientInstance* ci, Actor* lp) override {
+		lp->SetPos(lp->Position.lower);
+	};
+};

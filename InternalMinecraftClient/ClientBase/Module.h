@@ -16,11 +16,12 @@ public:
     bool enabled;
 
 public: // functions
-    virtual void OnEnable(ClientInstance* ci) {};
-    virtual void OnDisable(ClientInstance* ci) {};
+    virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
+    virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
 
     virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
+    virtual void OnGameTick(Actor* lp) {};
 
     //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};

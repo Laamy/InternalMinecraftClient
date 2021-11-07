@@ -16,12 +16,18 @@
 #include "Utils/Utils.h"
 #include "Utils/RenderUtils.h"
 #include "ClientBase/Module.h"
+
+std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
+
 #include "ClientBase/ModuleHandler.h"
 
 #define PI 3.14159265359 // 3.14159265359
 
 typedef void(__thiscall* tick)(ClientInstance* clientinstance, void* a2);
 tick _tick;
+
+typedef void(__thiscall* player)(Actor* lp, void* a2);
+player _player;
 
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
@@ -32,7 +38,6 @@ mouse _mouse;
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
-std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 std::map<uint64_t, bool> beforeKeymap = std::map<uint64_t, bool>();
 
 std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
@@ -48,6 +53,8 @@ bool renderClickUI = false;
 
 RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
+ClientInstance* clientInst;
+Actor* localPlr;
 class BitmapFont* font;
 
 int frame = 0;
@@ -56,6 +63,19 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     if (c == 0x2D && keymap[c] == false && v == true) {
         renderClickUI = !renderClickUI;
     }
+
+    for (int i = 0; i < handler.modules.size(); ++i) {
+        if (handler.modules[i]->keybind == c && modulesEnabled[i] == false && v == true) {
+
+            handler.modules[i]->enabled = !handler.modules[i]->enabled;
+
+            if (handler.modules[i]->enabled)
+                handler.modules[i]->OnEnable(clientInst, localPlr);
+            else handler.modules[i]->OnDisable(clientInst, localPlr);
+
+        }
+    }
+
     keymap[c] = v;
     _key(c, v);
 };
@@ -94,6 +114,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
                             handler.modules[i]->enabled = !handler.modules[i]->enabled;
+                            if (!handler.modules[i]->enabled)
+                                handler.modules[i]->OnDisable(clientInst, localPlr);
+                            else
+                                handler.modules[i]->OnEnable(clientInst, localPlr);
                         }
                         beforeKeymap[i] = keymap[(int)' '];
                         catMod++;
@@ -112,6 +136,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
 void callback(ClientInstance* ci, void* a2) {
 
+    clientInst = ci;
     acs = ci->guiData;
     font = ci->mcGame->defaultGameFont;
 
@@ -120,6 +145,14 @@ void callback(ClientInstance* ci, void* a2) {
             mod->OnTick(ci);
 
     _tick(ci, a2);
+};
+
+void playerCallback(Actor* lp, void* a2) {
+    localPlr = lp;
+    for (auto mod : handler.modules)
+        if (mod->enabled)
+            mod->OnGameTick(lp);
+    _player(lp, a2);
 };
 
 void Init(HMODULE c) {
@@ -139,6 +172,7 @@ void Init(HMODULE c) {
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
+        uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00");
         //uintptr_t mouseAddr = Mem::findSig("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 57 41 54 41 55 41 56 41 57 48 83 EC ? 44 0F B7 BC 24 ? ? ? ? 48 8B ");
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
 
@@ -152,6 +186,10 @@ void Init(HMODULE c) {
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
             _logf(L"[TreroInternal]: ClientInstance hooked!\n");
+        };
+        if (MH_CreateHook((void*)localPlayerAddr, &playerCallback, reinterpret_cast<LPVOID*>(&_player)) == MH_OK) {
+            MH_EnableHook((void*)localPlayerAddr);
+            _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
         //    MH_EnableHook((void*)mouseAddr);
