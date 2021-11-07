@@ -29,6 +29,7 @@
 #include "Modules/ArrayList.h"
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
+#include "Modules/Jesus.h"
 
 class ModuleHandler {
 public:
@@ -67,6 +68,7 @@ public:
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));
         modules.push_back(new HighJump(player));
+        modules.push_back(new Jesus(player));
         // InventoryMove
         // Jesus
         // LongJump
