@@ -29,6 +29,7 @@
 #include "Modules/ArrayList.h"
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
+#include "Modules/NoFall.h"
 
 class ModuleHandler {
 public:
@@ -79,6 +80,7 @@ public:
         // Bhop
         // Gamemode
         modules.push_back(new Phase(player));
+        modules.push_back(new NoFall(player));
 
         modules.push_back(new DebugCursor(misc));
         // Disabler
