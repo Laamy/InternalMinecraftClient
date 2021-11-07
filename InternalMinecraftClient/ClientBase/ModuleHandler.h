@@ -31,6 +31,7 @@
 #include "Modules/Spider.h"
 #include "Modules/Jesus.h"
 #include "Modules/CreativeFly.h"
+#include "Modules/DebugMenu.h"
 
 class ModuleHandler {
 public:
@@ -83,7 +84,7 @@ public:
         // Gamemode
         modules.push_back(new Phase(player));
 
-        modules.push_back(new DebugCursor(misc));
+        
         // Disabler
         // InPvPTower
         // Masturbator
@@ -123,6 +124,8 @@ public:
         modules.push_back(new Zoom(visual));
 
         modules.push_back(new TestModule(debug));
+        modules.push_back(new DebugMenu(debug));
+        modules.push_back(new DebugCursor(debug));
         // HiveBhop
 
         // Sort modules
