@@ -2,7 +2,7 @@
 
 class LifeboatFly : public Module {
 public:
-	LifeboatFly(std::string cat) : Module("LifeboatFly", cat, 0x07) {};
+	LifeboatFly(std::string cat) : Module(cat, "LifeboatFly", 0x07) {};
 	ClientInstance* ci;
 	bool blinking;
 	int count;

@@ -33,9 +33,9 @@
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
-#include "Modules/AirSwim.h"
 #include "Modules/SpinAttack.h"
 #include "Modules/LifeboatFly.h"
+#include "Modules/Seedhack.h"
 
 class ModuleHandler {
 public:
@@ -61,6 +61,7 @@ public:
         // Scaffold -- cant do this until i learn GameMode in LP
         // Teleport -- Dont need this due to .tp
         modules.push_back(new Timer(world));
+        modules.push_back(new SeedHack(world));
         // Tower -- Could do
         modules.push_back(new Blink(world));
         modules.push_back(new Noclip(world));
@@ -70,8 +71,7 @@ public:
         // Reach -- I wonder how you would go about reach internally lol? i think i know how actually i would sig scan then covert it to a float*
 
         modules.push_back(new AirStuck(player));
-        //modules.push_back(new AirSwim(player)); // crashes
-        //modules.push_back(new AutoWalk(player));//needs a fix for using Cos,...
+        modules.push_back(new AutoWalk(player));//needs a fix for using Cos,...
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));
         modules.push_back(new HighJump(player));

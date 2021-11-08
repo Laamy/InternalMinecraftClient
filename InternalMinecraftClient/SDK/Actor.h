@@ -208,7 +208,7 @@ public:
 	virtual void changeDimension(class ChangeDimensionPacket const&);
 	virtual int getControllingPlayer(void);
 	virtual void checkFallDamage(float, bool);
-	virtual void causeFallDamage(float, float, ActorDamageSource);
+	virtual void causeFallDamage(float, float, class ActorDamageSource);
 	virtual void handleFallDistanceOnServer(float, float, bool);
 	virtual void playSynchronizedSound(class LevelSoundEvent, Vector3 const&, Block const&, bool);
 	virtual void playSynchronizedSound(class LevelSoundEvent, Vector3 const&, int, bool);
