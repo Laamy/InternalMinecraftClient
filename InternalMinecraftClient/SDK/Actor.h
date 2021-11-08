@@ -8,8 +8,6 @@
 class BlockSource {};
 
 class Actor {
-private:
-	virtual void TryroFunc0();
 public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);

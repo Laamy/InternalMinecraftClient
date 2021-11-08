@@ -6,7 +6,6 @@
 
 class Dimension {
 private:
-	virtual void TryroFunc0();
 	virtual void TryroFunc1();
 	virtual void TryroFunc2();
 	virtual void TryroFunc3();

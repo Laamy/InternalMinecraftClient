@@ -2,7 +2,6 @@
 
 class Level {
 private:
-	virtual void TryreoFunc0();
 	virtual void TryreoFunc1();
 	virtual void TryreoFunc2();
 	virtual void TryreoFunc3();
