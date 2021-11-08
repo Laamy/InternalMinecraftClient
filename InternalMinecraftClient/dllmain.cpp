@@ -64,8 +64,6 @@ std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 bool cancelUiRender = false;
 bool renderClickUI = false;
 
-
-
 int frame = 0;
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p

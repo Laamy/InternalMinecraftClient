@@ -163,13 +163,16 @@
     <ClInclude Include="ClientBase\Modules\ArrayList.h" />
     <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
     <ClInclude Include="ClientBase\Modules\Blink.h" />
+    <ClInclude Include="ClientBase\Modules\CreativeFly.h" />
     <ClInclude Include="ClientBase\Modules\DebugCursor.h" />
+    <ClInclude Include="ClientBase\Modules\DebugMenu.h" />
     <ClInclude Include="ClientBase\Modules\ExpandScreen.h" />
     <ClInclude Include="ClientBase\Modules\FastWater.h" />
     <ClInclude Include="ClientBase\Modules\Freecam.h" />
     <ClInclude Include="ClientBase\Modules\Freelook.h" />
     <ClInclude Include="ClientBase\Modules\Glide.h" />
     <ClInclude Include="ClientBase\Modules\HighJump.h" />
+    <ClInclude Include="ClientBase\Modules\Jesus.h" />
     <ClInclude Include="ClientBase\Modules\Noclip.h" />
     <ClInclude Include="ClientBase\Modules\NoFall.h" />
     <ClInclude Include="ClientBase\Modules\NoPacket.h" />
