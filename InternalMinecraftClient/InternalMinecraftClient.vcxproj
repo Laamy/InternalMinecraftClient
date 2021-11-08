@@ -174,6 +174,7 @@
     <ClInclude Include="ClientBase\Modules\Glide.h" />
     <ClInclude Include="ClientBase\Modules\HighJump.h" />
     <ClInclude Include="ClientBase\Modules\Jesus.h" />
+    <ClInclude Include="ClientBase\Modules\LifeboatFly.h" />
     <ClInclude Include="ClientBase\Modules\Noclip.h" />
     <ClInclude Include="ClientBase\Modules\NoFall.h" />
     <ClInclude Include="ClientBase\Modules\NoPacket.h" />

@@ -14,6 +14,7 @@
 #include "SDK/KeyInfo.h"
 
 //KeyInfo* keyinfo;
+class ClientInstance* clientInst;
 
 // Utils
 #include "Utils/Utils.h"
@@ -29,7 +30,6 @@ std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 
 RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
-ClientInstance* clientInst;
 Actor* localPlr;
 class BitmapFont* font;
 ModuleHandler handler = ModuleHandler();

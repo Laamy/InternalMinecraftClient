@@ -4,33 +4,19 @@ class DebugMenu : public Module {
 public:
 	DebugMenu(std::string cat) : Module(cat, "DebugMenu", 0x07) {};
 
-	Level level;
+	Actor* act;
+
+	void OnEnable(ClientInstance* cls, Actor* lp) override {
+		act = lp;
+	};
 
 	void OnFrameRender(RenderUtils* ctx) override {
-		if (level.WorldName != "") {
-			auto worldText = TextHolder("World: " + level.WorldName);
-			auto worldTextPos = Vector2(0, 0);
-			ctx->DrawString(worldTextPos, _RGB(255, 255, 255), worldText, ctx->font);
-		}
-		else {
-			auto worldText = TextHolder("World: Unknown");
-			auto worldTextPos = Vector2(0, 0);
-			ctx->DrawString(worldTextPos, _RGB(255, 255, 255), worldText, ctx->font);
-		}
-		
-		auto labText = TextHolder("Looking At Block: " + level.LookingAtBlock);
-		auto labTextPos = Vector2(0, 20);
-		ctx->DrawString(labTextPos, _RGB(255, 255, 255), labText, ctx->font);
+		if (act == nullptr) return;
+		if (act->level == nullptr) return;
 
-		if (level.SelectedSide) {
-			auto ssText = TextHolder("SelectedSide: " + level.SelectedSide);
-			auto ssTextPos = Vector2(0, 40);
-			ctx->DrawString(ssTextPos, _RGB(255, 255, 255), ssText, ctx->font);
-		}
-		else {
-			auto ssText = TextHolder("SelectedSide: Unknown");
-			auto ssTextPos = Vector2(0, 40);
-			ctx->DrawString(ssTextPos, _RGB(255, 255, 255), ssText, ctx->font);
-		}
-	}
+		ctx->DrawString(Vector2(0, 16 * 0), _RGB(255, 255, 255), TextHolder("IsDay: " + act->dimension->isDay()), ctx->font, 0.6f);
+		ctx->DrawString(Vector2(0, 16 * 1), _RGB(255, 255, 255), TextHolder("SpawnPos: " + act->dimension->getSpawnPos()), ctx->font, 0.6f);
+		ctx->DrawString(Vector2(0, 16 * 2), _RGB(255, 255, 255), TextHolder("IsEnchanted: " + act->isEnchanted()), ctx->font, 0.6f);
+		ctx->DrawString(Vector2(0, 16 * 3), _RGB(255, 255, 255), TextHolder("IsImmobile: " + act->isImmobile()), ctx->font, 0.6f);
+	};
 };

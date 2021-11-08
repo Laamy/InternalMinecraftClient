@@ -2,7 +2,7 @@
 
 class Freelook : public Module {
 public:
-	Freelook(std::string cat) : Module(cat, "Freelook", (int)'R') {};
+	Freelook(std::string cat) : Module("Freelook", cat, 0x07) {};
 	Vector2 oldPos;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {

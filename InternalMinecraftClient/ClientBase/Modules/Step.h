@@ -2,7 +2,7 @@
 
 class Step : public Module {
 public:
-	Step(std::string cat) : Module(cat, "Step", (int)'R') {};
+	Step(std::string cat) : Module(cat, "Step", 0x07) {};
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;

@@ -1,0 +1,62 @@
+#pragma once
+
+class LifeboatFly : public Module {
+public:
+	LifeboatFly(std::string cat) : Module("LifeboatFly", cat, 0x07) {};
+	ClientInstance* ci;
+	bool blinking;
+	int count;
+
+	void OnEnable(ClientInstance* ci, Actor* lp) override {
+		if (lp == nullptr) return;
+		
+		this->ci = ci;
+		blinking = false;
+	};
+
+	void OnGameTick(Actor* lp) override {
+		if (lp == nullptr || ci == nullptr) return;
+
+		float speed = 0.4f;
+
+		ci->timerClass->timerClass->timer = 20.0f * speed;
+
+		lp->onGround = true;
+
+		float speed2 = 1.25f / speed;
+
+		float cy = (lp->CameraRots.y + 90) * (PI / 180);
+
+		if (keymap[(int)'W'])
+		{
+			lp->Velocity.x = sin(cy) * speed2;
+			lp->Velocity.z = cos(cy) * speed2;
+		}
+		lp->Velocity.y = -0.001f;
+
+		if (count > 7)
+		{
+			blinking = true;
+			ci->loopbackSender->RetPacketSender();
+			count = 0;
+		}
+		else
+		{
+			count++;
+			blinking = false;
+			ci->loopbackSender->RestorePacketSender();
+		}
+	};
+
+	void OnDisable(ClientInstance* ci, Actor* lp) override {
+		if (lp == nullptr) return;
+		count = 0;
+		if (!blinking)
+		{
+			ci->loopbackSender->RestorePacketSender();
+			blinking = false;
+		}
+		ci->timerClass->timerClass->timer = 20.0f;
+		lp->Velocity = Vector3(0, 0, 0);
+	};
+};

@@ -8,6 +8,10 @@ public:
 		lp->startSpinAttack();
 	};
 
+	void OnGameTick(Actor* lp) override {
+		lp->startSpinAttack();
+	};
+
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		lp->stopSpinAttack();
 	};

@@ -2,7 +2,7 @@
 
 class ReverseStep : public Module {
 public:
-	ReverseStep(std::string cat) : Module(cat, "ReverseStep", (int)'R') {};
+	ReverseStep(std::string cat) : Module(cat, "ReverseStep", 0x07) {};
 
 	void OnGameTick(Actor* lp) override {
 		if (lp == nullptr) return;
