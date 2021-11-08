@@ -103,17 +103,17 @@ public:
 	virtual void onPlayerDeath(Player&, class ActorDamageSource const&);
 	virtual void tick(void);
 	virtual void directTickEntities(class BlockSource&);
-	virtual void animateTick(Actor&);
-	virtual void explode(class BlockSource&, Actor*, Vector3 const&, float, bool, bool, float, bool);
+	virtual void animateTick(class Actor&);
+	virtual void explode(class BlockSource&, class Actor*, Vector3 const&, float, bool, bool, float, bool);
 	virtual void explode(class Explosion&);
 	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Vector3 const&, Dimension*);
-	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Actor const&, Vector3 const&);
+	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class Actor const&, Vector3 const&);
 	virtual void denyEffect(class BlockSource&, Vector3 const&);
 	virtual void potionSplash(); //removed
-	virtual void applyLiquidPhysicsToActor(Actor*, class MaterialType);
+	virtual void applyLiquidPhysicsToActor(class Actor*, class MaterialType);
 	virtual void extinguishFire(class BlockSource&, class BlockPos const&, class uchar);
-	virtual void findPath(Actor&, int, int, int, class NavigationComponent&);
-	virtual void findPath(Actor&, Actor&, NavigationComponent&);
+	virtual void findPath(class Actor&, int, int, int, class NavigationComponent&);
+	virtual void findPath2(class Actor&, Actor&, NavigationComponent&);
 	virtual void updateSleepingPlayerList(void);
 	virtual int getTime(void);
 	virtual void setTime(int);
@@ -205,7 +205,7 @@ public:
 	virtual void broadcastLocalEvent(class BlockSource&, LevelEvent, Vector3 const&, Block const&);
 	virtual void broadcastSoundEvent(class BlockSource&, LevelSoundEvent, Vector3 const&, Block const&, ActorDefinitionIdentifier const&, bool, bool);
 	virtual void broadcastSoundEvent(class BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void broadcastActorEvent(Actor&, class ActorEvent, int);
+	virtual void broadcastActorEvent(class Actor&, class ActorEvent, int);
 	virtual void addBossEventListener(class BossEventListener*);
 	virtual void removeBossEventListener(BossEventListener*);
 	virtual void broadcastBossEvent(class BossEventUpdateType, uint64_t const&, class BossEventPacket const&);
@@ -235,11 +235,11 @@ public:
 	virtual void onChunkLoaded(class ChunkSource&, LevelChunk&);
 	virtual void onChunkDiscarded(LevelChunk&);
 	virtual void queueEntityDestruction(); //removed
-	virtual void removeEntityReferences(Actor&, bool);
-	virtual void removeEntity(Actor&);
+	virtual void removeEntityReferences(class Actor&, bool);
+	virtual void removeEntity(class Actor&);
 	virtual void removeEntity(WeakEntityRef);
-	virtual void removeEntityIfExists(Actor*);
-	virtual void forceRemoveEntity(Actor&);
+	virtual void removeEntityIfExists(class Actor*);
+	virtual void forceRemoveEntity(class Actor&);
 	virtual void forceFlushRemovedPlayers(void);
 	virtual void loadFunctionManager(void);
 	virtual void levelCleanupQueueEntityRemoval(); //removed
@@ -251,7 +251,7 @@ public:
 	virtual void waitAsyncSuspendWork(void);
 	virtual void _destroyEffect(class BlockPos const&, Block const&, int);
 	virtual void addParticleEffect(class HashedString const&, Vector3 const&, class MolangVariableMap const&);
-	virtual void addParticleEffect(HashedString const&, Actor const&, HashedString const&, Vector3 const&, MolangVariableMap const&);
+	virtual void addParticleEffect(HashedString const&, class Actor const&, HashedString const&, Vector3 const&, MolangVariableMap const&);
 	virtual void addTerrainParticleEffect(class BlockPos const&, Block const&, Vector3 const&, float, float, float);
 	virtual void addTerrainSlideEffect(class BlockPos const&, Block const&, Vector3 const&, float, float, float);
 	virtual void addBreakingItemParticleEffect(Vector3 const&, ParticleType, class TextureUVCoordinateSet const&, bool);
@@ -324,7 +324,7 @@ public:
 	virtual int getGlobalActors(void);
 	virtual int getAutonomousActors(void);
 	virtual int getAutonomousLoadedEntities(void);
-	virtual void removeAutonomousEntity(Actor&, LevelChunk*);
+	virtual void removeAutonomousEntity(class Actor&, LevelChunk*);
 	virtual void notifySubChunkRequestManager(class SubChunkPacket const&);
 	virtual int getSubChunkRequestManager(void);
 	virtual int getPacketSender(void);

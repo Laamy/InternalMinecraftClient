@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include "Weather.h"
@@ -6,64 +6,56 @@
 
 class Dimension {
 private:
-	virtual void Function1();
-	virtual void Function2();
-	virtual void Function3();
-	virtual void Function4();
-	virtual void Function5();
-	virtual void Function6();
-	virtual void Function7();
-	virtual void Function8();
-	virtual void Function9();
-	virtual void Function10();
-	virtual void Function11();
-	virtual void Function12();
-	virtual void Function13();
-	virtual void Function14();
+	virtual void TryroFunc0();
+	virtual void TryroFunc1();
+	virtual void TryroFunc2();
+	virtual void TryroFunc3();
+	virtual void TryroFunc4();
 public:
+	virtual void onSourceCreated(class BlockSource&);
+	virtual void onSourceDestroyed(class BlockSource&);
+	virtual void onAreaChanged(class BlockSource&, class BlockPos const&, class BlockPos const&);
+	virtual void onBlockChanged(class BlockSource&, class BlockPos const&, class uint, class Block const&, class Block const&, int, class ActorBlockSyncMessage const*, class BlockChangedEventTarget);
+	virtual void onBrightnessChanged(class BlockSource&, class BlockPos const&);
+	virtual void onBlockEntityChanged(class BlockSource&, class BlockActor&);
+	virtual void onBlockEntityAboutToBeRemoved(); //removed
+	virtual void onEntityChanged(class BlockSource&, class Actor&);
+	virtual void onBlockEvent(class BlockSource&, int, int, int, int, int);
 	virtual void allChanged(void);
 	virtual void addParticle(class ParticleType, Vector3 const&, Vector3 const&, int, class CompoundTag const*, bool);
-	virtual void sendServerLegacyParticle(class ParticleType, Vector3 const&, Vector3 const&, int);
-private:
-	virtual void Function18();
-	virtual void Function19();
-	virtual void Function20();
-	virtual void Function21();
-	virtual void Function22();
-public:
+	virtual void sendServerLegacyParticle(ParticleType, Vector3 const&, Vector3 const&, int);
+	virtual void addParticleEffect(class HashedString const&, Vector3 const&, class MolangVariableMap const&);
+	virtual void addParticleEffect(class HashedString const&, class Actor const&, class HashedString const&, Vector3 const&, class MolangVariableMap const&);
+	virtual void addTerrainParticleEffect(BlockPos const&, Block const&, Vector3 const&, float, float, float);
+	virtual void addTerrainSlideEffect(BlockPos const&, Block const&, Vector3 const&, float, float, float);
+	virtual void addBreakingItemParticleEffect(Vector3 const&, ParticleType, class TextureUVCoordinateSet const&, bool);
 	virtual void playMusic(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Vector3 const&, float, float);
 	virtual void playStreamingMusic(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int, int, int);
 	virtual void onEntityAdded(class Actor&);
 	virtual void onEntityRemoved(class Actor&);
-private:
-	virtual void Function27();
-	virtual void Function28();
-public:
+	virtual void onChunkLoaded(class ChunkSource&, class LevelChunk&);
+	virtual void onSubChunkLoaded(class ChunkSource&, class LevelChunk&, short);
 	virtual void onChunkUnloaded(class LevelChunk&);
 	virtual void onLevelDestruction(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual void levelEvent(class LevelEvent, Vector3 const&, int);
-	virtual void levelEvent(class LevelEvent, class CompoundTag const&);
-private:
-	virtual void Function33();
-public:
+	virtual void levelEvent(class LevelEvent, CompoundTag const&);
+	virtual void levelSoundEvent(class LevelSoundEvent, Vector3 const&, int, class ActorDefinitionIdentifier const&, bool, bool);
 	virtual void levelSoundEvent(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Vector3 const&, float, float);
 	virtual void stopSoundEvent(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual void stopAllSounds(void);
-private:
-	virtual void Function37();
-public:
+	virtual void takePicture(); //removed
 	virtual void playerListChanged(void);
 	virtual void init(void);
 	virtual void tick(void);
 	virtual void tickRedstone(void);
 private:
-	virtual void Function42();
-	virtual void Function43();
-	virtual void Function44();
+	virtual void TryroFunc41();
+	virtual void TryroFunc42();
+	virtual void TryroFunc43();
 public:
 	virtual bool isNaturalDimension(void);
 	virtual bool isValidSpawn(int, int);
-	virtual float getBrightnessDependentFogColor();
+	virtual float getBrightnessDependentFogColor(); //removed
 	virtual bool isFoggyAt(int, int);
 	virtual int getCloudHeight(void);
 	virtual int getDefaultBiome(void);
@@ -78,14 +70,12 @@ public:
 	virtual float getSunIntensity(float, Vector3 const&, float);
 	virtual void forceCheckAllNeighChunkSavedStat(void);
 private:
-	virtual void Function61();
+	virtual void TryroFunc60();
 public:
 	virtual void deserialize(class CompoundTag const&);
 	virtual void serialize(class CompoundTag&);
-	virtual void sendBroadcast(Packet const&, class Player*);
-private:
-	virtual void Function65();
-public:
+	virtual void sendBroadcast(class Packet const&, class Player*);
+	virtual bool is2DPositionRelevantForPlayer(class BlockPos const&, class Player&);
 	virtual bool isActorRelevantForPlayer(class Player&, class Actor const&);
 	virtual int getLightTextureImageBuilder(void);
 	virtual int getBrightnessRamp(void);
