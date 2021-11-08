@@ -185,6 +185,7 @@
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GuiData.h" />
+    <ClInclude Include="SDK\KeyInfo.h" />
     <ClInclude Include="SDK\MinecraftGame.h" />
     <ClInclude Include="SDK\TextHolder.h" />
     <ClInclude Include="SDK\Weather.h" />

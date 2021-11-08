@@ -8,6 +8,483 @@
 class BlockSource {};
 
 class Actor {
+public:
+	virtual int getLastHurtByMob(void);
+private:
+	virtual void setLastHurtByMob(class Mob*);
+public:
+	virtual int getLastHurtByPlayer(void);
+	virtual void setLastHurtByPlayer(class Player*);
+	virtual int getLastHurtMob(void);
+	virtual void setLastHurtMob(Actor*);
+	virtual void outOfWorld(void);
+private:
+	virtual void Function7();
+	virtual void Function8();
+	virtual void Function9();
+	virtual void Function10();
+	virtual void Function11();
+public:
+	virtual void _doInitialMove(void);
+private:
+	virtual void Function13();
+	virtual void Function14();
+	virtual void Function15();
+public:
+	virtual void reset(void);
+	virtual int getOnDeathExperience(void);
+	virtual int getOwnerEntityType(void);
+	virtual void remove(void);
+	virtual void setPos(struct Vec3 const&);
+	virtual bool isRuntimePredictedMovementEnabled(void);
+	virtual int getPredictedMovementValues(void);
+	virtual int getPos(void);
+	virtual int getPosOld(void);
+	virtual float getPosExtrapolated(float);
+private:
+	virtual void Function26();
+public:
+	virtual int getFiringPos(void);
+	virtual void setRot(struct Vec2 const&);
+	virtual void move(struct Vec3 const&);
+private:
+	virtual void Function30();
+public:
+	virtual float getInterpolatedRidingPosition(float);
+	virtual float getInterpolatedBodyRot(float);
+	virtual float getInterpolatedHeadRot(float);
+	virtual float getInterpolatedBodyYaw(float);
+	virtual int getYawSpeedInDegreesPerSecond(void);
+	virtual float getInterpolatedWalkAnimSpeed(float);
+	virtual float getInterpolatedRidingOffset(float);
+private:
+	virtual void Function38();
+	virtual void Function39();
+public:
+	virtual void updateEntityInside(void);
+	virtual bool isFireImmune(void);
+private:
+	virtual void Function42();
+	virtual void Function43();
+public:
+	virtual void teleportTo(struct Vec3 const&, bool, int, int);
+	virtual void tryTeleportTo(struct Vec3 const&, bool, bool, int, int);
+	virtual void chorusFruitTeleport(struct Vec3 const&);
+	virtual void lerpMotion(struct Vec3 const&);
+	virtual void tryCreateAddActorPacket(void);
+private:
+	virtual void Function49();
+	virtual void Function50();
+	virtual void Function51();
+public:
+	virtual void positionPassenger(Actor&, float);
+	virtual int getRidingHeight(void);
+	virtual void startRiding(Actor&);
+	virtual void addPassenger(Actor&);
+	virtual void flagPassengerToRemove(Actor&);
+private:
+	virtual int getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class InputMode);
+public:
+	virtual void intersects(struct Vec3 const&, struct Vec3 const&);
+	virtual bool isInWall(void);
+	virtual bool isInvisible(void);
+	virtual void canShowNameTag(void);
+	virtual void canExistInPeaceful(void);
+	virtual void setNameTagVisible(bool);
+private:
+	virtual void Function64();
+public:
+	virtual int getNameTagAsHash(void);
+private:
+	virtual void Function66();
+	virtual void Function67();
+public:
+	virtual void setNameTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
+	virtual int getAlwaysShowNameTag(void);
+	virtual void setScoreTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
+private:
+	virtual void Function71();
+public:
+	virtual bool isInWater(void);
+	virtual void hasEnteredWater(void);
+	virtual bool isInLava(void);
+private:
+	virtual void Function75();
+public:
+	virtual bool isOverWater(void);
+private:
+	virtual void Function77();
+	virtual void Function78();
+public:
+	virtual int getCameraOffset(void);
+	virtual int getShadowHeightOffs(void);
+	virtual int getShadowRadius(void);
+	virtual float getHeadLookVector(float);
+	virtual void canSeeInvisible(void);
+	virtual void canSee(Actor const&);
+	virtual void canSee(struct Vec3 const&);
+	virtual bool isSkyLit(float);
+	virtual float getBrightness(float);
+	virtual void interactPreventDefault(void);
+private:
+	virtual void playerTouch(class Player&);
+public:
+	virtual void onAboveBubbleColumn(bool);
+	virtual void onInsideBubbleColumn(bool);
+	virtual bool isImmobile(void);
+	virtual bool isSilent(void);
+	virtual bool isPickable(void);
+	virtual bool isFishable(void);
+	virtual bool isSleeping(void);
+	virtual void setSleeping(bool);
+	virtual bool isShootable(void);
+	virtual void setSneaking(bool);
+private:
+	virtual void Function100();
+	virtual void Function101();
+public:
+	virtual bool isAlive(void);
+	virtual bool isOnFire(void);
+private:
+	virtual void Function104();
+public:
+	virtual bool isCreativeModeAllowed(void);
+	virtual bool isSurfaceMob(void);
+	virtual bool isTargetable(void);
+	virtual bool isLocalPlayer(void);
+	virtual bool isPlayer(void);
+	virtual bool isAffectedByWaterBottle(void);
+	virtual void canAttack(Actor*, bool);
+	virtual void setTarget(Actor*);
+	virtual void findAttackTarget(void);
+	virtual bool isValidTarget(Actor*);
+	virtual void attack(Actor&, class ActorDamageCause const&);
+	virtual void performRangedAttack(Actor&, float);
+	virtual void adjustDamageAmount(int&);
+	virtual int getEquipmentCount(void);
+	virtual void setOwner(uint64_t);
+	virtual void setSitting(bool);
+	virtual void onTame(void);
+	virtual void onFailedTame(void);
+	virtual int getInventorySize(void);
+	virtual int getEquipSlots(void);
+	virtual int getChestSlots(void);
+	virtual void setStanding(bool);
+	virtual void canPowerJump(void);
+	virtual void setCanPowerJump(bool);
+	virtual bool isJumping(void);
+	virtual bool isEnchanted(void);
+	virtual void vehicleJumped(void);
+	virtual void vehicleLanded(struct Vec3 const&, struct Vec3 const&);
+	virtual void shouldRender(void);
+	virtual void playAmbientSound(void);
+	virtual int getAmbientSound(void);
+private:
+	virtual void Function136();
+	virtual void Function137();
+	virtual void Function138();
+public:
+	virtual void animateHurt(void);
+	virtual void doFireHurt(int);
+	virtual void onLightningHit(void);
+private:
+	virtual void Function142();
+public:
+	virtual void feed(int);
+private:
+	virtual void Function144();
+public:
+	virtual int getPickRadius(void);
+	virtual int getActorRendererId(void);
+	virtual void spawnAtLocation(int, int);
+	virtual void spawnAtLocation(int, int, float);
+private:
+	virtual void Function149();
+	virtual void Function150();
+	virtual void Function151();
+public:
+	virtual void despawn(void);
+	virtual void killed(Actor&);
+	virtual void awardKillScore(Actor&, int);
+private:
+	virtual void Function155();
+	virtual void Function156();
+	virtual void Function157();
+	virtual void Function158();
+	virtual void Function159();
+	virtual void Function160();
+	virtual void Function161();
+	virtual void Function162();
+	virtual void Function163();
+	virtual void Function164();
+public:
+	virtual int getEquippedTotem(void);
+	virtual void consumeTotem(void);
+private:
+	virtual void save(class CompoundTag&);
+	virtual void saveWithoutId(class CompoundTag&);
+	virtual void load(class CompoundTag const&, class DataLoadHelper&);
+	virtual void Function170();
+public:
+	virtual int getEntityTypeId(void);
+	virtual void queryEntityRenderer(void);
+	virtual int getSourceUniqueID(void);
+	virtual void setOnFire(int);
+	virtual void extinguishFire(void);
+	virtual void thawFreezeEffect(void);
+	virtual void canFreeze(void);
+	virtual bool isWearingLeatherArmor(void);
+private:
+	virtual void Function179();
+	virtual void Function180();
+public:
+	virtual int getPortalCooldown(void);
+	virtual int getPortalWaitTime(void);
+	virtual int getDimensionId(void);
+	virtual void canChangeDimensions(void);
+private:
+	virtual void Function185();
+	virtual void Function186();
+public:
+	virtual int getControllingPlayer(void);
+	virtual void checkFallDamage(float, bool);
+private:
+	virtual void Function189();
+public:
+	virtual void handleFallDistanceOnServer(float, float, bool);
+private:
+	virtual void Function191();
+	virtual void Function192();
+public:
+	virtual void onSynchedDataUpdate(int);
+	virtual void canAddPassenger(Actor&);
+private:
+	virtual void Function195();
+public:
+	virtual void canBePulledIntoVehicle(void);
+	virtual void inCaravan(void);
+	virtual bool isLeashableType(void);
+	virtual void tickLeash(void);
+	virtual void sendMotionPacketIfNeeded(void);
+	virtual void canSynchronizeNewEntity(void);
+	virtual void stopRiding(bool, bool, bool);
+	virtual void startSwimming(void);
+	virtual void stopSwimming(void);
+	virtual void buildDebugInfo(std::basic_string<char, std::char_traits<char>, std::allocator<char>>&);
+private:
+	virtual void Function206();
+public:
+	virtual bool isClientSide(void);
+private:
+	virtual void Function208();
+	virtual void Function209();
+public:
+	virtual int getDeathTime(void);
+	virtual void heal(int);
+	virtual bool isInvertedHealAndHarm(void);
+	virtual void canBeAffected(int);
+private:
+	virtual void Function214();
+	virtual void Function215();
+	virtual void Function216();
+	virtual void Function217();
+	virtual void Function218();
+public:
+	virtual int getAnimationComponent(void);
+private:
+	virtual void Function220();
+public:
+	virtual void swing(void);
+private:
+	virtual void Function222();
+	virtual void Function223();
+public:
+	virtual int getOutputSignal(void);
+	virtual int getDebugText(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>&);
+	virtual int getMapDecorationRotation(void);
+	virtual int getPassengerYRotation(Actor const&);
+	virtual int getYHeadRot(void);
+	virtual bool isWorldBuilder(void);
+	virtual bool isCreative(void);
+	virtual bool isAdventure(void);
+private:
+	virtual void Function232();
+	virtual void Function233();
+	virtual void Function234();
+	virtual void Function235();
+public:
+	virtual void setAuxValue(int);
+	virtual void setSize(float, float);
+	virtual void onOrphan(void);
+	virtual void wobble(void);
+	virtual void wasHurt(void);
+	virtual void startSpinAttack(void);
+	virtual void stopSpinAttack(void);
+	virtual void setDamageNearbyMobs(bool);
+private:
+	virtual void Function244();
+public:
+	virtual void reloadLootTable(void);
+private:
+	virtual void Function246();
+public:
+	virtual int getDeletionDelayTimeSeconds(void);
+	virtual void kill(void);
+private:
+	virtual void Function249();
+public:
+	virtual void shouldDropDeathLoot(void);
+private:
+	virtual void Function251();
+	virtual void Function252();
+	virtual void Function253();
+public:
+	virtual float getNextStep(float);
+	virtual int getLootTable(void);
+private:
+	virtual void Function256();
+	virtual void Function257();
+public:
+	virtual void shouldTryMakeStepSound(void);
+	virtual void canMakeStepSound(void);
+private:
+	virtual void Function260();
+public:
+	virtual void markHurt(void);
+private:
+	virtual void Function262();
+	virtual void Function263();
+	virtual void Function264();
+	virtual void Function265();
+	virtual void Function266();
+public:
+	virtual void _makeFlySound(void);
+private:
+	virtual void Function268();
+	virtual void Function269();
+public:
+	virtual void updateWaterState(void);
+	virtual void doWaterSplashEffect(void);
+	virtual void spawnTrailBubbles(void);
+private:
+	virtual void Function273();
+public:
+	virtual void _removePassenger(uint64_t const&, bool, bool, bool);
+	virtual void _onSizeUpdated(void);
+	virtual void _doAutoAttackOnTouch(Actor&);
+	virtual void knockback(Actor*, int, float, float, float, float, float);
+	virtual void spawnAnim(void);
+	virtual void setSprinting(bool);
+	virtual int getHurtSound(void);
+	virtual int getDeathSound(void);
+private:
+	virtual void Function282();
+public:
+	virtual int getSpeed(void);
+	virtual void setSpeed(float);
+	virtual int getJumpPower(void);
+private:
+	virtual void Function286();
+public:
+	virtual int getMeleeWeaponDamageBonus(Actor);
+	virtual int getMeleeKnockbackBonus(void);
+	virtual void travel(float, float, float);
+private:
+	virtual void Function290();
+public:
+	virtual void applyFinalFriction(float, bool);
+	virtual void updateWalkAnim(void);
+	virtual void aiStep(void);
+private:
+	virtual void Function294();
+public:
+	virtual void pushActors(void);
+	virtual void lookAt(Actor*, float, float);
+	virtual bool isLookingAtAnEntity(void);
+	virtual void checkSpawnRules(bool);
+	virtual void checkSpawnObstruction(void);
+	virtual float getAttackAnim(float);
+private:
+	virtual void Function301();
+	virtual void Function302();
+	virtual void Function303();
+	virtual void Function304();
+public:
+	virtual int getTimeAlongSwing(void);
+	virtual void ate(void);
+	virtual int getMaxHeadXRot(void);
+	virtual bool isAlliedTo(Actor);
+private:
+	virtual void doHurtTarget(Actor*, class ActorDamageCause const&);
+public:
+	virtual void canBeControlledByPassenger(void);
+	virtual void leaveCaravan(void);
+	virtual void joinCaravan(Actor);
+	virtual void hasCaravanTail(void);
+	virtual int getCaravanHead(void);
+	virtual int getArmorValue(void);
+	virtual int getArmorCoverPercentage(void);
+private:
+	virtual void Function317();
+	virtual void Function318();
+	virtual void Function319();
+	virtual void Function320();
+public:
+	virtual void containerChanged(int);
+	virtual void updateEquipment(void);
+	virtual void clearEquipment(void);
+	virtual int getAllArmor(void);
+	virtual int getAllArmorID(void);
+	virtual int getAllHand(void);
+	virtual int getAllEquipment(void);
+	virtual int getArmorTypeHash(void);
+private:
+	virtual void Function329();
+public:
+	virtual void dropEquipmentOnDeath(void);
+private:
+	virtual void Function331();
+public:
+	virtual void sendInventory(bool);
+private:
+	virtual void Function333();
+public:
+	virtual void createAIGoals(void);
+	virtual void onBorn(Actor&, Actor&);
+private:
+	virtual void Function336();
+public:
+	virtual void setTransitioningSitting(bool);
+	virtual void attackAnimation(Actor*, float);
+	virtual int getAttackTime(void);
+private:
+	virtual void Function340();
+public:
+	virtual void canExistWhenDisallowMob(void);
+	virtual void useNewAi(void);
+	virtual void ascendLadder(void);
+private:
+	virtual void Function344();
+	virtual void Function345();
+public:
+	virtual void dropContainer(void);
+	virtual void initBodyControl(void);
+	virtual void jumpFromGround(void);
+private:
+	virtual void Function349();
+public:
+	virtual void updateAi(void);
+	virtual void newServerAiStep(void);
+	virtual void _serverAiMobStep(void);
+private:
+	virtual void Function353();
+	virtual void Function354();
+public:
+	virtual void dropBags(void);
+	virtual void tickDeath(void);
+	virtual void updateGliding(void);
+	virtual void _allowAscendingScaffolding(void);
+
 private: // Variables
 	char pad_0x0000[0x138]; //0x0000
 public:

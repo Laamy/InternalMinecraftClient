@@ -11,6 +11,9 @@
 #include "SDK/Actor.h"
 #include "SDK/GuiData.h"
 #include "SDK/ClientInstance.h"
+#include "SDK/KeyInfo.h"
+
+KeyInfo* keyinfo;
 
 // Utils
 #include "Utils/Utils.h"
@@ -43,7 +46,7 @@ player _player;
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
 
-typedef void(__thiscall* mouse)(bool held, uintptr_t keyId, void* a3);
+typedef void(__thiscall* mouse)(KeyInfo* cls);
 mouse _mouse;
  
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
@@ -86,9 +89,12 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     _key(c, v);
 };
 
-void mouseCallback(bool held, uintptr_t keyId, void* a3) {
-    mousemap[keyId] = held;
-    _mouse(held, keyId, a3);
+void mouseCallback(KeyInfo* cls) {
+    keyinfo = cls;
+    if (keyinfo->leftMouseDown)
+        _logf(L"MouseDown");
+    //_mouse(cls);
+
 };
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
@@ -181,7 +187,7 @@ void Init(HMODULE c) {
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00");
-        //uintptr_t mouseAddr = Mem::findSig("48 8B C4 48 89 58 08 48 89 68 10 48 89 70 18 57 41 54 41 55 41 56 41 57 48 83 EC ? 44 0F B7 BC 24 ? ? ? ? 48 8B ");
+        uintptr_t mouseAddr = Mem::findSig("83 7B 4C ? 75 1C 80 7B");
         uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
 
         _logf(L"[TreroInternal]: Hooking functions...\n");
@@ -199,9 +205,10 @@ void Init(HMODULE c) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
-        //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
-        //    MH_EnableHook((void*)mouseAddr);
-        //};
+        if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
+            MH_EnableHook((void*)mouseAddr);
+            _logf(L"[TreroInternal]: KeyInfo hooked!\n");
+        };
         if (MH_CreateHook((void*)renderCtx, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
             MH_EnableHook((void*)renderCtx);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
