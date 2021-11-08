@@ -187,6 +187,7 @@
     <ClInclude Include="SDK\GuiData.h" />
     <ClInclude Include="SDK\KeyInfo.h" />
     <ClInclude Include="SDK\MinecraftGame.h" />
+    <ClInclude Include="SDK\Packet\Packet.h" />
     <ClInclude Include="SDK\TextHolder.h" />
     <ClInclude Include="SDK\Weather.h" />
     <ClInclude Include="Utils\RenderUtils.h" />

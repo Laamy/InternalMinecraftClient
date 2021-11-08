@@ -35,7 +35,7 @@ public:
 	virtual int getOnDeathExperience(void);
 	virtual int getOwnerEntityType(void);
 	virtual void remove(void);
-	virtual void setPos(struct Vec3 const&);
+	virtual void setPos(Vector3 const&);
 	virtual bool isRuntimePredictedMovementEnabled(void);
 	virtual int getPredictedMovementValues(void);
 	virtual int getPos(void);
@@ -46,7 +46,7 @@ private:
 public:
 	virtual int getFiringPos(void);
 	virtual void setRot(struct Vec2 const&);
-	virtual void move(struct Vec3 const&);
+	virtual void move(Vector3 const&);
 private:
 	virtual void Function30();
 public:
@@ -67,10 +67,10 @@ private:
 	virtual void Function42();
 	virtual void Function43();
 public:
-	virtual void teleportTo(struct Vec3 const&, bool, int, int);
-	virtual void tryTeleportTo(struct Vec3 const&, bool, bool, int, int);
-	virtual void chorusFruitTeleport(struct Vec3 const&);
-	virtual void lerpMotion(struct Vec3 const&);
+	virtual void teleportTo(Vector3 const&, bool, int, int);
+	virtual void tryTeleportTo(Vector3 const&, bool, bool, int, int);
+	virtual void chorusFruitTeleport(Vector3 const&);
+	virtual void lerpMotion(Vector3 const&);
 	virtual void tryCreateAddActorPacket(void);
 private:
 	virtual void Function49();
@@ -85,7 +85,7 @@ public:
 private:
 	virtual int getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class InputMode);
 public:
-	virtual void intersects(struct Vec3 const&, struct Vec3 const&);
+	virtual void intersects(Vector3 const&, Vector3 const&);
 	virtual bool isInWall(void);
 	virtual bool isInvisible(void);
 	virtual void canShowNameTag(void);
@@ -122,7 +122,7 @@ public:
 	virtual float getHeadLookVector(float);
 	virtual void canSeeInvisible(void);
 	virtual void canSee(Actor const&);
-	virtual void canSee(struct Vec3 const&);
+	virtual void canSee(Vector3 const&);
 	virtual bool isSkyLit(float);
 	virtual float getBrightness(float);
 	virtual void interactPreventDefault(void);
@@ -175,7 +175,7 @@ public:
 	virtual bool isJumping(void);
 	virtual bool isEnchanted(void);
 	virtual void vehicleJumped(void);
-	virtual void vehicleLanded(struct Vec3 const&, struct Vec3 const&);
+	virtual void vehicleLanded(Vector3 const&, Vector3 const&);
 	virtual void shouldRender(void);
 	virtual void playAmbientSound(void);
 	virtual int getAmbientSound(void);
