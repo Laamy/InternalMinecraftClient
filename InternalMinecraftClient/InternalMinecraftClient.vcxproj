@@ -159,6 +159,7 @@
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
+    <ClInclude Include="ClientBase\Modules\AirSwim.h" />
     <ClInclude Include="ClientBase\Modules\Antibot.h" />
     <ClInclude Include="ClientBase\Modules\ArrayList.h" />
     <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="ClientBase\Modules\Phase.h" />
     <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
     <ClInclude Include="ClientBase\Modules\Spider.h" />
+    <ClInclude Include="ClientBase\Modules\SpinAttack.h" />
     <ClInclude Include="ClientBase\Modules\Step.h" />
     <ClInclude Include="ClientBase\Modules\TestModule.h" />
     <ClInclude Include="ClientBase\Modules\Timer.h" />

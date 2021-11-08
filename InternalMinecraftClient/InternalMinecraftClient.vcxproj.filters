@@ -161,6 +161,12 @@
     <ClInclude Include="ClientBase\Modules\Jesus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientBase\Modules\AirSwim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientBase\Modules\SpinAttack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
