@@ -31,7 +31,7 @@ public:
 
 	void Draw(Vector2 position, Vector2 size, _RGB colour) {
 		if (ctx == nullptr) return;
-		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
+		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), _RGB(0, 0, 0), colour.a);
 	};
 
 	/*void DrawButton(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held) {
@@ -53,25 +53,25 @@ public:
 		bool toReturn;
 		auto rect = Vector4(position.x, position.x + size.x, position.y, position.y + size.y);
 		if (alwaysHold) {
-			ctx->fillRectangle(rect, heldColour, colour.a);
-			DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(200, 200, 200), text, font, scale);
+			ctx->fillRectangle(rect, _RGB(115, 115, 115), colour.a);
+			DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(100, 100, 100), text, font, scale);
 		}
 		if (curMousePos.x < rect.x && curMousePos.x > rect.w && curMousePos.y < rect.z && curMousePos.y > rect.y) {
 			if (!held) {
 				if (!alwaysHold)
-				ctx->fillRectangle(rect, hoverColour, colour.a);
+				ctx->fillRectangle(rect, _RGB(100, 100, 100), colour.a);
 			}
 			else {
 				if (!alwaysHold)
-				ctx->fillRectangle(rect, heldColour, colour.a);
+				ctx->fillRectangle(rect, _RGB(90, 90, 90), colour.a);
 				toReturn = true;
 			}
 			if (!alwaysHold)
-			DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(200, 200, 200), text, font, scale);
+			DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(100, 100, 100), text, font, scale);
 		}
 		else {
 			if (!alwaysHold) {
-				ctx->fillRectangle(rect, colour, colour.a);
+				ctx->fillRectangle(rect, _RGB(15, 15, 15), colour.a);
 				DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(255, 255, 255), text, font, scale);
 			}
 		}
@@ -80,7 +80,7 @@ public:
 
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour, float width) {
 		if (ctx == nullptr) return;
-		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
+		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), _RGB(255, 255, 255), colour.a, (int)width);
 	};
 
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font) {
