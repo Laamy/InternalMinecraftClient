@@ -51,7 +51,7 @@ public:
         std::string world = "World";
         std::string player = "Player";
         std::string misc = "Misc";
-        std::string flies = "Flies";
+        std::string flies = "Flys";
         std::string visual = "Visual";
         std::string debug = "Debug";
 
