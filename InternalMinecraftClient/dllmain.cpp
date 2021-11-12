@@ -63,7 +63,9 @@ std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 
 bool cancelUiRender = false;
 bool renderClickUI = false;
+bool justEnabled = true;
 
+int enabledTicks = 0;
 int frame = 0;
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
@@ -138,6 +140,18 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         }
 
         frame = 0;
+    }
+    //Simple Inject Notification by zPearls, but re-made!!
+    if (justEnabled) {
+        enabledTicks++;
+        if (enabledTicks > 1 && enabledTicks < 1000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
+            auto catText = TextHolder("Trero Internal has been Injected!");
+            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255), catText, font, 1.0f);
+            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255), 1.0);
+        } else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
+            justEnabled = false;
+            enabledTicks = 0;
+        }
     }
 
     for (int i = 0; i < handler.modules.size(); i++)
