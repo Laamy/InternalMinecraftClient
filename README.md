@@ -9,4 +9,4 @@
 ![Last Commit](https://img.shields.io/github/last-commit/Laamy/Trero?style=for-the-badge)
 </p>
 
-https://discord.gg/Zr6RDAJp9F Why not join our discord?
+https://discord.gg/vjvHVEqTyK Why not join our discord?
