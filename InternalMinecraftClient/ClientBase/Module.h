@@ -22,6 +22,43 @@ public: // functions
     virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
     virtual void OnGameTick(Actor* lp) {};
+    
+    float sin(float x)
+	{
+		float res = 0, pow = x, fact = 1;
+		for (int i = 0; i < 5; ++i)
+		{
+			res += pow / fact;
+			pow *= -1 * x * x;
+			fact *= (2 * (i + 1)) * (2 * (i + 1) + 1);
+		}
+
+		return res;
+	}
+
+	double _pow(double a, double b) {
+		double c = 1;
+		for (int i = 0; i < b; i++)
+			c *= a;
+		return c;
+	}
+
+	double _fact(double x) {
+		double ret = 1;
+		for (int i = 1; i <= x; i++)
+			ret *= i;
+		return ret;
+	}
+
+	double cos(double x) {
+		double y = 1;
+		double s = -1;
+		for (int i = 2; i <= 100; i += 2) {
+			y += s * (_pow(x, i) / _fact(i));
+			s *= -1;
+		}
+		return y;
+	}
 
     //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};
