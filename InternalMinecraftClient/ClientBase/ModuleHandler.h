@@ -37,6 +37,7 @@
 #include "Modules/LifeboatFly.h"
 #include "Modules/NoYFlight.h"
 #include "Modules/Seedhack.h"
+#include "Modules/Bhop.h"
 
 class ModuleHandler {
 public:
@@ -77,6 +78,7 @@ public:
         modules.push_back(new Glide(player));
         modules.push_back(new HighJump(player));
         modules.push_back(new Jesus(player));
+        modules.push_back(new Bhop(player));
         // InventoryMove
         // Jesus
         // LongJump
