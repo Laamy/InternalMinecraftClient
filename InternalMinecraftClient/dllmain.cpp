@@ -251,17 +251,17 @@ void Init(HMODULE c) {
             MH_EnableHook((void*)keymapAddr);
             //memcpy((void*)keymapAddr, copy.inlineText, 0x1000);
             _logf(L"[TreroInternal]: Keymap hooked!\n");
-            SendChatMsg("[TreroInternal]: Keymap hooked!");
+            //SendChatMsg("[TreroInternal]: Keymap hooked!");
         };
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
             _logf(L"[TreroInternal]: ClientInstance hooked!\n");
-            SendChatMsg("[TreroInternal]: ClientInstance hooked!");
+           // SendChatMsg("[TreroInternal]: ClientInstance hooked!");
         };
         if (MH_CreateHook((void*)localPlayerAddr, &playerCallback, reinterpret_cast<LPVOID*>(&_player)) == MH_OK) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
-            SendChatMsg("[TreroInternal]: LocalPlayer hooked!");
+            //SendChatMsg("[TreroInternal]: LocalPlayer hooked!");
         };
         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
         //    MH_EnableHook((void*)mouseAddr);
@@ -270,7 +270,7 @@ void Init(HMODULE c) {
         if (MH_CreateHook((void*)renderCtxAddr, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
             MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
-            SendChatMsg("[TreroInternal]: RenderContext hooked!");
+            //SendChatMsg("[TreroInternal]: RenderContext hooked!");
         };
     };
 }
