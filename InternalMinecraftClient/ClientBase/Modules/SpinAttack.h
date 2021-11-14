@@ -3,16 +3,16 @@
 class SpinAttack : public Module {
 public:
 	SpinAttack(std::string cat) : Module(cat, "SpinAttack", 0x07) {};
-
+	vLocalPlayer* player;
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		lp->startSpinAttack();
+		player->startSpinAttack();
 	};
 
 	void OnGameTick(Actor* lp) override {
-		lp->startSpinAttack();
+		player->startSpinAttack();
 	};
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->stopSpinAttack();
+		player->stopSpinAttack();
 	};
 };

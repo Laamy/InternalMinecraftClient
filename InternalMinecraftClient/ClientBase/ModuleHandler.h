@@ -40,6 +40,7 @@
 #include "Modules/Seedhack.h"
 #include "Modules/Bhop.h"
 #include "Modules/Jetpack.h"
+#include "Modules/AutoSneak.h"
 
 class ModuleHandler {
 public:
@@ -91,6 +92,7 @@ public:
         modules.push_back(new Step(player));
         modules.push_back(new SpinAttack(player));
         modules.push_back(new ReverseStep(player));
+        modules.push_back(new AutoSneak(player));
         // Velocity
         // Bhop
         // Gamemode

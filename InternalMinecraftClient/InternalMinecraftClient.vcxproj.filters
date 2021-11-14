@@ -173,6 +173,9 @@
     <ClInclude Include="ClientBase\Modules\Killgame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientBase\Modules\AutoSneak.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
