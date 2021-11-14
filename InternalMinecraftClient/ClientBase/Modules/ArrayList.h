@@ -22,9 +22,9 @@ public:
 			boxPos.y = offset * 10;
 
 			ctx->DrawString(strPos, _RGB(200, 200, 200), vText1, ctx->font);
-			ctx->Draw(Vector2(boxPos.x - 2, boxPos.y), Vector2(2, 10), _RGB(255, 0, 204));//Why does it appear black?
-			ctx->Draw(boxPos, Vector2(ctx->ctx->getLineLength(ctx->font, &vText1, 1) + 1, 10), _RGB(255, 0, 204, 69));//why does everything appear black?
-			
+			ctx->Draw(Vector2(boxPos.x - 2, boxPos.y), Vector2(1.8, 10), _RGB(252, 161, 3, 69));
+			ctx->Draw(boxPos, Vector2(ctx->ctx->getLineLength(ctx->font, &vText1, 1) + 1, 10), _RGB(33, 33, 33, 69));
+
 			offset++;
 		}
 	}
