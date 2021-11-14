@@ -26,9 +26,7 @@ public:
 			lp->Velocity = newVel;
 			lp->fallDistance = .0f;//works on world's and realm's (nofall)
 		}
-		else {
-			lp->Velocity = Vector3(0, 0, 0);
-		}
+		
 	};
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
