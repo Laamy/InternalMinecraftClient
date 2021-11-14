@@ -24,6 +24,7 @@
 #include "Modules/Noclip.h"
 #include "Modules/Phase.h"
 #include "Modules/Step.h"
+#include "Modules/Killgame.h"
 #include "Modules/Freecam.h"
 #include "Modules/ReverseStep.h"
 #include "Modules/ArrayList.h"
@@ -54,7 +55,7 @@ public:
         std::string world = "World";
         std::string player = "Player";
         std::string misc = "Misc";
-        std::string flies = "Flies";
+        std::string flies = "Flys";
         std::string visual = "Visual";
         std::string debug = "Debug";
 
@@ -108,7 +109,7 @@ public:
         // FixHitBox
         // Freecam
         // Jump
-        // KillGame
+        modules.push_back(new Killgame(misc));
         // LoadConfig
         // SaveConfig
         // Welcome

@@ -187,6 +187,7 @@
     <ClInclude Include="ClientBase\Modules\Step.h" />
     <ClInclude Include="ClientBase\Modules\TestModule.h" />
     <ClInclude Include="ClientBase\Modules\Timer.h" />
+    <ClInclude Include="ClientBase\Modules\Killgame.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
