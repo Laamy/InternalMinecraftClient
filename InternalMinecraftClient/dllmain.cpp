@@ -177,7 +177,7 @@ void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
 };
 
-void DisplayObj(const char txt[64]) {
+/*void DisplayObj(const char txt[64]) {
     auto sce = TextHolder(txt);
     if (clientInst->guiData != nullptr)
         _chatMsg(&clientInst->guiData, &sce);
@@ -197,7 +197,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
     if (txt->getText()[0] != '.') // cancel all .command related chat msgs :p
         _chatMsg(a1, txt);
     //else SendChatMsg("Cancelled command!");
-};
+};*/
 
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
@@ -222,15 +222,15 @@ void Init(HMODULE c) {
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
-        uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
+        //uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
 
         _logf(L"[TreroInternal]: Hooking functions...\n");
 
-        if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
+        /*if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
             MH_EnableHook((void*)chatMsgSigAddr);
             _logf(L"[TreroInternal]: ChatMsg hooked!\n");
             SendChatMsg("[TreroInternal]: ChatMsg hooked!");
-        };
+        };*/
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
