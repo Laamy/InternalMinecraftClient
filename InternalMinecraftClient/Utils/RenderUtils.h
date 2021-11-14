@@ -31,7 +31,7 @@ public:
 
 	void Draw(Vector2 position, Vector2 size, _RGB colour) {
 		if (ctx == nullptr) return;
-		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), _RGB(0, 0, 0), colour.a);
+		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
 	};
 
 	/*void DrawButton(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held) {
