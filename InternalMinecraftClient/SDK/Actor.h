@@ -484,3 +484,7 @@ public: // Functions
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
 	};
 };
+
+class vLocalPlayer : public Actor {
+
+};

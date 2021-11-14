@@ -7,6 +7,9 @@
 
 #define _logf(str)  OutputDebugString(str)
 
+typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
+chatMsg _chatMsg;
+
 // SDK
 #include "SDK/Actor.h"
 #include "SDK/GuiData.h"
@@ -48,7 +51,7 @@ key _key;
 
 typedef void(__thiscall* mouse)(KeyInfo* cls);
 mouse _mouse;
- 
+
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
@@ -115,9 +118,18 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
             int cat = 0;
             for (std::string x : categories) {
-                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10), _RGB(33, 33, 33));
+
+                renderUtil.Draw(
+                    Vector2((float)(70 + (cat * 60)), 80),
+                    Vector2(48, 10), _RGB(33, 33, 33));
+
                 auto catText = TextHolder(x); // (ctx->getLineLength(font, &catText, 1) / 2)
-                renderUtil.DrawString(Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165), _RGB(255, 255, 255), catText, font, 0.6f);
+
+                renderUtil.DrawString(
+                    Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165),
+                    _RGB(255, 255, 255),
+                    catText, font, 0.6f);
+                
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
@@ -179,6 +191,28 @@ void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
 };
 
+void DisplayObj(const char txt[64]) {
+    auto sce = TextHolder(txt);
+    if (clientInst->guiData != nullptr)
+        _chatMsg(&clientInst->guiData, &sce);
+}
+
+void SendChatMsg(const char txt[64]) { // i was testing please ignore!
+    auto sce = TextHolder(txt);
+    //DisplayObj("Sent!");
+    _chatMsg(&clientInst->guiData, &sce);
+}
+
+void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?
+    
+    //auto cse = TextHolder("[TreroInternal]: ChatMsg Detected!");
+    //_chatMsg(a1, &cse);
+
+    if (txt->getText()[0] != '.') // cancel all .command related chat msgs :p
+        _chatMsg(a1, txt);
+    //else SendChatMsg("Cancelled command!");
+};
+
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
 
@@ -200,31 +234,43 @@ void Init(HMODULE c) {
        // uintptr_t ImmobileAddr = Mem::findSig("40 53 48 83 EC ? 48 8B D9 E8 ? ? ? ? 84 C0 75 ? 48 8B 03 48 8B CB"); could be used in future
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
+        //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
-        uintptr_t renderCtx = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
+        uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
+        uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
 
         _logf(L"[TreroInternal]: Hooking functions...\n");
+
+        if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
+            MH_EnableHook((void*)chatMsgSigAddr);
+            _logf(L"[TreroInternal]: ChatMsg hooked!\n");
+            SendChatMsg("[TreroInternal]: ChatMsg hooked!");
+        };
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
             MH_EnableHook((void*)keymapAddr);
             //memcpy((void*)keymapAddr, copy.inlineText, 0x1000);
             _logf(L"[TreroInternal]: Keymap hooked!\n");
+            SendChatMsg("[TreroInternal]: Keymap hooked!");
         };
         if (MH_CreateHook((void*)hookAddr, &callback, reinterpret_cast<LPVOID*>(&_tick)) == MH_OK) {
             MH_EnableHook((void*)hookAddr);
             _logf(L"[TreroInternal]: ClientInstance hooked!\n");
+            SendChatMsg("[TreroInternal]: ClientInstance hooked!");
         };
         if (MH_CreateHook((void*)localPlayerAddr, &playerCallback, reinterpret_cast<LPVOID*>(&_player)) == MH_OK) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
+            SendChatMsg("[TreroInternal]: LocalPlayer hooked!");
         };
         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
         //    MH_EnableHook((void*)mouseAddr);
         //    _logf(L"[TreroInternal]: KeyInfo hooked!\n");
         //};
-        if (MH_CreateHook((void*)renderCtx, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
-            MH_EnableHook((void*)renderCtx);
+        if (MH_CreateHook((void*)renderCtxAddr, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
+            MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
+            SendChatMsg("[TreroInternal]: RenderContext hooked!");
         };
     };
 }
