@@ -6,8 +6,8 @@ public:
     float speedMod = 0.7f;
 
 	void OnGameTick(Actor* lp) override {
-		lp->Velocity.x = cos((lp->BodyRots()->y + 90) * 0.01745329251f) * speedMod;
+		lp->Velocity.x = cos((lp->bodyRots()->y + 90) * 0.01745329251f) * speedMod;
 		lp->Velocity.y = 0.075f * speedMod;
-		lp->Velocity.z = sin((lp->BodyRots()->y + 90) * 0.01745329251f) * speedMod;
+		lp->Velocity.z = sin((lp->bodyRots()->y + 90) * 0.01745329251f) * speedMod;
 	};
 };
