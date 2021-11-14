@@ -24,7 +24,7 @@ public:
 			newVel.z = (float)sin(calcYaw) * 2;
 
 			lp->Velocity = newVel;
-			lp->fallDistance = .0f;//works on world's and realm's
+			lp->fallDistance = .0f;//works on world's and realm's (nofall)
 		}
 		else {
 			lp->Velocity = Vector3(0, 0, 0);
