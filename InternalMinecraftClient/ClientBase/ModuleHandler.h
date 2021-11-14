@@ -38,6 +38,7 @@
 #include "Modules/NoYFlight.h"
 #include "Modules/Seedhack.h"
 #include "Modules/Bhop.h"
+#include "Modules/Jetpack.h"
 
 class ModuleHandler {
 public:
@@ -79,6 +80,7 @@ public:
         modules.push_back(new HighJump(player));
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
+        
         // InventoryMove
         // Jesus
         // LongJump
@@ -118,10 +120,11 @@ public:
         // Flight
         // HiveFlight
         // Jetpack
-        //modules.push_back(new OGMFlight(flies));
+        modules.push_back(new OGMFlight(flies));
         //modules.push_back(new LifeboatFly(flies));
         modules.push_back(new CreativeFly(flies));
         modules.push_back(new NoYFlight(flies));
+        modules.push_back(new Jetpack(flies));
         // TeleportPhase
 
         modules.push_back(new Watermark(visual));
