@@ -173,15 +173,6 @@
     <ClInclude Include="ClientBase\Modules\Killgame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Bhop.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Jetpack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\NoYFlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
