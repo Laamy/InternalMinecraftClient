@@ -106,53 +106,9 @@ private:
 	char pad_0x1149[0xD23]; //0x1149
 public:
 	unsigned char Gamemode; //0x1E6C
-private:
-	char pad_0x1E6D[0x393]; //0x1E6D
-public:
-	Vector2 NetherPortalAnimation; //0x2200
-private:
-	char pad_0x2208[0x2C]; //0x2208
-public:
-	Vector3i Position2; //0x2200
-	//__int32 PosX; //0x2234
-	//__int32 PosY; //0x2238
-	//__int32 PosZ; //0x223C
-private:
-	char pad_0x2240[0x40]; //0x2240
-public:
-	float IsMoving; //0x2280
-private:
-	char pad_0x2284[0x2]; //0x2284
-public:
-	unsigned char IsInPortal; //0x2286
-private:
-	char pad_0x2287[0xE3]; //0x2287
-public:
-	unsigned char HeldItemAmount; //0x236A
-private:
-	char pad_0x236B[0x6D]; //0x236B
-public:
-	unsigned char SelectedHotbarID; //0x23D8
-private:
-	char pad_0x23D9[0x37]; //0x23D9
-public:
-	Vector2 SetRotations; //0x2410
-	Vector2 SetRotations2; //0x2418
-
-	bool* _onGround() {
-		return reinterpret_cast<bool*>((uintptr_t)(this) + 0x1D8);
-	};
 
 	float* SwingAnimation() {
 		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
-	};
-
-	AABB* _position() {
-		return reinterpret_cast<AABB*>((uintptr_t)(this) + 0x4C0);
-	};
-
-	Vector3* _velocity() {
-		return reinterpret_cast<Vector3*>((uintptr_t)(this) + 0x4F8);
 	};
 
 public: // Functions
@@ -169,14 +125,6 @@ public: // Functions
 		this->Position.upper.x = v.x + 0.6f;
 		this->Position.upper.y = v.y + 1.8f;
 		this->Position.upper.z = v.z + 0.6f;
-	};
-
-	void PortalAnimation() {
-		this->NetherPortalAnimation = Vector2(1, 1);
-	};
-
-	void ClearPortalAnimation() {
-		this->NetherPortalAnimation = Vector2(0, 0);
 	};
 
 	void SetFieldOfView(float v) {
@@ -198,7 +146,8 @@ public: // Functions
 	};
 };
 
-class vLocalPlayer : public Actor {
+// These are not player functions pearl :p
+/*class vLocalPlayer : public Actor {
 	public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
@@ -486,3 +435,4 @@ public:
 	virtual void _onSizeUpdated(void);
 	virtual void _doAutoAttackOnTouch(Actor&);
 };
+*/
