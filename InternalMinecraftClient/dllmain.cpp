@@ -191,16 +191,16 @@ void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
 };
 
+void SendChatMsg(const char txt[64]) { // i was testing please ignore!
+    auto sce = TextHolder(txt);
+    //DisplayObj("Sent!");
+    //_chatMsg(&clientInst->guiData, &sce);
+}
+
 /*void DisplayObj(const char txt[64]) {
     auto sce = TextHolder(txt);
     if (clientInst->guiData != nullptr)
         _chatMsg(&clientInst->guiData, &sce);
-}
-
-void SendChatMsg(const char txt[64]) { // i was testing please ignore!
-    auto sce = TextHolder(txt);
-    //DisplayObj("Sent!");
-    _chatMsg(&clientInst->guiData, &sce);
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?

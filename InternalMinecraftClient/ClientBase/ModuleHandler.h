@@ -34,10 +34,8 @@
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
-#include "Modules/SpinAttack.h"
 #include "Modules/LifeboatFly.h"
 #include "Modules/NoYFlight.h"
-#include "Modules/Seedhack.h"
 #include "Modules/Bhop.h"
 #include "Modules/Jetpack.h"
 
@@ -65,7 +63,6 @@ public:
         // Scaffold -- cant do this until i learn GameMode in LP
         // Teleport -- Dont need this due to .tp
         modules.push_back(new Timer(world));
-        modules.push_back(new SeedHack(world));
         // Tower -- Could do
         modules.push_back(new Blink(world));
         modules.push_back(new Noclip(world));
@@ -89,7 +86,6 @@ public:
         // Speed
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
-        modules.push_back(new SpinAttack(player));
         modules.push_back(new ReverseStep(player));
         // Velocity
         // Bhop

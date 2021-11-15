@@ -8,7 +8,6 @@
 class BlockSource {};
 
 class Actor {
-
 private: // Variables
 	char pad_0x0000[0x138]; //0x0000
 public:
