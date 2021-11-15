@@ -107,14 +107,14 @@ private:
 public:
 	unsigned char Gamemode; //0x1E6C
 
-	float* SwingAnimation() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
-	};
-
 public: // Functions
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
 		Camera.upper = v;
+	};
+
+	float* SwingAnimation() {
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
 	};
 
 	void SetPos(Vector3 v) {
@@ -135,10 +135,6 @@ public: // Functions
 
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1058);
-	};
-
-	void FixReadExcp() { // VirtualUnlock
-		VirtualUnlock(this, 0x2418);
 	};
 
 	Vector2* bodyRots() {
