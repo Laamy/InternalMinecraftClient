@@ -11,12 +11,12 @@ public:
 
 			auto vText1 = TextHolder(vMods[i]->name);
 
-			auto strPos = Vector2(0, 0);
+			Vector2 strPos = Vector2(0, 0);
 
 			strPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 0;
 			strPos.y = offset * 20;
 
-			auto boxPos = Vector2(0, 0);
+			Vector2 boxPos = Vector2(0, 0);
 
 			boxPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 1;
 			boxPos.y = offset * 10;

@@ -6,5 +6,5 @@ public:
 
     void OnGameTick(Actor* lp) override {
         lp->Velocity.y = -0.01f;
-    };
+    }
 };

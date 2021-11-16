@@ -7,7 +7,7 @@ public:
 	void OnFrameRender(RenderUtils* ctx) override {
 		auto vText1 = TextHolder("Trero Internal");
 
-		auto strPos = Vector2(0, 0);
+		Vector2 strPos = Vector2(0, 0);
 
 		strPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 4;
 		strPos.y = ctx->guiData->scaledResolution.y * 2 - 24;

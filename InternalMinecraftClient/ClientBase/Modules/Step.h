@@ -7,12 +7,12 @@ public:
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 
-		lp->StepHeight = 2;
-	};
+		lp->StepHeight = 3;
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 
 		lp->StepHeight = 0.5f;
-	};
+	}
 };

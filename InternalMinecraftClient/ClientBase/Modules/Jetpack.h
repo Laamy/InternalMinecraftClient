@@ -7,9 +7,8 @@ public:
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
-		this->ci = ci;
-	};
-
+		ci = ci;
+	}
 
 	void OnGameTick(Actor* lp) override {
 		if (lp == nullptr || ci == nullptr) return;
@@ -24,13 +23,12 @@ public:
 			newVel.z = (float)sin(calcYaw) * 2;
 
 			lp->Velocity = newVel;
-			lp->fallDistance = .0f;//works on world's and realm's (nofall)
+			lp->fallDistance = 0.f;//works on world's and realm's (nofall)
 		}
-		
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
-		lp->Velocity = Vector3(0, 0, 0);
-	};
+		lp->Velocity = {0, 0, 0};
+	}
 };

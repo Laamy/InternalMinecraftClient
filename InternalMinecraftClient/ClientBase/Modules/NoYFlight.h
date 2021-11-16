@@ -7,9 +7,8 @@ public:
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
-		this->ci = ci;
-	};
-
+		ci = ci;
+	}
 
 	void OnGameTick(Actor* lp) override {
 		if (lp == nullptr || ci == nullptr) return;
@@ -26,12 +25,12 @@ public:
 			lp->Velocity = newVel;
 		}
 		else {
-			lp->Velocity = Vector3(0, 0, 0);
+			lp->Velocity = {0, 0, 0};
 		}
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
-		lp->Velocity = Vector3(0, 0, 0);
+		lp->Velocity = { 0, 0, 0 };
 	};
 };
