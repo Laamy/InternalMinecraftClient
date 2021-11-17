@@ -6,5 +6,5 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		_logf(L"Tick\n");
-	};
+	}
 };

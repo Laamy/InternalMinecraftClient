@@ -6,9 +6,9 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		lp->Position.upper.y = lp->Position.lower.y - 1.8f;
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		lp->SetPos(lp->Position.lower);
-	};
+	}
 };

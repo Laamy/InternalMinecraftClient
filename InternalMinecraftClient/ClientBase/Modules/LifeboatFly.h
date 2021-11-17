@@ -10,9 +10,9 @@ public:
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 		
-		this->ci = ci;
+		ci = ci;
 		blinking = false;
-	};
+	}
 
 	void OnGameTick(Actor* lp) override {
 		if (lp == nullptr || ci == nullptr) return;
@@ -27,36 +27,32 @@ public:
 
 		float cy = (lp->CameraRots.y + 90) * (PI / 180);
 
-		if (keymap[(int)'W'])
-		{
+		if (keymap[(int)'W']) {
 			lp->Velocity.x = sin(cy) * speed2;
 			lp->Velocity.z = cos(cy) * speed2;
 		}
 		lp->Velocity.y = -0.001f;
 
-		if (count > 7)
-		{
+		if (count > 7) {
 			blinking = true;
 			ci->loopbackSender->RetPacketSender();
 			count = 0;
 		}
-		else
-		{
+		else {
 			count++;
 			blinking = false;
 			ci->loopbackSender->RestorePacketSender();
 		}
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 		count = 0;
-		if (!blinking)
-		{
+		if (!blinking) {
 			ci->loopbackSender->RestorePacketSender();
 			blinking = false;
 		}
 		ci->timerClass->timerClass->timer = 20.0f;
-		lp->Velocity = Vector3(0, 0, 0);
-	};
+		lp->Velocity = {0, 0, 0};
+	}
 };

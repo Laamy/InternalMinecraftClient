@@ -11,7 +11,7 @@ public:
 		savedPos = lp->Position.lower;
 
 		ci->loopbackSender->RetPacketSender();
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
@@ -19,5 +19,5 @@ public:
 		lp->SetPos(savedPos);
 
 		ci->loopbackSender->RestorePacketSender();
-	};
+	}
 };
