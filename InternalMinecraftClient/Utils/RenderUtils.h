@@ -49,7 +49,7 @@ public:
 	};
 
 	bool DrawButtonText(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held, TextHolder text, class BitmapFont* font, float scale, Vector2 scaleOffset, bool alwaysHold = false) {
-		if (ctx == nullptr) return false;
+		if (ctx == nullptr) return false; // tf?
 		bool toReturn;
 		auto rect = Vector4(position.x, position.x + size.x, position.y, position.y + size.y);
 		if (alwaysHold) {
@@ -80,7 +80,12 @@ public:
 
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour, float width) {
 		if (ctx == nullptr) return;
-		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), _RGB(255, 255, 255), colour.a, (int)width);
+		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
+	};
+
+	void DrawOutline(Vector2 position, Vector2 size, _RGB colour) {
+		if (ctx == nullptr) return;
+		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)(colour.a / 255.0f));
 	};
 
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font) {

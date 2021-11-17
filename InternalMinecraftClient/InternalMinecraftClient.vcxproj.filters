@@ -173,6 +173,9 @@
     <ClInclude Include="ClientBase\Modules\Killgame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClientBase\BypassBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

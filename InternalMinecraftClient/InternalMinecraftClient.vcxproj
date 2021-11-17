@@ -155,6 +155,7 @@
     <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientBase\BypassBox.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />

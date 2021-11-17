@@ -52,24 +52,17 @@ public:
 
         std::string world = "World";
         std::string player = "Player";
-        std::string misc = "Misc";
-        std::string flies = "Flys";
+        std::string flies = "Flies";
         std::string visual = "Visual";
         std::string debug = "Debug";
+        std::string misc = "Misc";
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
-        modules.push_back(new NoPacket(world)); // got it working but for some reason enable and disable are reversed? OH WAIT I KNOW WHY!
-        // Scaffold -- cant do this until i learn GameMode in LP
-        // Teleport -- Dont need this due to .tp
+        modules.push_back(new NoPacket(world));
         modules.push_back(new Timer(world));
-        // Tower -- Could do
         modules.push_back(new Blink(world));
         modules.push_back(new Noclip(world));
-
-        // modules.push_back(new Module("Combat", "", 0x07));
-        // RapidHit
-        // Reach -- I wonder how you would go about reach internally lol? i think i know how actually i would sig scan then covert it to a float*
 
         modules.push_back(new AirStuck(player));
         modules.push_back(new AutoWalk(player));
@@ -79,66 +72,29 @@ public:
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
         
-        // InventoryMove
-        // Jesus
-        // LongJump
-        // RapidPlace
-        // Speed
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
         modules.push_back(new ReverseStep(player));
-        // Velocity
-        // Bhop
-        // Gamemode
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
 
-        
-        // Disabler
-        // InPvPTower
-        // Masturbator
-        // StreamMode
-        // MineplexStep
-        // AntiImmobile
-        // NoLagback
-        // Eject
-        // FixHitBox
-        // Freecam
-        // Jump
-        modules.push_back(new Killgame(misc));
-        // LoadConfig
-        // SaveConfig
-        // Welcome
-
-        // BhopFlight
-        // CreativeFlight
-        // ElytraFlight
-        // FastFlight
-        // Flight
-        // HiveFlight
-        // Jetpack
         modules.push_back(new OGMFlight(flies));
-        //modules.push_back(new LifeboatFly(flies));
         modules.push_back(new CreativeFly(flies));
         modules.push_back(new NoYFlight(flies));
         modules.push_back(new Jetpack(flies));
-        // TeleportPhase
 
         modules.push_back(new Watermark(visual));
         modules.push_back(new ExpandScreen(visual));
         modules.push_back(new ArrayList(visual));
-        // ClickGUI
-        // CoordsHud
         modules.push_back(new Freelook(visual));
         modules.push_back(new Freecam(visual));
         modules.push_back(new NoSwing(visual));
-        // RainbowEffects
         modules.push_back(new Zoom(visual));
 
         modules.push_back(new TestModule(debug));
-        //modules.push_back(new DebugMenu(debug));
         modules.push_back(new DebugCursor(debug));
-        // HiveBhop
+
+        modules.push_back(new Killgame(misc));
 
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());

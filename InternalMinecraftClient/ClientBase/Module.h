@@ -1,4 +1,5 @@
 #pragma once
+#include "BypassBox.h"
 
 class Module {
 public:
@@ -15,6 +16,9 @@ public:
     uintptr_t keybind;
     bool enabled;
 
+	// Private variables
+	std::vector<BypassBox> bypasses;
+
 public: // functions
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
     virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
@@ -22,18 +26,9 @@ public: // functions
     virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
     virtual void OnGameTick(Actor* lp) {};
-    
-    float sin(float x)
-	{
-		float res = 0, pow = x, fact = 1;
-		for (int i = 0; i < 5; ++i)
-		{
-			res += pow / fact;
-			pow *= -1 * x * x;
-			fact *= (2 * (i + 1)) * (2 * (i + 1) + 1);
-		}
 
-		return res;
+	void addBypass(BypassBox bypass) {
+		bypasses.push_back(bypass);
 	}
 
 	double _pow(double a, double b) {
@@ -48,6 +43,19 @@ public: // functions
 		for (int i = 1; i <= x; i++)
 			ret *= i;
 		return ret;
+	}
+    
+    float sin(float x)
+	{
+		float res = 0, pow = x, fact = 1;
+		for (int i = 0; i < 5; ++i)
+		{
+			res += pow / fact;
+			pow *= -1 * x * x;
+			fact *= (2 * (i + 1)) * (2 * (i + 1) + 1);
+		}
+
+		return res;
 	}
 
 	double cos(double x) {
