@@ -6,5 +6,5 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		lp->fallDistance = 0.f;
-	};
+	}
 };

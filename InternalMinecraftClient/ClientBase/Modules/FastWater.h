@@ -3,7 +3,6 @@
 class FastWater : public Module {
 public:
     FastWater(std::string cat) : Module(cat, "FastWater", 0x07) {};
-    float speed = 0.44;
 
     void OnGameTick(Actor* lp) override {
         if (lp->IsInWater || lp->IsInLava)
@@ -14,5 +13,5 @@ public:
             lp->Velocity.y = 0.01f;
             lp->Velocity.z = cos(cy) * 2;
         }
-    };
+    }
 };

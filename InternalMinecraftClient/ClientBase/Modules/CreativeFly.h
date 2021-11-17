@@ -8,11 +8,11 @@ public:
         if (lp == nullptr) return;
         lp->IsFlying = true;
         lp->CanFly = true;
-    };
+    }
 
     void OnDisable(ClientInstance* ci, Actor* lp) override {
         if (lp == nullptr) return;
         lp->IsFlying = false;
         lp->CanFly = false;
-    };
+    }
 };

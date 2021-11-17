@@ -6,9 +6,9 @@ public:
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		ci->loopbackSender->RetPacketSender();
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		ci->loopbackSender->RestorePacketSender();
-	};
+	}
 };
