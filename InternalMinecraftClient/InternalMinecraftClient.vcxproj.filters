@@ -1,181 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="SDK\Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\Dimension.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\MinecraftUIRenderContext.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\GameMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\RenderUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\ClientInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\GuiData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\TextHolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\Weather.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\MinecraftGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\ModuleHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\AirJump.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\TestModule.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Watermark.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\DebugCursor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\AirStuck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\AutoWalk.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\OGMFlight.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\ExpandScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\FastWater.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Glide.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\HighJump.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Zoom.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\NoSwing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Freelook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Antibot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\NoPacket.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Timer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Noclip.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Phase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Step.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Freecam.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\ReverseStep.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\ArrayList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Blink.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Spider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\NoFall.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\KeyInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SDK\Packet\Packet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\DebugMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\CreativeFly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Jesus.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\SeedHack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\SpinAttack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\LifeboatFly.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\Modules\Killgame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientBase\BypassBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="ClientBase\BypassBox.h" />
+    <ClInclude Include="ClientBase\Module.h" />
+    <ClInclude Include="ClientBase\ModuleHandler.h" />
+    <ClInclude Include="ClientBase\Modules\AirJump.h" />
+    <ClInclude Include="ClientBase\Modules\AirStuck.h" />
+    <ClInclude Include="ClientBase\Modules\Bhop.h" />
+    <ClInclude Include="ClientBase\Modules\Jetpack.h" />
+    <ClInclude Include="ClientBase\Modules\NoYFlight.h" />
+    <ClInclude Include="ClientBase\Modules\SeedHack.h" />
+    <ClInclude Include="ClientBase\Modules\Antibot.h" />
+    <ClInclude Include="ClientBase\Modules\ArrayList.h" />
+    <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
+    <ClInclude Include="ClientBase\Modules\Blink.h" />
+    <ClInclude Include="ClientBase\Modules\CreativeFly.h" />
+    <ClInclude Include="ClientBase\Modules\DebugCursor.h" />
+    <ClInclude Include="ClientBase\Modules\DebugMenu.h" />
+    <ClInclude Include="ClientBase\Modules\ExpandScreen.h" />
+    <ClInclude Include="ClientBase\Modules\FastWater.h" />
+    <ClInclude Include="ClientBase\Modules\Freecam.h" />
+    <ClInclude Include="ClientBase\Modules\Freelook.h" />
+    <ClInclude Include="ClientBase\Modules\Glide.h" />
+    <ClInclude Include="ClientBase\Modules\HighJump.h" />
+    <ClInclude Include="ClientBase\Modules\Jesus.h" />
+    <ClInclude Include="ClientBase\Modules\LifeboatFly.h" />
+    <ClInclude Include="ClientBase\Modules\Noclip.h" />
+    <ClInclude Include="ClientBase\Modules\NoFall.h" />
+    <ClInclude Include="ClientBase\Modules\NoPacket.h" />
+    <ClInclude Include="ClientBase\Modules\NoSwing.h" />
+    <ClInclude Include="ClientBase\Modules\OGMFlight.h" />
+    <ClInclude Include="ClientBase\Modules\Phase.h" />
+    <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
+    <ClInclude Include="ClientBase\Modules\Spider.h" />
+    <ClInclude Include="ClientBase\Modules\SpinAttack.h" />
+    <ClInclude Include="ClientBase\Modules\Step.h" />
+    <ClInclude Include="ClientBase\Modules\TestModule.h" />
+    <ClInclude Include="ClientBase\Modules\Timer.h" />
+    <ClInclude Include="ClientBase\Modules\Killgame.h" />
+    <ClInclude Include="ClientBase\Modules\Watermark.h" />
+    <ClInclude Include="ClientBase\Modules\Zoom.h" />
+    <ClInclude Include="SDK\ClientInstance.h" />
+    <ClInclude Include="SDK\GuiData.h" />
+    <ClInclude Include="SDK\KeyInfo.h" />
+    <ClInclude Include="SDK\MinecraftGame.h" />
+    <ClInclude Include="SDK\Packet\Packet.h" />
+    <ClInclude Include="SDK\TextHolder.h" />
+    <ClInclude Include="SDK\Weather.h" />
+    <ClInclude Include="Utils\RenderUtils.h" />
+    <ClInclude Include="SDK\GameMode.h" />
+    <ClInclude Include="SDK\MinecraftUIRenderContext.h" />
+    <ClInclude Include="Utils\Math.h" />
+    <ClInclude Include="SDK\Actor.h" />
+    <ClInclude Include="SDK\Dimension.h" />
+    <ClInclude Include="SDK\Level.h" />
+    <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
