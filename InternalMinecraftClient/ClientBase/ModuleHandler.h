@@ -38,6 +38,8 @@
 #include "Modules/NoYFlight.h"
 #include "Modules/Bhop.h"
 #include "Modules/Jetpack.h"
+#include "Modules/Criticals.h"
+#include "Modules/AntiVoid.h"
 
 class ModuleHandler {
 public:
@@ -50,6 +52,7 @@ public:
     void InitModules() {
         _logf(L"[TreroInternal]: Registering modules...\n");
 
+        std::string combat = "Combat";
         std::string world = "World";
         std::string player = "Player";
         std::string flies = "Flies";
@@ -57,8 +60,11 @@ public:
         std::string debug = "Debug";
         std::string misc = "Misc";
 
+        //modules.push_back(new Criticals(combat));
+
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
+        modules.push_back(new AntiVoid(world));
         modules.push_back(new NoPacket(world));
         modules.push_back(new Timer(world));
         modules.push_back(new Blink(world));
@@ -71,7 +77,6 @@ public:
         modules.push_back(new HighJump(player));
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
-        
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
         modules.push_back(new ReverseStep(player));

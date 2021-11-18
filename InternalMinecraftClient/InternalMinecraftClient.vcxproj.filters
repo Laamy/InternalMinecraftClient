@@ -59,6 +59,8 @@
     <ClInclude Include="SDK\Dimension.h" />
     <ClInclude Include="SDK\Level.h" />
     <ClInclude Include="Utils\Utils.h" />
+    <ClInclude Include="ClientBase\Modules\Criticals.h" />
+    <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

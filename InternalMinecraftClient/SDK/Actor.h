@@ -8,58 +8,61 @@
 class BlockSource {};
 
 class Actor {
-private: // Variables
-	char pad_0x0000[0x138]; //0x0000
+private:
+	char pad_0x0000[0x100]; //0x0000
 public:
-	Vector2 CameraRots; //0x0138
-	Vector2 CameraRots2; //0x0140
+	__int8 CameraCanMov; //0x0100 
+private:
+	char pad_0x0101[0x37]; //0x0101
+public:
+	Vector2 CameraRots; //0x0138 
+	Vector2 CameraRotsBefore; //0x0140 
 private:
 	char pad_0x0148[0x10]; //0x0148
 public:
-	Vector3 EyeHeight; //0x0158
+	Vector3 eyeHeight; //0x0158 
 private:
 	char pad_0x0164[0x70]; //0x0164
-public: // 0x1BC
-	float fallDistance; //0x01D4
-	unsigned char onGround; //0x01D8
-	unsigned char onGround2; //0x01D9
-	unsigned char WalkingIntoBlock;
-	unsigned char onGround3; //0x01DB
-	unsigned char WalkingIntoBlock2; //0x01DC
-private:
-	char pad_0x01DD[0x5B]; //0x01DD
 public:
-	float StepHeight; //0x0238
+	float fallDistance; //0x01D4 
+	unsigned char onGround; //0x01D8 
+	unsigned char onGround2; //0x01D9 
+	unsigned char walkingIntoObj; //0x01DA 
+	unsigned char onGround3; //0x01DB 
+	unsigned char TouchingObj; //0x01DC 
 private:
-	char pad_0x023C[0x4]; //0x023C
+	char pad_0x01DD[0x4F]; //0x01DD
 public:
-	float WalkDistance; //0x0240
-	float WalkDistance1; //0x0244
-	float MoveDistance; //0x0248
+	float CameraRenderHeight; //0x022C 
 private:
-	char pad_0x024C[0xC]; //0x024C
+	char pad_0x0230[0x8]; //0x0230
 public:
-	float MoveDistanceExact; //0x0258
+	float stepHeight; //0x0238 
+	float nullObj_0x023C; //0x023C 
+	float touchingObjWalkDistance; //0x0240 
+	float touchingObjWalkDistanceBefore; //0x0244 
+	float blocksTraveled; //0x0248 
+	Vector3 SlowDown; //0x024C 
+	float blocksTraveledExc; //0x0258 
 private:
 	char pad_0x025C[0x1]; //0x025C
 public:
-	unsigned char IsInWater; //0x025D
+	unsigned char IsInWater; //0x025D 
 private:
 	char pad_0x025E[0x4A]; //0x025E
 public:
-	__int32 TicksPast; //0x02A8
+	__int32 HurtTime; //0x02A8 
+	__int32 HurtTimeAnimation; //0x02AC 
 private:
-	char pad_0x02AC[0x1D]; //0x02AC
+	char pad_0x02B0[0x19]; //0x02B0
 public:
-	unsigned char IsInLava; //0x02C9
+	unsigned char IsInLava; //0x02C9 
 private:
-	char pad_0x02CA[0x7A]; //0x02CA
+	char pad_0x02CA[0x76]; //0x02CA
 public:
-	float SpeedCalc; //0x0344
-	__int32 SpeedCalc2; //0x0348
-	float MoveTick; //0x034C
+	float playerAnimationPlaybackSpeed; //0x0340 
 private:
-	char pad_0x0350[0x10]; //0x0350
+	char pad_0x0344[0x1C]; //0x0344
 public:
 	BlockSource* blockSource; //0x0360
 	Dimension* dimension; //0x0368

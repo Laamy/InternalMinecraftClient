@@ -52,9 +52,6 @@ key _key;
 typedef void(__thiscall* blockRenderer)(void* rendercls, void* block); // rendercls never changes block is the current block that is being rendered via this func
 blockRenderer _renderBlock;
 
-typedef void(__thiscall* mouse)(KeyInfo* cls);
-mouse _mouse;
-
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
@@ -75,6 +72,8 @@ int enabledTicks = 0;
 int frame = 0;
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
+    _key(c, v);
+
     if (c == 0x2D && keymap[c] == false && v == true) {
         renderClickUI = !renderClickUI;
     }
@@ -92,15 +91,6 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     }
 
     keymap[c] = v;
-    _key(c, v);
-};
-
-void mouseCallback(KeyInfo* cls) {
-    //keyinfo = cls;
-    //if (keyinfo->leftMouseDown)
-        //_logf(L"MouseDown");
-    //_mouse(cls);
-
 };
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
