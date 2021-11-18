@@ -6,6 +6,8 @@ public:
 	float speedMod = 1.5f;
 
 	void OnGameTick(Actor* lp) override {
+		if (lp == nullptr) return;
+
 		if (keymap['F']) {
 			auto calcYaw = (lp->bodyRots()->y + 90) * ((float)PI / 180);
 			auto calcPitch = (lp->bodyRots()->x) * -((float)PI / 180);
