@@ -40,7 +40,7 @@
 #include "Modules/Jetpack.h"
 #include "Modules/Criticals.h"
 #include "Modules/AntiVoid.h"
-#include "Modules/NoSlowDown.h"
+#include "Modules/NoBrakes.h"
 
 class ModuleHandler {
 public:
@@ -61,7 +61,7 @@ public:
         std::string debug = "Debug";
         std::string misc = "Misc";
 
-        //modules.push_back(new Criticals(combat));
+        modules.push_back(new Criticals(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
@@ -83,7 +83,7 @@ public:
         modules.push_back(new ReverseStep(player));
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
-        modules.push_back(new NoSlowDown(player));
+        modules.push_back(new NoBrakes(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));
