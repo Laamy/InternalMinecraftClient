@@ -206,17 +206,20 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
-    
+
     //auto cse = TextHolder("[TreroInternal]: ChatMsg Detected!");
     //_chatMsg(a1, &cse);
 
-    if (txt->getText()[0] != '.') // cancel all .command related chat msgs :p
+    if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
+        auto command = ((std::string)txt->getText()).erase(0, 1);
+        if (command == "eject") {
+            MH_DisableHook(MH_ALL_HOOKS);
+            MH_Uninitialize();
+        }
+    }else{
         _chatMsg(a1, txt);
-    else
-    {
-        // .command code here!
     }
-};
+};//ill make commands work like modules/well sorted later -> zPearlss
 
 void Init(HMODULE c) {
     if (MH_Initialize() == MH_OK) {
