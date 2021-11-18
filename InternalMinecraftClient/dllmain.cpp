@@ -67,7 +67,9 @@ std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
 bool cancelUiRender = false;
 bool renderClickUI = false;
 bool justEnabled = true;
+bool justDisabled = false;
 
+int disabledTicks = 0;
 int enabledTicks = 0;
 int frame = 0;
 
@@ -146,6 +148,28 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
         frame = 0;
     }
+    
+    if (justDisabled) {
+        disabledTicks++;
+        if (disabledTicks > 1 && disabledTicks < 1000) {
+            auto catText = TextHolder("Trero Internal has been Ejected!");
+
+            int alpha = 255;
+            if (disabledTicks >= 745)
+                alpha -= disabledTicks - 745;
+
+            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), catText, font);
+            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha));
+        }
+
+        else if (disabledTicks > 1000) {
+            justDisabled = false;
+            disabledTicks = 0;
+            MH_DisableHook(MH_ALL_HOOKS);
+            MH_Uninitialize();
+        }
+    }
+    
     //Simple Inject Notification by zPearls, but re-made!!
     if (justEnabled) {
         enabledTicks++;
@@ -213,8 +237,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
         if (command == "eject") {
-            MH_DisableHook(MH_ALL_HOOKS);
-            MH_Uninitialize();
+           justDisabled = true; //auto ejects and shows notification
         }
     }else{
         _chatMsg(a1, txt);
