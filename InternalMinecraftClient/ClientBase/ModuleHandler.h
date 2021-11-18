@@ -40,6 +40,7 @@
 #include "Modules/Jetpack.h"
 #include "Modules/Criticals.h"
 #include "Modules/AntiVoid.h"
+#include "Modules/NoSlowDown.h"
 
 class ModuleHandler {
 public:
@@ -82,6 +83,7 @@ public:
         modules.push_back(new ReverseStep(player));
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
+        modules.push_back(new NoSlowDown(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));
