@@ -54,6 +54,9 @@ key _key;
 typedef void(__thiscall* blockRenderer)(void* rendercls, void* block); // rendercls never changes block is the current block that is being rendered via this func
 blockRenderer _renderBlock;
 
+typedef bool(__thiscall* Immobile)(Actor* lp);
+Immobile _Immobile;
+
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
@@ -126,7 +129,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                     Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165),
                     _RGB(255, 255, 255),
                     catText, font, 0.6f);
-                
+
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
@@ -150,7 +153,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
         frame = 0;
     }
-    
+
     //Simple Inject Notification by zPearls, but re-made!!
     if (justEnabled) {
         enabledTicks++;
@@ -163,7 +166,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
             renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), catText, font);
             renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha));
-        } else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
+        }
+        else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
             justEnabled = false;
             enabledTicks = 0;
         }
@@ -198,6 +202,16 @@ void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per ga
     _renderBlock(cls, block);
 };
 
+bool MobImmobile(Actor* lp) {
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "TestModule";
+        if (test && mod->enabled) { // there has to be a better way to do this
+            return false;
+        }
+    }
+    return _Immobile(lp);
+};
+
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
     auto sce = TextHolder(txt);
     //DisplayObj("Sent!");
@@ -219,7 +233,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         auto test = mod->name == "Spammer";
         if (test && mod->enabled) { // there has to be a better way to do this
             for (int i = 0; i < 10; i++)
-            _chatMsg(a1, txt);
+                _chatMsg(a1, txt);
         }
     }
 
@@ -236,14 +250,16 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
                     if (mod->name == "TestModule") {
                         mod->enabled = false;
                     }
-                } else {
+                }
+                else {
                     if (mod->name == "TestModule") {
                         mod->enabled = true;
                     }
                 }
             }
         }
-    }else{
+    }
+    else {
         _chatMsg(a1, txt);
     }
 };//ill make commands work like modules/well sorted later -> zPearlss
@@ -270,10 +286,11 @@ void Init(LPVOID c) {
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
+        uintptr_t ImmobileAddr = Mem::findSig("48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 30 48 8D 54 24 20 E8 A7 EC FA FE 90 48 8B C8 E8 8E 53 98 FE 48 8B D8 48 8B C8 E8 B3 FA 11 00 84 C0 75 15"); //when the intop is smart :Flushed:
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
         uintptr_t blockRendererAddr = Mem::findSig("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 4C 89 4C");
-        
+
         _logf(L"[TreroInternal]: Hooking functions...\n");
 
         if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
@@ -284,6 +301,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)blockRendererAddr, &renderBlockCallback, reinterpret_cast<LPVOID*>(&_renderBlock)) == MH_OK) {
             MH_EnableHook((void*)blockRendererAddr);
             _logf(L"[TreroInternal]: BlockRenderer hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
+            MH_EnableHook((void*)ImmobileAddr);
+            _logf(L"[TreroInternal]: Immobile hooked!\n");
         };
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
@@ -308,14 +330,14 @@ void Init(LPVOID c) {
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
         };
 
-        lab:
+    lab:
         while (clientAlive) {};
         Sleep(1);
 
         if (clientAlive)
             goto lab;
 
-        MH_QueueDisableHook(MH_ALL_HOOKS); //its still in your game bec u cant build even after uninjecting
+        MH_QueueDisableHook(MH_ALL_HOOKS);
         MH_DisableHook(MH_ALL_HOOKS);
         MH_Uninitialize();
         MH_RemoveHook(MH_ALL_HOOKS);
