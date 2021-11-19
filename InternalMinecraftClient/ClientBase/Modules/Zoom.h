@@ -8,7 +8,7 @@ public:
 		if (lp->CameraRots.x == 0) return;
 
 		if (keymap['C']) {
-			lp->SetFieldOfView(0.2f);
+			lp->SetFieldOfView(0.25f);
 		}
 		else
 		{
