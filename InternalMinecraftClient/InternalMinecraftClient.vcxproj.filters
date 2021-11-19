@@ -62,6 +62,7 @@
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
     <ClInclude Include="ClientBase\Modules\NoSlowDown.h" />
+    <ClInclude Include="ClientBase\Modules\Spammer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
