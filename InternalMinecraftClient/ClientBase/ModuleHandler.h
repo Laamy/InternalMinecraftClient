@@ -14,6 +14,7 @@
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
 #include "Modules/Glide.h"
+#include "Modules/Spammer.h"
 #include "Modules/HighJump.h"
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
@@ -102,6 +103,7 @@ public:
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new Spammer(misc));
 
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());
