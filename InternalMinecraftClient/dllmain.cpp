@@ -165,8 +165,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         else if (disabledTicks > 1000) {
             justDisabled = false;
             disabledTicks = 0;
+            MH_QueueDisableHook(MH_ALL_HOOKS); //its still in your game bec u cant build even after uninjecting
             MH_DisableHook(MH_ALL_HOOKS);
             MH_Uninitialize();
+            MH_RemoveHook(MH_ALL_HOOKS);
         }
     }
     
