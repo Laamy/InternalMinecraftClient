@@ -236,7 +236,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
-        if (test && mod->enabled) {
+        if (test && mod->enabled) { // there has to be a better way to do this
             for (int i = 0; i < 10; i++)
             _chatMsg(a1, txt);
         }
