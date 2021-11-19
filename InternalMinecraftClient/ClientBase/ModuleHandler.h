@@ -42,6 +42,7 @@
 #include "Modules/Criticals.h"
 #include "Modules/AntiVoid.h"
 #include "Modules/NoBrakes.h"
+#include "Modules/Hitbox.h"
 
 class ModuleHandler {
 public:
@@ -63,6 +64,7 @@ public:
         std::string misc = "Misc";
 
         modules.push_back(new Criticals(combat));
+        modules.push_back(new Hitbox(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
