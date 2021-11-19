@@ -13,7 +13,6 @@
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\NoYFlight.h" />
-    <ClInclude Include="ClientBase\Modules\SeedHack.h" />
     <ClInclude Include="ClientBase\Modules\Antibot.h" />
     <ClInclude Include="ClientBase\Modules\ArrayList.h" />
     <ClInclude Include="ClientBase\Modules\AutoWalk.h" />
@@ -62,7 +61,6 @@
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
     <ClInclude Include="ClientBase\Modules\NoSlowDown.h" />
-    <ClInclude Include="ClientBase\Modules\Spammer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
