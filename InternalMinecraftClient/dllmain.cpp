@@ -54,6 +54,9 @@ key _key;
 typedef void(__thiscall* blockRenderer)(void* rendercls, void* block); // rendercls never changes block is the current block that is being rendered via this func
 blockRenderer _renderBlock;
 
+typedef void(__thiscall* Immobile)(Actor* lp, bool immobile);
+Immobile _Immobile;
+
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
@@ -198,6 +201,10 @@ void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per ga
     _renderBlock(cls, block);
 };
 
+void MobImmobile(Actor* lp, bool immobile) {
+    _Immobile(lp, immobile);
+};
+
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
     auto sce = TextHolder(txt);
     //DisplayObj("Sent!");
@@ -270,6 +277,7 @@ void Init(LPVOID c) {
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
+        uintptr_t ImmobileAddr = Mem::findSig("40 53 48 83 EC ? 48 8B D9 E8 ? ? ? ? 84 C0 75 ? 48 8B 03 48 8B CB"); //could be used in future
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
         uintptr_t blockRendererAddr = Mem::findSig("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 4C 89 4C");
@@ -284,6 +292,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)blockRendererAddr, &renderBlockCallback, reinterpret_cast<LPVOID*>(&_renderBlock)) == MH_OK) {
             MH_EnableHook((void*)blockRendererAddr);
             _logf(L"[TreroInternal]: BlockRenderer hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
+            MH_EnableHook((void*)ImmobileAddr);
+            _logf(L"[TreroInternal]: Immobile hooked!\n");
         };
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
