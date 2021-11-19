@@ -166,7 +166,6 @@
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\NoBrakes.h" />
     <ClInclude Include="ClientBase\Modules\NoYFlight.h" />
-    <ClInclude Include="ClientBase\Modules\SeedHack.h" />
     <ClInclude Include="ClientBase\Modules\Antibot.h" />
     <ClInclude Include="ClientBase\Modules\ArrayList.h" />
     <ClInclude Include="ClientBase\Modules\AutoWalk.h" />

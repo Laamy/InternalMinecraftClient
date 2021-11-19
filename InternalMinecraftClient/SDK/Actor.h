@@ -8,146 +8,9 @@
 class BlockSource {};
 
 class Actor {
-private:
-	char pad_0x0000[0x100]; //0x0000
-public:
-	__int8 CameraCanMov; //0x0100 
-private:
-	char pad_0x0101[0x37]; //0x0101
-public:
-	Vector2 CameraRots; //0x0138 
-	Vector2 CameraRotsBefore; //0x0140 
-private:
-	char pad_0x0148[0x10]; //0x0148
-public:
-	Vector3 eyeHeight; //0x0158 
-private:
-	char pad_0x0164[0x70]; //0x0164
-public:
-	float fallDistance; //0x01D4 
-	unsigned char onGround; //0x01D8 
-	unsigned char onGround2; //0x01D9 
-	unsigned char walkingIntoObj; //0x01DA 
-	unsigned char onGround3; //0x01DB 
-	unsigned char TouchingObj; //0x01DC 
-private:
-	char pad_0x01DD[0x4F]; //0x01DD
-public:
-	float CameraRenderHeight; //0x022C 
-private:
-	char pad_0x0230[0x8]; //0x0230
-public:
-	float stepHeight; //0x0238 
-	float nullObj_0x023C; //0x023C 
-	float touchingObjWalkDistance; //0x0240 
-	float touchingObjWalkDistanceBefore; //0x0244 
-	float blocksTraveled; //0x0248 
-	Vector3 SlowDown; //0x024C 
-	float blocksTraveledExc; //0x0258 
-private:
-	char pad_0x025C[0x1]; //0x025C
-public:
-	unsigned char IsInWater; //0x025D 
-private:
-	char pad_0x025E[0x4A]; //0x025E
-public:
-	__int32 HurtTime; //0x02A8 
-	__int32 HurtTimeAnimation; //0x02AC 
-private:
-	char pad_0x02B0[0x19]; //0x02B0
-public:
-	unsigned char IsInLava; //0x02C9 
-private:
-	char pad_0x02CA[0x76]; //0x02CA
-public:
-	float playerAnimationPlaybackSpeed; //0x0340 
-private:
-	char pad_0x0344[0x1C]; //0x0344
-public:
-	BlockSource* blockSource; //0x0360
-	Dimension* dimension; //0x0368
-	Level* level; //0x0370
-private:
-	char pad_0x0378[0x88]; //0x0378
-public:
-	char EntityType[64]; //0xAE3E8838
-private:
-	char pad_0x0440[0x80]; //0x0440
-public:
-	AABB Position; //0x04C0
-	Vector2 Hitbox; //0x04D8
-	AABB Camera; //0x04E0
-	Vector3 Velocity; //0x04F8
-	Vector3 Velocity2; //0x0504
-private:
-	char pad_0x0510[0x3C0]; //0x0510
-public:
-	__int64 IsAfk; //0x08D0
-private:
-	char pad_0x08D8[0x8]; //0x08D8
-public:
-	std::string Username; //0xCE89EF28
-private:
-	char pad_0x0900[0x80]; //0x0900
-public:
-	unsigned char IsFlying; //0x0980 
-private:
-	char pad_0x0981[0xB]; //0x0981
-public:
-	unsigned char CanFly; //0x098C 
-private:
-	char pad_0x098D[0x23F]; //0x098D
-public: // 1.17.34 im unsure how to find nor where gamemode is rn sorry lol
-	GameMode* gameMode; //0x0BCC 
-private:
-	char pad_0x0BD4[0x484]; //0x0BD4
-	float N0000020C; //0x1058 
-	char pad_0x105C[0xEC]; //0x105C
-public:
-	unsigned char InInventory; //0x1148
-private:
-	char pad_0x1149[0xD23]; //0x1149
-public:
-	unsigned char Gamemode; //0x1E6C
 
-public: // Functions
-	void SetRenderPosition(Vector3 v) {
-		Camera.lower = v;
-		Camera.upper = v;
-	};
+public: // Vtyasble
 
-	float* SwingAnimation() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
-	};
-
-	void SetPos(Vector3 v) {
-		this->Position.lower.x = v.x;
-		this->Position.lower.y = v.y;
-		this->Position.lower.z = v.z;
-
-		this->Position.upper.x = v.x + 0.6f;
-		this->Position.upper.y = v.y + 1.8f;
-		this->Position.upper.z = v.z + 0.6f;
-	};
-
-	void SetFieldOfView(float v) {
-		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
-		*(float*)((uintptr_t)(this) + 0x1058) = v;
-		//*(float*)((uintptr_t)(this) + 0x1140) = v;
-	};
-
-	float FieldOfView() {
-		return *reinterpret_cast<float*>(this + 0x1058);
-	};
-
-	Vector2* bodyRots() {
-		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
-	};
-};
-
-// These are not player functions pearl :p
-/*class vLocalPlayer : public Actor {
-	public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
 	virtual int getLastHurtByPlayer(void);
@@ -433,5 +296,140 @@ public:
 	virtual void _removePassenger(uint64_t const&, bool, bool, bool);
 	virtual void _onSizeUpdated(void);
 	virtual void _doAutoAttackOnTouch(Actor&);
+
+private: // Variables
+	char pad_0x0000[0x100 - 0x8]; //0x0000
+public:
+	__int8 CameraCanMov; //0x0100 
+private:
+	char pad_0x0101[0x37]; //0x0101
+public:
+	Vector2 CameraRots; //0x0138 
+	Vector2 CameraRotsBefore; //0x0140 
+private:
+	char pad_0x0148[0x10]; //0x0148
+public:
+	Vector3 eyeHeight; //0x0158 
+private:
+	char pad_0x0164[0x70]; //0x0164
+public:
+	float fallDistance; //0x01D4 
+	unsigned char onGround; //0x01D8 
+	unsigned char onGround2; //0x01D9 
+	unsigned char walkingIntoObj; //0x01DA 
+	unsigned char onGround3; //0x01DB 
+	unsigned char TouchingObj; //0x01DC 
+private:
+	char pad_0x01DD[0x4F]; //0x01DD
+public:
+	float CameraRenderHeight; //0x022C 
+private:
+	char pad_0x0230[0x8]; //0x0230
+public:
+	float stepHeight; //0x0238 
+	float nullObj_0x023C; //0x023C 
+	float touchingObjWalkDistance; //0x0240 
+	float touchingObjWalkDistanceBefore; //0x0244 
+	float blocksTraveled; //0x0248 
+	Vector3 SlowDown; //0x024C 
+	float blocksTraveledExc; //0x0258 
+private:
+	char pad_0x025C[0x1]; //0x025C
+public:
+	unsigned char IsInWater; //0x025D 
+private:
+	char pad_0x025E[0x4A]; //0x025E
+public:
+	__int32 HurtTime; //0x02A8 
+	__int32 HurtTimeAnimation; //0x02AC 
+private:
+	char pad_0x02B0[0x19]; //0x02B0
+public:
+	unsigned char IsInLava; //0x02C9 
+private:
+	char pad_0x02CA[0x76]; //0x02CA
+public:
+	float playerAnimationPlaybackSpeed; //0x0340 
+private:
+	char pad_0x0344[0x1C]; //0x0344
+public:
+	BlockSource* blockSource; //0x0360
+	Dimension* dimension; //0x0368
+	Level* level; //0x0370
+private:
+	char pad_0x0378[0x88]; //0x0378
+public:
+	char EntityType[64]; //0xAE3E8838
+private:
+	char pad_0x0440[0x80]; //0x0440
+public:
+	AABB Position; //0x04C0
+	Vector2 Hitbox; //0x04D8
+	AABB Camera; //0x04E0
+	Vector3 Velocity; //0x04F8
+	Vector3 Velocity2; //0x0504
+private:
+	char pad_0x0510[0x3C0]; //0x0510
+public:
+	__int64 IsAfk; //0x08D0
+private:
+	char pad_0x08D8[0x8]; //0x08D8
+public:
+	std::string Username; //0xCE89EF28
+private:
+	char pad_0x0900[0x80]; //0x0900
+public:
+	unsigned char IsFlying; //0x0980 
+private:
+	char pad_0x0981[0xB]; //0x0981
+public:
+	unsigned char CanFly; //0x098C 
+private:
+	char pad_0x098D[0x23F]; //0x098D
+public: // 1.17.34 im unsure how to find nor where gamemode is rn sorry lol
+	GameMode* gameMode; //0x0BCC 
+private:
+	char pad_0x0BD4[0x484]; //0x0BD4
+	float N0000020C; //0x1058 
+	char pad_0x105C[0xEC]; //0x105C
+public:
+	unsigned char InInventory; //0x1148
+private:
+	char pad_0x1149[0xD23]; //0x1149
+public:
+	unsigned char Gamemode; //0x1E6C
+
+public: // Functions
+	void SetRenderPosition(Vector3 v) {
+		Camera.lower = v;
+		Camera.upper = v;
+	};
+
+	float* SwingAnimation() {
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
+	};
+
+	void SetPos(Vector3 v) {
+		this->Position.lower.x = v.x;
+		this->Position.lower.y = v.y;
+		this->Position.lower.z = v.z;
+
+		this->Position.upper.x = v.x + 0.6f;
+		this->Position.upper.y = v.y + 1.8f;
+		this->Position.upper.z = v.z + 0.6f;
+	};
+
+	void SetFieldOfView(float v) {
+		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
+		*(float*)((uintptr_t)(this) + 0x1058) = v;
+		//*(float*)((uintptr_t)(this) + 0x1140) = v;
+	};
+
+	float FieldOfView() {
+		return *reinterpret_cast<float*>(this + 0x1058);
+	};
+
+	Vector2* bodyRots() {
+		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
+	};
 };
-*/

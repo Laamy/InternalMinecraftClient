@@ -6,13 +6,10 @@ public:
 	ClientInstance* ci;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		if (lp == nullptr) return;
 		ci = ci;
 	}
 
 	void OnGameTick(Actor* lp) override {
-		if (lp == nullptr || ci == nullptr) return;
-
 		if (keymap['W']) {
 			auto calcYaw = (lp->bodyRots()->y + 90) * ((float)PI / 180);
 
@@ -30,7 +27,6 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		if (lp == nullptr) return;
 		lp->Velocity = { 0, 0, 0 };
 	};
 };

@@ -8,15 +8,11 @@ public:
 	int count;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		if (lp == nullptr) return;
-		
 		ci = ci;
 		blinking = false;
 	}
 
 	void OnGameTick(Actor* lp) override {
-		if (lp == nullptr || ci == nullptr) return;
-
 		float speed = 0.4f;
 
 		ci->timerClass->timerClass->timer = 20.0f * speed;
@@ -46,7 +42,6 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		if (lp == nullptr) return;
 		count = 0;
 		if (!blinking) {
 			ci->loopbackSender->RestorePacketSender();
