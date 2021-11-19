@@ -234,6 +234,14 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
     //auto cse = TextHolder("[TreroInternal]: ChatMsg Detected!");
     //_chatMsg(a1, &cse);
 
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "Spammer";
+        if (test && mod->enabled) {
+            for (int i = 0; i < 10; i++)
+            _chatMsg(a1, txt);
+        }
+    }
+
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
         if (command == "eject") {
