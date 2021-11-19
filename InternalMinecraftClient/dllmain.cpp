@@ -239,6 +239,20 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         if (command == "eject") {
            justDisabled = true; //auto ejects and shows notification
         }
+
+        if (command == "toggle") {
+            for (auto mod : handler.modules) {
+                if (mod->enabled) {
+                    if (mod->name == "TestModule") {
+                        mod->enabled = false;
+                    }
+                } else {
+                    if (mod->name == "TestModule") {
+                        mod->enabled = true;
+                    }
+                }
+            }
+        }
     }else{
         _chatMsg(a1, txt);
     }
