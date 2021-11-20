@@ -43,6 +43,9 @@
 #include "Modules/AntiVoid.h"
 #include "Modules/NoBrakes.h"
 #include "Modules/Hitbox.h"
+#include "Modules/Killaura.h"
+#include "Modules/Uninject.h"
+#include "Modules/FixHitbox.h"
 
 class ModuleHandler {
 public:
@@ -65,6 +68,7 @@ public:
 
         modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
+        modules.push_back(new Killaura(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
@@ -102,10 +106,12 @@ public:
         modules.push_back(new Zoom(visual));
 
         modules.push_back(new TestModule(debug));
-        modules.push_back(new DebugCursor(debug));
+        //modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
         modules.push_back(new Spammer(misc));
+        modules.push_back(new Uninject(misc));
+        modules.push_back(new FixHitbox(misc));
 
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());

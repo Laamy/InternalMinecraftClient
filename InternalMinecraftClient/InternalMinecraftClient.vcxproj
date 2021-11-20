@@ -163,6 +163,7 @@
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
+    <ClInclude Include="ClientBase\Modules\FixHitbox.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\NoBrakes.h" />

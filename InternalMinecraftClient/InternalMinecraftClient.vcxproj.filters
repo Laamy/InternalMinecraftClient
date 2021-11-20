@@ -63,6 +63,7 @@
     <ClInclude Include="SDK\Level.h" />
     <ClInclude Include="Utils\Utils.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
+    <ClInclude Include="ClientBase\Modules\FixHitbox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

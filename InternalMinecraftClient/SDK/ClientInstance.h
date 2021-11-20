@@ -79,28 +79,47 @@ public:
 	GuiData* guiData; //0x04E8
 
 public:
-	//Actor* getLocalPlayer() {
+	//auto getLocalPlayer() {
 	//	return reinterpret_cast<class Actor*>((uintptr_t)(this) + 0x138);
 	//};
 
-	GuiData* getGuiData() {
+	auto getGuiData() {
 		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
 	};
 
-	class TimerClass* getTimerClass() {
+	auto getTimerClass() {
 		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0);
 	};
 
-	class LoopbackSender* getLoopbackSender() {
+	auto getLoopbackSender() {
 		return reinterpret_cast<class LoopbackSender*>((uintptr_t)(this) + 0xB0);
 	};
 
-	MinecraftGame* getMcGame() {
+	auto getMcGame() {
 		return reinterpret_cast<MinecraftGame*>((uintptr_t)(this) + 0xA8);
 	};
 
+	auto getEntityList() {
+
+		std::map<uintptr_t, Actor*> cleanMap = std::map<uintptr_t, Actor*>();
+
+		int i = 0;
+		for (auto ent : entityList) {
+			cleanMap[i] = ent.second;
+			i++;
+		}
+
+		return cleanMap;
+	};
+
+	auto getLocalPlayer() { // Player class is way different from actor structs so dont get this mixed up pearl/intop :p
+		for (auto ent : entityList) {
+			return reinterpret_cast<Player*>(ent.second);
+		}
+	};
+
 public: // Custom Voids
-	bool isInGame() {
+	auto isInGame() {
 		return guiData->windowData->inWorld;
 	};
 	/*
