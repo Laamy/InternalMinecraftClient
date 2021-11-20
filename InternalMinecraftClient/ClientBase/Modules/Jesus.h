@@ -6,7 +6,7 @@ public:
 
     void OnGameTick(Actor* lp) override {
         if (lp->IsInWater || lp->IsInLava) {
-            lp->Velocity.y = 0.2f;
+            lp->Velocity.y = 0.025f;
             lp->onGround = true;
         }
     }
