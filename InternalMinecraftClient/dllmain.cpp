@@ -5,15 +5,20 @@
 #include <Psapi.h>
 #include <string>
 
+#include <cassert>
+
 #define _logf(str)  OutputDebugString(str)
 
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
 
+std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
+
 bool clientAlive = true;
 
 // SDK
 #include "SDK/Actor.h"
+#include "SDK/Player.h"
 #include "SDK/GuiData.h"
 #include "SDK/ClientInstance.h"
 #include "SDK/KeyInfo.h"
@@ -192,6 +197,9 @@ void callback(ClientInstance* ci, void* a2) {
 
 void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
+
+    entityList[reinterpret_cast<uint64_t>(lp)] = lp;
+
     localPlr = lp;
     for (auto mod : handler.modules)
         if (mod->enabled)
@@ -263,6 +271,13 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         _chatMsg(a1, txt);
     }
 };//ill make commands work like modules/well sorted later -> zPearlss
+
+auto GetDllHMod(void) -> HMODULE {
+    MEMORY_BASIC_INFORMATION info;
+    size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
+    assert(len == sizeof(info));
+    return len ? (HMODULE)info.AllocationBase : NULL;
+};
 
 void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
@@ -337,12 +352,10 @@ void Init(LPVOID c) {
         if (clientAlive)
             goto lab;
 
-        MH_QueueDisableHook(MH_ALL_HOOKS);
         MH_DisableHook(MH_ALL_HOOKS);
         MH_Uninitialize();
-        MH_RemoveHook(MH_ALL_HOOKS);
 
-        FreeLibraryAndExitThread(static_cast<HMODULE>(c), 1);
+        FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }
 

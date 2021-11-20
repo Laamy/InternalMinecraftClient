@@ -134,7 +134,9 @@ public:
 	virtual void setTarget(Actor*);
 	virtual void findAttackTarget(void);
 	virtual bool isValidTarget(Actor*);
-	virtual void attack(Actor&, class ActorDamageCause const&);
+private:
+	virtual void attack(Actor&, class ActorDamageCause const&); // i want Player* >:c
+public:
 	virtual void performRangedAttack(Actor&, float);
 	virtual void adjustDamageAmount(int&);
 	virtual int getEquipmentCount(void);

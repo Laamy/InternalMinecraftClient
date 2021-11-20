@@ -80,10 +80,6 @@ public:
 	GuiData* guiData; //0x04E8
 
 public:
-	auto getLocalPlayer() {
-		return reinterpret_cast<class Actor*>((uintptr_t)(this) + 0x138);
-	};
-
 	auto getGuiData() {
 		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
 	};
@@ -111,6 +107,10 @@ public:
 		}
 
 		return cleanMap;
+	};
+
+	auto getLocalPlayer() { // local player in client instance crashes so please leave this like this lol?
+		return reinterpret_cast<Player*>(entityList[0]);
 	};
 
 public: // Custom Voids

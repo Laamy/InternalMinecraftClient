@@ -2,7 +2,6 @@
 
 class Player : public Actor {
 private:
-	virtual void TryroFunc0(); // this top function may mess with it :p
 	virtual void Constructor1();
 	virtual void Constructor2();
 public:
@@ -19,7 +18,7 @@ public:
 	virtual void reloadComponents(); // removed
 	virtual void _serverInitItemStackIds(void);
 	virtual void _doInitialMove(void);
-	virtual void hasComponent(HashedString const&);
+	virtual void hasComponent(class HashedString const&);
 private:
 	virtual void Constructor3();
 	virtual void Constructor4();
@@ -34,11 +33,11 @@ public:
 	virtual int getPos(void);
 	virtual int getPosOld(void);
 	virtual float getPosExtrapolated(float);
-	virtual float getAttachPos(ActorLocation, float);
+	virtual float getAttachPos(class ActorLocation, float);
 	virtual int getFiringPos(void);
 	virtual void setRot(Vector2 const&);
 	virtual void move(Vector3 const&);
-	virtual void move(IActorMovementProxy&, Vector3 const&);
+	virtual void move(class IActorMovementProxy&, Vector3 const&);
 	virtual float getInterpolatedRidingPosition(float);
 	virtual float getInterpolatedBodyRot(float);
 	virtual float getInterpolatedHeadRot(float);
@@ -51,7 +50,7 @@ public:
 	virtual void updateEntityInside(void);
 	virtual bool isFireImmune(void);
 	virtual void breaksFallingBlocks(void);
-	virtual void blockedByShield(ActorDamageSource const&, Actor&);
+	virtual void blockedByShield(class ActorDamageSource const&, Actor&);
 	virtual void teleportTo(Vector3 const&, bool, int, int);
 	virtual void tryTeleportTo(Vector3 const&, bool, bool, int, int);
 	virtual void chorusFruitTeleport(Vector3 const&);
@@ -65,7 +64,7 @@ public:
 	virtual void startRiding(Actor&);
 	virtual void addPassenger(Actor&);
 	virtual void flagPassengerToRemove(Actor&);
-	virtual int getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, InputMode);
+	virtual int getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class InputMode);
 	virtual void intersects(Vector3 const&, Vector3 const&);
 	virtual bool isInWall(void);
 	virtual bool isInvisible(void);
@@ -79,7 +78,7 @@ public:
 private:
 	virtual void TryroFunc69();
 public:
-	virtual void filterFormattedNameTag(UIProfanityContext const&);
+	virtual void filterFormattedNameTag(class UIProfanityContext const&);
 	virtual void setNameTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual int getAlwaysShowNameTag(void);
 	virtual void setScoreTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
@@ -89,7 +88,7 @@ public:
 	virtual bool isInWater(void);
 	virtual void hasEnteredWater(void);
 	virtual bool isInLava(void);
-	virtual bool isUnderLiquid(MaterialType);
+	virtual bool isUnderLiquid(class MaterialType);
 	virtual bool isOverWater(void);
 	virtual void setBlockMovementSlowdownMultiplier(Vector3 const&);
 	virtual void resetBlockMovementSlowdownMultiplier(void);
@@ -115,7 +114,7 @@ public:
 	virtual bool isShootable(void);
 	virtual void setSneaking(bool);
 	virtual bool isBlocking(void);
-	virtual bool isDamageBlocked(ActorDamageSource const&);
+	virtual bool isDamageBlocked(class ActorDamageSource const&);
 	virtual bool isAlive(void);
 	virtual bool isOnFire(void);
 	virtual bool isOnHotBlock(void);
@@ -129,7 +128,7 @@ public:
 	virtual void setTarget(Actor*);
 	virtual void findAttackTarget(void);
 	virtual bool isValidTarget(Actor*);
-	virtual void attack(Actor&, ActorDamageCause const&);
+	virtual void attack(Actor&); // tf
 	virtual void performRangedAttack(Actor&, float);
 	virtual void adjustDamageAmount(int&);
 	virtual int getEquipmentCount(void);
@@ -151,20 +150,20 @@ public:
 	virtual void playAmbientSound(void);
 	virtual int getAmbientSound(void);
 	virtual bool isInvulnerableTo(ActorDamageSource const&);
-	virtual int getBlockDamageCause(Block const&);
+	virtual int getBlockDamageCause(class Block const&);
 	virtual void actuallyHurt(int, ActorDamageSource const&, bool);
 	virtual void animateHurt(void);
 	virtual void doFireHurt(int);
 	virtual void onLightningHit(void);
-	virtual void onBounceStarted(BlockPos const&, Block const&);
+	virtual void onBounceStarted(class BlockPos const&, class Block const&);
 	virtual void feed(int);
-	virtual void handleEntityEvent(ActorEvent, int);
+	virtual void handleEntityEvent(class ActorEvent, int);
 	virtual int getPickRadius(void);
 	virtual int getActorRendererId(void);
 	virtual void spawnAtLocation(int, int);
 	virtual void spawnAtLocation(int, int, float);
-	virtual void spawnAtLocation(Block const&, int);
-	virtual void spawnAtLocation(Block const&, int, float);
+	virtual void spawnAtLocation(class Block const&, int);
+	virtual void spawnAtLocation(class Block const&, int, float);
 	virtual void spawnAtLocation(ItemStack const&, float);
 	virtual void despawn(void);
 	virtual void killed(Actor&);
@@ -174,17 +173,17 @@ public:
 	virtual int getArmorMaterialTypeInSlot(ArmorSlot);
 	virtual int getArmorMaterialTextureTypeInSlot(ArmorSlot);
 	virtual int getArmorColorInSlot(ArmorSlot, int);
-	virtual int getEquippedSlot(EquipmentSlot);
-	virtual void setEquippedSlot(EquipmentSlot, ItemStack const&);
+	virtual int getEquippedSlot(class EquipmentSlot);
+	virtual void setEquippedSlot(class EquipmentSlot, ItemStack const&);
 	virtual int getCarriedItem(void);
 	virtual void setCarriedItem(ItemStack const&);
 	virtual void setOffhandSlot(ItemStack const&);
 	virtual int getEquippedTotem(void);
 	virtual void consumeTotem(void);
-	virtual void save(CompoundTag&);
-	virtual void saveWithoutId(CompoundTag&);
-	virtual void load(CompoundTag const&, DataLoadHelper&);
-	virtual void loadLinks(CompoundTag const&, std::vector<ActorLink, std::allocator<ActorLink>>&, DataLoadHelper&);
+	virtual void save(class CompoundTag&);
+	virtual void saveWithoutId(class CompoundTag&);
+	virtual void load(class CompoundTag const&, class DataLoadHelper&);
+	virtual void loadLinks(); // removed
 	virtual int getEntityTypeId(void);
 	virtual void queryEntityRenderer(void);
 	virtual int getSourceUniqueID(void);
@@ -200,7 +199,7 @@ public:
 	virtual int getDimensionId(void);
 	virtual void canChangeDimensions(void);
 	virtual void changeDimension(); // removed
-	virtual void changeDimension2(ChangeDimensionPacket const&);
+	virtual void changeDimension2(class ChangeDimensionPacket const&);
 	virtual int getControllingPlayer(void);
 	virtual void checkFallDamage(float, bool);
 	virtual void causeFallDamage(float, float, ActorDamageSource);
@@ -222,15 +221,15 @@ public:
 	virtual void buildDebugInfo(std::basic_string<char, std::char_traits<char>, std::allocator<char>>&);
 	virtual int getCommandPermissionLevel(void);
 	virtual bool isClientSide(void);
-	virtual int getMutableAttribute(Attribute const&);
-	virtual int getAttribute(Attribute const&);
+	virtual int getMutableAttribute(class Attribute const&);
+	virtual int getAttribute(class Attribute const&);
 	virtual int getDeathTime(void);
 	virtual void heal(int);
 	virtual bool isInvertedHealAndHarm(void);
 	virtual void canBeAffected(int);
-	virtual void canBeAffected(MobEffectInstance const&);
-	virtual void canBeAffectedByArrow(MobEffectInstance const&);
-	virtual void onEffectAdded(MobEffectInstance&);
+	virtual void canBeAffected(class MobEffectInstance const&);
+	virtual void canBeAffectedByArrow(class MobEffectInstance const&);
+	virtual void onEffectAdded(class MobEffectInstance&);
 	virtual void onEffectUpdated(MobEffectInstance&);
 	virtual void onEffectRemoved(MobEffectInstance&);
 	virtual int getAnimationComponent(void);
@@ -260,7 +259,7 @@ public:
 	virtual void setDamageNearbyMobs(bool);
 	virtual void renderDebugServerState(Options const&);
 	virtual void reloadLootTable(void);
-	virtual void reloadLootTable(EquipmentTableDefinition const&);
+	virtual void reloadLootTable(class EquipmentTableDefinition const&);
 	virtual int getDeletionDelayTimeSeconds(void);
 	virtual void kill(void);
 	virtual void die(ActorDamageSource const&);
@@ -323,7 +322,7 @@ public:
 	virtual void ate(void);
 	virtual int getMaxHeadXRot(void);
 	virtual bool isAlliedTo(Actor);
-	virtual void doHurtTarget(Actor*, ActorDamageCause const&);
+	virtual void doHurtTarget(Actor*, class ActorDamageCause const&);
 	virtual void canBeControlledByPassenger(void);
 	virtual void leaveCaravan(void);
 	virtual void joinCaravan(Actor);
@@ -373,7 +372,7 @@ public:
 	virtual void tickDeath(void);
 	virtual void updateGliding(void);
 	virtual void _allowAscendingScaffolding(void);
-	virtual void prepareRegion(ChunkSource&);
+	virtual void prepareRegion(class ChunkSource&);
 	virtual void destroyRegion(void);
 	virtual void suspendRegion(void);
 	virtual void resendAllChunks(void);
@@ -400,7 +399,7 @@ public:
 	virtual void startDestroying(void);
 	virtual void stopDestroying(void);
 	virtual void openPortfolio(void);
-	virtual void openBook(int, bool, int, BlockActor*);
+	virtual void openBook(int, bool, int, class BlockActor*);
 	virtual void openTrading(uint64_t const&, bool);
 	virtual void canOpenContainerScreen(void);
 	virtual void openChalkboard(class ChalkboardBlockActor&, bool);
@@ -424,7 +423,7 @@ public:
 	virtual void stopLoading(void);
 	virtual void registerTrackedBoss(uint64_t);
 	virtual void unRegisterTrackedBoss(uint64_t);
-	virtual void setPlayerGameType(GameType);
+	virtual void setPlayerGameType(class GameType);
 	virtual void initHUDContainerManager(void);
 	virtual void _crit(Actor&);
 	virtual int getEventing(void);
@@ -473,6 +472,4 @@ public:
 	virtual int getMovementSettings(void);
 	virtual void onMovePlayerPacketNormal(Vector3 const&, Vector2 const&, float);
 	virtual void _createChunkSource(ChunkSource&);
-
-
 };
