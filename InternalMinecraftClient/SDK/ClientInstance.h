@@ -79,9 +79,9 @@ public:
 	GuiData* guiData; //0x04E8
 
 public:
-	//auto getLocalPlayer() {
-	//	return reinterpret_cast<class Actor*>((uintptr_t)(this) + 0x138);
-	//};
+	auto getLocalPlayer() {
+		return reinterpret_cast<class Actor*>((uintptr_t)(this) + 0x138);
+	};
 
 	auto getGuiData() {
 		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
@@ -110,12 +110,6 @@ public:
 		}
 
 		return cleanMap;
-	};
-
-	auto getLocalPlayer() { // Player class is way different from actor structs so dont get this mixed up pearl/intop :p
-		for (auto ent : entityList) {
-			return reinterpret_cast<Player*>(ent.second);
-		}
 	};
 
 public: // Custom Voids
