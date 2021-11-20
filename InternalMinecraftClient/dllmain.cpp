@@ -180,6 +180,12 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
     for (int i = 0; i < handler.modules.size(); i++)
         modulesEnabled[i] = handler.modules[i]->enabled;
+
+    for (auto mod : handler.modules) {
+        auto Eject = mod->name == "Uninject";
+        if (Eject && mod->enabled)
+            clientAlive = false;
+    }
 };
 
 void callback(ClientInstance* ci, void* a2) {
@@ -248,7 +254,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
 
-        if (command == "eject") {
+        if (command == "eject" || command == "uninject") {
             clientAlive = false;
         }
 
