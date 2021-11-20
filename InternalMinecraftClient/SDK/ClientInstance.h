@@ -2,6 +2,7 @@
 
 #include "../Utils/Math.h"
 #include "MinecraftGame.h"
+#include "Player.h"
 
 class TimerClass2 {
 public:
