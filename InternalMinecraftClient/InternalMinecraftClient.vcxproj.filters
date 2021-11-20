@@ -64,6 +64,9 @@
     <ClInclude Include="Utils\Utils.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\FixHitbox.h" />
+    <ClInclude Include="SDK\Player.h" />
+    <ClInclude Include="ClientBase\Modules\Uninject.h" />
+    <ClInclude Include="ClientBase\Modules\Killaura.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
