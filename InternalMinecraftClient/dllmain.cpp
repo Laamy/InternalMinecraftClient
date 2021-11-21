@@ -257,6 +257,7 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
+    /*
     if (txt->getText()) {
         auto command = ((std::string)txt->getText()).erase(0,0);
         if (command == "dad?") {
@@ -268,6 +269,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
             _chatMsg(a1, &cse);
         }
     }else _chatMsg(a1, txt);
+    */
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
