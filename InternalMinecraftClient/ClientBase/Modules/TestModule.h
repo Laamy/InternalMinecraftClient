@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 
 class TestModule : public Module {
 public:
@@ -8,7 +9,8 @@ public:
 
 	void OnGameTick(Actor* a1) override {
 		auto lp = clientInst->getLocalPlayer();
-		
-		lp->Username = "r u working?";
+	}
+	virtual void OnFrameRender(RenderUtils* ctx) {
+		ctx->DrawString(Vector2(100, 100), _RGB(0, 0, 0), std::string("gi"), ctx->font);
 	}
 };

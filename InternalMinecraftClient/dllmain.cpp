@@ -334,6 +334,36 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
     }
 };//ill make commands work like modules/well sorted later -> zPearlss
 
+std::string getClipboardText() {
+    if (!OpenClipboard(nullptr)) {
+        return "";
+    }
+    else {
+        HANDLE hData = GetClipboardData(CF_TEXT);
+        char* pszText = static_cast<char*>(GlobalLock(hData));
+        if (pszText == nullptr)
+            return "";
+        CloseClipboard();
+        return std::string(pszText);
+    }
+}
+
+void setClipboardText(std::string text) {
+    if (!OpenClipboard(nullptr))
+        return;
+    EmptyClipboard();
+    HGLOBAL hg = GlobalAlloc(GMEM_MOVEABLE, text.size() + 1);
+    if (!hg) {
+        CloseClipboard();
+        return;
+    }
+    memcpy(GlobalLock(hg), text.c_str(), text.size() + 1);
+    GlobalUnlock(hg);
+    SetClipboardData(CF_TEXT, hg);
+    CloseClipboard();
+    GlobalFree(hg);
+}
+
 auto GetDllHMod(void) -> HMODULE {
     MEMORY_BASIC_INFORMATION info;
     size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
