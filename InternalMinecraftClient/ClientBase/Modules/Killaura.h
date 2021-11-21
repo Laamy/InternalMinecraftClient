@@ -5,7 +5,7 @@ public:
 	Killaura(std::string cat) : Module(cat, "Killaura", 'P') {};
 
 	void OnGameTick(Actor* lp) override {
-		auto localPlayer = clientInst->getLocalPlayer();
+		auto localPlayer = clientInst->getCPlayer();
 
 		//localPlayer->swing();
 

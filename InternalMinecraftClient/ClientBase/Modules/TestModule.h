@@ -8,7 +8,7 @@ public:
 	}
 
 	void OnGameTick(Actor* a1) override {
-		auto lp = clientInst->getLocalPlayer();
+		auto lp = clientInst->getCPlayer();
 	}
 
 	virtual void OnFrameRender(RenderUtils* ctx) {

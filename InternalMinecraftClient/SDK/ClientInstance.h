@@ -109,9 +109,13 @@ public:
 		return cleanMap;
 	};
 
-	auto getLocalPlayer() { // local player in client instance crashes so please leave this like this lol?
-		for (auto ent : entityList)
-			return reinterpret_cast<Player*>(ent.second);
+	auto getCPlayer() { // local player in client instance crashes so please leave this like this lol?
+		Player* plr = nullptr;
+		for (auto ent : entityList) {
+			plr = reinterpret_cast<Player*>(ent.first);
+			break;
+		}
+		return plr;
 	};
 
 public: // Custom Voids
