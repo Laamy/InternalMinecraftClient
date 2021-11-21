@@ -38,5 +38,9 @@ public:
 private:
 	char pad_0x0150[0x38]; //0x0150
 public:
-	class BitmapFont* font3; //0x0188 
+	class BitmapFont* invisGameFont; //0x0188 
+private:
+	char pad_0x042069; //lol idk how this works lmfao
+public:
+	class BitmapFont* defaultgameFont2; //idk, but it works lmfao
 }; // 0x110
