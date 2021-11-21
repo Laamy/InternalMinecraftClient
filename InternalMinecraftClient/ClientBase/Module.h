@@ -49,16 +49,13 @@ public: // functions
 		return ret;
 	}
     
-    float sin(float x)
-	{
+    float sin(float x) {
 		float res = 0, pow = x, fact = 1;
-		for (int i = 0; i < 5; ++i)
-		{
+		for (int i = 0; i < 5; i++) {
 			res += pow / fact;
 			pow *= -1 * x * x;
 			fact *= (2 * (i + 1)) * (2 * (i + 1) + 1);
 		}
-
 		return res;
 	}
 
@@ -71,7 +68,6 @@ public: // functions
 		}
 		return y;
 	}
-
     //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyHeld(uintptr_t keyAddr, bool* cancel) {};
