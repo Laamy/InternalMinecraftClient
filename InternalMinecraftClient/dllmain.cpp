@@ -317,7 +317,6 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
 
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
-        auto command = ((std::string)txt->getText()).erase(0, 1);
         Command* checkCmd = cmdHandler.findCommand(command);
         if (checkCmd != nullptr) {
             checkCmd->Execute(clientInst, localPlr);
