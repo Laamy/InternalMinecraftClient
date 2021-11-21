@@ -1,7 +1,4 @@
 #pragma once
-#include <string>
-#include "SDK/Actor.h"
-#include "SDK/ClientInstance.h"
 
 class Command {
 public:
