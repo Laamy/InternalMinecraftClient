@@ -257,9 +257,17 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
-
-    //auto cse = TextHolder("[TreroInternal]: ChatMsg Detected!");
-    //_chatMsg(a1, &cse);
+    if (txt->getText()) {
+        auto command = ((std::string)txt->getText()).erase(0,0);
+        if (command == "dad?") {
+            auto cse = TextHolder("[TreroInternal]: Im getting Milk!!!!");
+            _chatMsg(a1, &cse);
+        }
+        if (command == "mom?") {
+            auto cse = TextHolder("[TreroInternal]: Yes My Child????");
+            _chatMsg(a1, &cse);
+        }
+    }else _chatMsg(a1, txt);
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
