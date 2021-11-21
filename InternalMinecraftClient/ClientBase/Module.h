@@ -26,6 +26,9 @@ public: // functions
     virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
     virtual void OnGameTick(Actor* lp) {};
+	virtual bool HoldMode() {
+		return false;
+	}
 
 	void addBypass(BypassBox bypass) {
 		bypasses.push_back(bypass);

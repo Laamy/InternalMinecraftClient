@@ -89,13 +89,19 @@ int frame = 0;
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     _key(c, v);
 
-    if (c == 0x2D && keymap[c] == false && v == true) {
+    if (c == VK_INSERT && keymap[c] == false && v == true) {
         renderClickUI = !renderClickUI;
     }
 
     for (int i = 0; i < handler.modules.size(); ++i) {
-        if (c == handler.modules[i]->keybind &&  v == true) {
+        if (c == handler.modules[i]->keybind && handler.modules[i]->HoldMode()) {
+            handler.modules[i]->enabled = !handler.modules[i]->enabled;
 
+            if (handler.modules[i]->enabled)
+                handler.modules[i]->OnEnable(clientInst, localPlr);
+            else handler.modules[i]->OnDisable(clientInst, localPlr);
+
+        }else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {
             handler.modules[i]->enabled = !handler.modules[i]->enabled;
 
             if (handler.modules[i]->enabled)
