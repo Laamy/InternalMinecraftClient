@@ -62,6 +62,9 @@ blockRenderer _renderBlock;
 typedef bool(__thiscall* Immobile)(Actor* lp);
 Immobile _Immobile;
 
+typedef float(__thiscall* time)(__int64 a1, int a2, float a3);
+time _time;
+
 typedef bool(__thiscall* test)(__int64 _this, float* color, __int64 a3, float a4);
 test _Test;
 
@@ -247,10 +250,26 @@ bool Test(__int64 _this, float* color, __int64 a3, float a4) { // There is - Yaa
     for (auto mod : handler.modules) {
         auto test = mod->name == "TestModule";
         if (test && mod->enabled) {
-            return 1;// there has to be a better way to do this
+            return 0;// there has to be a better way to do this
         }
     }
     return _Test(_this, color, a3, a4);
+};
+
+
+float timeOfDay(__int64 a1, int a2, float a3) {
+    // Initialize these hooks in the module constructor {};
+    // I'll preplace the comment for where you need to place this hook code
+
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "TestModule";
+        if (test && mod->enabled) {
+           return 121000.f;
+        }
+        else {
+            return _time(a1, a3, a3);
+        }
+    }
 };
 
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
@@ -337,10 +356,10 @@ void Init(LPVOID c) {
             if (addCategory)
                 categories.push_back(mod->category);
         }
-
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
         uintptr_t testAddr = Mem::findSig("41 0F 10 08 48 8B C2 0F"); // fog color
+        uintptr_t timeOfDayAddr = Mem::findSig("44 8B C2 B8 F1 19 76 05 F7 EA");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
@@ -365,6 +384,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
             MH_EnableHook((void*)ImmobileAddr);
             _logf(L"[TreroInternal]: Immobile hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)timeOfDayAddr, &timeOfDay, reinterpret_cast<LPVOID*>(&_time)) == MH_OK) {
+            MH_EnableHook((void*)timeOfDayAddr);
+            _logf(L"[TreroInternal]: TimeOfDay hooked!\n");
         };
 
         if (MH_CreateHook((void*)testAddr, &Test, reinterpret_cast<LPVOID*>(&_Test)) == MH_OK) {
