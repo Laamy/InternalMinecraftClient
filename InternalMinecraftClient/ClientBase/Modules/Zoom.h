@@ -3,7 +3,8 @@
 class Zoom : public Module { // worked
 public:
 	Zoom(std::string cat) : Module(cat, "Zoom", 'C') {};
-	void OnGameTick(Actor* lp) override {
+
+	void OnEnable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 			lp->SetFieldOfView(0.25f);
 	}
