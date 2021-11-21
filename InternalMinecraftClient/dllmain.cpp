@@ -94,7 +94,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     }
 
     for (int i = 0; i < handler.modules.size(); ++i) {
-        if (handler.modules[i]->keybind == c && modulesEnabled[i] == false && v == true) {
+        if (c == handler.modules[i]->keybind &&  v == true) {
 
             handler.modules[i]->enabled = !handler.modules[i]->enabled;
 
@@ -166,16 +166,16 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     if (justEnabled) {
         enabledTicks++;
         if (enabledTicks > 1 && enabledTicks < 1000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
-            auto catText = TextHolder("Trero Internal has been Injected!");
+            auto Text = TextHolder("Trero Internal has been Injected!");
 
             int alpha = 255; // make injection notification fadeaway :p ( yaami<3#8483 )
             if (enabledTicks <= 400)
                 alpha += enabledTicks - 400;
             else if (enabledTicks >= 745)
-                    alpha -= enabledTicks - 745;
+                alpha -= enabledTicks - 745;
 
-            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), catText, font);
-            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha));
+            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), Text, font);
+            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha)); // some reason not drawing the outline :/
         }
         else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
             justEnabled = false;

@@ -33,6 +33,7 @@
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
 #include "Modules/Jesus.h"
+#include "Modules/StreamName.h"
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
@@ -105,10 +106,11 @@ public:
         modules.push_back(new Freelook(visual));
         modules.push_back(new Freecam(visual));
         modules.push_back(new NoSwing(visual));
+        modules.push_back(new StreamName(visual));
         modules.push_back(new Zoom(visual));
 
         modules.push_back(new TestModule(debug));
-        //modules.push_back(new DebugCursor(debug));
+        modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
         modules.push_back(new Spammer(misc));
