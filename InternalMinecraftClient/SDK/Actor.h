@@ -9,8 +9,9 @@ class BlockSource {};
 
 class Actor {
 
-public: // Vtyasble
-
+private:
+	virtual void Constructor(); // most likely 2 of these
+public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
 	virtual int getLastHurtByPlayer(void);
@@ -27,7 +28,7 @@ public: // Vtyasble
 	virtual void hasComponent(class HashedString const&);
 private:
 	virtual void TryroFuncC0();
-	virtual void TryroFuncB1();
+	virtual void TryroFuncB1(); // useless constructors
 public:
 	virtual void reset(void);
 	virtual int getOnDeathExperience(void);
@@ -134,9 +135,7 @@ public:
 	virtual void setTarget(Actor*);
 	virtual void findAttackTarget(void);
 	virtual bool isValidTarget(Actor*);
-private:
-	virtual void attack(Actor&, class ActorDamageCause const&); // i want Player* >:c
-public:
+	virtual void attack(Actor&); // , class ActorDamageCause const&
 	virtual void performRangedAttack(Actor&, float);
 	virtual void adjustDamageAmount(int&);
 	virtual int getEquipmentCount(void);
@@ -299,7 +298,7 @@ public:
 	virtual void _onSizeUpdated(void);
 	virtual void _doAutoAttackOnTouch(Actor&);
 
-private: // Variables
+private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0000[0x100 - 0x8]; //0x0000
 public:
 	__int8 CameraCanMov; //0x0100 

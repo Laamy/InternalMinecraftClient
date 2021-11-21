@@ -110,7 +110,8 @@ public:
 	};
 
 	auto getLocalPlayer() { // local player in client instance crashes so please leave this like this lol?
-		return reinterpret_cast<Player*>(entityList[0]);
+		for (auto ent : entityList)
+			return reinterpret_cast<Player*>(ent.second);
 	};
 
 public: // Custom Voids

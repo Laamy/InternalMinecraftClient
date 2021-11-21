@@ -1,7 +1,7 @@
 #pragma once
 
 class Player : public Actor {
-private:
+/*private:
 	virtual void Constructor1();
 	virtual void Constructor2();
 public:
@@ -471,5 +471,5 @@ private:
 public:
 	virtual int getMovementSettings(void);
 	virtual void onMovePlayerPacketNormal(Vector3 const&, Vector2 const&, float);
-	virtual void _createChunkSource(ChunkSource&);
+	virtual void _createChunkSource(ChunkSource&);*/
 };
