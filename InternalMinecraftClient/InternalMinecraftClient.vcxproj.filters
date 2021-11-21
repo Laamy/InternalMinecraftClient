@@ -67,6 +67,7 @@
     <ClInclude Include="SDK\Player.h" />
     <ClInclude Include="ClientBase\Modules\Uninject.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />
+    <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

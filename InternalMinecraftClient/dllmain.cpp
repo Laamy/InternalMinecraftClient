@@ -221,7 +221,7 @@ void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per ga
 
 bool MobImmobile(Actor* lp) {
     for (auto mod : handler.modules) {
-        auto test = mod->name == "TestModule";
+        auto test = mod->name == "AntiImmobile";
         if (test && mod->enabled) { // there has to be a better way to do this
             return false;
         }
@@ -362,8 +362,6 @@ void Init(LPVOID c) {
             goto lab;
 
         MH_DisableHook(MH_ALL_HOOKS);
-        MH_Uninitialize();
-
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }

@@ -160,6 +160,7 @@
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
+    <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />

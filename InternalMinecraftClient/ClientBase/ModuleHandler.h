@@ -14,6 +14,7 @@
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
 #include "Modules/Glide.h"
+#include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
 #include "Modules/HighJump.h"
 #include "Modules/Zoom.h"
@@ -85,6 +86,7 @@ public:
         modules.push_back(new HighJump(player));
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
+        modules.push_back(new AntiImmobile(player));
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
         modules.push_back(new ReverseStep(player));
