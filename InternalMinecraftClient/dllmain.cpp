@@ -139,8 +139,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         auto test = mod->name == "Zoom";
         if (test && mod->enabled)
             cancelUiRender = true;
-        else
-            cancelUiRender = false;
+        else cancelUiRender = false;
     }
 
     handler.FrameRender(&renderUtil);
