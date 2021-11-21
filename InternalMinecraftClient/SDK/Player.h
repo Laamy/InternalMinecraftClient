@@ -235,8 +235,8 @@ public:
 	virtual int getAnimationComponent(void);
 	virtual void openContainerComponent(Player&);
 	virtual void swing(void);
-	virtual void useItem(ItemStackBase&, ItemUseMethod, bool);
-	virtual void hasOutputSignal(uchar);
+	virtual void useItem(class ItemStackBase&, class ItemUseMethod, bool);
+	virtual void hasOutputSignal(char*);
 	virtual int getOutputSignal(void);
 	virtual int getDebugText(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>&);
 	virtual int getMapDecorationRotation(void);
@@ -247,7 +247,7 @@ public:
 	virtual bool isAdventure(void);
 	virtual void add(ItemStack&);
 	virtual void drop(ItemStack const&, bool);
-	virtual int getInteraction(Player&, ActorInteraction&, Vector3 const&);
+	virtual int getInteraction(Player&, class ActorInteraction&, Vector3 const&);
 	virtual void canDestroyBlock(Block const&);
 	virtual void setAuxValue(int);
 	virtual void setSize(float, float);
@@ -257,7 +257,7 @@ public:
 	virtual void startSpinAttack(void);
 	virtual void stopSpinAttack(void);
 	virtual void setDamageNearbyMobs(bool);
-	virtual void renderDebugServerState(Options const&);
+	virtual void renderDebugServerState(class Options const&);
 	virtual void reloadLootTable(void);
 	virtual void reloadLootTable(class EquipmentTableDefinition const&);
 	virtual int getDeletionDelayTimeSeconds(void);
@@ -265,12 +265,12 @@ public:
 	virtual void die(ActorDamageSource const&);
 	virtual void shouldDropDeathLoot(void);
 	virtual void shouldTick(void);
-	virtual void extractSnapshot(PlayerSnapshotComponent&);
-	virtual void applySnapshot(PlayerSnapshotComponent const&, PlayerSnapshotComponent const&);
+	virtual void extractSnapshot(class PlayerSnapshotComponent&);
+	virtual void applySnapshot(class PlayerSnapshotComponent const&, class PlayerSnapshotComponent const&);
 	virtual float getNextStep(float);
 	virtual int getLootTable(void);
 	virtual void interpolatorTick(void);
-	virtual void updateEntitySpecificMolangVariables(RenderParams&);
+	virtual void updateEntitySpecificMolangVariables(class RenderParams&);
 	virtual void shouldTryMakeStepSound(void);
 	virtual void canMakeStepSound(void);
 	virtual void _hurt(ActorDamageSource const&, int, bool, bool);
