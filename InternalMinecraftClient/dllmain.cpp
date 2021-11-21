@@ -174,7 +174,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     //Simple Inject Notification by zPearls, but re-made!!
     if (justEnabled) {
         enabledTicks++;
-        if (enabledTicks > 1 && enabledTicks < 1000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
+        if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
             auto Text = TextHolder("Trero Internal has been Injected!");
 
             int alpha = 255; // make injection notification fadeaway :p ( yaami<3#8483 )
@@ -285,7 +285,7 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
-    /*
+  
     if (txt->getText()) {
         auto command = ((std::string)txt->getText()).erase(0,0);
         if (command == "dad?") {
@@ -297,7 +297,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
             _chatMsg(a1, &cse);
         }
     }else _chatMsg(a1, txt);
-    */
+
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
