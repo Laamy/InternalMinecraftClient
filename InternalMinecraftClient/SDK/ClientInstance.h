@@ -71,7 +71,7 @@ public:
 	LoopbackSender* loopbackSender; //0x00D0
 private:
 	char pad_0x00D8[0x60]; //0x00D8
-public:
+private:
 	//Actor* localPlayer; //0x0138
 	char pad_0x0138[0x8]; //0x0138
 private:
