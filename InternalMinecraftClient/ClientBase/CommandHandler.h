@@ -12,14 +12,14 @@ public:
 
         //commands.push_back(new TestCommand("test", "Test command", ""));
     }
-
-	auto findCommand(std::string name) -> Command* {
-		std::vector<Command*>* allCmds = commands;
-		for (auto cmd : *allCmds) {
-			if (cmd->CheckName(name)) {
-				return cmd;
-			}
+	
+    auto findCommand(std::string name) -> Command* {
+        std::vector<Command*>* allCmds = commands;
+	for (auto cmd : *allCmds) {
+		if (cmd->CheckName(name)) {
+		    return cmd;
 		}
-		return nullptr;
-	}
+	    }
+	return nullptr;
+    }
 };
