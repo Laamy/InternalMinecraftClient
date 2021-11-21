@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "../SDK/Actor.h"
+#include "../SDK/ClientInstance.h"
 
 class Command {
 public:
@@ -14,7 +16,6 @@ public:
 	std::string name;
 	std::string description;
 	std::vector<std::string> aliases;
-
 
 public: // functions
 	virtual void Execute(ClientInstance* ci, Actor* lp) {};
