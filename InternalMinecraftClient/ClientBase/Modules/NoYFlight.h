@@ -21,12 +21,11 @@ public:
 
 			lp->Velocity = newVel;
 		}
-		else {
+		else
 			lp->Velocity = {0, 0, 0};
-		}
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->Velocity = { 0, 0, 0 };
-	};
+		lp->Velocity = {0, 0, 0};
+	}
 };
