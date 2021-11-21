@@ -1,6 +1,8 @@
 #pragma once
 
 #include <algorithm>
+#include <vector>
+#include "Command.h"
 
 class CommandHandler {
 public:
