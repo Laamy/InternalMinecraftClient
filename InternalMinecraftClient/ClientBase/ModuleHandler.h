@@ -49,7 +49,6 @@
 #include "Modules/Hitbox.h"
 #include "Modules/Killaura.h"
 #include "Modules/Uninject.h"
-#include "Modules/FixHitbox.h"
 #include "Modules/AlwaysDay.h"
 
 class ModuleHandler {
@@ -121,7 +120,6 @@ public:
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));
-        modules.push_back(new FixHitbox(misc));
 
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());
