@@ -62,6 +62,9 @@ blockRenderer _renderBlock;
 typedef bool(__thiscall* Immobile)(Actor* lp);
 Immobile _Immobile;
 
+typedef bool(__thiscall* test)(__int64 _this, float* color, __int64 a3, float a4);
+test _Test;
+
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 
@@ -186,6 +189,9 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         if (Eject && mod->enabled)
             clientAlive = false;
     }
+    if (keymap[VK_CONTROL] && keymap['L']) {
+        clientAlive = false;
+    }
 };
 
 void callback(ClientInstance* ci, void* a2) {
@@ -218,12 +224,24 @@ void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per ga
 
 bool MobImmobile(Actor* lp) {
     for (auto mod : handler.modules) {
-        auto test = mod->name == "TestModule";
+        auto test = mod->name == "AntiImmobile";
         if (test && mod->enabled) { // there has to be a better way to do this
             return false;
         }
     }
     return _Immobile(lp);
+};
+
+bool Test(__int64 _this, float* color, __int64 a3, float a4) {
+    static float rcolors[4];
+
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "TestModule";
+        if (test && mod->enabled) {
+            return true;// there has to be a better way to do this
+        }
+    }
+    return _Test(_this, color, a3, a4);
 };
 
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
@@ -239,9 +257,19 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
-
-    //auto cse = TextHolder("[TreroInternal]: ChatMsg Detected!");
-    //_chatMsg(a1, &cse);
+    /*
+    if (txt->getText()) {
+        auto command = ((std::string)txt->getText()).erase(0,0);
+        if (command == "dad?") {
+            auto cse = TextHolder("[TreroInternal]: Im getting Milk!!!!");
+            _chatMsg(a1, &cse);
+        }
+        if (command == "mom?") {
+            auto cse = TextHolder("[TreroInternal]: Yes My Child????");
+            _chatMsg(a1, &cse);
+        }
+    }else _chatMsg(a1, txt);
+    */
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
@@ -303,6 +331,7 @@ void Init(LPVOID c) {
 
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
+        uintptr_t testAddr = Mem::findSig("41 0F 10 08 48 8B C2 0F");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
@@ -327,6 +356,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
             MH_EnableHook((void*)ImmobileAddr);
             _logf(L"[TreroInternal]: Immobile hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)testAddr, &Test, reinterpret_cast<LPVOID*>(&_Test)) == MH_OK) {
+            MH_EnableHook((void*)testAddr);
+            _logf(L"[TreroInternal]: Test hooked!\n");
         };
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
@@ -359,8 +393,6 @@ void Init(LPVOID c) {
             goto lab;
 
         MH_DisableHook(MH_ALL_HOOKS);
-        MH_Uninitialize();
-
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }

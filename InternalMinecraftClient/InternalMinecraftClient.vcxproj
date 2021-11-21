@@ -160,12 +160,14 @@
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
+    <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\FixHitbox.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
+    <ClInclude Include="ClientBase\Modules\Killaura.h" />
     <ClInclude Include="ClientBase\Modules\NoBrakes.h" />
     <ClInclude Include="ClientBase\Modules\NoYFlight.h" />
     <ClInclude Include="ClientBase\Modules\Antibot.h" />
@@ -197,6 +199,7 @@
     <ClInclude Include="ClientBase\Modules\TestModule.h" />
     <ClInclude Include="ClientBase\Modules\Timer.h" />
     <ClInclude Include="ClientBase\Modules\Killgame.h" />
+    <ClInclude Include="ClientBase\Modules\Uninject.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="SDK\KeyInfo.h" />
     <ClInclude Include="SDK\MinecraftGame.h" />
     <ClInclude Include="SDK\Packet\Packet.h" />
+    <ClInclude Include="SDK\Player.h" />
     <ClInclude Include="SDK\TextHolder.h" />
     <ClInclude Include="SDK\Weather.h" />
     <ClInclude Include="Utils\RenderUtils.h" />
