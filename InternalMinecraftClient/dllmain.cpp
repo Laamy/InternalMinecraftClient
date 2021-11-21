@@ -169,8 +169,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
             auto catText = TextHolder("Trero Internal has been Injected!");
 
             int alpha = 255; // make injection notification fadeaway :p ( yaami<3#8483 )
-            if (enabledTicks >= 745)
-                alpha -= enabledTicks - 745;
+            if (enabledTicks <= 400)
+                alpha += enabledTicks - 400;
+            else if (enabledTicks >= 745)
+                    alpha -= enabledTicks - 745;
 
             renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), catText, font);
             renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha));
