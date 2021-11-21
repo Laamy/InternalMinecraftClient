@@ -19,17 +19,16 @@ public:
 
 public: // functions
 	virtual void Execute(ClientInstance* ci, Actor* lp) {};
-	virtual auto CheckName(std::string Name) -> bool {
-	    if(name == this->name) {
-		return true;
-	    }
-
-	    std::vector<std::string> aliases = aliases;
-	    for(auto alias : aliases) {
-		if(alias == name) {
+	virtual auto CheckName(std::string Name)->bool {
+		if (name == this->name) {
 			return true;
 		}
-	    }
+		std::vector<std::string> aliases = aliases;
+		for (auto alias : aliases) {
+			if (alias == name) {
+				return true;
+			}
+		}
 	return false;
     }
 };
