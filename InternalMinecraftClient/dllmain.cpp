@@ -381,7 +381,7 @@ void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
 
         handler.InitModules();
-
+        cmdHandler.InitCommands();
         vMods = handler.modules;
 
         for (auto mod : handler.modules) {
