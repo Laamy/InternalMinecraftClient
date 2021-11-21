@@ -7,7 +7,7 @@ public:
 	void OnGameTick(Actor* lp) override {
 		float yaw = (float)lp->bodyRots()->y;
 
-		lp->Velocity.z = sin((yaw + 90) * 0.01745329251f) * 0.44;
-		lp->Velocity.x = cos((yaw + 90) * 0.01745329251f) * 0.44;
+		lp->Velocity.z = sin((yaw + 90) * 0.01745329251f) * 0.44f;
+		lp->Velocity.x = cos((yaw + 90) * 0.01745329251f) * 0.44f;
 	}
 };

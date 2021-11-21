@@ -3,7 +3,7 @@
 
 class Module {
 public:
-    Module(std::string category, std::string name, uintptr_t keybind, bool enabled = false) { // Constructor
+    Module(std::string category, std::string name/*, std::string tooltip*/, uintptr_t keybind, bool enabled = false) { // Constructor
         this->category = category;
         this->name = name;
         this->keybind = keybind;
@@ -13,6 +13,7 @@ public:
 public:
     std::string category;
     std::string name;
+	std::string tooltip;
     uintptr_t keybind;
     bool enabled;
 
@@ -26,6 +27,9 @@ public: // functions
     virtual void OnFrameRender(RenderUtils* ctx) {};
     virtual void OnTick(ClientInstance* ci) {};
     virtual void OnGameTick(Actor* lp) {};
+	virtual bool HoldMode() {
+		return false;
+	}
 
 	void addBypass(BypassBox bypass) {
 		bypasses.push_back(bypass);
@@ -45,16 +49,13 @@ public: // functions
 		return ret;
 	}
     
-    float sin(float x)
-	{
+    float sin(float x) {
 		float res = 0, pow = x, fact = 1;
-		for (int i = 0; i < 5; ++i)
-		{
+		for (int i = 0; i < 5; i++) {
 			res += pow / fact;
 			pow *= -1 * x * x;
 			fact *= (2 * (i + 1)) * (2 * (i + 1) + 1);
 		}
-
 		return res;
 	}
 
@@ -67,7 +68,6 @@ public: // functions
 		}
 		return y;
 	}
-
     //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};
     //virtual void OnKeyHeld(uintptr_t keyAddr, bool* cancel) {};

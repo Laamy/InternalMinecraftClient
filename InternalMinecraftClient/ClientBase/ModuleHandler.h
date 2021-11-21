@@ -13,7 +13,9 @@
 #include "Modules/OGMFlight.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
+#include "Modules/Godmode.h"
 #include "Modules/Glide.h"
+#include "Modules/ChestRay.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
 #include "Modules/HighJump.h"
@@ -33,6 +35,7 @@
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
 #include "Modules/Jesus.h"
+#include "Modules/StreamName.h"
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
@@ -47,6 +50,7 @@
 #include "Modules/Killaura.h"
 #include "Modules/Uninject.h"
 #include "Modules/FixHitbox.h"
+#include "Modules/AlwaysDay.h"
 
 class ModuleHandler {
 public:
@@ -105,12 +109,16 @@ public:
         modules.push_back(new Freelook(visual));
         modules.push_back(new Freecam(visual));
         modules.push_back(new NoSwing(visual));
+        modules.push_back(new StreamName(visual));
         modules.push_back(new Zoom(visual));
+        modules.push_back(new ChestRay(visual));
+        modules.push_back(new AlwaysDay(visual));
 
         modules.push_back(new TestModule(debug));
-        //modules.push_back(new DebugCursor(debug));
+        modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));
         modules.push_back(new FixHitbox(misc));

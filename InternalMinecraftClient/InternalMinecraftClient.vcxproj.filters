@@ -68,6 +68,14 @@
     <ClInclude Include="ClientBase\Modules\Uninject.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
+    <ClInclude Include="ClientBase\Modules\StreamName.h" />
+    <ClInclude Include="ClientBase\Modules\ChestRay.h" />
+    <ClInclude Include="ClientBase\Command.h" />
+    <ClInclude Include="ClientBase\CommandHandler.h" />
+    <ClInclude Include="ClientBase\Commands\TestCommand.h" />
+    <ClInclude Include="ClientBase\Modules\GodMode.h" />
+    <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
+    <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

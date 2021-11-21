@@ -1,0 +1,28 @@
+#pragma once
+#include <string>
+#include <vector>
+#include "../SDK/Actor.h"
+#include "../SDK/ClientInstance.h"
+
+class Command {
+public:
+	Command(std::string name, std::string description/*, std::vector<std::string> aliases*/) { // Constructor
+		this->name = name;
+		this->description = description;
+		this->aliases = aliases;
+	};
+
+public:
+	std::string name;
+	std::string description;
+	std::vector<std::string> aliases;
+
+public: // functions
+	virtual void Execute(ClientInstance* ci, Actor* lp) {};
+	virtual bool CheckName(std::string MName) {
+		if (MName == this->name) {
+			return true;
+		}
+		return false;
+    }
+};

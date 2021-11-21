@@ -11,7 +11,12 @@
 
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
-
+auto GetDllHMod(void) -> HMODULE {
+    MEMORY_BASIC_INFORMATION info;
+    size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
+    assert(len == sizeof(info));
+    return len ? (HMODULE)info.AllocationBase : NULL;
+};
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 
 bool clientAlive = true;
@@ -32,18 +37,20 @@ class ClientInstance* clientInst;
 
 std::vector<class Module*> vMods;
 
+#include "ClientBase/Command.h"
 #include "ClientBase/Module.h"
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 
 #include "ClientBase/ModuleHandler.h"
+#include "ClientBase/CommandHandler.h"
 
 RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
 Actor* localPlr;
 class BitmapFont* font;
 ModuleHandler handler = ModuleHandler();
-
+CommandHandler cmdHandler = CommandHandler();
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -61,6 +68,9 @@ blockRenderer _renderBlock;
 
 typedef bool(__thiscall* Immobile)(Actor* lp);
 Immobile _Immobile;
+
+typedef float(__thiscall* time)(__int64 a1, int a2, float a3);
+time _time;
 
 typedef bool(__thiscall* test)(__int64 _this, float* color, __int64 a3, float a4);
 test _Test;
@@ -89,13 +99,19 @@ int frame = 0;
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     _key(c, v);
 
-    if (c == 0x2D && keymap[c] == false && v == true) {
+    if (c == VK_INSERT && keymap[c] == false && v == true) {
         renderClickUI = !renderClickUI;
     }
 
     for (int i = 0; i < handler.modules.size(); ++i) {
-        if (handler.modules[i]->keybind == c && modulesEnabled[i] == false && v == true) {
+        if (c == handler.modules[i]->keybind && handler.modules[i]->HoldMode()) {
+            handler.modules[i]->enabled = !handler.modules[i]->enabled;
 
+            if (handler.modules[i]->enabled)
+                handler.modules[i]->OnEnable(clientInst, localPlr);
+            else handler.modules[i]->OnDisable(clientInst, localPlr);
+
+        }else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {
             handler.modules[i]->enabled = !handler.modules[i]->enabled;
 
             if (handler.modules[i]->enabled)
@@ -116,6 +132,14 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 
     if (cancelUiRender == false)
         _render(a1, ctx);
+
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "Zoom";
+        if (test && mod->enabled)
+            cancelUiRender = true;
+        else
+            cancelUiRender = false;
+    }
 
     handler.FrameRender(&renderUtil);
 
@@ -165,15 +189,17 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
     //Simple Inject Notification by zPearls, but re-made!!
     if (justEnabled) {
         enabledTicks++;
-        if (enabledTicks > 1 && enabledTicks < 1000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
-            auto catText = TextHolder("Trero Internal has been Injected!");
+        if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
+            auto Text = TextHolder("Trero Internal has been Injected!");
 
-            int alpha = 255; // make injection notification fadeaway :p ( yaami<3#8483 )
-            if (enabledTicks >= 745)
+            int alpha = 255; // make injection notification fade :p ( yaami<3#8483 )
+            if (enabledTicks <= 400)
+                alpha += enabledTicks - 400;
+            else if (enabledTicks >= 745)
                 alpha -= enabledTicks - 745;
 
-            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), catText, font);
-            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &catText, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha));
+            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), Text, font);
+            renderUtil.DrawOutline(Vector2(297 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 0), Vector2(181, 11), _RGB(255, 255, 255, alpha)); // some reason not drawing the outline :/
         }
         else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
             justEnabled = false;
@@ -195,7 +221,6 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 };
 
 void callback(ClientInstance* ci, void* a2) {
-
     clientInst = ci;
     acs = ci->guiData;
     font = ci->mcGame->defaultGameFont;
@@ -219,7 +244,7 @@ void playerCallback(Actor* lp, void* a2) {
 };
 
 void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per game frame
-    _renderBlock(cls, block); // xray
+    _renderBlock(cls, block);
 };
 
 bool MobImmobile(Actor* lp) {
@@ -235,15 +260,24 @@ bool MobImmobile(Actor* lp) {
 bool Test(__int64 _this, float* color, __int64 a3, float a4) { // There is - Yaami.
     // Initialize these hooks in the module constructor {};
     // I'll preplace the comment for where you need to place this hook code
-    static float rcolors[4];
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "TestModule";
         if (test && mod->enabled) {
-            return true;// there has to be a better way to do this
+            return 0;// there has to be a better way to do this
         }
     }
     return _Test(_this, color, a3, a4);
+};
+
+float timeOfDay(__int64 a1, int a2, float a3) {
+    for (auto mod : handler.modules) {
+        auto test = mod->name == "AlwaysDay";
+        if (test && mod->enabled) {
+            return 0;
+        }
+    }
+    return _time(a1, a2, a3);
 };
 
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
@@ -259,19 +293,20 @@ void DisplayObj(const char txt[64]) {
 }
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
-    /*
-    if (txt->getText()) {
+  
+   /* if (txt->getText()) {
         auto command = ((std::string)txt->getText()).erase(0,0);
         if (command == "dad?") {
             auto cse = TextHolder("[TreroInternal]: Im getting Milk!!!!");
             _chatMsg(a1, &cse);
+            return;
         }
         if (command == "mom?") {
             auto cse = TextHolder("[TreroInternal]: Yes My Child????");
             _chatMsg(a1, &cse);
+            return;
         }
-    }else _chatMsg(a1, txt);
-    */
+    } else _chatMsg(a1, txt);*/
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
@@ -283,9 +318,9 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
 
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
-
-        if (command == "eject" || command == "uninject") {
-            clientAlive = false;
+        Command* checkCmd = cmdHandler.findCommand(command);
+        if (checkCmd != nullptr) {
+            checkCmd->Execute(clientInst, localPlr);
         }
 
         if (command == "toggle") {
@@ -303,23 +338,45 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
             }
         }
     }
-    else {
+    else
         _chatMsg(a1, txt);
-    }
 };//ill make commands work like modules/well sorted later -> zPearlss
 
-auto GetDllHMod(void) -> HMODULE {
-    MEMORY_BASIC_INFORMATION info;
-    size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
-    assert(len == sizeof(info));
-    return len ? (HMODULE)info.AllocationBase : NULL;
-};
+std::string getClipboardText() {
+    if (!OpenClipboard(nullptr)) {
+        return "";
+    }
+    else {
+        HANDLE hData = GetClipboardData(CF_TEXT);
+        char* pszText = static_cast<char*>(GlobalLock(hData));
+        if (pszText == nullptr)
+            return "";
+        CloseClipboard();
+        return std::string(pszText);
+    }
+}
+
+void setClipboardText(std::string text) {
+    if (!OpenClipboard(nullptr))
+        return;
+    EmptyClipboard();
+    HGLOBAL hg = GlobalAlloc(GMEM_MOVEABLE, text.size() + 1);
+    if (!hg) {
+        CloseClipboard();
+        return;
+    }
+    memcpy(GlobalLock(hg), text.c_str(), text.size() + 1);
+    GlobalUnlock(hg);
+    SetClipboardData(CF_TEXT, hg);
+    CloseClipboard();
+    GlobalFree(hg);
+}
 
 void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
 
         handler.InitModules();
-
+        cmdHandler.InitCommands();
         vMods = handler.modules;
 
         for (auto mod : handler.modules) {
@@ -330,10 +387,10 @@ void Init(LPVOID c) {
             if (addCategory)
                 categories.push_back(mod->category);
         }
-
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
-        uintptr_t testAddr = Mem::findSig("41 0F 10 08 48 8B C2 0F"); // immobile
+        uintptr_t testAddr = Mem::findSig("41 0F 10 08 48 8B C2 0F"); // fog color
+        uintptr_t timeOfDayAddr = Mem::findSig("44 8B C2 B8 F1 19 76 05 F7 EA");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
@@ -358,6 +415,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
             MH_EnableHook((void*)ImmobileAddr);
             _logf(L"[TreroInternal]: Immobile hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)timeOfDayAddr, &timeOfDay, reinterpret_cast<LPVOID*>(&_time)) == MH_OK) {
+            MH_EnableHook((void*)timeOfDayAddr);
+            _logf(L"[TreroInternal]: TimeOfDay hooked!\n");
         };
 
         if (MH_CreateHook((void*)testAddr, &Test, reinterpret_cast<LPVOID*>(&_Test)) == MH_OK) {
@@ -398,6 +460,7 @@ void Init(LPVOID c) {
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }
+
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
     switch (ul_reason_for_call) {

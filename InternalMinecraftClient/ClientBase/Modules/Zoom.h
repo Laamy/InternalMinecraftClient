@@ -2,22 +2,15 @@
 
 class Zoom : public Module { // worked
 public:
-	Zoom(std::string cat) : Module(cat, "Zoom", 0x07) {};
+	Zoom(std::string cat) : Module(cat, "Zoom", 'X') {};//We need to make it so when we are typing in chat, it dosent activate modules hgdgdfhgdfh
 
-	void OnGameTick(Actor* lp) override {
-		if (lp->CameraRots.x == 0) return;
-
-		if (keymap['C']) {
+	void OnEnable(ClientInstance* ci, Actor* lp) override {
+		if (lp == nullptr) return;
 			lp->SetFieldOfView(0.25f);
-		}
-		else
-		{
-			lp->SetFieldOfView(1);
-		}
-	};
+	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		if (lp == nullptr) return;
 		lp->SetFieldOfView(1);
-	};
+	}
 };

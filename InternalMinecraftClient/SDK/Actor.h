@@ -301,7 +301,7 @@ public:
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0000[0x100 - 0x8]; //0x0000
 public:
-	__int8 CameraCanMov; //0x0100 
+	__int8 CameraCanMove; //0x0100 
 private:
 	char pad_0x0101[0x37]; //0x0101
 public:

@@ -2,12 +2,12 @@
 
 class Killaura : public Module {
 public:
-	Killaura(std::string cat) : Module(cat, "Killaura", 0x07) {};
+	Killaura(std::string cat) : Module(cat, "Killaura", 'P') {};
 
 	void OnGameTick(Actor* lp) override {
 		auto localPlayer = clientInst->getCPlayer();
 
-		localPlayer->swing();
+		//localPlayer->swing();
 
         /*for (auto ent : clientInst->getEntityList()) {
 			if (ent.first == reinterpret_cast<uintptr_t>(localPlayer))
