@@ -6,7 +6,7 @@
 
 class Command {
 public:
-	Command(std::string name, std::string description, std::vector<std::string> aliases) { // Constructor
+	Command(std::string name, std::string description/*, std::vector<std::string> aliases*/) { // Constructor
 		this->name = name;
 		this->description = description;
 		this->aliases = aliases;
