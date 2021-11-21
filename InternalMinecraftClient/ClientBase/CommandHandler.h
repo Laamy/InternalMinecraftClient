@@ -4,6 +4,7 @@
 #include <vector>
 #include "Command.h"
 #include "Commands/TestCommand.h"
+#include "Commands/EjectCommand.h"
 
 class CommandHandler {
 public:
@@ -13,6 +14,7 @@ public:
 
     void InitCommands() {
         commands.push_back(new TestCommand("test"));
+        commands.push_back(new EjectCommand("eject"));
     }
 
     Command* findCommand(std::string name){

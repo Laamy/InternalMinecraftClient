@@ -158,6 +158,7 @@
     <ClInclude Include="ClientBase\BypassBox.h" />
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
+    <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
     <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />

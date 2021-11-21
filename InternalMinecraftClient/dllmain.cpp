@@ -11,7 +11,12 @@
 
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
-
+auto GetDllHMod(void) -> HMODULE {
+    MEMORY_BASIC_INFORMATION info;
+    size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
+    assert(len == sizeof(info));
+    return len ? (HMODULE)info.AllocationBase : NULL;
+};
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 
 bool clientAlive = true;
@@ -289,7 +294,7 @@ void DisplayObj(const char txt[64]) {
 
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
   
-    if (txt->getText()) {
+   /* if (txt->getText()) {
         auto command = ((std::string)txt->getText()).erase(0,0);
         if (command == "dad?") {
             auto cse = TextHolder("[TreroInternal]: Im getting Milk!!!!");
@@ -301,7 +306,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
             _chatMsg(a1, &cse);
             return;
         }
-    } else _chatMsg(a1, txt);
+    } else _chatMsg(a1, txt);*/
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
@@ -316,9 +321,6 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         Command* checkCmd = cmdHandler.findCommand(command);
         if (checkCmd != nullptr) {
             checkCmd->Execute(clientInst, localPlr);
-        }
-        if (command == "eject" || command == "uninject") {
-            clientAlive = false;
         }
 
         if (command == "toggle") {
@@ -369,13 +371,6 @@ void setClipboardText(std::string text) {
     CloseClipboard();
     GlobalFree(hg);
 }
-
-auto GetDllHMod(void) -> HMODULE {
-    MEMORY_BASIC_INFORMATION info;
-    size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
-    assert(len == sizeof(info));
-    return len ? (HMODULE)info.AllocationBase : NULL;
-};
 
 void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
@@ -462,10 +457,10 @@ void Init(LPVOID c) {
             goto lab;
 
         MH_DisableHook(MH_ALL_HOOKS);
-        MH_RemoveHook(MH_ALL_HOOKS);
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }
+
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {
     switch (ul_reason_for_call) {
