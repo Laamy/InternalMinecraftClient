@@ -300,13 +300,14 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         if (command == "dad?") {
             auto cse = TextHolder("[TreroInternal]: Im getting Milk!!!!");
             _chatMsg(a1, &cse);
+            return;
         }
         if (command == "mom?") {
             auto cse = TextHolder("[TreroInternal]: Yes My Child????");
             _chatMsg(a1, &cse);
+            return;
         }
-    }else _chatMsg(a1, txt);
-
+    } else _chatMsg(a1, txt);
 
     for (auto mod : handler.modules) {
         auto test = mod->name == "Spammer";
@@ -341,9 +342,8 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
             }
         }
     }
-    else {
+    else
         _chatMsg(a1, txt);
-    }
 };//ill make commands work like modules/well sorted later -> zPearlss
 
 std::string getClipboardText() {
