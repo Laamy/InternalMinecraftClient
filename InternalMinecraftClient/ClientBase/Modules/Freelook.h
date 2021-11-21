@@ -2,10 +2,10 @@
 
 class Freelook : public Module {
 public:
+	Freelook(std::string cat) : Module(cat, "Freelook", 'N') {};
 	bool HoldMode() {
 		return true;
 	}
-	Freelook(std::string cat) : Module(cat, "Freelook", 'N') {};
 	Vector2 oldPos;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
