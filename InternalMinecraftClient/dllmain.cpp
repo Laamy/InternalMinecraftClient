@@ -230,12 +230,12 @@ void playerCallback(Actor* lp, void* a2) {
 };
 
 void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per game frame
-    for (auto mod : handler.modules) {
+   /*for (auto mod : handler.modules) {
         auto test = mod->name == "ChestRay";
         if (test && mod->enabled) {
             return;
         }
-    }
+    }*/
     _renderBlock(cls, block);
 };
 
