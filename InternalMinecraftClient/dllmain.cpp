@@ -186,6 +186,9 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         if (Eject && mod->enabled)
             clientAlive = false;
     }
+    if (keymap[VK_CONTROL] && keymap['L']) {
+        clientAlive = false;
+    }
 };
 
 void callback(ClientInstance* ci, void* a2) {
