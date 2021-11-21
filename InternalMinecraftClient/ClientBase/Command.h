@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <vector>
 
 class Command {
 public:
@@ -11,7 +13,7 @@ public:
 public:
 	std::string name;
 	std::string description;
-	std::vector<std::string> aliases
+	std::vector<std::string> aliases;
 
 
 public: // functions

@@ -14,6 +14,7 @@
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
 #include "Modules/Glide.h"
+#include "Modules/ChestRay.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
 #include "Modules/HighJump.h"
@@ -108,6 +109,7 @@ public:
         modules.push_back(new NoSwing(visual));
         modules.push_back(new StreamName(visual));
         modules.push_back(new Zoom(visual));
+        modules.push_back(new ChestRay(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));

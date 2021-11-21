@@ -3,7 +3,7 @@
 
 class Module {
 public:
-    Module(std::string category, std::string name, uintptr_t keybind, bool enabled = false) { // Constructor
+    Module(std::string category, std::string name/*, std::string tooltip*/, uintptr_t keybind, bool enabled = false) { // Constructor
         this->category = category;
         this->name = name;
         this->keybind = keybind;
@@ -13,6 +13,7 @@ public:
 public:
     std::string category;
     std::string name;
+	std::string tooltip;
     uintptr_t keybind;
     bool enabled;
 
