@@ -9,6 +9,7 @@ public:
 
 	void OnGameTick(Actor* a1) override {
 		auto lp = clientInst->getLocalPlayer();
+		a1->CameraCanMove = 0;
 	}
 	virtual void OnFrameRender(RenderUtils* ctx) {
 		ctx->DrawString(Vector2(100, 100), _RGB(0, 0, 0), std::string("We love gay's"), ctx->font);
