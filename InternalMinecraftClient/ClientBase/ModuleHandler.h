@@ -50,6 +50,7 @@
 #include "Modules/Killaura.h"
 #include "Modules/Uninject.h"
 #include "Modules/FixHitbox.h"
+#include "Modules/AlwaysDay.h"
 
 class ModuleHandler {
 public:
@@ -111,6 +112,7 @@ public:
         modules.push_back(new StreamName(visual));
         modules.push_back(new Zoom(visual));
         modules.push_back(new ChestRay(visual));
+        modules.push_back(new AlwaysDay(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));

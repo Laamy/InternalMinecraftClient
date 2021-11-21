@@ -74,6 +74,7 @@
     <ClInclude Include="ClientBase\CommandHandler.h" />
     <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
+    <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

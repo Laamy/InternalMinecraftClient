@@ -265,20 +265,14 @@ bool Test(__int64 _this, float* color, __int64 a3, float a4) { // There is - Yaa
     return _Test(_this, color, a3, a4);
 };
 
-
 float timeOfDay(__int64 a1, int a2, float a3) {
-    // Initialize these hooks in the module constructor {};
-    // I'll preplace the comment for where you need to place this hook code
-
     for (auto mod : handler.modules) {
-        auto test = mod->name == "TestModule";
+        auto test = mod->name == "AlwaysDay";
         if (test && mod->enabled) {
-           return 121000.f;
-        }
-        else {
-            _time(a1, a3, a3);
+            return 0;
         }
     }
+    return _time(a1, a2, a3);
 };
 
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
