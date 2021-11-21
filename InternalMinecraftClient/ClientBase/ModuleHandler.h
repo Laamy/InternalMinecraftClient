@@ -13,6 +13,7 @@
 #include "Modules/OGMFlight.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
+#include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
 #include "Modules/AntiImmobile.h"
@@ -115,6 +116,7 @@ public:
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));
         modules.push_back(new FixHitbox(misc));

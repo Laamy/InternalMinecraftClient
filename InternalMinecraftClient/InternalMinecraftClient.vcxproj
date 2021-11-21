@@ -158,6 +158,7 @@
     <ClInclude Include="ClientBase\BypassBox.h" />
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
+    <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="ClientBase\Modules\ChestRay.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\FixHitbox.h" />
+    <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />

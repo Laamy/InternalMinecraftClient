@@ -11,6 +11,6 @@ public:
 		auto lp = clientInst->getLocalPlayer();
 	}
 	virtual void OnFrameRender(RenderUtils* ctx) {
-		ctx->DrawString(Vector2(100, 100), _RGB(0, 0, 0), std::string("gi"), ctx->font);
+		ctx->DrawString(Vector2(100, 100), _RGB(0, 0, 0), std::string("We love gay's"), ctx->font);
 	}
 };
