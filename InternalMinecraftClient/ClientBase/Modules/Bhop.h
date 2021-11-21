@@ -2,7 +2,7 @@
 
 class Bhop : public Module {
 public:
-	Bhop(std::string cat) : Module(cat, "Bhop", 'V') {};
+	Bhop(std::string cat) : Module(cat, "Bhop", 'Z') {};
 	void OnGameTick(Actor* lp) override {
 		float yaw = (float)lp->bodyRots()->y;
 		if (keymap['W']) {
