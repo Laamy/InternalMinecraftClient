@@ -11,12 +11,14 @@
 
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
+
 auto GetDllHMod(void) -> HMODULE {
     MEMORY_BASIC_INFORMATION info;
     size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
     assert(len == sizeof(info));
     return len ? (HMODULE)info.AllocationBase : NULL;
 };
+
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 
 bool clientAlive = true;
