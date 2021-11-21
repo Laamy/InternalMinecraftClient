@@ -14,8 +14,8 @@ public:
     }
 
     auto findCommand(std::string name)->Command* {
-        std::vector<Command*>* allCmds = commands;
-        for (auto cmd : *allCmds) {
+        std::vector<Command*> allCmds = commands;
+        for (auto cmd : allCmds) {
             if (cmd->CheckName(name)) {
                 return cmd;
             }
