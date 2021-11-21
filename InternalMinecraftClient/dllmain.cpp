@@ -216,7 +216,6 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
 };
 
 void callback(ClientInstance* ci, void* a2) {
-
     clientInst = ci;
     acs = ci->guiData;
     font = ci->mcGame->defaultGameFont;
@@ -240,12 +239,6 @@ void playerCallback(Actor* lp, void* a2) {
 };
 
 void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per game frame
-   /*for (auto mod : handler.modules) {
-        auto test = mod->name == "ChestRay";
-        if (test && mod->enabled) {
-            return;
-        }
-    }*/
     _renderBlock(cls, block);
 };
 
@@ -283,7 +276,7 @@ float timeOfDay(__int64 a1, int a2, float a3) {
            return 121000.f;
         }
         else {
-            return _time(a1, a3, a3);
+            _time(a1, a3, a3);
         }
     }
 };
