@@ -10,7 +10,7 @@ public:
 		this->name = name;
 		this->description = description;
 		this->aliases = aliases;
-	};
+	}
 
 public:
 	std::string name;

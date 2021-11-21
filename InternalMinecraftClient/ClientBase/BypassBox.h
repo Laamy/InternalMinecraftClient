@@ -3,5 +3,5 @@
 class BypassBox {
 public:
 	BypassBox() { // Constructor
-	};
+	}
 };
