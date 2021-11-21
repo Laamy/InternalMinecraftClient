@@ -323,21 +323,6 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         if (checkCmd != nullptr) {
             checkCmd->Execute(clientInst, localPlr);
         }
-
-        if (command == "toggle") {
-            for (auto mod : handler.modules) {
-                if (mod->enabled) {
-                    if (mod->name == "TestModule") {
-                        mod->enabled = false;
-                    }
-                }
-                else {
-                    if (mod->name == "TestModule") {
-                        mod->enabled = true;
-                    }
-                }
-            }
-        }
     }
     else
         _chatMsg(a1, txt);

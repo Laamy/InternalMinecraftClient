@@ -5,6 +5,8 @@
 #include "Command.h"
 #include "Commands/TestCommand.h"
 #include "Commands/EjectCommand.h"
+#include "Commands/ToggleCommand.h"
+#include "Commands/FixHitbox.h"
 
 class CommandHandler {
 public:
@@ -15,6 +17,8 @@ public:
     void InitCommands() {
         commands.push_back(new TestCommand("test"));
         commands.push_back(new EjectCommand("eject"));
+        commands.push_back(new ToggleCommand("toggle"));
+        commands.push_back(new FixHitbox("fixhitbox"));
     }
 
     Command* findCommand(std::string name){

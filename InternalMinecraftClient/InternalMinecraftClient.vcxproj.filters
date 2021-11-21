@@ -75,6 +75,7 @@
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
+    <ClInclude Include="ClientBase\Commands\ToggleCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
