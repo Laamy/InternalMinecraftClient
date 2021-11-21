@@ -177,7 +177,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
             auto Text = TextHolder("Trero Internal has been Injected!");
 
-            int alpha = 255; // make injection notification fadeaway :p ( yaami<3#8483 )
+            int alpha = 255; // make injection notification fade :p ( yaami<3#8483 )
             if (enabledTicks <= 400)
                 alpha += enabledTicks - 400;
             else if (enabledTicks >= 745)
