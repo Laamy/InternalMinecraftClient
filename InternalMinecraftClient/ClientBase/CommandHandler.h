@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include "Command.h"
+#include "Commands/TestCommand.h"
 
 class CommandHandler {
 public:
