@@ -32,18 +32,20 @@ class ClientInstance* clientInst;
 
 std::vector<class Module*> vMods;
 
+#include "ClientBase/Command.h"
 #include "ClientBase/Module.h"
 
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 
 #include "ClientBase/ModuleHandler.h"
+#include "ClientBase/CommandHandler.h"
 
 RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
 Actor* localPlr;
 class BitmapFont* font;
 ModuleHandler handler = ModuleHandler();
-
+CommandHandler cmdHandler = CommandHandler();
 
 #define PI 3.14159265359 // 3.14159265359
 
@@ -315,7 +317,11 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
 
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
         auto command = ((std::string)txt->getText()).erase(0, 1);
-
+        auto command = ((std::string)txt->getText()).erase(0, 1);
+        Command* checkCmd = cmdHandler.findCommand(command);
+        if (checkCmd != nullptr) {
+            checkCmd->Execute(clientInst, localPlr);
+        }
         if (command == "eject" || command == "uninject") {
             clientAlive = false;
         }
