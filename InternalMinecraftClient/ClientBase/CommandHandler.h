@@ -9,11 +9,12 @@ public:
     std::vector<Command*> commands;
 
 public:
+
     void InitCommands() {
-        //commands.push_back(new TestCommand("test", "Test command", ""));
+        commands.push_back(new TestCommand("test"));
     }
 
-    auto findCommand(std::string name)->Command* {
+    Command* findCommand(std::string name){
         std::vector<Command*> allCmds = commands;
         for (auto cmd : allCmds) {
             if (cmd->CheckName(name)) {
