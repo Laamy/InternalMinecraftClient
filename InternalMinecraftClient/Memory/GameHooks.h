@@ -18,4 +18,8 @@ public:
 		hooks.push_back(new VirtualFuncHook(std::string(hookName), ptr, function));
 		return getHook(hookName);
 	}
+
+	void debugEcho(const char* notifyName, const char* notifyDesc, float canExistFor = 1500) {
+		notifications.push_back(new DebugNotify(std::string(notifyName), std::string(notifyDesc), canExistFor));
+	}
 };
