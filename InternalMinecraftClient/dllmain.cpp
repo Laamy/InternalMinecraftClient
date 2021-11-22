@@ -262,8 +262,8 @@ bool MobImmobile(Actor* lp) {
 };
 
 bool Velocity(float Velx, float Vely, float Velz) {
-   // return false; for anti knockback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    return _Vel(0, 0, 0);
+   // return false; //for anti knockback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return _Vel(Velx, Vely, Velz);
 };
 
 bool Test(__int64 _this, float* color, __int64 a3, float a4) { // There is - Yaami.
