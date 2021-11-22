@@ -6,10 +6,9 @@ public:
 	Vector3 savedPos;
 
 	void OnGameTick(Actor* lp) override {
-		if (lp->onGround3) {
-			savedPos = lp->Position.lower;
+		if (lp->fallDistance == 0) {
+			savedPos = lp->Position.upper;
 		}
-
 		if (lp->fallDistance > 5)
 			lp->SetPos(savedPos);
 	}
