@@ -40,6 +40,13 @@ struct Vector3 {
 	bool operator != (Vector3 v) { return v.x != x || v.y != y || v.z != z; };
 	Vector3 operator *= (Vector3 v) { return Vector3(v.x * x, v.y * y, v.z * z); };
 
+	Vector3 lerp(const Vector3& pos, float x1, float y1, float z1) {
+		Vector3 This;
+		This.x = x + x1 * (pos.x - x);
+		This.y = y + y1 * (pos.y - y);
+		This.z = z + z1 * (pos.z - z);
+		return This;
+	}
 	float Distance(Vector3 v) {
 		float dX = x - v.x;
 		float dY = y - v.y;

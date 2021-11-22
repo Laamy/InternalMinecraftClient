@@ -3,13 +3,11 @@
 
 class TestModule : public Module {
 public:
-	TestModule(std::string cat) : Module(cat, "TestModule", 'K') {
-		// Constructor (Runs once on start up)
-	}
-	void OnEnable(ClientInstance* ci, Actor* lp) {}
-	void OnDisable(ClientInstance* ci, Actor* lp) {}
-	void OnFrameRender(RenderUtils* ctx) {
-		drawTooltip("hey");
-	}
-	void OnTick(ClientInstance* ci) {}
+	TestModule(std::string cat) : Module(cat, "TestModule", 'K') {}
+
+    virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
+    virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
+    virtual void OnFrameRender(RenderUtils* ctx) {};
+    virtual void OnTick(ClientInstance* ci) {};
+    virtual void OnGameTick(Actor* lp) {};
 };

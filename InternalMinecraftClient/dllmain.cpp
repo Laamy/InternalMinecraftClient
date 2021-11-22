@@ -71,6 +71,9 @@ Immobile _Immobile;
 typedef float(__thiscall* time)(__int64 a1, int a2, float a3);
 time _time;
 
+typedef bool(__thiscall* VelocityYes)(float Velx, float Vely, float Velz);
+VelocityYes _Vel;
+
 typedef bool(__thiscall* test)(__int64 _this, float* color, __int64 a3, float a4);
 test _Test;
 
@@ -251,6 +254,11 @@ bool MobImmobile(Actor* lp) {
     return _Immobile(lp);
 };
 
+bool Velocity(float Velx, float Vely, float Velz) {
+   // return false; //for anti knockback!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return _Vel(Velx, Vely, Velz);
+};
+
 bool Test(__int64 _this, float* color, __int64 a3, float a4) { // There is - Yaami.
     // Initialize these hooks in the module constructor {};
     // I'll preplace the comment for where you need to place this hook code
@@ -381,6 +389,7 @@ void Init(LPVOID c) {
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
         uintptr_t testAddr = Mem::findSig("41 0F 10 08 48 8B C2 0F"); // fog color
+        uintptr_t velocityAddr = Mem::findSig("89 81 ? ? ? ? 8B 42 ? 89 81 ? ? ? ? 8B 42 ? 89 81 ? ? ? ? C3 CC CC CC CC CC 48 89 5C 24");
         uintptr_t timeOfDayAddr = Mem::findSig("44 8B C2 B8 F1 19 76 05 F7 EA");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
@@ -410,6 +419,11 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)testAddr, &Test, reinterpret_cast<LPVOID*>(&_Test)) == MH_OK) {
             MH_EnableHook((void*)testAddr);
             _logf(L"[TreroInternal]: Test hooked!\n");
+        };
+
+        if (MH_CreateHook((void*)velocityAddr, &Velocity, reinterpret_cast<LPVOID*>(&_Vel)) == MH_OK) {
+            MH_EnableHook((void*)velocityAddr);
+            _logf(L"[TreroInternal]: Velocity hooked!\n");
         };
 
         if (MH_CreateHook((void*)keymapAddr, &keyCallback, reinterpret_cast<LPVOID*>(&_key)) == MH_OK) {
@@ -442,6 +456,7 @@ void Init(LPVOID c) {
             goto lab;
 
         MH_DisableHook(MH_ALL_HOOKS);
+        MH_RemoveHook(MH_ALL_HOOKS);
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }
