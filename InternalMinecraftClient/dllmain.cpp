@@ -65,9 +65,6 @@ player _player;
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
 
-typedef void(__thiscall* blockRenderer)(void* rendercls, void* block); // rendercls never changes block is the current block that is being rendered via this func
-blockRenderer _renderBlock;
-
 typedef bool(__thiscall* Immobile)(Actor* lp);
 Immobile _Immobile;
 
@@ -244,10 +241,6 @@ void playerCallback(Actor* lp, void* a2) {
             mod->OnGameTick(lp);
 };
 
-void renderBlockCallback(void* cls, void* block) { // Runs 0x10(16) times per game frame
-    _renderBlock(cls, block);
-};
-
 bool MobImmobile(Actor* lp) {
     for (auto mod : handler.modules) {
         auto test = mod->name == "AntiImmobile";
@@ -396,18 +389,12 @@ void Init(LPVOID c) {
         uintptr_t ImmobileAddr = Mem::findSig("48 89 5C 24 08 48 89 74 24 10 57 48 83 EC 30 48 8D 54 24 20 E8 A7 EC FA FE 90 48 8B C8 E8 8E 53 98 FE 48 8B D8 48 8B C8 E8 B3 FA 11 00 84 C0 75 15"); //when the intop is smart :Flushed:
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B");
         uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
-        uintptr_t blockRendererAddr = Mem::findSig("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 4C 89 4C");
-
+        
         _logf(L"[TreroInternal]: Hooking functions...\n");
 
         if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
             MH_EnableHook((void*)chatMsgSigAddr);
             _logf(L"[TreroInternal]: ChatMsg hooked!\n");
-        };
-
-        if (MH_CreateHook((void*)blockRendererAddr, &renderBlockCallback, reinterpret_cast<LPVOID*>(&_renderBlock)) == MH_OK) {
-            MH_EnableHook((void*)blockRendererAddr);
-            _logf(L"[TreroInternal]: BlockRenderer hooked!\n");
         };
 
         if (MH_CreateHook((void*)ImmobileAddr, &MobImmobile, reinterpret_cast<LPVOID*>(&_Immobile)) == MH_OK) {
