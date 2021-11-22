@@ -192,8 +192,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
         frame = 0;
     }
 
+    // Removed simple injection notification due to my new notification system lol
+
     //Simple Inject Notification by zPearls, but re-made!!
-    if (justEnabled) {
+    /*if (justEnabled) {
         enabledTicks++;
         if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
             auto Text = TextHolder("Trero Internal has been Injected!");
@@ -211,6 +213,22 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
             justEnabled = false;
             enabledTicks = 0;
         }
+    }*/
+
+    int loopIndex = 0;
+    for (auto notification : hooks->notifications) {
+        notification->existedTick++;
+        if (notification->existedTick == notification->canExistFor/*Tick*/)
+            hooks->notifications.erase(std::remove(hooks->notifications.begin(), hooks->notifications.end(), notification),
+                hooks->notifications.end());
+        if (notification->existedTick >= (notification->canExistFor - 255)/*Tick*/)
+            notification->fadeAlpha--; // make notification fade out
+        if (notification->existedTick <= 255/*Tick*/)
+            notification->fadeAlpha++; // make notification fade in
+
+        // Render Notification
+        renderUtil.DrawString(Vector2(25, 25 + (20/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
+        loopIndex++;
     }
 
     for (int i = 0; i < handler.modules.size(); i++)
@@ -452,6 +470,8 @@ void Init(LPVOID c) {
             MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
         };
+
+        hooks->debugEcho("InitMsg", "Client has initialized");
 
     lab:
         while (clientAlive) {};

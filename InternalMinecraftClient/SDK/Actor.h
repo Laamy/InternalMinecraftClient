@@ -8,9 +8,6 @@
 class BlockSource {};
 
 class Actor {
-
-private:
-	virtual void Constructor(); // most likely 2 of these
 public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
@@ -156,9 +153,9 @@ public:
 	virtual void shouldRender(void);
 	virtual void playAmbientSound(void);
 	virtual int getAmbientSound(void);
-	virtual bool isInvulnerableTo(ActorDamageSource const&);
+	virtual bool isInvulnerableTo(class ActorDamageSource const&);
 	virtual int getBlockDamageCause(class Block const&);
-	virtual void actuallyHurt(int, ActorDamageSource const&, bool);
+	virtual void actuallyHurt(int, class ActorDamageSource const&, bool);
 	virtual void animateHurt(void);
 	virtual void doFireHurt(int);
 	virtual void onLightningHit(void);
@@ -169,28 +166,28 @@ public:
 	virtual int getActorRendererId(void);
 	virtual void spawnAtLocation(int, int);
 	virtual void spawnAtLocation(int, int, float);
-	virtual void spawnAtLocation(Block const&, int);
-	virtual void spawnAtLocation(Block const&, int, float);
+	virtual void spawnAtLocation(class Block const&, int);
+	virtual void spawnAtLocation(class Block const&, int, float);
 	virtual void spawnAtLocation(class ItemStack const&, float);
 	virtual void despawn(void);
 	virtual void killed(Actor&);
 	virtual void awardKillScore(Actor&, int);
 	virtual void setArmor(class ArmorSlot, class ItemStack const&);
 	virtual int getArmor(class ArmorSlot);
-	virtual int getArmorMaterialTypeInSlot(ArmorSlot);
-	virtual int getArmorMaterialTextureTypeInSlot(ArmorSlot);
-	virtual int getArmorColorInSlot(ArmorSlot, int);
+	virtual int getArmorMaterialTypeInSlot(class ArmorSlot);
+	virtual int getArmorMaterialTextureTypeInSlot(class ArmorSlot);
+	virtual int getArmorColorInSlot(class ArmorSlot, int);
 	virtual int getEquippedSlot(class EquipmentSlot);
-	virtual void setEquippedSlot(EquipmentSlot, ItemStack const&);
+	virtual void setEquippedSlot(class EquipmentSlot, class ItemStack const&);
 	virtual int getCarriedItem(void);
-	virtual void setCarriedItem(ItemStack const&);
-	virtual void setOffhandSlot(ItemStack const&);
+	virtual void setCarriedItem(class ItemStack const&);
+	virtual void setOffhandSlot(class ItemStack const&);
 	virtual int getEquippedTotem(void);
 	virtual void consumeTotem(void);
 	virtual void save(class CompoundTag&);
-	virtual void saveWithoutId(CompoundTag&);
-	virtual void load(CompoundTag const&, class DataLoadHelper&);
-	virtual void loadLinks(CompoundTag const&, std::vector<class ActorLink, std::allocator<ActorLink>>&, DataLoadHelper&);
+	virtual void saveWithoutId(class CompoundTag&);
+	virtual void load(class CompoundTag const&, class DataLoadHelper&);
+	virtual void loadLinks(class CompoundTag const&, std::vector<class ActorLink, std::allocator<ActorLink>>&, class DataLoadHelper&);
 	virtual int getEntityTypeId(void);
 	virtual void queryEntityRenderer(void);
 	virtual int getSourceUniqueID(void);
