@@ -293,6 +293,17 @@ void DisplayObj(const char txt[64]) {
         _chatMsg(&clientInst->guiData, &sce);
 }
 
+std::vector<std::string> split(const std::string& text, char sep) {
+    std::vector<std::string> tokens;
+    std::size_t start = 0, end = 0;
+    while ((end = text.find(sep, start)) != std::string::npos) {
+        tokens.push_back(text.substr(start, end - start));
+        start = end + 1;
+    }
+    tokens.push_back(text.substr(start));
+    return tokens;
+}
+
 void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use this for .commands and cheat around hooking my packet func in lbs?)
   
    /* if (txt->getText()) {
@@ -321,7 +332,8 @@ void chatMsgCallback(void* a1, TextHolder* txt) { // callback (Maybe i can use t
         auto command = ((std::string)txt->getText()).erase(0, 1);
         Command* checkCmd = cmdHandler.findCommand(command);
         if (checkCmd != nullptr) {
-            checkCmd->Execute(clientInst, localPlr);
+            auto txt2 = ((std::string)txt->getText());
+            checkCmd->Execute(split(txt2, ' '));
         }
     }
     else

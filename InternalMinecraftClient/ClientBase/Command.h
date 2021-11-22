@@ -9,7 +9,7 @@ public:
 	Command(std::string name, std::string description/*, std::vector<std::string> aliases*/) { // Constructor
 		this->name = name;
 		this->description = description;
-		this->aliases = aliases;
+		//this->aliases = aliases;
 	};
 
 public:
@@ -18,7 +18,7 @@ public:
 	std::vector<std::string> aliases;
 
 public: // functions
-	virtual void Execute(ClientInstance* ci, Actor* lp) {};
+	virtual void Execute(std::vector<std::string> args) {};
 	virtual bool CheckName(std::string MName) {
 		if (MName == this->name) {
 			return true;
