@@ -10,7 +10,7 @@ public:
 			savedPos = lp->Position.lower;
 		}
 
-		if (lp->fallDistance > 2)
+		if (lp->fallDistance > 5)
 			lp->SetPos(savedPos);
 	}
 };

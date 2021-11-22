@@ -455,6 +455,7 @@ void Init(LPVOID c) {
             goto lab;
 
         MH_DisableHook(MH_ALL_HOOKS);
+        MH_RemoveHook(MH_ALL_HOOKS);
         FreeLibraryAndExitThread(GetDllHMod(), 0);
     };
 }
