@@ -211,6 +211,8 @@
     <ClInclude Include="ClientBase\Modules\Velocity.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
+    <ClInclude Include="Memory\GameHooks.h" />
+    <ClInclude Include="Memory\VirtualFuncHook.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GuiData.h" />
     <ClInclude Include="SDK\KeyInfo.h" />

@@ -13,4 +13,8 @@ public:
 		if (lp == nullptr) return;
 		lp->SetFieldOfView(1);
 	}
+
+	void OnGameTick(Actor* lp) override {
+		lp->SetFieldOfView(1);
+	}
 };

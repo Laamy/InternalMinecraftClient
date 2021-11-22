@@ -7,6 +7,11 @@
 
 #include <cassert>
 
+// Memory
+#include "Memory/GameHooks.h"
+
+Hooks* hooks = new Hooks();
+
 #define _logf(str)  OutputDebugString(str)
 
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
