@@ -79,6 +79,7 @@
     <ClInclude Include="ClientBase\Modules\Velocity.h" />
     <ClInclude Include="Memory\GameHooks.h" />
     <ClInclude Include="Memory\VirtualFuncHook.h" />
+    <ClInclude Include="SDK\RenderContext\DebugNotify.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

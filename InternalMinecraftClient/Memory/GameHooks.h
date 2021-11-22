@@ -1,7 +1,9 @@
 #include "VirtualFuncHook.h"
+#include "../SDK/RenderContext/DebugNotify.h"
 
-class Hooks {
+class BaseClient {
 public:
+	std::vector<DebugNotify*> notifications;
 	std::vector<VirtualFuncHook*> hooks;
 
 public:

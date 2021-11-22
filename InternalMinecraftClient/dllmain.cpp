@@ -10,7 +10,7 @@
 // Memory
 #include "Memory/GameHooks.h"
 
-Hooks* hooks = new Hooks();
+BaseClient* hooks = new BaseClient();
 
 #define _logf(str)  OutputDebugString(str)
 
