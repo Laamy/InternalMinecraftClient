@@ -21,6 +21,9 @@ public:
 	std::vector<BypassBox> bypasses;
 
 public: // functions
+	virtual void drawTooltip(RenderUtils* ctx, std::string name) {
+		ctx->DrawString(Vector2(2, 650), _RGB(0, 0, 0), tooltip, ctx->font);
+	}
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
     virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
 
