@@ -4,7 +4,8 @@ class FixHitbox : public Command {
 public:
 	FixHitbox(std::string name) : Command(name, "FixHitbox") {};
 
-	void Execute(ClientInstance* ci, Actor* lp) override {
+	void Execute(std::vector<std::string> args) override {
+		auto lp = clientInst->getCPlayer();
 		lp->SetPos(lp->Position.lower);
 	}
 };
