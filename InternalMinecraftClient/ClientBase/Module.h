@@ -23,7 +23,7 @@ public:
 public: // functions
 	RenderUtils* ctx;
 	virtual void drawTooltip(std::string name) {
-		ctx->DrawString(Vector2(2, 650), _RGB(0, 0, 0), tooltip, ctx->font);
+		ctx->DrawString(Vector2(2, clientInst->getGuiData()->resolution.y - 22), _RGB(0, 0, 0), tooltip, ctx->font);
 	}
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
     virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
