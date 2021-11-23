@@ -15,7 +15,7 @@ public:
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
-		func->enableHook(false);
+		func->disableHook();
 	}
 
 	static bool Test(__int64 _this, float* color, __int64 a3, float a4) {

@@ -14,7 +14,7 @@ public:
     }
 
     void OnDisable(ClientInstance* a1, Actor* a2) override {
-        func->enableHook(false);
+        func->disableHook();
     }
 
     static float timeOfDay(__int64 a1, int a2, float a3) {

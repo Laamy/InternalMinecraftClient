@@ -13,7 +13,7 @@ public:
 	};
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
-		func->enableHook(false);
+		func->disableHook();
 	};
 
 	static void onChunkRender(void* a1, void* a2) { return; };

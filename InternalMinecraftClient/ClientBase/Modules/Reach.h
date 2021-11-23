@@ -14,7 +14,7 @@ public:
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
-		func->enableHook(false);
+		func->disableHook();
 	}
 
 	static bool Reech(float* distance) {
