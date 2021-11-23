@@ -3,11 +3,12 @@
 
 class Module {
 public:
-    Module(std::string category, std::string name, std::string tooltip, uintptr_t keybind, bool enabled = false) { // Constructor
+    Module(std::string category = "Empty", std::string name = "Empty", std::string tooltip = "Empty", uintptr_t keybind = 0x07, bool enabled = false) { // Constructor
         this->category = category;
         this->name = name;
+		this->tooltip = tooltip;
         this->keybind = keybind;
-        this->enabled = enabled;
+		this->enabled = enabled;
     };
 
 public:
@@ -21,10 +22,8 @@ public:
 	std::vector<BypassBox> bypasses;
 
 public: // functions
-	RenderUtils* ctx;
-	class BitmapFont* font;
-	virtual void drawTooltip(std::string name) {
-		ctx->DrawString(Vector2(25, 45), _RGB(255, 255, 255, 255), name, font, 0.8f);
+	virtual void drawTooltip(TextHolder tooltip) {
+		renderUtil.DrawString(Vector2(15, renderUtil.guiData->scaledResolution.y * 2 - 15 - (20 * 0.8f)), _RGB(255, 255, 255), tooltip, renderUtil.font, 0.8f);
 	}
 	
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {};

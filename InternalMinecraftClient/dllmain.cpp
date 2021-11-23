@@ -22,6 +22,8 @@ auto GetDllHMod(void) -> HMODULE {
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 bool clientAlive = true;
 
+class BitmapFont* font;
+
 // SDK
 #include "SDK/Actor.h"
 #include "SDK/Player.h"
@@ -36,6 +38,8 @@ class ClientInstance* clientInst;
 #include "Utils/Utils.h"
 #include "Utils/RenderUtils.h"
 
+RenderUtils renderUtil = RenderUtils();
+
 std::vector<class Module*> vMods;
 #include "ClientBase/Command.h"
 #include "ClientBase/Module.h"
@@ -44,10 +48,8 @@ std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 #include "ClientBase/ModuleHandler.h"
 #include "ClientBase/CommandHandler.h"
 
-RenderUtils renderUtil = RenderUtils();
 GuiData* acs;
 Actor* localPlr;
-class BitmapFont* font;
 ModuleHandler handler = ModuleHandler();
 CommandHandler cmdHandler = CommandHandler();
 
@@ -114,7 +116,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     keymap[c] = v;
 };
 
-void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
+void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     if (renderUtil.ctx == nullptr && font != nullptr)
         renderUtil.Init(ctx, acs, font, reinterpret_cast<class Handle*>(&handler));
     if (renderUtil.ctx == nullptr || font == nullptr) return;
@@ -143,7 +145,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                         auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if(cda){
-                            handler.modules[i]->drawTooltip(handler.modules[i]->name);
+                            handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
+                            //hooks->debugEcho("Tooltip", "Tooltips in use");
                         }                            
 
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
