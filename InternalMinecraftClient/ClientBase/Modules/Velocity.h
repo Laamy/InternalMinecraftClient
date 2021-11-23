@@ -3,7 +3,7 @@
 class Velocity : public Module {
 public:
 	VirtualFuncHook* func;
-	Velocity(std::string cat) : Module(cat, "Velocity", 0x07) {
+	Velocity(std::string cat) : Module(cat, "Velocity", "test tooltip", 0x07) {
 		uintptr_t address = Mem::findSig("89 81 ? ? ? ? 8B 42 ? 89 81 ? ? ? ? 8B 42 ? 89 81 ? ? ? ? C3 CC CC CC CC CC 48 89 5C 24");
 		func = hooks->createHook("Velocity", address, AntiKB);
 
