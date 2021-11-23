@@ -9,7 +9,7 @@ public:
 		lp->Hitbox.y = 7;
 	}
 
-	virtual void OnDisable(ClientInstance* ci, Actor* lp) {
+	void OnDisable(ClientInstance* ci, Actor* lp) override {
 		lp->Hitbox.x = 0.6f;
 		lp->Hitbox.y = 1.8f;
 	}
