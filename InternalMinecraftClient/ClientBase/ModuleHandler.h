@@ -53,6 +53,7 @@
 #include "Modules/Uninject.h"
 #include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
+#include "Modules/Notifications.h"
 
 class ModuleHandler {
 public:
@@ -117,6 +118,7 @@ public:
         modules.push_back(new Zoom(visual));
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
+        modules.push_back(new Notifications(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));
