@@ -10,6 +10,7 @@
 #include "Modules/Watermark.h"
 #include "Modules/AirStuck.h"
 #include "Modules/AutoWalk.h"
+#include "Modules/Reach.h"
 #include "Modules/OGMFlight.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
@@ -74,6 +75,7 @@ public:
         modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
         modules.push_back(new Killaura(combat));
+        modules.push_back(new Reach(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));

@@ -198,6 +198,7 @@
     <ClInclude Include="ClientBase\Modules\NoSwing.h" />
     <ClInclude Include="ClientBase\Modules\OGMFlight.h" />
     <ClInclude Include="ClientBase\Modules\Phase.h" />
+    <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
     <ClInclude Include="ClientBase\Modules\Spammer.h" />
     <ClInclude Include="ClientBase\Modules\Spider.h" />
