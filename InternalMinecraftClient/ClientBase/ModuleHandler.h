@@ -22,6 +22,7 @@
 #include "Modules/HighJump.h"
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
+#include "Modules/Reach.h"
 #include "Modules/Freelook.h"
 #include "Modules/Antibot.h"
 #include "Modules/NoPacket.h"
@@ -52,6 +53,7 @@
 #include "Modules/Uninject.h"
 #include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
+#include "Modules/Notifications.h"
 
 class ModuleHandler {
 public:
@@ -116,6 +118,7 @@ public:
         modules.push_back(new Zoom(visual));
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
+        modules.push_back(new Notifications(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));
