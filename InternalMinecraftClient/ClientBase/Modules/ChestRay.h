@@ -3,7 +3,7 @@
 class ChestRay : public Module {
 public:
 	VirtualFuncHook* func;
-	ChestRay(std::string cat) : Module(cat, "ChestRay", 0x07) {
+	ChestRay(std::string cat) : Module(cat, "ChestRay", "Stop rendering full blocks", 0x07) {
 		uintptr_t address = Mem::findSig("48 89 5C 24 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 4C 89 4C");
 		func = hooks->createHook("OnChunkRender", address, onChunkRender);
 	};

@@ -2,7 +2,7 @@
 
 class Freecam : public Module {
 public:
-	Freecam(std::string cat) : Module(cat, "Freecam", 0x07) {};
+	Freecam(std::string cat) : Module(cat, "Freecam", "Freely fly around client sidedly", 0x07) {};
 	Vector3 savedPos;
 	Vector3 savedVel;
 	bool isFlying;

@@ -2,7 +2,7 @@
 
 class Jetpack : public Module {
 public:
-	Jetpack(std::string cat) : Module(cat, "Jetpack", 'F') {};
+	Jetpack(std::string cat) : Module(cat, "Jetpack", "Get a magical jetpack!", 'F') {};
 	bool HoldMode() {
 		return true;
 	}

@@ -2,7 +2,7 @@
 
 class Zoom : public Module {
 public:
-	Zoom(std::string cat) : Module(cat, "Zoom", 'X') {};//We need to make it so when we are typing in chat, it dosent activate modules hgdgdfhgdfh
+	Zoom(std::string cat) : Module(cat, "Zoom", "Decrease your fov then increase it again", 'X') {};
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 			lp->SetFieldOfView(0.25f);

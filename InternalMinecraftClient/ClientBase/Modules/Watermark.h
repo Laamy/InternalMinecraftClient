@@ -2,7 +2,7 @@
 
 class Watermark : public Module {
 public:
-	Watermark(std::string cat) : Module(cat, "Watermark", 0x07, true) {};
+	Watermark(std::string cat) : Module(cat, "Watermark", "Display watermark in bottom corner of screen", 0x07, true) {};
 
 	void OnFrameRender(RenderUtils* ctx) override {
 		if (clientInst->mcGame != nullptr) {

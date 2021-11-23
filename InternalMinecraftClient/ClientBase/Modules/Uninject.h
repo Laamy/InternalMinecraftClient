@@ -2,5 +2,5 @@
 
 class Uninject : public Module {
 public:
-	Uninject(std::string cat) : Module(cat, "Uninject", 0x07) {};
+	Uninject(std::string cat) : Module(cat, "Uninject", "Uninject trero internal", 0x07) {};
 };

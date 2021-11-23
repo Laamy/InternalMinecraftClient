@@ -2,7 +2,7 @@
 
 class ArrayList : public Module {
 public:
-	ArrayList(std::string cat) : Module(cat, "ArrayList", 0x07, true) {};
+	ArrayList(std::string cat) : Module(cat, "ArrayList", "Display list of modules that are enabled", 0x07, true) {};
 
 	void OnFrameRender(RenderUtils* ctx) override {
 		int offset = 0;

@@ -4,7 +4,7 @@
 
 #define PI 3.14159265359 // 3.14159265359
 
-/*#include "Modules/AirJump.h"
+#include "Modules/AirJump.h"
 #include "Modules/TestModule.h"
 #include "Modules/DebugCursor.h"
 #include "Modules/Watermark.h"
@@ -50,7 +50,7 @@
 #include "Modules/Hitbox.h"
 #include "Modules/Killaura.h"
 #include "Modules/Uninject.h"
-#include "Modules/AlwaysDay.h"*/
+#include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
 
 class ModuleHandler {
@@ -72,7 +72,7 @@ public:
         std::string debug = "Debug";
         std::string misc = "Misc";
 
-       /* modules.push_back(new Criticals(combat));
+        modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
         modules.push_back(new Killaura(combat));
         modules.push_back(new Reach(combat));
@@ -99,7 +99,7 @@ public:
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
         modules.push_back(new NoBrakes(player));
-        //modules.push_back(new Velocity(player));
+        modules.push_back(new Velocity(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));
@@ -123,9 +123,8 @@ public:
         modules.push_back(new Killgame(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
-        modules.push_back(new Uninject(misc));*/
-        modules.push_back(new Velocity(player));
-        
+        modules.push_back(new Uninject(misc));
+
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());
 

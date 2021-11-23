@@ -2,7 +2,7 @@
 
 class DebugMenu : public Module {
 public:
-	DebugMenu(std::string cat) : Module(cat, "DebugMenu", 0x07) {};
+	DebugMenu(std::string cat) : Module(cat, "DebugMenu", "DebugMenu", 0x07) {};
 
 	Actor* act;
 

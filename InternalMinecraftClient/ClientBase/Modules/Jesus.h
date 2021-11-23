@@ -2,7 +2,7 @@
 
 class Jesus : public Module {
 public:
-    Jesus(std::string cat) : Module(cat, "Jesus", 0x07) {};
+    Jesus(std::string cat) : Module(cat, "Jesus", "Walk on water like jesus", 0x07) {};
 
     void OnGameTick(Actor* lp) override {
         if (lp->IsInWater || lp->IsInLava) {

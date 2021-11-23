@@ -4,7 +4,7 @@
 class TestModule : public Module {
 public:
 	VirtualFuncHook* func;
-	TestModule(std::string cat) : Module(cat, "TestModule", 0x07) {
+	TestModule(std::string cat) : Module(cat, "TestModule", "TestModule", 0x07) {
 		uintptr_t address = Mem::findSig("41 0F 10 08 48 8B C2 0F"); //Currently Fog Color
 		func = hooks->createHook("Test", address, Test);
 

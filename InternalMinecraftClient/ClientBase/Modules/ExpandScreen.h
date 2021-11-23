@@ -3,7 +3,7 @@
 
 class ExpandScreen : public Module {
 public:
-	ExpandScreen(std::string cat) : Module(cat, "ExpandScreen", 0x07) {};
+	ExpandScreen(std::string cat) : Module(cat, "ExpandScreen", "Increase your screen resolution in unnatural ways D:", 0x07) {};
 
 	void OnTick(ClientInstance* ci) override {
 		ci->guiData->windowData->renderWindow.x = ci->guiData->resolution.x * 2;

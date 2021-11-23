@@ -2,7 +2,7 @@
 
 class StreamName : public Module {
 public:
-	StreamName(std::string cat) : Module(cat, "StreamName", 0x07) {
+	StreamName(std::string cat) : Module(cat, "StreamName", "Client sidedly hide your minecraft username", 0x07) {
 		// Constructor (Runs once on start up)
 	}
 

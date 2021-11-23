@@ -2,7 +2,7 @@
 
 class CreativeFly : public Module {
 public:
-    CreativeFly(std::string cat) : Module(cat, "CreativeFly", 'R') {};
+    CreativeFly(std::string cat) : Module(cat, "CreativeFly", "Fly like your in creative", 'R') {};
     
     void OnEnable(ClientInstance* ci, Actor* lp) override {
         lp->IsFlying = true;

@@ -2,7 +2,7 @@
 
 class Noclip : public Module {
 public:
-	Noclip(std::string cat) : Module(cat, "Noclip", 0x07) {};
+	Noclip(std::string cat) : Module(cat, "Noclip", "Disable all collisions", 0x07) {};
 
 	void OnGameTick(Actor* lp) override {
 		lp->Position.upper.y = lp->Position.lower.y - 1.8f;

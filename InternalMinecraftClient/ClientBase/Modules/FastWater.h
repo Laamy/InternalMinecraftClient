@@ -2,7 +2,7 @@
 
 class FastWater : public Module {
 public:
-    FastWater(std::string cat) : Module(cat, "FastWater", 0x07) {};
+    FastWater(std::string cat) : Module(cat, "FastWater", "Become a speed boat!", 0x07) {};
 
     void OnGameTick(Actor* lp) override {
         if (lp->IsInWater || lp->IsInLava)

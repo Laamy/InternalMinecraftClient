@@ -2,7 +2,7 @@
 
 class AutoWalk : public Module {
 public:
-	AutoWalk(std::string cat) : Module(cat, "AutoWalk", 0x07) {};
+	AutoWalk(std::string cat) : Module(cat, "AutoWalk", "Automatically walk forwards!", 0x07) {};
 
 	void OnGameTick(Actor* lp) override {
 		float yaw = (float)lp->bodyRots()->y;
