@@ -428,12 +428,13 @@ public: // Functions
 		return *reinterpret_cast<float*>(this + 0x1058);
 	};
 
-	float Reach() {
-		uintptr_t reachAddr = Mem::findSig("? ? ? ? DB 0F 49 40 00");
-		PDWORD disposable;
+	PDWORD disposable;
+	float SetReach(float v) {
+		uintptr_t reachAddr = Mem::findSig("F3 0F 10 05 ?? ?? ?? ?? 41 0F 28 D9");
 		VirtualProtect((LPVOID*)reachAddr, sizeof(float), PAGE_EXECUTE_READWRITE, disposable);
 		auto reach = *reinterpret_cast<float*>(reachAddr);
-		return reach;
+		v = reach;
+		return v;
 	};
 
 	Vector2* bodyRots() {
