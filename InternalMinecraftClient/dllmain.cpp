@@ -142,6 +142,10 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) {
                         auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
                         auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
+                        if(cda){
+                            handler.modules[i]->drawTooltip(handler.modules[i]->name);
+                        }                            
+
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
                             handler.modules[i]->enabled = !handler.modules[i]->enabled;
                             if (!handler.modules[i]->enabled)

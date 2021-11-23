@@ -3,7 +3,7 @@
 
 class Module {
 public:
-    Module(std::string category, std::string name/*, std::string tooltip*/, uintptr_t keybind, bool enabled = false) { // Constructor
+    Module(std::string category, std::string name, std::string tooltip, uintptr_t keybind, bool enabled = false) { // Constructor
         this->category = category;
         this->name = name;
         this->keybind = keybind;
@@ -22,9 +22,11 @@ public:
 
 public: // functions
 	RenderUtils* ctx;
+	class BitmapFont* font;
 	virtual void drawTooltip(std::string name) {
-		ctx->DrawString(Vector2(2, 650), _RGB(0, 0, 0), name, ctx->font);
+		ctx->DrawString(Vector2(25, 45), _RGB(255, 255, 255, 255), name, font, 0.8f);
 	}
+	
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
     virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
 
