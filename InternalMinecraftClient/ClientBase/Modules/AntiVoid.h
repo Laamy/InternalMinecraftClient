@@ -9,7 +9,7 @@ public:
 		if (lp->fallDistance == 0) {
 			savedPos = lp->Position.upper;
 		}
-		if (lp->fallDistance > 5)
+		if (lp->fallDistance > 5 && lp->Position.lower.y > 30)
 			lp->SetPos(savedPos);
 	}
 };
