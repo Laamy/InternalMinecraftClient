@@ -16,6 +16,9 @@ public:
 			enable ? MH_EnableHook(this->ptr) : MH_DisableHook(this->ptr);
 		}
 	}
+	void disableHook() {
+		enableHook(false);
+	}
 
 	template <typename TRet, typename... TArgs>
 	inline auto* GetFastcall() {

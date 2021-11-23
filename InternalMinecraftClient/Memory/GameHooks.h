@@ -13,7 +13,7 @@ public:
 				return hook;
 		}
 	}
-
+	//someone pls do an example of a hook here so i can see what to do
 	VirtualFuncHook* createHook(const char* hookName, uintptr_t ptr, void* function) {
 		hooks.push_back(new VirtualFuncHook(std::string(hookName), ptr, function));
 		return getHook(hookName);
