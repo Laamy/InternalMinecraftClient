@@ -10,12 +10,6 @@ public:
     float* reachPtr = nullptr;
     unsigned long oldProtect = 0;
 
-    void OnGameTick(Actor* lp) {
-        if (reachPtr != 0) {
-            *reachPtr = reachValue;
-        }
-    }
-
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
         static uintptr_t sigOffset = 0x0;
         if (sigOffset == 0x0) {
