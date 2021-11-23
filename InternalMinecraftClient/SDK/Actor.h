@@ -4,6 +4,7 @@
 #include "../SDK/Dimension.h"
 #include "../SDK/Level.h"
 #include "GameMode.h"
+#include "../Utils/Utils.h"
 
 class BlockSource {};
 
@@ -427,13 +428,13 @@ public: // Functions
 		return *reinterpret_cast<float*>(this + 0x1058);
 	};
 
-	/*float Reach() {
+	float Reach() {
 		uintptr_t reachAddr = Mem::findSig("? ? ? ? DB 0F 49 40 00");
 		PDWORD disposable;
 		VirtualProtect((LPVOID*)reachAddr, sizeof(float), PAGE_EXECUTE_READWRITE, disposable);
 		auto reach = *reinterpret_cast<float*>(reachAddr);
 		return reach;
-	};*/
+	};
 
 	Vector2* bodyRots() {
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
