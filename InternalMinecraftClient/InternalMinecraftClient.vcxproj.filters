@@ -81,6 +81,7 @@
     <ClInclude Include="Memory\VirtualFuncHook.h" />
     <ClInclude Include="SDK\RenderContext\DebugNotify.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
+    <ClInclude Include="ClientBase\Modules\Notifications.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

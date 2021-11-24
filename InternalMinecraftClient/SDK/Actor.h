@@ -259,8 +259,8 @@ public:
 	virtual void onOrphan(void);
 	virtual void wobble(void);
 	virtual void wasHurt(void);
-	virtual void startSpinAttack(void);
 	virtual void stopSpinAttack(void);
+	virtual void startSpinAttack(void);
 	virtual void setDamageNearbyMobs(bool);
 	virtual void renderDebugServerState(class Options const&);
 	virtual void reloadLootTable(void);
