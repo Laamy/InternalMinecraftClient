@@ -9,6 +9,20 @@
 
 class Mem {
 public:
+    static void nopAddress(const char* sig, int size) {
+        uintptr_t address = findSig(sig);
+        for (int i = 0; i < size; ++i) {
+            auto byteData = *reinterpret_cast<char*>(address + size);
+            byteData = 0x90;
+        }
+    };
+    static void retAddress(const char* sig, int size) {
+        uintptr_t address = findSig(sig);
+        for (int i = 0; i < size; ++i) {
+            auto byteData = *reinterpret_cast<char*>(address + size);
+            byteData = 0xC3;
+        }
+    };
     static uintptr_t findSig(const char* sig) {
         const char* pattern = sig;
         uintptr_t firstMatch = 0;
