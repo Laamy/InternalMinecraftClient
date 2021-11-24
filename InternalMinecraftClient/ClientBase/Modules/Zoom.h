@@ -10,12 +10,11 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->SetFieldOfView(1);
+		lp->SetFieldOfView(1.f);
 		cancelUiRender = false;
 	}
 
 	void OnGameTick(Actor* lp) override {
-		lp->SetFieldOfView(1);
 		lp->SetFieldOfView(0.25f);
 	}
 };

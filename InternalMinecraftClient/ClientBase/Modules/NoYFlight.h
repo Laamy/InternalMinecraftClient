@@ -6,26 +6,35 @@ public:
 	ClientInstance* ci;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		ci = ci;
+		this->ci = ci;
 	}
 
 	void OnGameTick(Actor* lp) override {
+		float yaw = (float)lp->bodyRots()->y;
+		lp->Velocity.x = 0.f;
+		lp->Velocity.y = 0.f;
+		lp->Velocity.z = 0.f;
 		if (keymap['W']) {
-			auto calcYaw = (lp->bodyRots()->y + 90) * ((float)PI / 180);
-
-			Vector3 newVel;
-
-			newVel.x = (float)cos(calcYaw) * 2;
-			newVel.y = 0;
-			newVel.z = (float)sin(calcYaw) * 2;
-
-			lp->Velocity = newVel;
+			lp->Velocity.z = sin((yaw + 90) * 0.01745329251f) * 2;
+			lp->Velocity.x = cos((yaw + 90) * 0.01745329251f) * 2;
 		}
-		else
-			lp->Velocity = {0, 0, 0};
+		if (keymap['A']) {
+			lp->Velocity.z = sin((yaw + 0) * 0.01745329251f) * 2;
+			lp->Velocity.x = cos((yaw + 0) * 0.01745329251f) * 2;
+		}
+		if (keymap['S']) {
+			lp->Velocity.z = sin((yaw - 90) * 0.01745329251f) * 2;
+			lp->Velocity.x = cos((yaw - 90) * 0.01745329251f) * 2;
+		}
+		if (keymap['D']) {
+			lp->Velocity.z = sin((yaw + 180) * 0.01745329251f) * 2;
+			lp->Velocity.x = cos((yaw + 180) * 0.01745329251f) * 2;
+		}
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->Velocity = {0, 0, 0};
+		lp->Velocity.x = 0.f;
+		lp->Velocity.y = 0.f;
+		lp->Velocity.z = 0.f;
 	}
 };
