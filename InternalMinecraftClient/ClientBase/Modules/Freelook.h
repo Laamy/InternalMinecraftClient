@@ -13,8 +13,11 @@ public:
 	}
 
 	void OnGameTick(Actor* lp) override {
-		if (oldPos != Vector2(0, 0))
+		if (oldPos != Vector2(0, 0)) {
 			lp->CameraRots = oldPos;
+			lp->SetBodyYaw(oldPos.y);
+			lp->SetWeirdYaw(oldPos.y);
+		}
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
