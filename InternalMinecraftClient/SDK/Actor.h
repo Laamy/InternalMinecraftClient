@@ -402,11 +402,11 @@ public: // Functions
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
 		Camera.upper = v;
-	};
+	}
 
 	float* SwingAnimation() {
 		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
-	};
+	}
 
 	void SetPos(Vector3 v) {
 		this->Position.lower.x = v.x;
@@ -416,17 +416,33 @@ public: // Functions
 		this->Position.upper.x = v.x + 0.6f;
 		this->Position.upper.y = v.y + 1.8f;
 		this->Position.upper.z = v.z + 0.6f;
-	};
+	}
 
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1058) = v;
 		//*(float*)((uintptr_t)(this) + 0x1140) = v;
-	};
+	}
 
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1058);
-	};
+	}
+
+	void SetBodyYaw(float v) {
+		*(float*)((uintptr_t)(this) + 0x0748) = v;
+	}
+
+	void SetBodyYaw2(float v) {
+		*(float*)((uintptr_t)(this) + 0x074C) = v;
+	}
+
+	void SetWeirdYaw(float v) {
+		*(float*)((uintptr_t)(this) + 0x0750) = v;
+	}
+
+	void SetRlyWeirdYaw(float v) {
+		*(float*)((uintptr_t)(this) + 0x0754) = v;
+	}
 
 	PDWORD disposable;
 	float SetReach(float v) {
@@ -435,9 +451,9 @@ public: // Functions
 		auto reach = *reinterpret_cast<float*>(reachAddr);
 		v = reach;
 		return v;
-	};
+	}
 
 	Vector2* bodyRots() {
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
-	};
+	}
 };
