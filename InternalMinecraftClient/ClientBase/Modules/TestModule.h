@@ -11,6 +11,7 @@ public:
 	}
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
+		hooks->debugEcho("", "Test module!");
 		func->enableHook();
 	}
 
