@@ -7,8 +7,7 @@ public:
 	}
 
 	void OnGameTick(Actor* a1) override {
-		auto lp = clientInst->getCPlayer();
 
-		lp->Username = "Streaming";
+		a1->Username = "Streaming";
 	}
 };
