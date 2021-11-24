@@ -13,9 +13,9 @@ public:
 		//func->enableHook();
 	}
 	void OnGameTick(Actor* a2) {
-		a2->fallDistance = 0.8485439567;
+		a2->fallDistance = 0.9;
 		if (a2->onGround)
-			a2->Velocity.y = 0.02f;
+			a2->Velocity.y = 0.05f;
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
