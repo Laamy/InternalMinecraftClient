@@ -23,5 +23,7 @@ public:
 	}
     virtual void OnFrameRender(RenderUtils* ctx) {}
     virtual void OnTick(ClientInstance* ci) {}
-    virtual void OnGameTick(Actor* lp) {}
+	virtual void OnGameTick(Actor* lp) {
+		lp->animateHurt();
+	}
 };

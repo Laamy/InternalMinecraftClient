@@ -75,13 +75,14 @@
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
     <ClInclude Include="ClientBase\Commands\ToggleCommand.h" />
-    <ClInclude Include="ClientBase\Commands\FixHitbox.h" />
+    <ClInclude Include="ClientBase\Commands\FixHitboxCommand.h" />
     <ClInclude Include="ClientBase\Modules\Velocity.h" />
     <ClInclude Include="Memory\GameHooks.h" />
     <ClInclude Include="Memory\VirtualFuncHook.h" />
     <ClInclude Include="SDK\RenderContext\DebugNotify.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\Notifications.h" />
+    <ClInclude Include="ClientBase\Commands\DieCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

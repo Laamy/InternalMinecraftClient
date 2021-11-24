@@ -1,8 +1,8 @@
 #pragma once
 
-class FixHitbox : public Command {
+class FixHitboxCommand : public Command {
 public:
-	FixHitbox(std::string name) : Command(name, "FixHitbox") {};
+	FixHitboxCommand(std::string name) : Command(name, "FixHitbox") {};
 
 	void Execute(std::vector<std::string> args) override {
 		auto lp = clientInst->getCPlayer();
