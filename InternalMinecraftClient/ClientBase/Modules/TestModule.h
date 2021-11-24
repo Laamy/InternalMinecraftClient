@@ -18,10 +18,10 @@ public:
 		func->disableHook();
 	}
 
-	static bool Test(__int64 _this, float* color, __int64 a3, float a4) {
-		return false;
+	static float* Test(__int64 _this, float* color, __int64 a3, float a4) {
+		return color;
 	}
-    virtual void OnFrameRender(RenderUtils* ctx) {};
-    virtual void OnTick(ClientInstance* ci) {};
-    virtual void OnGameTick(Actor* lp) {};
+    virtual void OnFrameRender(RenderUtils* ctx) {}
+    virtual void OnTick(ClientInstance* ci) {}
+    virtual void OnGameTick(Actor* lp) {}
 };

@@ -17,7 +17,7 @@ auto GetDllHMod(void) -> HMODULE {
     size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
     assert(len == sizeof(info));
     return len ? (HMODULE)info.AllocationBase : NULL;
-};
+}
 
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 bool clientAlive = true;
@@ -81,11 +81,13 @@ bool isRightClickDown() {
         return false;
     return mouse->rightClickDown;
 }
+
 bool isLeftClickDown() {
     if (mouse == 0)
         return false;
     return mouse->leftClickDown;
 }
+
 bool isWheelDown() {
     if (mouse == 0)
         return false;
@@ -114,7 +116,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         }
     }
     keymap[c] = v;
-};
+}
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     if (renderUtil.ctx == nullptr && font != nullptr)
@@ -130,14 +132,9 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
             renderUtil.Draw(Vector2(0, 0), renderUtil.guiData->scaledResolution, _RGB(33, 33, 33, 150));
             int cat = 0;
             for (std::string x : categories) {
-                renderUtil.Draw(
-                    Vector2((float)(70 + (cat * 60)), 80),
-                    Vector2(48, 10), _RGB(33, 33, 33));
+                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10), _RGB(33, 33, 33));
                 auto catText = TextHolder(x); // (ctx->getLineLength(font, &catText, 1) / 2)
-                renderUtil.DrawString(
-                    Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165),
-                    _RGB(255, 255, 255),
-                    catText, font, 0.6f);
+                renderUtil.DrawString(Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165), _RGB(255, 255, 255), catText, font, 0.6f);
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
@@ -163,7 +160,6 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                 cat++;
             }
         }
-
         frame = 0;
     }
     /*if (justEnabled) { //Inject Notification
@@ -204,7 +200,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'])
             clientAlive = false;
     }
-};
+}
 
 void callback(ClientInstance* ci, void* a2) {
     clientInst = ci; acs = ci->guiData;
@@ -212,7 +208,7 @@ void callback(ClientInstance* ci, void* a2) {
     for (auto mod : handler.modules)
     if (ci->isInGame() && mod->enabled)
     mod->OnTick(ci); _tick(ci, a2);
-};
+}
 
 void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
@@ -220,7 +216,7 @@ void playerCallback(Actor* lp, void* a2) {
     localPlr = lp;
     for (auto mod:handler.modules)
     if (mod->enabled) mod->OnGameTick(lp);
-};
+}
 
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
     auto sce = TextHolder(txt);
@@ -261,7 +257,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) {
             checkCmd->Execute(split(txt2, ' '));
         }
     } else _chatMsg(a1, txt);
-};//ill make commands work like modules/well sorted later -> zPearlss
+}//ill make commands work like modules/well sorted later -> zPearlss
 
 std::string getClipboardText() {
     if (!OpenClipboard(nullptr))
@@ -347,7 +343,7 @@ void Init(LPVOID c) {
         MH_DisableHook(MH_ALL_HOOKS);
         MH_RemoveHook(MH_ALL_HOOKS);
         FreeLibraryAndExitThread(GetDllHMod(), 0);
-    };
+    }
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD  ul_reason_for_call, LPVOID lpReserved) {

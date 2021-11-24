@@ -6,6 +6,6 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		if (lp->walkingIntoObj)
-			lp->Velocity.y = 0.30f;
+			lp->Velocity.y = 0.35f;
 	}
 };

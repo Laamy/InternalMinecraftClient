@@ -26,12 +26,12 @@ public: // functions
 		renderUtil.DrawString(Vector2(15, renderUtil.guiData->scaledResolution.y * 2 - 15 - (20 * 0.8f)), _RGB(255, 255, 255), tooltip, renderUtil.font, 0.8f);
 	}
 	
-    virtual void OnEnable(ClientInstance* ci, Actor* lp) {};
-    virtual void OnDisable(ClientInstance* ci, Actor* lp) {};
+    virtual void OnEnable(ClientInstance* ci, Actor* lp) {}
+    virtual void OnDisable(ClientInstance* ci, Actor* lp) {}
 
-    virtual void OnFrameRender(RenderUtils* ctx) {};
-    virtual void OnTick(ClientInstance* ci) {};
-    virtual void OnGameTick(Actor* lp) {};
+    virtual void OnFrameRender(RenderUtils* ctx) {}
+    virtual void OnTick(ClientInstance* ci) {}
+    virtual void OnGameTick(Actor* lp) {}
 	virtual bool HoldMode() {
 		return false;
 	}
@@ -73,11 +73,11 @@ public: // functions
 		}
 		return y;
 	}
-    //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {};
-    //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {};
-    //virtual void OnKeyHeld(uintptr_t keyAddr, bool* cancel) {};
+    //virtual void OnKeyDown(uintptr_t keyAddr, bool* cancel) {}
+    //virtual void OnKeyUp(uintptr_t keyAddr, bool* cancel) {}
+    //virtual void OnKeyHeld(uintptr_t keyAddr, bool* cancel) {}
 
-    //virtual auto OnMouseDown(uintptr_t mouseKeyAddr, bool* cancel) -> void {};
-    //virtual auto OnMouseUp(uintptr_t mouseKeyAddr, bool* cancel) -> void {};
-    //virtual auto OnMouseHeld(uintptr_t mouseKeyAddr, bool* cancel) -> void {};
+    //virtual auto OnMouseDown(uintptr_t mouseKeyAddr, bool* cancel) -> void {}
+    //virtual auto OnMouseUp(uintptr_t mouseKeyAddr, bool* cancel) -> void {}
+    //virtual auto OnMouseHeld(uintptr_t mouseKeyAddr, bool* cancel) -> void {}
 };
