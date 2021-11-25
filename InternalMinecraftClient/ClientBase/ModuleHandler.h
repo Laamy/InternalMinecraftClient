@@ -54,6 +54,10 @@
 #include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
 #include "Modules/Notifications.h"
+#include "Modules/NoShadow.h"
+#include "Modules/NoAnimations.h"
+#include "Modules/LDFreelook.h"
+#include "Modules/SpinAttack.h"
 
 class ModuleHandler {
 public:
@@ -86,6 +90,9 @@ public:
         modules.push_back(new Timer(world));
         modules.push_back(new Blink(world));
         modules.push_back(new Noclip(world));
+        modules.push_back(new ChestRay(world));
+        modules.push_back(new AlwaysDay(world));
+        modules.push_back(new SpinAttack(world));
 
         modules.push_back(new AirStuck(player));
         modules.push_back(new AutoWalk(player));
@@ -116,9 +123,10 @@ public:
         modules.push_back(new NoSwing(visual));
         modules.push_back(new StreamName(visual));
         modules.push_back(new Zoom(visual));
-        modules.push_back(new ChestRay(visual));
-        modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Notifications(visual));
+        modules.push_back(new NoShadow(visual));
+        modules.push_back(new NoAnimations(visual));
+        modules.push_back(new LDFreelook(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));

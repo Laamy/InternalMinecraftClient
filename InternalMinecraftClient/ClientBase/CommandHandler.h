@@ -6,6 +6,7 @@
 #include "Commands/TestCommand.h"
 #include "Commands/EjectCommand.h"
 #include "Commands/ToggleCommand.h"
+#include "Commands/TopCommand.h"
 #include "Commands/FixHitbox.h"
 
 class CommandHandler {
@@ -18,6 +19,7 @@ public:
         commands.push_back(new TestCommand("test"));
         commands.push_back(new EjectCommand("eject"));
         commands.push_back(new ToggleCommand("toggle"));
+        //commands.push_back(new TopCommand("top"));
         commands.push_back(new FixHitbox("fixhitbox"));
     }
 
@@ -28,6 +30,6 @@ public:
                 return cmd;
             }
         }
-	return nullptr;
+	    return nullptr;
     }
 };

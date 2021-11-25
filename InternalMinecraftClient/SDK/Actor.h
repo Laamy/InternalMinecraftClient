@@ -259,8 +259,8 @@ public:
 	virtual void onOrphan(void);
 	virtual void wobble(void);
 	virtual void wasHurt(void);
-	virtual void startSpinAttack(void);
 	virtual void stopSpinAttack(void);
+	virtual void startSpinAttack(void);
 	virtual void setDamageNearbyMobs(bool);
 	virtual void renderDebugServerState(class Options const&);
 	virtual void reloadLootTable(void);
@@ -431,7 +431,7 @@ public: // Functions
 	PDWORD disposable;
 	float SetReach(float v) {
 		uintptr_t reachAddr = Mem::findSig("F3 0F 10 05 ?? ?? ?? ?? 41 0F 28 D9");
-		VirtualProtect((LPVOID*)reachAddr, sizeof(float), PAGE_EXECUTE_READWRITE, disposable);
+		VirtualProtect((LPVOID*)reachAddr, sizeof(float), PAGE_EXECUTE_READWRITE, disposable); // i hate visual studio in general
 		auto reach = *reinterpret_cast<float*>(reachAddr);
 		v = reach;
 		return v;
