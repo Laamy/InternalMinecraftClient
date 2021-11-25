@@ -12,6 +12,10 @@ public:
 		func->enableHook();
 	};
 
+	virtual void OnGameTick(Actor* lp) {
+		lp->playerAnimationPlaybackSpeed = 0.f;
+	}
+
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
 		func->disableHook();
 	};
