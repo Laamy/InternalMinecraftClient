@@ -17,6 +17,7 @@ public:
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
+		a2->playerAnimationPlaybackSpeed = 1.0f;
 		func->disableHook();
 	};
 
