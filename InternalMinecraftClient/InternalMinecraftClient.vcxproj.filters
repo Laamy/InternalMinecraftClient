@@ -81,6 +81,13 @@
     <ClInclude Include="Memory\VirtualFuncHook.h" />
     <ClInclude Include="SDK\RenderContext\DebugNotify.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
+    <ClInclude Include="ClientBase\Commands\DieCommand.h" />
+    <ClInclude Include="ClientBase\Commands\TopCommand.h" />
+    <ClInclude Include="ClientBase\Modules\LDFreelook.h" />
+    <ClInclude Include="ClientBase\Modules\NoAnimations.h" />
+    <ClInclude Include="ClientBase\Modules\Notifications.h" />
+    <ClInclude Include="ClientBase\Modules\NoShadow.h" />
+    <ClInclude Include="ClientBase\Modules\Crasher.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
