@@ -19,6 +19,7 @@
 #include "Modules/ChestRay.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
+#include "Modules/Crasher.h"
 #include "Modules/HighJump.h"
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
@@ -126,6 +127,7 @@ public:
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new Crasher(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));
