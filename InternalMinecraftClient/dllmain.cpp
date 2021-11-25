@@ -101,17 +101,28 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
 
     for (int i = 0; i < handler.modules.size(); ++i) {
         if (!renderClickUI) {
-            if (c == handler.modules[i]->keybind && handler.modules[i]->HoldMode()) {
+            if (c == handler.modules[i]->keybind && handler.modules[i]->HoldMode()) {//for modules like jetpack
                 handler.modules[i]->enabled = !handler.modules[i]->enabled;
                 if (handler.modules[i]->enabled)
                     handler.modules[i]->OnEnable(clientInst, localPlr);
                 else handler.modules[i]->OnDisable(clientInst, localPlr);
-            }
-            else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {
+            } else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {//for normal modules
                 handler.modules[i]->enabled = !handler.modules[i]->enabled;
-                if (handler.modules[i]->enabled)
+                if (handler.modules[i]->enabled) {
                     handler.modules[i]->OnEnable(clientInst, localPlr);
-                else handler.modules[i]->OnDisable(clientInst, localPlr);
+                    for (auto mod : handler.modules) {
+                        auto Notis = mod->name == "Notifications";
+                        if (Notis && mod->enabled)
+                            hooks->debugEcho("ModuleEnabled", "Module has been enabled");
+                    }
+                } else {
+                    handler.modules[i]->OnDisable(clientInst, localPlr);
+                    for (auto mod : handler.modules) {
+                        auto Notis = mod->name == "Notifications";
+                        if (Notis && mod->enabled)
+                            hooks->debugEcho("ModuleDisabled", "Module has been disabled");
+                    }
+                }
             }
         }
     }

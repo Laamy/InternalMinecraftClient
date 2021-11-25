@@ -11,6 +11,7 @@ public:
 	}
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
+		hooks->debugEcho("", "Test module!");
 		func->enableHook();
 	}
 
@@ -23,5 +24,7 @@ public:
 	}
     virtual void OnFrameRender(RenderUtils* ctx) {}
     virtual void OnTick(ClientInstance* ci) {}
-    virtual void OnGameTick(Actor* lp) {}
+	virtual void OnGameTick(Actor* lp) {
+		lp->SetPitch(100);
+	}
 };

@@ -19,9 +19,11 @@
 #include "Modules/ChestRay.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
+#include "Modules/Crasher.h"
 #include "Modules/HighJump.h"
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
+#include "Modules/SpinAttack.h"
 #include "Modules/Reach.h"
 #include "Modules/Freelook.h"
 #include "Modules/Antibot.h"
@@ -73,7 +75,7 @@ public:
         std::string combat = "Combat";
         std::string world = "World";
         std::string player = "Player";
-        std::string flies = "Flies";
+        std::string flies = "Flys";
         std::string visual = "Visual";
         std::string debug = "Debug";
         std::string misc = "Misc";
@@ -81,7 +83,8 @@ public:
         modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
         modules.push_back(new Killaura(combat));
-        modules.push_back(new Reach(combat));
+        //modules.push_back(new Reach(combat)); // for now because not werking :/
+        modules.push_back(new SpinAttack(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
@@ -128,10 +131,11 @@ public:
         modules.push_back(new NoAnimations(visual));
         modules.push_back(new LDFreelook(visual));
 
-        modules.push_back(new TestModule(debug));
+        modules.push_back(new TestModule(debug)); //make sure to // these out before releasein
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new Crasher(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));

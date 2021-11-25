@@ -6,8 +6,8 @@
 #include "Commands/TestCommand.h"
 #include "Commands/EjectCommand.h"
 #include "Commands/ToggleCommand.h"
-#include "Commands/TopCommand.h"
-#include "Commands/FixHitbox.h"
+#include "Commands/FixHitboxCommand.h"
+#include "Commands/DieCommand.h"
 
 class CommandHandler {
 public:
@@ -19,8 +19,8 @@ public:
         commands.push_back(new TestCommand("test"));
         commands.push_back(new EjectCommand("eject"));
         commands.push_back(new ToggleCommand("toggle"));
-        //commands.push_back(new TopCommand("top"));
-        commands.push_back(new FixHitbox("fixhitbox"));
+        commands.push_back(new FixHitboxCommand("fixhitbox"));
+        commands.push_back(new DieCommand("die"));
     }
 
     Command* findCommand(std::string name){
@@ -30,6 +30,6 @@ public:
                 return cmd;
             }
         }
-	    return nullptr;
+	return nullptr;
     }
 };
