@@ -9,10 +9,33 @@
 
 class Mem {
 public:
-    static void nopAddress(const char* sig, int size) {
-        uintptr_t address = findSig(sig);
+    static std::vector<char*> getAddrPtrPad(uintptr_t addr, int size) {
+        std::vector<char*> padding;
         for (int i = 0; i < size; ++i) {
-            auto byteData = *reinterpret_cast<char*>(address + size);
+            auto byteData = reinterpret_cast<char*>(addr + size);
+            padding.push_back(byteData);
+        }
+        return padding;
+    };
+    static std::vector<char> getAddrPad(uintptr_t addr, int size) {
+        std::vector<char> padding;
+        for (int i = 0; i < size; ++i) {
+            auto byteData = *reinterpret_cast<char*>(addr + size);
+            padding.push_back(byteData);
+        }
+        return padding;
+    };
+    static std::vector<char> setAddrPad(uintptr_t addr, std::vector<char> replacementCode) {
+        std::vector<char> padding;
+        for (int i = 0; i < replacementCode.size(); ++i) {
+            auto byteData = reinterpret_cast<char*>(addr + (i - 1));
+            *byteData = replacementCode[i];
+        }
+        return padding;
+    };
+    static void nopAddress(uintptr_t addr, int size) { // its either protected or im stupid
+        for (int i = 0; i < size; ++i) {
+            auto byteData = *reinterpret_cast<char*>(addr + size);
             byteData = 0x90;
         }
     };
