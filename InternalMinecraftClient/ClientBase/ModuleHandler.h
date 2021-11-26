@@ -8,6 +8,7 @@
 #include "Modules/TestModule.h"
 #include "Modules/DebugCursor.h"
 #include "Modules/Watermark.h"
+#include "Modules/HiveFly.h"
 #include "Modules/AirStuck.h"
 #include "Modules/AutoWalk.h"
 #include "Modules/Reach.h"
@@ -110,6 +111,7 @@ public:
         modules.push_back(new CreativeFly(flies));
         modules.push_back(new NoYFlight(flies));
         modules.push_back(new Jetpack(flies));
+        modules.push_back(new HiveFly(flies));
 
         modules.push_back(new Watermark(visual));
         modules.push_back(new ExpandScreen(visual));

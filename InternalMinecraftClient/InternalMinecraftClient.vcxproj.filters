@@ -83,6 +83,7 @@
     <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\Notifications.h" />
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
+    <ClInclude Include="ClientBase\Modules\HiveFly.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

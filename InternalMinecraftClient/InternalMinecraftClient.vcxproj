@@ -174,6 +174,7 @@
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
+    <ClInclude Include="ClientBase\Modules\HiveFly.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />
     <ClInclude Include="ClientBase\Modules\NoBrakes.h" />
