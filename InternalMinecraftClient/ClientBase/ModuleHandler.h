@@ -18,6 +18,7 @@
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
+#include "Modules/CreativeMode.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
 #include "Modules/Crasher.h"
@@ -136,6 +137,7 @@ public:
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new CreativeMode(misc)); //once we have module setting it could be a module where u can change the gamemode or we could make it a command
         modules.push_back(new Crasher(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));

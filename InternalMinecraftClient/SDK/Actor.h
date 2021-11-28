@@ -464,4 +464,12 @@ public: // Functions
 	Vector2* bodyRots() {
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
 	}
+
+	void setGamemode(int gamemode) {
+		*(int*)((uintptr_t)(this) + 0x1D84) = gamemode;
+	}
+
+	int getGamemode() {
+		return *reinterpret_cast<int*>(this + 0x1D84);
+	}
 };

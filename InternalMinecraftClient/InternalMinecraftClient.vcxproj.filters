@@ -88,6 +88,8 @@
     <ClInclude Include="ClientBase\Modules\Notifications.h" />
     <ClInclude Include="ClientBase\Modules\NoShadow.h" />
     <ClInclude Include="ClientBase\Modules\Crasher.h" />
+    <ClInclude Include="ClientBase\Modules\HiveFly.h" />
+    <ClInclude Include="ClientBase\Modules\CreativeMode.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -173,6 +173,7 @@
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\ChestRay.h" />
     <ClInclude Include="ClientBase\Modules\Crasher.h" />
+    <ClInclude Include="ClientBase\Modules\CreativeMode.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
