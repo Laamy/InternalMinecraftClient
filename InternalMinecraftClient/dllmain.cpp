@@ -173,21 +173,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         }
         frame = 0;
     }
-    /*if (justEnabled) { //Inject Notification
-        enabledTicks++;
-        if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
-            auto Text = TextHolder("Trero Internal has been Injected!");
-            int alpha = 255;
-            if (enabledTicks <= 400)
-                alpha += enabledTicks - 400;
-            else if (enabledTicks >= 745)
-                alpha -= enabledTicks - 745;
-            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), Text, font);
-        } else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
-            justEnabled = false;
-            enabledTicks = 0;
-        }
-    }*/
+
     int loopIndex = 0;
     for (auto notification : hooks->notifications) {
         notification->existedTick++;
@@ -206,10 +192,34 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     for (int i = 0; i < handler.modules.size(); i++)
         modulesEnabled[i] = handler.modules[i]->enabled;
 
+    if (justEnabled && clientInst->isInGame()) { //Inject Message
+        enabledTicks++;
+        if (enabledTicks == 1) {
+            localPlr->displayClientMessage("[TreroInternal] Client succesfuly loaded!");
+        }
+        else if (enabledTicks > 1) {
+            justEnabled = false;
+            enabledTicks = 0;
+        }
+    }
+
+    if (justDisabled && clientInst->isInGame()) { //Eject Message
+        disabledTicks++;
+        if (disabledTicks == 1) {
+            localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
+        }
+        else if (disabledTicks > 1) {
+            justDisabled = false;
+            disabledTicks = 0;
+            clientAlive = false;
+        }
+    }
+
     for (auto mod : handler.modules) {
         auto Eject = mod->name == "Uninject";
-        if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'])
-            clientAlive = false;
+        if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
+            justDisabled = true;
+        }
     }
 }
 
