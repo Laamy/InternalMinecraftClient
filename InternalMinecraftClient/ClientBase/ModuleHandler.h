@@ -40,6 +40,7 @@
 #include "Modules/ArrayList.h"
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
+#include "Modules/Airswim.h"
 #include "Modules/Jesus.h"
 #include "Modules/StreamName.h"
 #include "Modules/CreativeFly.h"
@@ -103,6 +104,7 @@ public:
         modules.push_back(new SpinAttack(world));
 
         modules.push_back(new AirStuck(player));
+        modules.push_back(new Airswim(player));
         modules.push_back(new AutoWalk(player));
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));

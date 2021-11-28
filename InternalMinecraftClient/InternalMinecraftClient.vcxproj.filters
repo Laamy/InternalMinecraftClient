@@ -93,6 +93,7 @@
     <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
     <ClInclude Include="ClientBase\Modules\AutoSneak.h" />
     <ClInclude Include="ClientBase\Modules\Tornado.h" />
+    <ClInclude Include="ClientBase\Modules\Airswim.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
