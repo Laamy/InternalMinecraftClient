@@ -27,6 +27,6 @@ public:
 	}
     virtual void OnTick(ClientInstance* ci) {}
 	virtual void OnGameTick(Actor* lp) {
-		lp->setDamageNearbyMobs(true);
+		lp->kill();
 	}
 };
