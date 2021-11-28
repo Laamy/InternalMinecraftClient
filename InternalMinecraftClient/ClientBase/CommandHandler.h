@@ -8,6 +8,7 @@
 #include "Commands/ToggleCommand.h"
 #include "Commands/FixHitboxCommand.h"
 #include "Commands/DieCommand.h"
+#include "Commands/XpCommand.h"
 
 class CommandHandler {
 public:
@@ -21,6 +22,7 @@ public:
         commands.push_back(new ToggleCommand("toggle"));
         commands.push_back(new FixHitboxCommand("fixhitbox"));
         commands.push_back(new DieCommand("die"));
+        commands.push_back(new XpCommand("xp"));
     }
 
     Command* findCommand(std::string name){

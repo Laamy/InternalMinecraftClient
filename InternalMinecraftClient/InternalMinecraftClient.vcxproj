@@ -163,6 +163,7 @@
     <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Commands\ToggleCommand.h" />
     <ClInclude Include="ClientBase\Commands\TopCommand.h" />
+    <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
