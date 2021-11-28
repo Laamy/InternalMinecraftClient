@@ -10,7 +10,7 @@ class BlockSource {};
 
 class Actor {
 public:
-	virtual int getLastHurtByMob(void);
+	//virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
 	virtual int getLastHurtByPlayer(void);
 	virtual void setLastHurtByPlayer(class Player*);
