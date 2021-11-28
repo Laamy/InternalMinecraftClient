@@ -2,7 +2,7 @@
 
 class HiveFly : public Module {
 public:
-	HiveFly(std::string cat) : Module(cat, "HiveFly", "Turn it on, throw a pearl, then boom!", 'G') {};
+	HiveFly(std::string cat) : Module(cat, "HiveFly", "Turn it on, throw a pearl, then boom!", 0x07) {};
 	ClientInstance* ci;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {

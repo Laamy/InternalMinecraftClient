@@ -2,7 +2,7 @@
 
 class Killaura : public Module {
 public:
-	Killaura(std::string cat) : Module(cat, "Killaura", "Hit every entity around you", 'P') {};
+	Killaura(std::string cat) : Module(cat, "Killaura", "Hit every entity around you", 0x07) {};
 
 	void OnGameTick(Actor* lp) override {
 		auto localPlayer = clientInst->getCPlayer();

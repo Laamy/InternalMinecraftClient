@@ -2,7 +2,7 @@
 
 class XpCommand : public Command {
 public:
-	XpCommand(std::string name) : Command(name, "Teleport to the top block above you") {};
+	XpCommand(std::string name) : Command(name, "Gives 100 levels!!!") {};
 
 	void Execute(std::vector<std::string> args) override {
 		auto lp = clientInst->getCPlayer();
