@@ -27,6 +27,6 @@ public:
 	}
     virtual void OnTick(ClientInstance* ci) {}
 	virtual void OnGameTick(Actor* lp) {
-		lp->kill();
+		lp->lerpMotion(Vector3(1, 1, 1));
 	}
 };
