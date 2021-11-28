@@ -12,7 +12,7 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->SetPos(savedPos);
+		lp->setPos(savedPos);
 
 		ci->loopbackSender->RestorePacketSender();
 	}

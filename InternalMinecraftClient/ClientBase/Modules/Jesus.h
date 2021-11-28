@@ -11,10 +11,10 @@ public:
         }
         /*
         if (lp->IsInWater || lp->IsInLava) {
-			Vector3 pos(lp->Position.lower);
+			Vector3 pos(*lp->getPos());
 			float ofs = 1.620010f;
 			pos.y = floorf(pos.y - ofs) + 0.6f + ofs;
-			lp->SetPos(pos);
+			lp->setPos(pos);
 			if (lp->Velocity.y <= 0)
 				lp->lerpybutworky(Vector3(lp->Velocity.x, 0.35, lp->Velocity.z));
 				lp->fallDistance = 0;

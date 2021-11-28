@@ -9,6 +9,6 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->SetPos(lp->Position.lower);
+		lp->setPos(lp->Position.lower);
 	}
 };

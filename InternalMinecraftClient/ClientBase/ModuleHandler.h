@@ -13,6 +13,7 @@
 #include "Modules/AutoWalk.h"
 #include "Modules/Reach.h"
 #include "Modules/OGMFlight.h"
+#include "Modules/Tornado.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
 #include "Modules/Godmode.h"
@@ -88,6 +89,7 @@ public:
         modules.push_back(new Killaura(combat));
         //modules.push_back(new Reach(combat)); // for now because not werking :/
         modules.push_back(new SpinAttack(combat));
+        modules.push_back(new Tornado(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
