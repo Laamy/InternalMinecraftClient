@@ -397,7 +397,7 @@ private:
 	char pad_0x1149[0xD23]; //0x1149
 public:
 	unsigned char Gamemode; //0x1E6C
-
+	//gamemode is actually 0x1D84
 public: // Functions
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;

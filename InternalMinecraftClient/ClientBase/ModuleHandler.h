@@ -25,7 +25,6 @@
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
 #include "Modules/SpinAttack.h"
-#include "Modules/Reach.h"
 #include "Modules/Freelook.h"
 #include "Modules/Antibot.h"
 #include "Modules/NoPacket.h"
