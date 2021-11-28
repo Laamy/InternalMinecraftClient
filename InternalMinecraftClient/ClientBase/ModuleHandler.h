@@ -51,6 +51,7 @@
 #include "Modules/Criticals.h"
 #include "Modules/AntiVoid.h"
 #include "Modules/NoBrakes.h"
+#include "Modules/AntiLagBack.h"
 #include "Modules/Hitbox.h"
 #include "Modules/Killaura.h"
 #include "Modules/Uninject.h"
@@ -113,6 +114,7 @@ public:
         modules.push_back(new NoFall(player));
         modules.push_back(new NoBrakes(player));
         modules.push_back(new Velocity(player));
+        modules.push_back(new AntiLagBack(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));
