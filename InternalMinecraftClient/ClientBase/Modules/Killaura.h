@@ -7,9 +7,7 @@ public:
 	void OnGameTick(Actor* lp) override {
 		auto localPlayer = clientInst->getCPlayer();
 
-		//localPlayer->swing();
-
-        /*for (auto ent : clientInst->getEntityList()) {
+        for (auto ent : clientInst->getEntityList()) {
 			if (ent.first == reinterpret_cast<uintptr_t>(localPlayer))
 				return;
 
@@ -18,6 +16,6 @@ public:
 
 			localPlayer->swing();
 			localPlayer->attack(*ent.second);
-        }*/
+        }
 	}
 };
