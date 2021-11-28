@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Utils/Math.h"
+#include "Actor.h"
 
 class GameMode {
 private:

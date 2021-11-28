@@ -64,7 +64,6 @@
 #include "Modules/NoShadow.h"
 #include "Modules/NoAnimations.h"
 #include "Modules/LDFreelook.h"
-#include "Modules/SpinAttack.h"
 #include "Modules/AutoSneak.h"
 #include "Modules/InventoryMove.h"
 
@@ -103,7 +102,6 @@ public:
         modules.push_back(new Noclip(world));
         modules.push_back(new ChestRay(world));
         modules.push_back(new AlwaysDay(world));
-        modules.push_back(new SpinAttack(world));
 
         modules.push_back(new AirStuck(player));
         modules.push_back(new AutoSprint(player));

@@ -7,6 +7,7 @@
 #include "../Utils/Utils.h"
 
 class BlockSource {};
+class GameMode;
 
 class Actor {
 private:
