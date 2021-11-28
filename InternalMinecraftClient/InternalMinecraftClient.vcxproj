@@ -183,6 +183,7 @@
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\HiveFly.h" />
+    <ClInclude Include="ClientBase\Modules\InventoryMove.h" />
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />
     <ClInclude Include="ClientBase\Modules\LDFreelook.h" />
