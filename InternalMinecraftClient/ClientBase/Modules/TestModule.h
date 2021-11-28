@@ -27,5 +27,6 @@ public:
 	}
     virtual void OnTick(ClientInstance* ci) {}
 	virtual void OnGameTick(Actor* lp) {
+		lp->lerpybutworky(Vector3(0, 1, 0));
 	}
 };

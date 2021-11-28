@@ -418,6 +418,12 @@ public: // Functions
 		this->Position.upper.z = v.z + 0.6f;
 	}
 
+	void lerpybutworky(Vector3 motion) { //if someone changes the name im gonna steal your knee caps
+		using lerpMotion2 = void(__thiscall*)(void*, Vector3);
+		static lerpMotion2 lerpy = reinterpret_cast<lerpMotion2>(Mem::findSig("8B 02 89 81 F8 04 00 00 8B 42 04 89 81 FC 04 00 00 8B 42 08 89 81 00 05 00 00 C3 CC"));
+		lerpy(this, motion);
+	}
+
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1058) = v;
