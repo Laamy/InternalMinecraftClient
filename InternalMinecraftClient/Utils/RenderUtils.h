@@ -1,4 +1,4 @@
-#pragma once*
+#pragma once
 #include "../SDK/MinecraftUIRenderContext.h"
 
 class RenderUtils {
@@ -88,7 +88,7 @@ public:
 		DrawString(position, colour, text, font, 1);
 	};
 
-	void FillRectAndDrawRect(Vector4 pos, _RGB colour1, _RGB colour2, float opacity, float opacity2, float lineWidth) {
+	void FillRectAndDrawRect(Vector4 pos, _RGB colour1, _RGB colour2, float opacity, float opacity2, int lineWidth) {
 		ctx->fillRectangle(pos, colour1, opacity);
 		ctx->drawRectangle(pos, colour2, opacity2, lineWidth);
 	};

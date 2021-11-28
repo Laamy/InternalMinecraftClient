@@ -150,7 +150,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
                         auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
-                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(48.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if(cda){
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
@@ -199,7 +199,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         if (notification->existedTick <= 255/*Tick*/)
             notification->fadeAlpha++; // make notification fade in
         // Render The Notification
-        renderUtil.DrawString(Vector2(25, 25 + (20/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
+        renderUtil.DrawString(Vector2(25.f, 25.f + (20.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
         loopIndex++;
     }
 

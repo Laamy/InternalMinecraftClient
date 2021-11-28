@@ -21,7 +21,7 @@ public:
 
 		float speed2 = 1.25f / speed;
 
-		float cy = (lp->CameraRots.y + 90) * (PI / 180);
+		float cy = (lp->CameraRots.y + 90) * (3.14159265359f / 180);
 
 		if (keymap[(int)'W']) {
 			lp->Velocity.x = sin(cy) * speed2;

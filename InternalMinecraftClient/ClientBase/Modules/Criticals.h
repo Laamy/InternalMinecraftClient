@@ -13,7 +13,7 @@ public:
 		//func->enableHook();
 	}
 	void OnGameTick(Actor* a2) {
-		a2->fallDistance = 0.9;
+		a2->fallDistance = 0.9f;
 		if (a2->onGround)
 			a2->Velocity.y = 0.05f;
 	}
