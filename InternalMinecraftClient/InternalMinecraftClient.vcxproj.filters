@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Utils\TextFormat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
@@ -97,6 +98,7 @@
     <ClInclude Include="ClientBase\Modules\AutoSprint.h" />
     <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Modules\InventoryMove.h" />
+    <ClInclude Include="Utils\TextFormat.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

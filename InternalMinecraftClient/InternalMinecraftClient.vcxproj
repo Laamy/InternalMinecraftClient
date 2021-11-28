@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Utils\TextFormat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="SDK\Actor.h" />
     <ClInclude Include="SDK\Dimension.h" />
     <ClInclude Include="SDK\Level.h" />
+    <ClInclude Include="Utils\TextFormat.h" />
     <ClInclude Include="Utils\Utils.h" />
   </ItemGroup>
   <ItemGroup>
