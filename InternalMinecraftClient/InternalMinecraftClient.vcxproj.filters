@@ -94,6 +94,7 @@
     <ClInclude Include="ClientBase\Modules\AutoSneak.h" />
     <ClInclude Include="ClientBase\Modules\Tornado.h" />
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
+    <ClInclude Include="ClientBase\Modules\AutoSprint.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
