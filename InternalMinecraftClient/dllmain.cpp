@@ -192,15 +192,9 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     for (int i = 0; i < handler.modules.size(); i++)
         modulesEnabled[i] = handler.modules[i]->enabled;
 
-    if (justEnabled && clientInst->isInGame()) { //Inject Message
-        enabledTicks++;
-        if (enabledTicks == 1) {
-            localPlr->displayClientMessage("[TreroInternal] Client succesfuly loaded!");
-        }
-        else if (enabledTicks > 1) {
-            justEnabled = false;
-            enabledTicks = 0;
-        }
+    if (justEnabled && clientInst->isInGame()) {  //Inject Message
+        localPlr->displayClientMessage("[TreroInternal] Client succesfuly loaded!");
+        justEnabled = false;
     }
 
     if (justDisabled && clientInst->isInGame()) { //Eject Message
@@ -208,17 +202,13 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         if (disabledTicks == 1) {
             localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
         }
-        else if (disabledTicks > 1) {
-            justDisabled = false;
-            disabledTicks = 0;
-            clientAlive = false;
-        }
     }
 
     for (auto mod : handler.modules) {
         auto Eject = mod->name == "Uninject";
         if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
             justDisabled = true;
+            clientAlive = false;
         }
     }
 }
