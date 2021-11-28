@@ -23,10 +23,10 @@ public:
 		return color;
 	}
     virtual void OnFrameRender(RenderUtils* ctx) {
-		ctx->FillRectAndDrawRect(Vector4(10, 100, 10, 100), _RGB(0, 0, 255), _RGB(255, 0, 0), 0.25f, 1.f, 1.f);
+		//ctx->FillRectAndDrawRect(Vector4(10, 100, 10, 100), _RGB(0, 0, 255), _RGB(255, 0, 0), 0.25f, 1.f, 1.f);
 	}
     virtual void OnTick(ClientInstance* ci) {}
 	virtual void OnGameTick(Actor* lp) {
-		lp->lerpybutworky(Vector3(0, 1, 0));
+		lp->lerpybutworky(Vector3(0.1, 0.1, 0.1));
 	}
 };
