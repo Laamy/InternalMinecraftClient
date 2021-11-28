@@ -171,6 +171,7 @@
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
     <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
+    <ClInclude Include="ClientBase\Modules\AutoSneak.h" />
     <ClInclude Include="ClientBase\Modules\Bhop.h" />
     <ClInclude Include="ClientBase\Modules\ChestRay.h" />
     <ClInclude Include="ClientBase\Modules\Crasher.h" />

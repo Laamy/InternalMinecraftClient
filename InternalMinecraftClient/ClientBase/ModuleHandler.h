@@ -62,6 +62,7 @@
 #include "Modules/NoAnimations.h"
 #include "Modules/LDFreelook.h"
 #include "Modules/SpinAttack.h"
+#include "Modules/AutoSneak.h"
 
 class ModuleHandler {
 public:
@@ -107,6 +108,7 @@ public:
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
         modules.push_back(new AntiImmobile(player));
+        modules.push_back(new AutoSneak(player));
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
         modules.push_back(new ReverseStep(player));

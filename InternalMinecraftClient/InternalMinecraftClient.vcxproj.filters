@@ -91,6 +91,7 @@
     <ClInclude Include="ClientBase\Modules\HiveFly.h" />
     <ClInclude Include="ClientBase\Modules\CreativeMode.h" />
     <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
+    <ClInclude Include="ClientBase\Modules\AutoSneak.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
