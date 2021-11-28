@@ -405,7 +405,7 @@ private:
 		virtual void openPortfolio(void);
 		virtual void openBook(int, bool, int, class BlockActor*);
 		virtual void openTrading(uint64_t const&, bool);
-		virtual void canOpenContainerScreen(void);
+		virtual bool canOpenContainerScreen(void);
 		virtual void openChalkboard(class ChalkboardBlockActor&, bool);
 		virtual void openNpcInteractScreen(); // removed
 		virtual void openInventory(void);
