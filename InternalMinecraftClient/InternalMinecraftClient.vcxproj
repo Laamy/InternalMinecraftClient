@@ -223,8 +223,10 @@
     <ClInclude Include="Memory\GameHooks.h" />
     <ClInclude Include="Memory\VirtualFuncHook.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
+    <ClInclude Include="SDK\GLMatrix.h" />
     <ClInclude Include="SDK\GuiData.h" />
     <ClInclude Include="SDK\KeyInfo.h" />
+    <ClInclude Include="SDK\LevelRender.h" />
     <ClInclude Include="SDK\MinecraftGame.h" />
     <ClInclude Include="SDK\Packet\Packet.h" />
     <ClInclude Include="SDK\Player.h" />
