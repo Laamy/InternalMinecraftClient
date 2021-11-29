@@ -98,6 +98,7 @@
     <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Modules\InventoryMove.h" />
     <ClInclude Include="Utils\TextFormat.h" />
+    <ClInclude Include="ClientBase\Modules\NoWater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -57,6 +57,7 @@
 #include "Modules/AntiLagBack.h"
 #include "Modules/Hitbox.h"
 #include "Modules/Killaura.h"
+#include "Modules/NoWater.h"
 #include "Modules/Uninject.h"
 #include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
@@ -102,6 +103,7 @@ public:
         modules.push_back(new Noclip(world));
         modules.push_back(new ChestRay(world));
         modules.push_back(new AlwaysDay(world));
+        modules.push_back(new NoWater(world));
 
         modules.push_back(new AirStuck(player));
         modules.push_back(new AutoSprint(player));

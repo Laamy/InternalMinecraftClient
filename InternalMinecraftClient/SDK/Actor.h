@@ -90,8 +90,8 @@ private:
 	private:
 		virtual void TryroFunc74();
 	public:
-		virtual bool isInWater(void);
-		virtual void hasEnteredWater(void);
+		virtual bool isInWater(bool);
+		virtual void hasEnteredWater(bool);
 		virtual bool isInLava(void);
 		virtual bool isUnderLiquid(class MaterialType);
 		virtual bool isOverWater(void);
