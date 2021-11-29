@@ -6,6 +6,7 @@ public:
 
 	void Execute(std::vector<std::string> args) override {
 		auto lp = clientInst->getCPlayer();
-		lp->setPos(lp->Position.lower);
+		lp->Hitbox.x = 0.6f;
+		lp->Hitbox.y = 1.8f;
 	}
 };
