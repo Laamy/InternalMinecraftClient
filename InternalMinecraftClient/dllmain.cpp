@@ -42,6 +42,7 @@ class ClientInstance* clientInst;
 
 RenderUtils renderUtil = RenderUtils();
 
+std::vector<class Command*> vCmds;
 std::vector<class Module*> vMods;
 #include "ClientBase/Command.h"
 #include "ClientBase/Module.h"
