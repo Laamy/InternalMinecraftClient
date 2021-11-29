@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <vector>
 #include "Command.h"
+#include "Commands/HelpCommand.h"
 #include "Commands/TestCommand.h"
 #include "Commands/EjectCommand.h"
 #include "Commands/ToggleCommand.h"
@@ -19,6 +20,7 @@ public:
 
     void InitCommands() {
         commands.push_back(new TestCommand("test"));
+        commands.push_back(new HelpCommand("help"));
         commands.push_back(new EjectCommand("eject"));
         commands.push_back(new ToggleCommand("toggle"));
         commands.push_back(new FixHitboxCommand("fixhitbox"));

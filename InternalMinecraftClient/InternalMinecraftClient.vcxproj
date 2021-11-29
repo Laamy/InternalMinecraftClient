@@ -160,6 +160,7 @@
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
     <ClInclude Include="ClientBase\Commands\FixHitboxCommand.h" />
+    <ClInclude Include="ClientBase\Commands\HelpCommand.h" />
     <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Commands\ToggleCommand.h" />
     <ClInclude Include="ClientBase\Commands\TopCommand.h" />
