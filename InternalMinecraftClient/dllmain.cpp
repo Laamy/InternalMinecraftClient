@@ -228,6 +228,7 @@ void callback(ClientInstance* ci, void* a2) {
 
 void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
+    localPlr = lp;
     entityList[reinterpret_cast<uint64_t>(lp)] = lp;
     for (auto mod:handler.modules)
     if (mod->enabled) mod->OnGameTick(lp);
