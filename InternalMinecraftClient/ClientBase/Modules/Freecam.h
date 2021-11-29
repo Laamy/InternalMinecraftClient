@@ -21,7 +21,7 @@ public:
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->SetPos(savedPos);
+		lp->setPos(savedPos);
 		lp->Velocity = savedVel;
 		lp->IsFlying = isFlying;
 

@@ -2,7 +2,7 @@
 
 class Zoom : public Module {
 public:
-	Zoom(std::string cat) : Module(cat, "Zoom", "Decrease your fov then increase it again", 'X') {};
+	Zoom(std::string cat) : Module(cat, "Zoom", "Decrease your fov then increase it again", 0x07) {};
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
 			lp->SetFieldOfView(0.25f);

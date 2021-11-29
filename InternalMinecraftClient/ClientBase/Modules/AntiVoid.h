@@ -10,6 +10,6 @@ public:
 			savedPos = lp->Position.upper;
 		}
 		if (lp->fallDistance > 5 && lp->Position.lower.y > 30)
-			lp->SetPos(savedPos);
+			lp->setPos(savedPos);
 	}
 };

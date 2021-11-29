@@ -2,14 +2,12 @@
 
 class Killaura : public Module {
 public:
-	Killaura(std::string cat) : Module(cat, "Killaura", "Hit every entity around you", 'P') {};
+	Killaura(std::string cat) : Module(cat, "Killaura", "Hit every entity around you", 0x07) {};
 
 	void OnGameTick(Actor* lp) override {
 		auto localPlayer = clientInst->getCPlayer();
 
-		//localPlayer->swing();
-
-        /*for (auto ent : clientInst->getEntityList()) {
+        for (auto ent : clientInst->getEntityList()) {
 			if (ent.first == reinterpret_cast<uintptr_t>(localPlayer))
 				return;
 
@@ -18,6 +16,6 @@ public:
 
 			localPlayer->swing();
 			localPlayer->attack(*ent.second);
-        }*/
+        }
 	}
 };

@@ -89,8 +89,16 @@
     <ClInclude Include="ClientBase\Modules\NoShadow.h" />
     <ClInclude Include="ClientBase\Modules\Crasher.h" />
     <ClInclude Include="ClientBase\Modules\HiveFly.h" />
-    <ClInclude Include="SDK\GLMatrix.h" />
-    <ClInclude Include="SDK\LevelRender.h" />
+    <ClInclude Include="ClientBase\Modules\CreativeMode.h" />
+    <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
+    <ClInclude Include="ClientBase\Modules\AutoSneak.h" />
+    <ClInclude Include="ClientBase\Modules\Tornado.h" />
+    <ClInclude Include="ClientBase\Modules\Airswim.h" />
+    <ClInclude Include="ClientBase\Modules\AutoSprint.h" />
+    <ClInclude Include="ClientBase\Commands\XpCommand.h" />
+    <ClInclude Include="ClientBase\Modules\InventoryMove.h" />
+    <ClInclude Include="Utils\TextFormat.h" />
+    <ClInclude Include="ClientBase\Modules\NoWater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

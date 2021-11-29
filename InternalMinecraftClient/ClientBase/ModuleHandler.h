@@ -13,11 +13,13 @@
 #include "Modules/AutoWalk.h"
 #include "Modules/Reach.h"
 #include "Modules/OGMFlight.h"
+#include "Modules/Tornado.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/FastWater.h"
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
+#include "Modules/CreativeMode.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
 #include "Modules/Crasher.h"
@@ -25,7 +27,6 @@
 #include "Modules/Zoom.h"
 #include "Modules/NoSwing.h"
 #include "Modules/SpinAttack.h"
-#include "Modules/Reach.h"
 #include "Modules/Freelook.h"
 #include "Modules/Antibot.h"
 #include "Modules/NoPacket.h"
@@ -39,6 +40,8 @@
 #include "Modules/ArrayList.h"
 #include "Modules/Blink.h"
 #include "Modules/Spider.h"
+#include "Modules/Airswim.h"
+#include "Modules/AutoSprint.h"
 #include "Modules/Jesus.h"
 #include "Modules/StreamName.h"
 #include "Modules/CreativeFly.h"
@@ -51,8 +54,10 @@
 #include "Modules/Criticals.h"
 #include "Modules/AntiVoid.h"
 #include "Modules/NoBrakes.h"
+#include "Modules/AntiLagBack.h"
 #include "Modules/Hitbox.h"
 #include "Modules/Killaura.h"
+#include "Modules/NoWater.h"
 #include "Modules/Uninject.h"
 #include "Modules/AlwaysDay.h"
 #include "Modules/Velocity.h"
@@ -60,7 +65,8 @@
 #include "Modules/NoShadow.h"
 #include "Modules/NoAnimations.h"
 #include "Modules/LDFreelook.h"
-#include "Modules/SpinAttack.h"
+#include "Modules/AutoSneak.h"
+#include "Modules/InventoryMove.h"
 
 class ModuleHandler {
 public:
@@ -86,6 +92,7 @@ public:
         modules.push_back(new Killaura(combat));
         //modules.push_back(new Reach(combat)); // for now because not werking :/
         modules.push_back(new SpinAttack(combat));
+        modules.push_back(new Tornado(combat));
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
@@ -96,9 +103,11 @@ public:
         modules.push_back(new Noclip(world));
         modules.push_back(new ChestRay(world));
         modules.push_back(new AlwaysDay(world));
-        modules.push_back(new SpinAttack(world));
+        modules.push_back(new NoWater(world));
 
         modules.push_back(new AirStuck(player));
+        modules.push_back(new AutoSprint(player));
+        modules.push_back(new Airswim(player));
         modules.push_back(new AutoWalk(player));
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));
@@ -106,6 +115,7 @@ public:
         modules.push_back(new Jesus(player));
         modules.push_back(new Bhop(player));
         modules.push_back(new AntiImmobile(player));
+        modules.push_back(new AutoSneak(player));
         modules.push_back(new Spider(player));
         modules.push_back(new Step(player));
         modules.push_back(new ReverseStep(player));
@@ -113,6 +123,8 @@ public:
         modules.push_back(new NoFall(player));
         modules.push_back(new NoBrakes(player));
         modules.push_back(new Velocity(player));
+        modules.push_back(new AntiLagBack(player));
+        modules.push_back(new InventoryMove(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));
@@ -137,6 +149,7 @@ public:
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
+        modules.push_back(new CreativeMode(misc)); //once we have module setting it could be a module where u can change the gamemode or we could make it a command
         modules.push_back(new Crasher(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));

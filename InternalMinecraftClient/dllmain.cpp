@@ -58,6 +58,8 @@ typedef void(__thiscall* tick)(ClientInstance* clientinstance, void* a2);
 tick _tick;
 typedef void(__thiscall* player)(Actor* lp, void* a2);
 player _player;
+typedef void(__thiscall* gamemode)(GameMode* gm, void* a2);
+gamemode _gamemode;
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
@@ -150,7 +152,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
                         auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
-                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70 + (cat * 60)), 90 + (catMod * 10)), Vector2(48, 10), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(48.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
                         if(cda){
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
@@ -173,21 +175,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         }
         frame = 0;
     }
-    /*if (justEnabled) { //Inject Notification
-        enabledTicks++;
-        if (enabledTicks > 1 && enabledTicks < 3000) {//around 3s //checking if bigger then 1 to make sure no rando crashes appear :P
-            auto Text = TextHolder("Trero Internal has been Injected!");
-            int alpha = 255;
-            if (enabledTicks <= 400)
-                alpha += enabledTicks - 400;
-            else if (enabledTicks >= 745)
-                alpha -= enabledTicks - 745;
-            renderUtil.DrawString(Vector2(300 - (ctx->getLineLength(font, &Text, 0.6f) / 2), 1), _RGB(255, 255, 255, alpha), Text, font);
-        } else if (enabledTicks > 1000) {//this is so the text dissapears btw, same goes for enabledTicks and justEnabled ;/
-            justEnabled = false;
-            enabledTicks = 0;
-        }
-    }*/
+
     int loopIndex = 0;
     for (auto notification : hooks->notifications) {
         notification->existedTick++;
@@ -199,17 +187,31 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         if (notification->existedTick <= 255/*Tick*/)
             notification->fadeAlpha++; // make notification fade in
         // Render The Notification
-        renderUtil.DrawString(Vector2(25, 25 + (20/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
+        renderUtil.DrawString(Vector2(25.f, 25.f + (20.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
         loopIndex++;
     }
 
     for (int i = 0; i < handler.modules.size(); i++)
         modulesEnabled[i] = handler.modules[i]->enabled;
 
+    if (justEnabled && clientInst->isInGame()) {  //Inject Message
+        localPlr->displayClientMessage("[TreroInternal] Client succesfuly loaded!");
+        justEnabled = false;
+    }
+
+    if (justDisabled && clientInst->isInGame()) { //Eject Message
+        disabledTicks++;
+        if (disabledTicks == 1) {
+            localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
+        }
+    }
+
     for (auto mod : handler.modules) {
         auto Eject = mod->name == "Uninject";
-        if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'])
+        if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
+            justDisabled = true;
             clientAlive = false;
+        }
     }
 }
 
@@ -228,7 +230,13 @@ void playerCallback(Actor* lp, void* a2) {
     for (auto mod:handler.modules)
     if (mod->enabled) mod->OnGameTick(lp);
 }
-
+/*
+void gamemodeCallback(GameMode* gm, void* a2) {
+    _gamemode(gm, a2);
+    for (auto mod : handler.modules)
+    if (mod->enabled) mod->OnGameTick(gm);
+}
+*/
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
     auto sce = TextHolder(txt);
     //DisplayObj("Sent!");
@@ -315,6 +323,7 @@ void Init(LPVOID c) {
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
+        //uintptr_t gamemodeAddr = Mem::findSig("48 8D 05 02 80 23 02 48 89 01 48 89 51 08 48 C7 41 10 FF FF FF FF C7 41 18 FF FF FF FF 44 88 61 1C");
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B"); //48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B
@@ -336,6 +345,10 @@ void Init(LPVOID c) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
+       /*if (MH_CreateHook((void*)gamemodeAddr, &gamemodeCallback, reinterpret_cast<LPVOID*>(&_gamemode)) == MH_OK) {
+            MH_EnableHook((void*)gamemodeAddr);
+            _logf(L"[TreroInternal]: GameMode hooked!\n");
+        };*/
         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
         //    MH_EnableHook((void*)mouseAddr);
         //    _logf(L"[TreroInternal]: KeyInfo hooked!\n");

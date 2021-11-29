@@ -6,6 +6,6 @@ public:
 
 	void Execute(std::vector<std::string> args) override {
 		auto lp = clientInst->getCPlayer();
-		lp->animateHurt(); //please fix functions this shoudnlt kill you
+		lp->kill();
 	}
 };
