@@ -8,9 +8,14 @@ public:
 	}
 
 	void OnGameTick(Actor* lp) override {
-			auto calcYaw = (lp->bodyRots()->y + 90) * ((float)PI / 180);
-			auto calcPitch = (lp->bodyRots()->x) * -((float)PI / 180);
+		float calcYaw = (lp->bodyRots()->y + 90) * (PI / 180);
+		float calcPitch = (lp->bodyRots()->x) * -(PI / 180);
 
-			lp->lerpMotion(Vector3((float)cos(calcYaw) * 1.5f, (float)sin(calcPitch) * 1.5f, (float)sin(calcYaw) * 1.5f));
+		Vector3 moveVec;
+		moveVec.x = cos(calcYaw) * cos(calcPitch) * 1.5;
+		moveVec.y = sin(calcPitch) * 1.5;
+		moveVec.z = sin(calcYaw) * cos(calcPitch) * 1.5;
+
+		lp->lerpMotion(moveVec);
 	}
 };
