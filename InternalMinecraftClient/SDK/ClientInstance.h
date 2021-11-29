@@ -127,7 +127,7 @@ public:
 	Player* plr;
 	auto getCPlayer() { // local player in client instance crashes so please leave this like this lol?
 		for (auto ent : entityList) {
-			plr = reinterpret_cast<Player*>(ent.first);
+			plr = reinterpret_cast<Player*>(ent.second);
 			break;
 		}
 		return plr;
