@@ -28,6 +28,8 @@ class BitmapFont* font;
 #include "SDK/Actor.h"
 #include "SDK/Player.h"
 #include "SDK/GuiData.h"
+#include "SDK/GLMatrix.h"
+#include "SDK/LevelRender.h"
 #include "SDK/ClientInstance.h"
 #include "SDK/KeyInfo.h"
 
