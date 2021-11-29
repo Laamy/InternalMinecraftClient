@@ -156,7 +156,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                         auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
                         auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(48.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
-                        if(cda){
+                        if (cda) {
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
                             //hooks->debugEcho("Tooltip", "Tooltips in use");
                         }                            
@@ -278,7 +278,7 @@ void chatMsgCallback(void* a1, TextHolder* txt) {
             checkCmd->Execute(split(txt2, ' '));
         }
     } else _chatMsg(a1, txt);
-}//ill make commands work like modules/well sorted later -> zPearlss
+}
 
 std::string getClipboardText() {
     if (!OpenClipboard(nullptr))
