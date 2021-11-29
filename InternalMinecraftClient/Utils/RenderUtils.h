@@ -93,6 +93,24 @@ public:
 		DrawString(position, colour, text, font, 1);
 	};
 
+	auto World2Screen(Vector3 position) {
+		auto ci = *clientInst;
+
+		auto level = *ci.getLevelRender();
+
+		auto outputPtr = Vector2();
+
+		ci.WorldToScreen(
+			level.origin,
+			position,
+			outputPtr,
+			ci.getFov(),
+			guiData->scaledResolution
+		);
+
+		return outputPtr;
+	};
+
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font, float measureCalc) {
 		if (ctx == nullptr) return;
 		position.x = position.x * 1;
@@ -153,7 +171,6 @@ public:
 		secondPoint.x = position.x + size.x;
 		secondPoint.y = position.y + size.y;
 
-		// I'll use the point max math halved with DrawTriangleOutline for this
 		float x = secondPoint.x - position.x;
 		float y = secondPoint.y - position.y;
 

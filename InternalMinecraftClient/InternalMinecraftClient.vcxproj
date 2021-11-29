@@ -187,6 +187,7 @@
     <ClInclude Include="ClientBase\Modules\Jetpack.h" />
     <ClInclude Include="ClientBase\Modules\Killaura.h" />
     <ClInclude Include="ClientBase\Modules\LDFreelook.h" />
+    <ClInclude Include="ClientBase\Modules\NameTags.h" />
     <ClInclude Include="ClientBase\Modules\NoAnimations.h" />
     <ClInclude Include="ClientBase\Modules\NoBrakes.h" />
     <ClInclude Include="ClientBase\Modules\NoShadow.h" />
@@ -225,6 +226,7 @@
     <ClInclude Include="ClientBase\Modules\Timer.h" />
     <ClInclude Include="ClientBase\Modules\Killgame.h" />
     <ClInclude Include="ClientBase\Modules\Tornado.h" />
+    <ClInclude Include="ClientBase\Modules\Tracers.h" />
     <ClInclude Include="ClientBase\Modules\Uninject.h" />
     <ClInclude Include="ClientBase\Modules\Velocity.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />

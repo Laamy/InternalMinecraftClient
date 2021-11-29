@@ -2,7 +2,7 @@
 
 #include <wchar.h>
 
-extern char BASE_CHARACTER[2];
+extern char BASE_CHARACTER[2]; // who the fuck cpo[y [pasted this from horion
 extern char BLACK[4];
 extern char DARK_BLUE[4];
 extern char DARK_GREEN[4];

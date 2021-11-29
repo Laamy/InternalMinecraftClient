@@ -3,6 +3,7 @@
 #include "../Utils/Math.h"
 #include "MinecraftGame.h"
 #include "Player.h"
+#include <memory>
 
 class TimerClass2 {
 public:
@@ -85,7 +86,7 @@ public:
 	};
 
 	auto getLevelRender() {
-		return reinterpret_cast<LevelRender*>((uintptr_t)(this) + 0xC0);
+		return *reinterpret_cast<LevelRender**>((uintptr_t)(this) + 0xC0);
 	};
 
 	auto getFovX() {
@@ -100,6 +101,21 @@ public:
 		return reinterpret_cast<GLMatrix*>((uintptr_t)(this) + 0x2F0);
 	};
 
+	auto getMatrixCorrection() {
+		GLMatrix toReturn = GLMatrix();
+
+		GLMatrix* matrix = getMatrix();
+
+		for (int i = 0; i < 4; i++) {
+			toReturn.matrix[i * 4 + 0] = matrix->matrix[0 + i];
+			toReturn.matrix[i * 4 + 1] = matrix->matrix[4 + i];
+			toReturn.matrix[i * 4 + 2] = matrix->matrix[8 + i];
+			toReturn.matrix[i * 4 + 3] = matrix->matrix[12 + i];
+		}
+
+		return &toReturn;
+	};
+
 	auto getTimerClass() {
 		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0);
 	};
@@ -112,12 +128,16 @@ public:
 		return reinterpret_cast<MinecraftGame*>((uintptr_t)(this) + 0xA8);
 	};
 
-	auto getEntityList() {
+	auto getFov() {
+		return Vector2(*(float*)((uintptr_t)(this) + 0x670), *(float*)((uintptr_t)(this) + 0x684));
+	};
 
+	auto getEntityList() {
 		std::map<uintptr_t, Actor*> cleanMap = std::map<uintptr_t, Actor*>();
 
 		int i = 0;
 		for (auto ent : entityList) {
+			if (ent.second == nullptr) continue; // skip nullptr entities
 			cleanMap[i] = ent.second;
 			i++;
 		}
@@ -134,38 +154,18 @@ public:
 		return plr;
 	};
 
-	Vector2 WorldToScreen(Vector3 pos, int width, int height) {
-		auto matrix = getMatrix()->matrix;
-
-		Vector4 cc; // cc's im so funny
-		cc.x = pos.x * matrix[0] + pos.y * matrix[4] + pos.z * matrix[8] + matrix[12];
-		cc.y = pos.x * matrix[1] + pos.y * matrix[5] + pos.z * matrix[9] + matrix[13];
-		cc.z = pos.x * matrix[2] + pos.y * matrix[6] + pos.z * matrix[10] + matrix[14];
-		cc.w = pos.x * matrix[3] + pos.y * matrix[7] + pos.z * matrix[11] + matrix[15];
-
-		Vector3 NDC; // Normalized Device Coordinates (Idfk what that is i have to researhcx wtf poedo!!)
-		NDC.x = cc.x / cc.w;
-		NDC.y = cc.y / cc.w;
-
-		Vector2 plrSrn;
-		plrSrn.x = (width / 2 * NDC.x) + (NDC.x + width / 2);
-		plrSrn.y = -(height / 2 * NDC.y) + (NDC.y + height / 2);
-
-		return plrSrn;
-	}
-
 	__forceinline float transformx(const Vector3& p) {
-		auto matrix = getMatrix()->matrix;
+		auto matrix = getMatrixCorrection()->matrix;
 		return p.x * matrix[0] + p.y * matrix[4] + p.z * matrix[8] + matrix[12];
 	}
 
 	__forceinline float transformy(const Vector3& p) {
-		auto matrix = getMatrix()->matrix;
+		auto matrix = getMatrixCorrection()->matrix;
 		return p.x * matrix[1] + p.y * matrix[5] + p.z * matrix[9] + matrix[13];
 	}
 
-	__forceinline float transformz(const Vector3& p) {
-		auto matrix = getMatrix()->matrix;
+	__forceinline float transformz(const Vector3& p) { // std::shared_ptr<GLMatrix>(getMatrixCorrection());
+		auto matrix = getMatrixCorrection()->matrix;
 		return p.x * matrix[2] + p.y * matrix[6] + p.z * matrix[10] + matrix[14];
 	}
 
