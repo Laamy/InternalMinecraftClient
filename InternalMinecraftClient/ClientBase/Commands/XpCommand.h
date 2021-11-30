@@ -6,6 +6,10 @@ public:
 
 	void Execute(std::vector<std::string> args) {
 		auto lp = clientInst->getCPlayer();
-		lp->addLevels(100);
+
+		lp->addLevels(20);
+		lp->addExperience(5);
+
+		lp->displayClientMessage("");
 	}
 };

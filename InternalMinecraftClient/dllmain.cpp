@@ -101,8 +101,12 @@ bool isWheelDown() {
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     _key(c, v);
-    if (c == VK_INSERT && keymap[c] == false && v == true)
+    if (c == VK_INSERT && keymap[c] == false && v == true) {
         renderClickUI = !renderClickUI;
+        if (renderClickUI)
+            clientInst->grabMouse();
+        else clientInst->releaseMouse();
+    }
 
     for (int i = 0; i < handler.modules.size(); ++i) {
         if (!renderClickUI) {
