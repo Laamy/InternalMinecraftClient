@@ -9,8 +9,8 @@ public:
             lp->IsInWater = 0;
             lp->IsInLava = 0;
             lp->stopSwimming();
-            lp->isInWater(false);
-            lp->hasEnteredWater(false);
+//            lp->isInWater(false);
+//            lp->hasEnteredWater(false);
         }
         
     }
