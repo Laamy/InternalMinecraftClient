@@ -329,10 +329,10 @@ private:
 	virtual void Function267(); //
 	virtual void Function268(); //
 	virtual void Function269(); //
-	virtual void Function279(); //
+	virtual void Function270(); //
 public:
-	virtual void releaseMouse(); //
-	virtual void grabMouse(); //
+	virtual void releaseMouse(); //271
+	virtual void grabMouse(); //272
 
 private:
 	char pad_0x0000[0xA0]; //0x0000
