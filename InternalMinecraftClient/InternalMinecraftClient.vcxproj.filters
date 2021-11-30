@@ -143,6 +143,7 @@
     <ClInclude Include="ClientBase\Modules\NameTags.h" />
     <ClInclude Include="ClientBase\Modules\Tracers.h" />
     <ClInclude Include="ClientBase\Modules\PlayerList.h" />
+    <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

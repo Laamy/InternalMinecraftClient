@@ -158,6 +158,7 @@
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
+    <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
     <ClInclude Include="ClientBase\Commands\FixHitboxCommand.h" />
     <ClInclude Include="ClientBase\Commands\HelpCommand.h" />

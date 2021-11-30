@@ -2,7 +2,7 @@
 
 class PlayerList : public Module {
 public:
-	PlayerList(std::string cat) : Module(cat, "PlayerList", "Displays all players in renderdistance on the left side of the screen", 0x07, true) {};
+	PlayerList(std::string cat) : Module(cat, "PlayerList", "Displays all players in renderdistance on the left side of the screen", 0x07) {};
 
 	void OnFrameRender(RenderUtils* ctx) override {
 		if (clientInst->isInGame()) {
