@@ -67,19 +67,10 @@ private:
 	char pad_0x00B8[0x18]; //0x00B8
 public:
 	LoopbackSender* loopbackSender; //0x00D0
-private:
-	char pad_0x00D8[0x60]; //0x00D8
-private:
-	//Actor* localPlayer; //0x0138
-	char pad_0x0138[0x8]; //0x0138
-private:
-	char pad_0x0140[0x3A8]; //0x0140
-public:
-	GuiData* guiData; //0x04E8
 
 public:
 	auto getGuiData() {
-		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
+		return *reinterpret_cast<GuiData**>((uintptr_t)(this) + 0x4D0);
 	};
 
 	auto getLevelRender() {
@@ -186,7 +177,7 @@ public:
 	}
 
 	auto isInGame() {
-		return guiData->windowData->inWorld;
+		return getGuiData()->windowData->inWorld;
 	};
 
 private:

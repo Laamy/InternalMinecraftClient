@@ -225,7 +225,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
 }
 
 void callback(ClientInstance* ci, void* a2) {
-    clientInst = ci; acs = ci->guiData;
+    clientInst = ci; acs = ci->getGuiData();
     font = ci->mcGame->defaultGameFont;
     for (auto mod : handler.modules)
     if (ci->isInGame() && mod->enabled)
@@ -258,8 +258,8 @@ void SendChatMsg(const char txt[64]) { // i was testing please ignore!
 
 void DisplayObj(const char txt[64]) {
     auto sce = TextHolder(txt);
-    if (clientInst->guiData != nullptr)
-        _chatMsg(&clientInst->guiData, &sce);
+    if (clientInst->getGuiData() != nullptr)
+        _chatMsg(clientInst->getGuiData(), &sce);
 }
 
 std::vector<std::string> split(const std::string& text, char sep) {
