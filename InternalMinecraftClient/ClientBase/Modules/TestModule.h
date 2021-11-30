@@ -11,7 +11,10 @@ public:
 	}
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
-		a2->displayClientMessage("hi");
+		auto player = clientInst->getCPlayer();
+		Vector3 pos = a2->Position.lower;
+		std::string pos2 = std::to_string((int)pos.x);
+		a2->displayClientMessage(pos2);
 		hooks->debugEcho("", "Test module!");
 		func->enableHook();
 	}

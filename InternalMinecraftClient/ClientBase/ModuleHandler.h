@@ -11,6 +11,7 @@
 #include "Modules/HiveFly.h"
 #include "Modules/AirStuck.h"
 #include "Modules/AutoWalk.h"
+#include "Modules/PlayerList.h"
 #include "Modules/Reach.h"
 #include "Modules/OGMFlight.h"
 #include "Modules/Tornado.h"
@@ -137,6 +138,7 @@ public:
         modules.push_back(new HiveFly(flies));
 
         modules.push_back(new Watermark(visual));
+        modules.push_back(new PlayerList(visual));
         modules.push_back(new ArrayList(visual));
         modules.push_back(new Freelook(visual));
         modules.push_back(new Freecam(visual));

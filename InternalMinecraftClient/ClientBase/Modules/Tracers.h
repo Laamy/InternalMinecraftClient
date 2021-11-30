@@ -13,7 +13,7 @@ public:
 		for (auto ent : clientInst->getEntityList()) {
 			auto entity = ent.second;
 
-			ctx->DrawString(Vector2(10 + (index * 20), 10), _RGB(), TextHolder(
+			ctx->DrawString(Vector2(10.f + (index * 20), 10), _RGB(), TextHolder(
 				std::string(
 					std::to_string(entity->Position.lower.x) + ", " +
 					std::to_string(entity->Position.lower.y) + ", " +

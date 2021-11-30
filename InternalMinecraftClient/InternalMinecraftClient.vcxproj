@@ -158,6 +158,7 @@
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
+    <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
     <ClInclude Include="ClientBase\Commands\FixHitboxCommand.h" />
     <ClInclude Include="ClientBase\Commands\HelpCommand.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="ClientBase\Modules\NoSwing.h" />
     <ClInclude Include="ClientBase\Modules\OGMFlight.h" />
     <ClInclude Include="ClientBase\Modules\Phase.h" />
+    <ClInclude Include="ClientBase\Modules\PlayerList.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
     <ClInclude Include="ClientBase\Modules\Spammer.h" />
