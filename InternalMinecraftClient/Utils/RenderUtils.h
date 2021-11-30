@@ -93,21 +93,16 @@ public:
 		DrawString(position, colour, text, font, 1);
 	};
 
-	auto World2Screen(Vector3 position) { // fixed w2s
-
+	auto World2Screen(Vector3 position, Vector2& out) { // fixed w2s
 		auto level = *clientInst->getLevelRender();
 
-		auto outputPtr = Vector2();
-
-		clientInst->WorldToScreen(
+		return clientInst->WorldToScreen(
 			level.origin,
 			position,
-			outputPtr,
+			out,
 			clientInst->getFov(),
 			guiData->scaledResolution
 		);
-
-		return outputPtr;
 	};
 
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font, float measureCalc) {
