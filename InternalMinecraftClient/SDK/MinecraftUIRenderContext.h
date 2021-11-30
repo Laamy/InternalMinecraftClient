@@ -48,8 +48,8 @@ public:
     virtual auto unloadTexture(class TexturePtr* ResourceLocation) -> void {};
     virtual auto getUITextureInfo(class TexturePtr* ResourceLocation, bool a2) -> int {};
     virtual auto touchTexture(class TexturePtr* ResourceLocation) -> void {};
-    virtual auto getMeasureStrategy(struct Vec2 const&) -> int {};
-    virtual auto snapImageSizeToGrid(struct Vec2 const&) -> void {};
-    virtual auto snapImagePositionToGrid(struct Vec2 const&) -> void {}; // to lazy to rename Vec2 to Vector2 if you want to test these change it yourself
+    virtual auto getMeasureStrategy(Vector2 const&) -> int {};
+    virtual auto snapImageSizeToGrid(Vector2 const&) -> void {};
+    virtual auto snapImagePositionToGrid(Vector2 const&) -> void {};
     virtual auto notifyImageEstimate(ULONG) -> void {};
 };

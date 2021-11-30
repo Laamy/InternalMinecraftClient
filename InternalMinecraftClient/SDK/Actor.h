@@ -408,7 +408,7 @@ private:
 		virtual void openTrading(uint64_t const&, bool);
 		virtual bool canOpenContainerScreen(void);
 		virtual void openChalkboard(class ChalkboardBlockActor&, bool);
-		virtual void openNpcInteractScreen(); // removed
+		virtual void openNpcInteractScreen(int,int,int);//testing stuff but still removed ig
 		virtual void openInventory(void);
 		virtual void displayChatMessage(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 		virtual void displayClientMessage(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
