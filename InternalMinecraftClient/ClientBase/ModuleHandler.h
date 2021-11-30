@@ -150,7 +150,7 @@ public:
         modules.push_back(new LDFreelook(visual));
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
-        //modules.push_back(new Tracers(visual));
+        modules.push_back(new Tracers(visual));
 
         modules.push_back(new TestModule(debug)); //make sure to // these out before releasein
         modules.push_back(new DebugCursor(debug));

@@ -5,6 +5,6 @@ public:
 	TestCommand(std::string name) : Command(name, "test cmd") {};
 
 	void Execute(std::vector<std::string> args) override {
-		clientInst->grabMouse();
+		clientInst->setupPlayScreenForLeaveGame();
 	}
 };

@@ -55,9 +55,140 @@ public:
 	void RestorePacketSender() {
 		subClass.subClass.subClass.RestorePacketSender();
 	}
-}; // this 100% wont work :(
+};
 
 class ClientInstance {
+private:
+	char pad_0x0000[0xA0]; //0x0000
+public:
+	MinecraftGame* mcGame; //0x00A8
+	TimerClass* timerClass; //0x00B0
+private:
+	char pad_0x00B8[0x18]; //0x00B8
+public:
+	LoopbackSender* loopbackSender; //0x00D0
+private:
+	char pad_0x00D8[0x60]; //0x00D8
+private:
+	//Actor* localPlayer; //0x0138
+	char pad_0x0138[0x8]; //0x0138
+private:
+	char pad_0x0140[0x3A8]; //0x0140
+public:
+	GuiData* guiData; //0x04E8
+
+public:
+	auto getGuiData() {
+		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
+	};
+
+	auto getLevelRender() {
+		return *reinterpret_cast<LevelRender**>((uintptr_t)(this) + 0xC0);
+	};
+
+	auto getFovX() {
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x670);
+	};
+
+	auto getFovY() {
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x684);
+	};
+
+	auto getMatrix() {
+		return reinterpret_cast<GLMatrix*>((uintptr_t)(this) + 0x2F0);
+	};
+
+	auto getMatrixCorrection() {
+		GLMatrix toReturn = GLMatrix();
+
+		GLMatrix* matrix = getMatrix();
+
+		for (int i = 0; i < 4; i++) {
+			toReturn.matrix[i * 4 + 0] = matrix->matrix[0 + i];
+			toReturn.matrix[i * 4 + 1] = matrix->matrix[4 + i];
+			toReturn.matrix[i * 4 + 2] = matrix->matrix[8 + i];
+			toReturn.matrix[i * 4 + 3] = matrix->matrix[12 + i];
+		}
+
+		return &toReturn;
+	};
+
+	auto getTimerClass() {
+		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0);
+	};
+
+	auto getLoopbackSender() {
+		return reinterpret_cast<class LoopbackSender*>((uintptr_t)(this) + 0xB0);
+	};
+
+	auto getMcGame() {
+		return reinterpret_cast<MinecraftGame*>((uintptr_t)(this) + 0xA8);
+	};
+
+	auto getFov() {
+		return Vector2(*(float*)((uintptr_t)(this) + 0x670), *(float*)((uintptr_t)(this) + 0x684));
+	};
+
+	auto getEntityList() {
+		std::map<uintptr_t, Actor*> cleanMap = std::map<uintptr_t, Actor*>();
+
+		int i = 0;
+		for (auto ent : entityList) {
+			if (ent.second == nullptr) continue; // skip nullptr entities
+			cleanMap[i] = ent.second;
+			i++;
+		}
+
+		return cleanMap;
+	};
+	Player* plr;
+	auto getCPlayer() { // local player in client instance crashes so please leave this like this lol?
+		for (auto ent : entityList) {
+			plr = reinterpret_cast<Player*>(ent.second);
+			break;
+		}
+		return plr;
+	};
+
+	__forceinline float transformx(const Vector3& p) {
+		auto matrix = getMatrixCorrection()->matrix;
+		return p.x * matrix[0] + p.y * matrix[4] + p.z * matrix[8] + matrix[12];
+	}
+
+	__forceinline float transformy(const Vector3& p) {
+		auto matrix = getMatrixCorrection()->matrix;
+		return p.x * matrix[1] + p.y * matrix[5] + p.z * matrix[9] + matrix[13];
+	}
+
+	__forceinline float transformz(const Vector3& p) { // std::shared_ptr<GLMatrix>(getMatrixCorrection());
+		auto matrix = getMatrixCorrection()->matrix;
+		return p.x * matrix[2] + p.y * matrix[6] + p.z * matrix[10] + matrix[14];
+	}
+
+	inline bool WorldToScreen(Vector3 origin, Vector3 pos, Vector2& screen, Vector2 fov, Vector2 displaySize) {
+		pos.x -= origin.x;
+		pos.y -= origin.y;
+		pos.z -= origin.z;
+
+		float x = transformx(pos);
+		float y = transformy(pos);
+		float z = transformz(pos);
+
+		if (z > 0) return false;
+
+		float mX = (float)displaySize.x / 2.0F;
+		float mY = (float)displaySize.y / 2.0F;
+
+		screen.x = mX + (mX * x / -z * fov.x);
+		screen.y = mY - (mY * y / -z * fov.y);
+
+		return true;
+	}
+
+	auto isInGame() {
+		return guiData->windowData->inWorld;
+	};
+
 private:
 	virtual void Function0(); //
 	virtual void Function1(); //
@@ -68,10 +199,14 @@ private:
 	virtual void Function6(); //
 	virtual void Function7(); //
 	virtual void Function8(); //
-	virtual void Function9(); //
-	virtual void Function10(); //
+public:
+	virtual void requestLeaveGame(bool, bool); //9 (10)
+	virtual void stopPlayScreen(); //10 (11)
+private:
 	virtual void Function11(); //
-	virtual void Function12(); //
+public:
+	virtual void setupPlayScreenForLeaveGame(); //12 (13)
+private:
 	virtual void Function13(); //
 	virtual void Function14(); //
 	virtual void Function15(); //
@@ -331,138 +466,7 @@ private:
 	virtual void Function269(); //
 	virtual void Function270(); //
 public:
-	virtual void releaseMouse(); //271
-	virtual void grabMouse(); //272
-
-private:
-	char pad_0x0000[0xA0]; //0x0000
-public:
-	MinecraftGame* mcGame; //0x00A8
-	TimerClass* timerClass; //0x00B0
-private:
-	char pad_0x00B8[0x18]; //0x00B8
-public:
-	LoopbackSender* loopbackSender; //0x00D0
-private:
-	char pad_0x00D8[0x60]; //0x00D8
-private:
-	//Actor* localPlayer; //0x0138
-	char pad_0x0138[0x8]; //0x0138
-private:
-	char pad_0x0140[0x3A8]; //0x0140
-public:
-	GuiData* guiData; //0x04E8
-
-public:
-	auto getGuiData() {
-		return reinterpret_cast<GuiData*>((uintptr_t)(this) + 0x4E8);
-	};
-
-	auto getLevelRender() {
-		return *reinterpret_cast<LevelRender**>((uintptr_t)(this) + 0xC0);
-	};
-
-	auto getFovX() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x670);
-	};
-
-	auto getFovY() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x684);
-	};
-
-	auto getMatrix() {
-		return reinterpret_cast<GLMatrix*>((uintptr_t)(this) + 0x2F0);
-	};
-
-	auto getMatrixCorrection() {
-		GLMatrix toReturn = GLMatrix();
-
-		GLMatrix* matrix = getMatrix();
-
-		for (int i = 0; i < 4; i++) {
-			toReturn.matrix[i * 4 + 0] = matrix->matrix[0 + i];
-			toReturn.matrix[i * 4 + 1] = matrix->matrix[4 + i];
-			toReturn.matrix[i * 4 + 2] = matrix->matrix[8 + i];
-			toReturn.matrix[i * 4 + 3] = matrix->matrix[12 + i];
-		}
-
-		return &toReturn;
-	};
-
-	auto getTimerClass() {
-		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0);
-	};
-
-	auto getLoopbackSender() {
-		return reinterpret_cast<class LoopbackSender*>((uintptr_t)(this) + 0xB0);
-	};
-
-	auto getMcGame() {
-		return reinterpret_cast<MinecraftGame*>((uintptr_t)(this) + 0xA8);
-	};
-
-	auto getFov() {
-		return Vector2(*(float*)((uintptr_t)(this) + 0x670), *(float*)((uintptr_t)(this) + 0x684));
-	};
-
-	auto getEntityList() {
-		std::map<uintptr_t, Actor*> cleanMap = std::map<uintptr_t, Actor*>();
-
-		int i = 0;
-		for (auto ent : entityList) {
-			if (ent.second == nullptr) continue; // skip nullptr entities
-			cleanMap[i] = ent.second;
-			i++;
-		}
-
-		return cleanMap;
-	};
-	Player* plr;
-	auto getCPlayer() { // local player in client instance crashes so please leave this like this lol?
-		for (auto ent : entityList) {
-			plr = reinterpret_cast<Player*>(ent.second);
-			break;
-		}
-		return plr;
-	};
-
-	__forceinline float transformx(const Vector3& p) {
-		auto matrix = getMatrixCorrection()->matrix;
-		return p.x * matrix[0] + p.y * matrix[4] + p.z * matrix[8] + matrix[12];
-	}
-
-	__forceinline float transformy(const Vector3& p) {
-		auto matrix = getMatrixCorrection()->matrix;
-		return p.x * matrix[1] + p.y * matrix[5] + p.z * matrix[9] + matrix[13];
-	}
-
-	__forceinline float transformz(const Vector3& p) { // std::shared_ptr<GLMatrix>(getMatrixCorrection());
-		auto matrix = getMatrixCorrection()->matrix;
-		return p.x * matrix[2] + p.y * matrix[6] + p.z * matrix[10] + matrix[14];
-	}
-
-	inline bool WorldToScreen(Vector3 origin, Vector3 pos, Vector2& screen, Vector2 fov, Vector2 displaySize) {
-		pos.x -= origin.x;
-		pos.y -= origin.y;
-		pos.z -= origin.z;
-
-		float x = transformx(pos);
-		float y = transformy(pos);
-		float z = transformz(pos);
-
-		if (z > 0) return false;
-
-		float mX = (float)displaySize.x / 2.0F;
-		float mY = (float)displaySize.y / 2.0F;
-
-		screen.x = mX + (mX * x / -z * fov.x);
-		screen.y = mY - (mY * y / -z * fov.y);
-
-		return true;
-	}
-
-public: // Custom Voids
-	auto isInGame() {
-		return guiData->windowData->inWorld;
-	};
+	virtual void releaseMouse(); //271 (272)
+	virtual void grabMouse(); //272 (273)
+	virtual void refocusMouse(); //273 (274)
 };

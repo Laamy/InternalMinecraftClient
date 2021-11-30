@@ -154,9 +154,9 @@ private:
 		virtual void shouldRender(void);
 		virtual void playAmbientSound(void);
 		virtual int getAmbientSound(void);
-		virtual bool isInvulnerableTo(ActorDamageSource const&);
+		virtual bool isInvulnerableTo(class ActorDamageSource const&);
 		virtual int getBlockDamageCause(class Block const&);
-		virtual void actuallyHurt(int, ActorDamageSource const&, bool);
+		virtual void actuallyHurt(int, class ActorDamageSource const&, bool);
 		virtual void animateHurt(void);
 		virtual void doFireHurt(int);
 		virtual void onLightningHit(void);
@@ -173,16 +173,16 @@ private:
 		virtual void despawn(void);
 		virtual void killed(Actor&);
 		virtual void awardKillScore(Actor&, int);
-		virtual void setArmor(class ArmorSlot, ItemStack const&);
-		virtual int getArmor(ArmorSlot);
-		virtual int getArmorMaterialTypeInSlot(ArmorSlot);
-		virtual int getArmorMaterialTextureTypeInSlot(ArmorSlot);
-		virtual int getArmorColorInSlot(ArmorSlot, int);
+		virtual void setArmor(class ArmorSlot, class ItemStack const&);
+		virtual int getArmor(class ArmorSlot);
+		virtual int getArmorMaterialTypeInSlot(class ArmorSlot);
+		virtual int getArmorMaterialTextureTypeInSlot(class ArmorSlot);
+		virtual int getArmorColorInSlot(class ArmorSlot, int);
 		virtual int getEquippedSlot(class EquipmentSlot);
-		virtual void setEquippedSlot(class EquipmentSlot, ItemStack const&);
+		virtual void setEquippedSlot(class EquipmentSlot, class ItemStack const&);
 		virtual int getCarriedItem(void);
-		virtual void setCarriedItem(ItemStack const&);
-		virtual void setOffhandSlot(ItemStack const&);
+		virtual void setCarriedItem(class ItemStack const&);
+		virtual void setOffhandSlot(class ItemStack const&);
 		virtual int getEquippedTotem(void);
 		virtual void consumeTotem(void);
 		virtual void save(class CompoundTag&);
@@ -197,8 +197,8 @@ private:
 		virtual void thawFreezeEffect(void);
 		virtual void canFreeze(void);
 		virtual bool isWearingLeatherArmor(void);
-		virtual int getLiquidAABB(MaterialType);
-		virtual void handleInsidePortal(BlockPos const&);
+		virtual int getLiquidAABB(class MaterialType);
+		virtual void handleInsidePortal(class BlockPos const&);
 		virtual int getPortalCooldown(void);
 		virtual int getPortalWaitTime(void);
 		virtual int getDimensionId(void);
@@ -207,13 +207,13 @@ private:
 		virtual void changeDimension2(class ChangeDimensionPacket const&);
 		virtual int getControllingPlayer(void);
 		virtual void checkFallDamage(float, bool);
-		virtual void causeFallDamage(float, float, ActorDamageSource);
+		virtual void causeFallDamage(float, float, class ActorDamageSource);
 		virtual void handleFallDistanceOnServer(float, float, bool);
-		virtual void playSynchronizedSound(class LevelSoundEvent, Vector3 const&, Block const&, bool);
-		virtual void playSynchronizedSound(LevelSoundEvent, Vector3 const&, int, bool);
+		virtual void playSynchronizedSound(class LevelSoundEvent, Vector3 const&, class Block const&, bool);
+		virtual void playSynchronizedSound(class LevelSoundEvent, Vector3 const&, int, bool);
 		virtual void onSynchedDataUpdate(int);
 		virtual void canAddPassenger(Actor&);
-		virtual void canPickupItem(ItemStack const&);
+		virtual void canPickupItem(class ItemStack const&);
 		virtual void canBePulledIntoVehicle(void);
 		virtual void inCaravan(void);
 		virtual bool isLeashableType(void);
@@ -235,10 +235,10 @@ private:
 		virtual void canBeAffected(class MobEffectInstance const&);
 		virtual void canBeAffectedByArrow(class MobEffectInstance const&);
 		virtual void onEffectAdded(class MobEffectInstance&);
-		virtual void onEffectUpdated(MobEffectInstance&);
-		virtual void onEffectRemoved(MobEffectInstance&);
+		virtual void onEffectUpdated(class MobEffectInstance&);
+		virtual void onEffectRemoved(class MobEffectInstance&);
 		virtual int getAnimationComponent(void);
-		virtual void openContainerComponent(Player&);
+		virtual void openContainerComponent(class Player&);
 		virtual void swing(void);
 		virtual void useItem(class ItemStackBase&, class ItemUseMethod, bool);
 		virtual void hasOutputSignal(char*);
@@ -250,10 +250,10 @@ private:
 		virtual bool isWorldBuilder(void);
 		virtual bool isCreative(void);
 		virtual bool isAdventure(void);
-		virtual void add(ItemStack&);
-		virtual void drop(ItemStack const&, bool);
-		virtual int getInteraction(Player&, class ActorInteraction&, Vector3 const&);
-		virtual void canDestroyBlock(Block const&);
+		virtual void add(class ItemStack&);
+		virtual void drop(class ItemStack const&, bool);
+		virtual int getInteraction(class Player&, class ActorInteraction&, Vector3 const&);
+		virtual void canDestroyBlock(class Block const&);
 		virtual void setAuxValue(int);
 		virtual void setSize(float, float);
 		virtual void onOrphan(void);
@@ -267,7 +267,7 @@ private:
 		virtual void reloadLootTable(class EquipmentTableDefinition const&);
 		virtual int getDeletionDelayTimeSeconds(void);
 		virtual void kill(void);
-		virtual void die(ActorDamageSource const&);
+		virtual void die(class ActorDamageSource const&);
 		virtual void shouldDropDeathLoot(void);
 		virtual void shouldTick(void);
 		virtual void extractSnapshot(class PlayerSnapshotComponent&);
@@ -278,13 +278,13 @@ private:
 		virtual void updateEntitySpecificMolangVariables(class RenderParams&);
 		virtual void shouldTryMakeStepSound(void);
 		virtual void canMakeStepSound(void);
-		virtual void _hurt(ActorDamageSource const&, int, bool, bool);
+		virtual void _hurt(class ActorDamageSource const&, int, bool, bool);
 		virtual void markHurt(void);
 		virtual void _getAnimationComponent(); // removed
-		virtual void readAdditionalSaveData(CompoundTag const&, DataLoadHelper&);
-		virtual void addAdditionalSaveData(CompoundTag&);
-		virtual void _playStepSound(BlockPos const&, Block const&);
-		virtual void _playFlySound(BlockPos const&, Block const&);
+		virtual void readAdditionalSaveData(class CompoundTag const&, class DataLoadHelper&);
+		virtual void addAdditionalSaveData(class CompoundTag&);
+		virtual void _playStepSound(class BlockPos const&, class Block const&);
+		virtual void _playFlySound(class BlockPos const&, class Block const&);
 		virtual void _makeFlySound(void);
 		virtual void checkInsideBlocks(float);
 		virtual void pushOutOfBlocks(Vector3 const&);
@@ -300,11 +300,11 @@ private:
 		virtual void setSprinting(bool);
 		virtual int getHurtSound(void);
 		virtual int getDeathSound(void);
-		virtual int getItemInHandIcon(ItemStack const&, int);
+		virtual int getItemInHandIcon(class ItemStack const&, int);
 		virtual int getSpeed(void);
 		virtual void setSpeed(float);
 		virtual int getJumpPower(void);
-		virtual void hurtEffects(ActorDamageSource const&, int, bool, bool);
+		virtual void hurtEffects(class ActorDamageSource const&, int, bool, bool);
 		virtual int getMeleeWeaponDamageBonus(Actor);
 		virtual int getMeleeKnockbackBonus(void);
 		virtual void travel(float, float, float);
@@ -347,18 +347,18 @@ private:
 		virtual int getAllHand(void);
 		virtual int getAllEquipment(void);
 		virtual int getArmorTypeHash(void);
-		virtual void dropEquipmentOnDeath(ActorDamageSource const&, int);
+		virtual void dropEquipmentOnDeath(class ActorDamageSource const&, int);
 		virtual void dropEquipmentOnDeath(void);
 		virtual void clearVanishEnchantedItemsOnDeath(void);
 		virtual void sendInventory(bool);
-		virtual int getDamageAfterMagicAbsorb(ActorDamageSource const&, int);
+		virtual int getDamageAfterMagicAbsorb(class ActorDamageSource const&, int);
 		virtual void createAIGoals(void);
 		virtual void onBorn(Actor&, Actor&);
-		virtual void setItemSlot(EquipmentSlot, ItemStack const&);
+		virtual void setItemSlot(class EquipmentSlot, class ItemStack const&);
 		virtual void setTransitioningSitting(bool);
 		virtual void attackAnimation(Actor*, float);
 		virtual int getAttackTime(void);
-		virtual void _getWalkTargetValue(BlockPos const&);
+		virtual void _getWalkTargetValue(class BlockPos const&);
 		virtual void canExistWhenDisallowMob(void);
 		virtual void useNewAi(void);
 		virtual void ascendLadder(void);
@@ -371,8 +371,8 @@ private:
 		virtual void updateAi(void);
 		virtual void newServerAiStep(void);
 		virtual void _serverAiMobStep(void);
-		virtual int getDamageAfterEnchantReduction(ActorDamageSource const&, int);
-		virtual int getDamageAfterArmorAbsorb(ActorDamageSource const&, int);
+		virtual int getDamageAfterEnchantReduction(class ActorDamageSource const&, int);
+		virtual int getDamageAfterArmorAbsorb(class ActorDamageSource const&, int);
 		virtual void dropBags(void);
 		virtual void tickDeath(void);
 		virtual void updateGliding(void);
@@ -415,12 +415,12 @@ private:
 		virtual void displayTextObjectMessage(TextHolder const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 		virtual void displayTextObjectWhisperMessage(class ResolvedTextObject const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 		virtual void displayWhisperMessage(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
-		virtual void startSleepInBed(BlockPos const&);
+		virtual void startSleepInBed(class BlockPos const&);
 		virtual void stopSleepInBed(bool, bool);
 		virtual void canStartSleepInBed(void);
 		virtual int getSleepTimer(void);
 		virtual int getPreviousTickSleepTimer(void);
-		virtual void openSign(BlockPos const&);
+		virtual void openSign(class BlockPos const&);
 		virtual void playEmote(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 		virtual bool isHostingPlayer(void);
 		virtual bool isLoading(void);
@@ -454,10 +454,10 @@ private:
 		virtual void onSuspension(void);
 		virtual void onLinkedSlotsChanged(void);
 		virtual void startCooldown(class Item const*);
-		virtual int getItemCooldownLeft(HashedString const&);
+		virtual int getItemCooldownLeft(class HashedString const&);
 		virtual int getItemCooldownLeft(uintptr_t);
 		virtual int getMaxItemCooldownLeft(void);
-		virtual bool isItemInCooldown(HashedString const&);
+		virtual bool isItemInCooldown(class HashedString const&);
 	private:
 		virtual void TryroFunc435();
 		virtual void TryroFunc436();
@@ -476,7 +476,7 @@ private:
 	public:
 		virtual int getMovementSettings(void);
 		virtual void onMovePlayerPacketNormal(Vector3 const&, Vector2 const&, float);
-		virtual void _createChunkSource(ChunkSource&);
+		virtual void _createChunkSource(class ChunkSource&);
 
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0000[0x100 - 0x8]; //0x0000

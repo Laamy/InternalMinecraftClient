@@ -2,33 +2,21 @@
 
 class Tracers : public Module {
 public:
-	Tracers(std::string cat) : Module(cat, "Tracers", "Draw lines from the middle of your screen to an entity", 0x07, true) {};
+	Tracers(std::string cat) : Module(cat, "Tracers", "Draw lines from the middle of your screen to an entity", 0x07) {};
 
 	void OnFrameRender(RenderUtils* ctx) override {
-		auto origin = clientInst->getLevelRender()->origin;
-		auto fov = clientInst->getFov();
-		auto display = clientInst->guiData->scaledResolution;
+		auto w2s = Vector2();
 
-		int index = 0;
-		for (auto ent : clientInst->getEntityList()) {
-			auto entity = ent.second;
+		auto level = *clientInst->getLevelRender();
 
-			ctx->DrawString(Vector2(10.f + (index * 20), 10), _RGB(), TextHolder(
-				std::string(
-					std::to_string(entity->Position.lower.x) + ", " +
-					std::to_string(entity->Position.lower.y) + ", " +
-					std::to_string(entity->Position.lower.z)
-				).c_str()
-			), ctx->font);
-			index++;
-		}
+		clientInst->WorldToScreen(
+			level.origin,
+			Vector3(0,0,0),
+			w2s,
+			clientInst->getFov(),
+			clientInst->guiData->scaledResolution
+		);
 
-		/*for (auto ent : clientInst->getEntityList()) {
-			auto entity = ent.second;
-
-			auto w2sPos = ctx->World2Screen(entity->Position.lower);
-
-			ctx->Draw(w2sPos, Vector2(10, 10), _RGB());
-		}*/
+		renderUtil.Draw(w2s, Vector2(10, 10), _RGB());
 	}
 };
