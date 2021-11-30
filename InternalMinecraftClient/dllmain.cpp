@@ -203,11 +203,6 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     for (int i = 0; i < handler.modules.size(); i++)
         modulesEnabled[i] = handler.modules[i]->enabled;
 
-    if (justEnabled && clientInst->isInGame()) {  //Inject Message
-        localPlr->displayClientMessage("[TreroInternal] Client succesfuly loaded!");
-        justEnabled = false;
-    }
-
     if (justDisabled && clientInst->isInGame()) { //Eject Message
         disabledTicks++;
         if (disabledTicks == 1) {
