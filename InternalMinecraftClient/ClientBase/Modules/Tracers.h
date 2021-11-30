@@ -11,7 +11,7 @@ public:
 
 		clientInst->WorldToScreen(
 			level.origin,
-			Vector3(0,0,0),
+			Vector3(0, 0, 0),
 			w2s,
 			clientInst->getFov(),
 			clientInst->guiData->scaledResolution

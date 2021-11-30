@@ -93,18 +93,17 @@ public:
 		DrawString(position, colour, text, font, 1);
 	};
 
-	auto World2Screen(Vector3 position) {
-		auto ci = *clientInst;
+	auto World2Screen(Vector3 position) { // fixed w2s
 
-		auto level = *ci.getLevelRender();
+		auto level = *clientInst->getLevelRender();
 
 		auto outputPtr = Vector2();
 
-		ci.WorldToScreen(
+		clientInst->WorldToScreen(
 			level.origin,
 			position,
 			outputPtr,
-			ci.getFov(),
+			clientInst->getFov(),
 			guiData->scaledResolution
 		);
 
