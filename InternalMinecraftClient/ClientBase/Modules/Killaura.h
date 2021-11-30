@@ -15,7 +15,6 @@ public:
 				continue;
 
 			localPlayer->swing();
-			localPlayer->attack(*ent.second);
         }
 	}
 };
