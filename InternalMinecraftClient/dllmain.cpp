@@ -20,6 +20,8 @@ auto GetDllHMod(void) -> HMODULE {
 }
 
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
+std::map<uint64_t, class Actor*> completeEntityList = std::map<uint64_t, class Actor*>();
+
 bool clientAlive = true;
 
 class BitmapFont* font;
@@ -230,9 +232,13 @@ void callback(ClientInstance* ci, void* a2) {
     mod->OnTick(ci); _tick(ci, a2);
 }
 
+int a = 0;
+
 void playerCallback(Actor* lp, void* a2) {
     _player(lp, a2);
-    localPlr = lp;
+    if (lp->isLocalPlayer()) {
+        localPlr = lp;
+    }
     entityList[reinterpret_cast<uint64_t>(lp)] = lp;
     for (auto mod:handler.modules)
     if (mod->enabled) mod->OnGameTick(lp);
