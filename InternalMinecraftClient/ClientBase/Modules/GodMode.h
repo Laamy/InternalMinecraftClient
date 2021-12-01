@@ -5,8 +5,6 @@ public:
 	Godmode(std::string cat) : Module(cat, "Godmode", "LocalWorld only Godmode!", 0x07) {}
 
 	void OnGameTick(Actor* a1) override {
-		a1->HurtTimeAnimation = 1;
-		a1->HurtTime = 1;
-		a1->heal(10);
+		a1->CanTakeDamage = false;
 	}
 };

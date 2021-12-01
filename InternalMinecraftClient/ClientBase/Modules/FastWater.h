@@ -5,7 +5,7 @@ public:
     FastWater(std::string cat) : Module(cat, "FastWater", "Become a speed boat!", 0x07) {};
 
     void OnGameTick(Actor* lp) override {
-        if (lp->IsInWater || lp->IsInLava)
+        if (lp->IsInWater || lp->isInLava())
         {
             float yaw = (float)lp->bodyRots()->y;
 
