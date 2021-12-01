@@ -10,9 +10,6 @@ class BlockSource {};
 class GameMode;
 
 class Actor {
-private:
-	virtual void PlayerConstructor();
-	virtual void _PlayerConstructor();
 public:
 	virtual int getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
@@ -30,7 +27,7 @@ public:
 	virtual void hasComponent(class HashedString const&);
 private:
 	virtual void __PlayerConstructor();
-	virtual void ___PlayerConstructor();
+	//virtual void ___PlayerConstructor();
 public:
 	virtual void reset(void);
 	virtual int getOnDeathExperience(void);
