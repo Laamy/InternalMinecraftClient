@@ -12,7 +12,7 @@ public:
 
 class TimerClass {
 private:
-	char pad_0x0000[0xD0]; //0x0000
+	char pad_0x0000[0xD0 + (0x8 * 1)]; //0x0000
 public:
 	TimerClass2* timerClass;
 };
@@ -71,6 +71,10 @@ public:
 public:
 	auto getGuiData() {
 		return *reinterpret_cast<GuiData**>((uintptr_t)(this) + 0x4D0);
+	};
+
+	auto getLocalPlayer() {
+		return *reinterpret_cast<Actor**>((uintptr_t)(this) + 0x148);
 	};
 
 	auto getLevelRender() {
@@ -132,13 +136,11 @@ public:
 
 		return cleanMap;
 	};
-	Player* plr;
-	auto getCPlayer() { // local player in client instance crashes so please leave this like this lol?
-		for (auto ent : entityList) {
-			plr = reinterpret_cast<Player*>(ent.second);
-			break;
-		}
-		return plr;
+
+	Actor* getCPlayer() { // local player in client instance crashes so please leave this like this lol?
+		if (getLocalPlayer() == nullptr)
+			return nullptr;
+		return getLocalPlayer();
 	};
 
 	__forceinline float transformx(const Vector3& p) {

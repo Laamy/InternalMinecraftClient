@@ -436,47 +436,6 @@ public:
 	virtual void sendEventPacket(class EventPacket&);
 	virtual void addExperience(int);
 	virtual void addLevels(int);
-private:
-	virtual void TryroFunc418();
-	virtual void TryroFunc419();
-public:
-	virtual void inventoryChanged(class Container&, int, ItemStack const&, ItemStack const&, bool);
-private:
-	virtual void TryroFunc421();
-public:
-	virtual void deleteContainerManager(void);
-	virtual void setFieldOfViewModifier(float);
-	virtual bool is2DPositionRelevant(); //removed
-	virtual bool isActorRelevant(Actor const&);
-private:
-	virtual void TryroFunc426();
-public:
-	virtual void onSuspension(void);
-	virtual void onLinkedSlotsChanged(void);
-	virtual void startCooldown(class Item const*);
-	virtual int getItemCooldownLeft(HashedString const&);
-	virtual int getItemCooldownLeft(class ulong);
-	virtual int getMaxItemCooldownLeft(void);
-	virtual bool isItemInCooldown(HashedString const&);
-private:
-	virtual void TryroFunc434();
-	virtual void TryroFunc435();
-public:
-	virtual void sendNetworkPacket(Packet&);
-private:
-	virtual void TryroFunc437();
-	virtual void TryroFunc438();
-	virtual void TryroFunc439();
-	virtual void TryroFunc440();
-public:
-	virtual void reportMovementTelemetry(class MovementEventType);
-	virtual bool isSimulated(void);
-private:
-	virtual void TryroFunc443();
-public:
-	virtual int getMovementSettings(void);
-	virtual void onMovePlayerPacketNormal(Vector3 const&, Vector2 const&, float);
-	virtual void _createChunkSource(class ChunkSource&);
 
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0008[0xF8]; //0x0008
