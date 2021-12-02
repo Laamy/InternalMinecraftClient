@@ -522,7 +522,7 @@ public: // Functions
 	}
 
 	float* SwingAnimation() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C0);
 	}
 	/*
 	void lerpybutworky(Vector3 motion) { //if someone changes the name im gonna steal your knee caps

@@ -7,6 +7,7 @@ public:
 	void Execute(std::vector<std::string> args) {
 		auto lp = clientInst->getLocalPlayer();
 
-		lp->displayClientMessage("test");
+		lp->addLevels(100);
+		lp->displayClientMessage("Succesfully gave 100 levels!!!!");
 	}
 };
