@@ -541,15 +541,16 @@ public: // Functions
 		return *reinterpret_cast<float*>(this + 0x1058);
 	}
 
-	void SetPitch(float v) {
+	/*void SetPitch(float v) {
 		*(float*)((uintptr_t)(this) + 0x0138) = v;
 	}
-	void SetBodyYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0748) = v;
-	}
-	/*
+
 	void SetYaw(float v) {
 		*(float*)((uintptr_t)(this) + 0x013C) = v;
+	}
+
+	void SetBodyYaw(float v) {
+		*(float*)((uintptr_t)(this) + 0x0748) = v;
 	}
 
 	void SetBodyYaw2(float v) {
