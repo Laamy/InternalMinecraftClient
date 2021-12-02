@@ -2,7 +2,7 @@
 
 class NoYFlight : public Module {
 public:
-	NoYFlight(std::string cat) : Module(cat, "NoYFlight", "Bypassing fly made for mineplex", (int)'N') {};
+	NoYFlight(std::string cat) : Module(cat, "NoYFlight", "Bypassing fly made for mineplex", 'N') {};
 	ClientInstance* ci;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
