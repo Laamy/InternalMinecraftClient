@@ -2,7 +2,7 @@
 
 class Freelook : public Module {
 public:
-	Freelook(std::string cat) : Module(cat, "Freelook", "Freely look around client sidedly", 'N') {};
+	Freelook(std::string cat) : Module(cat, "Freelook", "Freely look around client sidedly", 'C') {};
 	bool HoldMode() {
 		return true;
 	}

@@ -522,7 +522,7 @@ public: // Functions
 	}
 
 	float* SwingAnimation() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C8);
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C0);
 	}
 	/*
 	void lerpybutworky(Vector3 motion) { //if someone changes the name im gonna steal your knee caps
@@ -533,12 +533,12 @@ public: // Functions
 	*/
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
-		*(float*)((uintptr_t)(this) + 0x1058) = v;
+		*(float*)((uintptr_t)(this) + 0x1050) = v;
 		//*(float*)((uintptr_t)(this) + 0x1140) = v;
 	}
 
 	float FieldOfView() {
-		return *reinterpret_cast<float*>(this + 0x1058);
+		return *reinterpret_cast<float*>(this + 0x1050);
 	}
 
 	/*void SetPitch(float v) {
