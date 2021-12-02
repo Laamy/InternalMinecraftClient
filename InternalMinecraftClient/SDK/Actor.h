@@ -440,8 +440,8 @@ public:
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0008[0xF8]; //0x0008
 public:
-	__int8 CameraCanMove; //0x0100 
-private:
+	__int8 InLove; //0x0100 
+private:// 0x100
 	char pad_0x0101[0x37]; //0x0101
 public:
 	Vector2 CameraRots; //0x0138 
@@ -471,19 +471,15 @@ public:
 	float blocksTraveled; //0x0248 
 	Vector3 SlowDown; //0x024C 
 	float blocksTraveledExc; //0x0258 
-private:
-	char pad_0x025C[0x1]; //0x025C
-public:
+	bool ImmersedInWater; //0x025C 
 	bool IsInWater; //0x025D 
-private:
-	char pad_0x025E[0x1]; //0x025E
-public:
+	bool HasEnteredWater; //0x025E (Got this from ida btw)
 	bool IsSwimming; //0x025F 
 private:
 	char pad_0x0260[0x48]; //0x0260
 public:
 	Vector3 HurtTime; //0x02A8 
-private:
+private: // 0x2B0
 	char pad_0x02B4[0x1]; //0x02B4
 public:
 	bool CameraShake; //0x02B5 
