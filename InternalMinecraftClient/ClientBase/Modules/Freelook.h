@@ -2,7 +2,7 @@
 
 class Freelook : public Module {
 public:
-	Freelook(std::string cat) : Module(cat, "Freelook", "Freely look around client sidedly", 'N') {};
+	Freelook(std::string cat) : Module(cat, "Freelook", "Freely look around client sidedly", 'C') {};
 	bool HoldMode() {
 		return true;
 	}
@@ -15,8 +15,8 @@ public:
 	void OnGameTick(Actor* lp) override {
 		if (oldPos != Vector2(0, 0)) {
 			lp->CameraRots = oldPos;
+			lp->SetPitch(oldPos.x);
 			lp->SetBodyYaw(oldPos.y);
-			lp->SetWeirdYaw(oldPos.y);
 		}
 	}
 

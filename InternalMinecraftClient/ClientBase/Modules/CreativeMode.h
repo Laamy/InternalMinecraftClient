@@ -10,10 +10,11 @@ public:
 	}
 
 	void OnGameTick(Actor* lp) override {
-		lp->setGamemode(1);
+		//lp->setGamemode(1);
+		//Yaami pls do this :)
 	}
 
 	void OnDisable(ClientInstance* ci, Actor* lp) override {
-		lp->setGamemode(origGamemode);
+		//lp->setGamemode(origGamemode);
 	}
 };
