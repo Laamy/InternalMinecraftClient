@@ -18,7 +18,7 @@ auto GetDllHMod(void) -> HMODULE {
     assert(len == sizeof(info));
     return len ? (HMODULE)info.AllocationBase : NULL;
 }
-//
+
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 std::map<uint64_t, class Actor*> completeEntityList = std::map<uint64_t, class Actor*>();
 
