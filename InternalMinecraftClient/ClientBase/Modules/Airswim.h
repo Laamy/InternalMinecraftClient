@@ -9,5 +9,7 @@ public:
 		lp->fallDistance = 0.f;
 		lp->startSwimming();
 		lp->doWaterSplashEffect();
+		lp->IsSwimming = true;
+		lp->HasEnteredWater = true;
 	}
 };
