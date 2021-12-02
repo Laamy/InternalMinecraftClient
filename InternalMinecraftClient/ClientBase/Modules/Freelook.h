@@ -15,8 +15,8 @@ public:
 	void OnGameTick(Actor* lp) override {
 		if (oldPos != Vector2(0, 0)) {
 			lp->CameraRots = oldPos;
-			lp->SetBodyYaw(oldPos.y);
-			lp->SetWeirdYaw(oldPos.y);
+			lp->BodyRotations.x = oldPos.y;
+			lp->FirstPersonHandRotations.x = oldPos.y;
 		}
 	}
 
