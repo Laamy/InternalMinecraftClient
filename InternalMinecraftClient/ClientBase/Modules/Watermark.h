@@ -14,4 +14,6 @@ public:
 
 		ctx->DrawString(strPos, _RGB(33, 33, 33), vText1, ctx->font);
 	}
+
+	//void OnGameTick(Actor* lp) override {};
 };

@@ -1,8 +1,8 @@
 #pragma once
 
 class LevelRender {
-private:
-	char paddimtolazytooppenreclass[0x854];
 public:
-	Vector3 origin;
+	Vector3 getOrigin() {
+		return *reinterpret_cast<Vector3*>((uintptr_t)this + 0x878);
+	}
 };

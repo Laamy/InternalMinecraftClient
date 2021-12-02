@@ -97,7 +97,7 @@ public:
 		auto level = *clientInst->getLevelRender();
 
 		return clientInst->WorldToScreen(
-			level.origin,
+			level.getOrigin(),
 			position,
 			out,
 			clientInst->getFov(),

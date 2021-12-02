@@ -9,14 +9,13 @@ public:
 	Vector2 oldPos;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		oldPos = lp->CameraRots;
+		oldPos = lp->BodyRotations;
 	}
 
 	void OnGameTick(Actor* lp) override {
 		if (oldPos != Vector2(0, 0)) {
 			lp->CameraRots = oldPos;
-			lp->SetBodyYaw(oldPos.y);
-			lp->SetWeirdYaw(oldPos.y);
+			lp->BodyRotations = oldPos;
 		}
 	}
 

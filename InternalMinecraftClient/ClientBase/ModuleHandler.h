@@ -30,16 +30,13 @@
 #include "Modules/SpinAttack.h"
 #include "Modules/Freelook.h"
 #include "Modules/Antibot.h"
-#include "Modules/NoPacket.h"
 #include "Modules/Timer.h"
 #include "Modules/Noclip.h"
 #include "Modules/Phase.h"
 #include "Modules/Step.h"
 #include "Modules/Killgame.h"
-#include "Modules/Freecam.h"
 #include "Modules/ReverseStep.h"
 #include "Modules/ArrayList.h"
-#include "Modules/Blink.h"
 #include "Modules/Spider.h"
 #include "Modules/Airswim.h"
 #include "Modules/AutoSprint.h"
@@ -48,7 +45,6 @@
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
 #include "Modules/NoFall.h"
-#include "Modules/LifeboatFly.h"
 #include "Modules/NoYFlight.h"
 #include "Modules/Bhop.h"
 #include "Modules/Jetpack.h"
@@ -105,9 +101,7 @@ public:
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
         modules.push_back(new AntiVoid(world));
-        modules.push_back(new NoPacket(world));
         modules.push_back(new Timer(world));
-        modules.push_back(new Blink(world));
         modules.push_back(new Noclip(world));
         modules.push_back(new NoWater(world));
         modules.push_back(new ReverseStep(world));
@@ -137,14 +131,13 @@ public:
         modules.push_back(new Jetpack(flies));
         modules.push_back(new HiveFly(flies));
 
-        modules.push_back(new Watermark(visual));
         modules.push_back(new PlayerList(visual));
         modules.push_back(new ArrayList(visual));
         modules.push_back(new Freelook(visual));
-        modules.push_back(new Freecam(visual));
         modules.push_back(new NoSwing(visual));
         modules.push_back(new Zoom(visual));
         modules.push_back(new Notifications(visual));
+        modules.push_back(new Watermark(visual));
         modules.push_back(new NoShadow(visual));
         modules.push_back(new NoAnimations(visual));
         modules.push_back(new LDFreelook(visual));
@@ -152,11 +145,11 @@ public:
         modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Tracers(visual));
 
-        modules.push_back(new TestModule(debug)); //make sure to // these out before releasein
+        modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
-        modules.push_back(new CreativeMode(misc)); //once we have module setting it could be a module where u can change the gamemode or we could make it a command
+        modules.push_back(new CreativeMode(misc)); 
         modules.push_back(new Crasher(misc));
         modules.push_back(new Godmode(misc));
         modules.push_back(new Spammer(misc));

@@ -43,4 +43,8 @@ private:
 	char pad_0x042069; //lol idk how this works lmfao
 public:
 	class BitmapFont* defaultgameFont2; //idk, but it works lmfao
+
+	bool canUseKeys() {
+		return *reinterpret_cast<bool**>(this + 0x300);
+	}
 }; // 0x110

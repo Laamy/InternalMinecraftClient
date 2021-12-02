@@ -18,43 +18,10 @@ public:
 };
 
 class LoopbackSender {
+private:
+	virtual void Constructor();
 public:
-	class _SubLoopbackSender { // 0
-	public:
-		class __SubLoopbackSender { // 8
-		private:
-			char pad_0x0000[0x8]; //0x0000
-		public:
-			class ___SubLoopbackSender { // 0
-			public:
-				char byteList[5]; //0x0000
-
-			public:
-				void RetPacketSender() { // 48 89 5C 24 08 - C3 90 90 90 90
-					byteList[0] = 0xC3;
-					byteList[1] = 0xC3;
-					byteList[2] = 0xC3;
-					byteList[3] = 0xC3;
-					byteList[4] = 0xC3;
-				}
-				void RestorePacketSender() { // 48 89 5C 24 08 - C3 90 90 90 90
-					byteList[0] = 0x48;
-					byteList[1] = 0x89;
-					byteList[2] = 0x5C;
-					byteList[3] = 0x24;
-					byteList[4] = 0x08;
-				}
-			} subClass;
-		} subClass;
-	} subClass;
-
-public:
-	void RetPacketSender() {
-		subClass.subClass.subClass.RetPacketSender();
-	}
-	void RestorePacketSender() {
-		subClass.subClass.subClass.RestorePacketSender();
-	}
+	virtual void sendToServer(Packet* pkt);
 };
 
 class ClientInstance {
@@ -63,10 +30,6 @@ private:
 public:
 	MinecraftGame* mcGame; //0x00A8
 	TimerClass* timerClass; //0x00B0
-private:
-	char pad_0x00B8[0x18]; //0x00B8
-public:
-	LoopbackSender* loopbackSender; //0x00D0
 
 public:
 	auto getGuiData() {
@@ -78,19 +41,19 @@ public:
 	};
 
 	auto getLevelRender() {
-		return *reinterpret_cast<LevelRender**>((uintptr_t)(this) + 0xC0);
+		return reinterpret_cast<LevelRender*>((uintptr_t)(this) + 0xD0); // 0xC0 + 0x10
 	};
 
 	auto getFovX() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x670);
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x658);
 	};
 
 	auto getFovY() {
-		return reinterpret_cast<float*>((uintptr_t)(this) + 0x684);
+		return reinterpret_cast<float*>((uintptr_t)(this) + 0x66C);
 	};
 
 	auto getMatrix() {
-		return reinterpret_cast<GLMatrix*>((uintptr_t)(this) + 0x2F0);
+		return reinterpret_cast<GLMatrix*>((uintptr_t)(this) + 0x2D8); //0x300
 	};
 
 	auto getMatrixCorrection() {
@@ -109,11 +72,11 @@ public:
 	};
 
 	auto getTimerClass() {
-		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0);
+		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0); //unknown
 	};
 
 	auto getLoopbackSender() {
-		return reinterpret_cast<class LoopbackSender*>((uintptr_t)(this) + 0xB0);
+		return reinterpret_cast<class LoopbackSender*>((uintptr_t)(this) + 0xE0);
 	};
 
 	auto getMcGame() {
@@ -121,7 +84,7 @@ public:
 	};
 
 	auto getFov() {
-		return Vector2(*(float*)((uintptr_t)(this) + 0x670), *(float*)((uintptr_t)(this) + 0x684));
+		return Vector2(*getFovX(), *getFovY());
 	};
 
 	auto getEntityList() {
@@ -137,13 +100,13 @@ public:
 		return cleanMap;
 	};
 
-	Actor* getCPlayer() { // local player in client instance crashes so please leave this like this lol?
+	Actor* getCPlayer() {
 		if (getLocalPlayer() == nullptr)
 			return nullptr;
 		return getLocalPlayer();
 	};
 
-	__forceinline float transformx(const Vector3& p) {
+	__forceinline float transformx(const Vector3& p) { // I think minecraft corrected the GLMatrix wtf
 		auto matrix = getMatrixCorrection()->matrix;
 		return p.x * matrix[0] + p.y * matrix[4] + p.z * matrix[8] + matrix[12];
 	}

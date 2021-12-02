@@ -439,8 +439,11 @@ public:
 
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0008[0xF8]; //0x0008
+
+	//isBaby -> 0x11
+
 public:
-	__int8 InLove; //0x0100 
+	bool InLove; //0x0100 
 private:// 0x100
 	char pad_0x0101[0x37]; //0x0101
 public:
