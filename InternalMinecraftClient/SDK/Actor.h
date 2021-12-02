@@ -541,7 +541,7 @@ public: // Functions
 		return *reinterpret_cast<float*>(this + 0x1058);
 	}
 
-	void SetPitch(float v) {
+	/*void SetPitch(float v) {
 		*(float*)((uintptr_t)(this) + 0x0138) = v;
 	}
 
@@ -563,7 +563,7 @@ public: // Functions
 
 	void SetRlyWeirdYaw(float v) {
 		*(float*)((uintptr_t)(this) + 0x0754) = v;
-	}
+	}*/
 
 	PDWORD disposable;
 	float SetReach(float v) {
@@ -578,11 +578,7 @@ public: // Functions
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
 	}
 
-	void setGamemode(int gamemode) {
-		*(int*)((uintptr_t)(this) + 0x1D84) = gamemode;
-	}
-
 	int getGamemode() {
-		return *reinterpret_cast<int*>(this + 0x1D84);
+		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
 };
