@@ -10,7 +10,7 @@ public:
 		Vector2 strPos = Vector2(0, 0);
 
 		strPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 4;
-		strPos.y = ctx->guiData->scaledResolution.y * 2 - 24;
+		strPos.y = ctx->guiData->scaledResolution.y - 20.f;
 
 		ctx->DrawString(strPos, _RGB(33, 33, 33), vText1, ctx->font);
 	}
