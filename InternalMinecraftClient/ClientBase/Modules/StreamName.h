@@ -7,12 +7,13 @@ public:
 	}
 	std::string OGName;
 	void OnEnable(ClientInstance* ci, Actor* lp) {
-		//OGName = lp->Username;
+		//OGName = lp->Nametag();
+		OGName = "Why are gay people so gay?";
 	}
 	void OnGameTick(Actor* a1) override {
-		//a1->Username = "Streaming";
+		a1->setName("Streaming");
 	}
 	void OnDisable(ClientInstance* ci, Actor* lp) {
-		//lp->Username = OGName;
+		lp->setName(OGName);
 	}
 };

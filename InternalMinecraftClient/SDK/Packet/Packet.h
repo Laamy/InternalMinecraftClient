@@ -1,18 +1,31 @@
 ﻿#pragma once
-
+#include "../TextHolder.h"
 class Packet {
-public:
-	virtual void BlockActorDataPacket(class BlockActorDataPacket const&); //1
-	virtual void LoginPacket(class LoginPacket&&); //2
 private:
-	virtual void TryroFunc3();
-	virtual void TryroFunc4();
-	virtual void TryroFunc5();
-	virtual void TryroFunc6();
-	virtual void TryroFunc7();
+	virtual void packetConstructor(void) {};
 public:
-	virtual void readExtended(class ReadOnlyBinaryStream&); //8
-	virtual void disallowBatching(void); //9
-private:
-	virtual void TryroFunc10();
+	virtual int getId(void) { return 0x0; };
+	virtual class TextHolder getTypeName(void) { return (class TextHolder)nullptr; };
+	virtual void write(class BinaryStream&) {};
+	virtual void read(class ReadOnlyBinaryStream&) {};
+	virtual void readExtended(class ReadOnlyBinaryStream&) {};
+	virtual void disallowBatching(void) {};
+
+	// Returns packet name e.g "MovePlayerPacket"
+	std::string getName()
+	{
+		return this->getTypeName().getText();
+	}
+
+	// Set vTable
+	void setVTable(uint64_t vtable)
+	{
+		*(uint64_t*)(reinterpret_cast<uintptr_t>(this) + 0x0) = vtable;
+	}
+
+	// Returns vTable
+	uint64_t getVTable()
+	{
+		return *(uint64_t*)(reinterpret_cast<uintptr_t>(this) + 0x0);
+	}
 };
