@@ -164,7 +164,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                         auto modInstance = handler.modules[i];
                         auto moduleBtnInfo = TextHolder(modInstance->name);
                         auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(75.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
-                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled, modInstance->vElement);
+                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled, modInstance->vElement, modInstance->enabled);
                         if (cda) {
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
                             //hooks->debugEcho("Tooltip", "Tooltips in use");

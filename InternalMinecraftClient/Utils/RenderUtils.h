@@ -63,7 +63,7 @@ public:
 		return false;
 	}
 
-	bool DrawButtonText(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held, TextHolder text, class BitmapFont* font, float scale, Vector2 scaleOffset, bool alwaysHold = false, VisualElement* vElement = nullptr) {
+	bool DrawButtonText(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held, TextHolder text, class BitmapFont* font, float scale, Vector2 scaleOffset, bool alwaysHold = false, VisualElement* vElement = nullptr, bool enabled = false) {
 		if (ctx == nullptr) return false;
 
 		// Values
@@ -84,8 +84,13 @@ public:
 				Draw(boxRect, _RGB(255.f, 255.f, 255.f, vElement->fade * 255.f));
 		}
 
+		// If enabled then glow
+		if (enabled)
+			Draw(boxRect, _RGB(255.f, 255.f, 255.f, 50.f));
+
 		// Render text
 		DrawString(Vector2(boxRect.x, boxRect.y), _RGB(), text, font);
+		ctx->flushText(0);
 
 		return returnValue;
 	};
