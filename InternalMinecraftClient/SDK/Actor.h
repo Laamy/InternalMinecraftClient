@@ -588,4 +588,8 @@ public: // Functions
 	std::string Nametag() {
 		return *reinterpret_cast<std::string*>(this + 0x08D8);
 	}
+
+	void setShadowRadius(float v) {
+		*(float*)((uintptr_t)(this) + 0x04D0) = v;
+	}
 };
