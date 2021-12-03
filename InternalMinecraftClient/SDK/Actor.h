@@ -581,4 +581,8 @@ public: // Functions
 	int getGamemode() {
 		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
+
+	std::string Nametag() {
+		return *reinterpret_cast<std::string*>(this + 0x08D8);
+	}
 };
