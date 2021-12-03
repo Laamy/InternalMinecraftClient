@@ -256,6 +256,7 @@
     <ClInclude Include="SDK\Level.h" />
     <ClInclude Include="Utils\TextFormat.h" />
     <ClInclude Include="Utils\Utils.h" />
+    <ClInclude Include="Utils\VisualElement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

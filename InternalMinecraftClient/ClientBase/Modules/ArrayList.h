@@ -5,27 +5,45 @@ public:
 	ArrayList(std::string cat) : Module(cat, "ArrayList", "Display list of modules that are enabled", 0x07, true) {};
 
 	void OnFrameRender(RenderUtils* ctx) override {
-		int offset = 0;
-		for (int i = 0; i < vMods.size(); ++i) {
-			if (!vMods[i]->enabled) continue;
+		// Client values
+		float offset = 0.f;
+		float fontHeightPadding = 10.f;
 
-			auto vText1 = TextHolder(vMods[i]->name);
+		// Game values
+		Vector2 resolution = ctx->guiData->scaledResolution;
+		BitmapFont* font = ctx->font;
 
-			Vector2 strPos = Vector2(0, 0);
+		// Colors
+		_RGB translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
+		_RGB white = _RGB(255, 255, 255, 255);
+		_RGB blue = _RGB(0.f, 30.f, 255.f, 255.f);
 
-			strPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 0;
-			strPos.y = offset * 20.f;
+		// Loop through our modules
+		for (Module* mod : vMods)
+		{
+			// Check if enabled before rendering
+			if (!mod->enabled)
+				continue;
 
-			Vector2 boxPos = Vector2(0, 0);
+			// Get length of the string
+			float modLen = ctx->MeasureText(mod->name, font);
 
-			boxPos.x = ctx->guiData->scaledResolution.x - ctx->ctx->getLineLength(ctx->font, &vText1, 1) - 1;
-			boxPos.y = offset * 10.f;
+			// Get position of outer boxes
+			float currentYOffset = fontHeightPadding * offset;
+			Rect boxPos = Rect(resolution.x - modLen, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
+			Rect sideBoxPos = Rect(boxPos.x - 2.f, boxPos.y, boxPos.x, boxPos.w);
 
-			ctx->DrawString(strPos, _RGB(200, 200, 200), vText1, ctx->font);
-			ctx->Draw(Vector2(boxPos.x - 2, boxPos.y), Vector2(1.8f, 10), _RGB(0, 30, 255, 69));
-			ctx->Draw(boxPos, Vector2(ctx->ctx->getLineLength(ctx->font, &vText1, 1) + 1, 10), _RGB(33, 33, 33, 69));
+			// Render box behind text
+			ctx->Draw(boxPos, translucentBlack);
 
-			offset++;
+			// Render side box
+			ctx->Draw(sideBoxPos, blue);
+
+			// Render text
+			ctx->DrawString(Vector2(boxPos.x, boxPos.y), white, TextHolder(mod->name), font);
+
+			// Increase module offset
+			offset += 1.f;
 		}
 	}
 };

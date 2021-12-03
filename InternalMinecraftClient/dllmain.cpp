@@ -41,6 +41,7 @@ class ClientInstance* clientInst;
 // Utils
 #include "Utils/Utils.h"
 #include "Utils/RenderUtils.h"
+#include "Utils/VisualElement.h"
 
 RenderUtils renderUtil = RenderUtils();
 
@@ -152,17 +153,18 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     if (frame == 3) { // stop from rendering 3 times a frame
         if (renderClickUI) {
             renderUtil.Draw(Vector2(0, 0), renderUtil.guiData->scaledResolution, _RGB(33, 33, 33, 150));
-            int cat = 0;
+            float cat = 0;
             for (std::string x : categories) {
-                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(48, 10), _RGB(33, 33, 33));
+                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(75, 10), _RGB(33, 33, 33));
                 auto catText = TextHolder(x); // (ctx->getLineLength(font, &catText, 1) / 2)
-                renderUtil.DrawString(Vector2(95 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 165), _RGB(255, 255, 255), catText, font, 0.6f);
+                renderUtil.DrawString(Vector2(80 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 80), _RGB(255, 255, 255), catText, font, 1.f);
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
-                        auto moduleBtnInfo = TextHolder(handler.modules[i]->name);
-                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(48.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
-                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled);
+                        auto modInstance = handler.modules[i];
+                        auto moduleBtnInfo = TextHolder(modInstance->name);
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(75.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
+                            moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled, modInstance->vElement);
                         if (cda) {
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
                             //hooks->debugEcho("Tooltip", "Tooltips in use");
@@ -179,7 +181,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                         catMod++;
                     }
                 }
-                cat++;
+                cat += 1.5f;
             }
         }
         frame = 0;

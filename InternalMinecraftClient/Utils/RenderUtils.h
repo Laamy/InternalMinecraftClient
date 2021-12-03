@@ -1,5 +1,6 @@
 #pragma once*
 #include "../SDK/MinecraftUIRenderContext.h"
+#include "../Utils/VisualElement.h"
 
 class RenderUtils
 {
@@ -32,12 +33,17 @@ public:
 
 	void Draw(Vector2 position, Vector2 size, _RGB colour) {
 		if (ctx == nullptr) return;
-		ctx->fillRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
+		ctx->fillRectangle(Rect(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a);
+	};
+
+	void Draw(Rect rectangle, _RGB colour) {
+		if (ctx == nullptr) return;
+		ctx->fillRectangle(Rect(rectangle.x, rectangle.z, rectangle.y, rectangle.w), colour, colour.a);
 	};
 
 	/*void DrawButton(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held) {
 		if (ctx == nullptr) return;
-		auto rect = Vector4(position.x, position.x + size.x, position.y, position.y + size.y);
+		auto rect = Rect(position.x, position.x + size.x, position.y, position.y + size.y);
 		if (curMousePos.x < rect.x && curMousePos.x > rect.w && curMousePos.y < rect.z && curMousePos.y > rect.y) {
 			if (!held) ctx->fillRectangle(rect, hoverColour, colour.a);
 			else ctx->fillRectangle(rect, heldColour, colour.a);
@@ -49,48 +55,53 @@ public:
 		return DrawButtonText(position, size, colour, hoverColour, heldColour, curMousePos, held, text, font, 1, Vector2(0, 0));
 	};
 
-	bool DrawButtonText(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held, TextHolder text, class BitmapFont* font, float scale, Vector2 scaleOffset, bool alwaysHold = false) {
-		if (ctx == nullptr) return false; // tf?
-		bool toReturn;
-		auto rect = Vector4(position.x, position.x + size.x, position.y, position.y + size.y);
-		if (alwaysHold) {
-			ctx->fillRectangle(rect, _RGB(115, 115, 115), colour.a);
-			DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(100, 100, 100), text, font, scale);
+	// Returns TRUE if mouse is inside the specified rectangle
+	bool isMouseInRect(Rect pos, Vector2 mousePos)
+	{
+		if (pos.x < mousePos.x && pos.y < mousePos.y && pos.z > mousePos.x && pos.w > mousePos.y)
+			return true;
+		return false;
+	}
+
+	bool DrawButtonText(Vector2 position, Vector2 size, _RGB colour, _RGB hoverColour, _RGB heldColour, Vector2 curMousePos, bool held, TextHolder text, class BitmapFont* font, float scale, Vector2 scaleOffset, bool alwaysHold = false, VisualElement* vElement = nullptr) {
+		if (ctx == nullptr) return false;
+
+		// Values
+		_RGB color = _RGB(40,40,40,255);
+		Rect boxRect = Rect(position.x, position.y, position.x + size.x, position.y + size.y);
+
+		// Get if mouse is in box
+		bool returnValue = isMouseInRect(boxRect, curMousePos);
+
+		// Render
+		Draw(boxRect, color);
+
+		// Animate
+		if (vElement != nullptr)
+		{
+			vElement->increment(0.00625f, 0.1f, returnValue);
+			if (vElement->fade >= 0)
+				Draw(boxRect, _RGB(255.f, 255.f, 255.f, vElement->fade * 255.f));
 		}
-		if (curMousePos.x < rect.x && curMousePos.x > rect.w && curMousePos.y < rect.z && curMousePos.y > rect.y) {
-			if (!held) {
-				if (!alwaysHold)
-					ctx->fillRectangle(rect, _RGB(100, 100, 100), colour.a);
-			}
-			else {
-				if (!alwaysHold)
-					ctx->fillRectangle(rect, _RGB(90, 90, 90), colour.a);
-				toReturn = true;
-			}
-			if (!alwaysHold)
-				DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(100, 100, 100), text, font, scale);
-		}
-		else {
-			if (!alwaysHold) {
-				ctx->fillRectangle(rect, _RGB(15, 15, 15), colour.a);
-				DrawString(Vector2(position.x + scaleOffset.x, position.y * 2 + scaleOffset.y), _RGB(255, 255, 255), text, font, scale);
-			}
-		}
-		return toReturn;
+
+		// Render text
+		DrawString(Vector2(boxRect.x, boxRect.y), _RGB(), text, font);
+
+		return returnValue;
 	};
 
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour, float width) {
 		if (ctx == nullptr) return;
-		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
+		ctx->drawRectangle(Rect(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)width);
 	};
 
 	void DrawOutline(Vector2 position, Vector2 size, _RGB colour) {
 		if (ctx == nullptr) return;
-		ctx->drawRectangle(Vector4(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)(colour.a / 255.0f));
+		ctx->drawRectangle(Rect(position.x, position.x + size.x, position.y, position.y + size.y), colour, colour.a, (int)(colour.a / 255.0f));
 	};
 
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font) {
-		DrawString(position, colour, text, font, 1);
+		DrawString(position, colour, text, font, 1.f);
 	};
 
 	auto World2Screen(Vector3 position, Vector2& out) { // fixed w2s
@@ -107,15 +118,13 @@ public:
 
 	void DrawString(Vector2 position, _RGB colour, TextHolder text, class BitmapFont* font, float measureCalc) {
 		if (ctx == nullptr) return;
-		position.x = position.x * 1;
-		position.y = position.y * 1 / 2;
-		auto calc = Vector4(position.x, position.x + 1000, position.y, position.y + 1000);
+		auto calc = Rect(position.x, position.x + 1000, position.y, position.y + 1000);
 		CaretMeasureData measureCalc2 = CaretMeasureData();
 		ctx->drawText(font, &calc, &text, colour, colour.a, nullptr, &measureCalc, &measureCalc2);
 		ctx->flushText(0);
 	};
 
-	void FillRectAndDrawRect(Vector4 pos, _RGB colour1, _RGB colour2, float opacity, float opacity2, float lineWidth) {
+	void FillRectAndDrawRect(Rect pos, _RGB colour1, _RGB colour2, float opacity, float opacity2, float lineWidth) {
 		ctx->fillRectangle(pos, colour1, opacity);
 		ctx->drawRectangle(pos, colour2, opacity2, lineWidth);
 	};
