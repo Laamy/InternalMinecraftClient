@@ -147,10 +147,12 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
     if (renderUtil.ctx == nullptr || font == nullptr) return;
     if (cancelUiRender == false)
         _render(a1, ctx);
-    handler.FrameRender(&renderUtil);
-
     frame++;
+
+    // wtf is wrong with you for coding this spaghetti bowl ass code
     if (frame == 3) { // stop from rendering 3 times a frame
+        handler.FrameRender(&renderUtil);
+
         if (renderClickUI) {
             renderUtil.Draw(Vector2(0, 0), renderUtil.guiData->scaledResolution, _RGB(33, 33, 33, 150));
             float cat = 0;
@@ -184,40 +186,39 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
                 cat += 1.5f;
             }
         }
+        int loopIndex = 0;
+        for (auto notification : hooks->notifications) {
+            notification->existedTick++;
+            if (notification->existedTick == notification->canExistFor/*Tick*/)
+                hooks->notifications.erase(std::remove(hooks->notifications.begin(), hooks->notifications.end(), notification),
+                    hooks->notifications.end());
+            if (notification->existedTick >= (notification->canExistFor - 255)/*Tick*/)
+                notification->fadeAlpha--; // make notification fade out
+            if (notification->existedTick <= 255/*Tick*/)
+                notification->fadeAlpha++; // make notification fade in
+            // Render The Notification
+            renderUtil.DrawString(Vector2(25.f, 25.f + (20.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
+            loopIndex++;
+        }
+
+        for (int i = 0; i < handler.modules.size(); i++)
+            modulesEnabled[i] = handler.modules[i]->enabled;
+
+        if (justDisabled && clientInst->isInGame()) { //Eject Message
+            disabledTicks++;
+            if (disabledTicks == 1) {
+                localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
+            }
+        }
+
+        for (auto mod : handler.modules) {
+            auto Eject = mod->name == "Uninject";
+            if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
+                justDisabled = true;
+                clientAlive = false;
+            }
+        }
         frame = 0;
-    }
-
-    int loopIndex = 0;
-    for (auto notification : hooks->notifications) {
-        notification->existedTick++;
-        if (notification->existedTick == notification->canExistFor/*Tick*/)
-            hooks->notifications.erase(std::remove(hooks->notifications.begin(), hooks->notifications.end(), notification),
-                hooks->notifications.end());
-        if (notification->existedTick >= (notification->canExistFor - 255)/*Tick*/)
-            notification->fadeAlpha--; // make notification fade out
-        if (notification->existedTick <= 255/*Tick*/)
-            notification->fadeAlpha++; // make notification fade in
-        // Render The Notification
-        renderUtil.DrawString(Vector2(25.f, 25.f + (20.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
-        loopIndex++;
-    }
-
-    for (int i = 0; i < handler.modules.size(); i++)
-        modulesEnabled[i] = handler.modules[i]->enabled;
-
-    if (justDisabled && clientInst->isInGame()) { //Eject Message
-        disabledTicks++;
-        if (disabledTicks == 1) {
-            localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
-        }
-    }
-
-    for (auto mod : handler.modules) {
-        auto Eject = mod->name == "Uninject";
-        if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
-            justDisabled = true;
-            clientAlive = false;
-        }
     }
 }
 

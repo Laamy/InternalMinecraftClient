@@ -1,7 +1,7 @@
 #pragma once
 class VisualElement {
 public:
-	float x, y, fade = 0;
+	float x, y, len, fade = 0;
 	bool initialised, open = false;
 	VisualElement() {
 		this->initialised = false;
