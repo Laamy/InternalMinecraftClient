@@ -44,6 +44,7 @@
 #include "Modules/StreamName.h"
 #include "Modules/CreativeFly.h"
 #include "Modules/DebugMenu.h"
+#include "Modules/NoWeb.h"
 #include "Modules/NoFall.h"
 #include "Modules/NoYFlight.h"
 #include "Modules/Bhop.h"
@@ -124,6 +125,7 @@ public:
         modules.push_back(new NoBrakes(player));
         modules.push_back(new Velocity(player));
         modules.push_back(new InventoryMove(player));
+        modules.push_back(new NoWeb(player));
 
         modules.push_back(new OGMFlight(flies));
         modules.push_back(new CreativeFly(flies));

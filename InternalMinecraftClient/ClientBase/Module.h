@@ -1,4 +1,5 @@
 #pragma once
+#include "../Utils/RenderUtils.h"
 #include "BypassBox.h"
 
 class Module {
@@ -15,6 +16,7 @@ public:
     std::string category;
     std::string name;
 	std::string tooltip;
+	VisualElement* vElement = new VisualElement();
     uintptr_t keybind;
     bool enabled;
 

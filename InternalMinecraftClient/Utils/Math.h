@@ -55,30 +55,35 @@ struct Vector3 {
 	}
 };
 
-struct Vector4 {
-	union {
-		struct {
-			float w, x, y, z;
+struct Rect {
+	union
+	{
+		struct
+		{
+			float x;
+			float y;
+			float z;
+			float w;
 		};
-		float arr[3];
+		float array[4];
 	};
 
-	Vector4(float w = 0, float x = 0, float y = 0, float z = 0) {
-		this->w = w;
+	Rect()
+	{
+		this->x = 0;
+		this->y = 0;
+		this->z = 0;
+		this->w = 0;
+	};
+
+	Rect(float x, float y, float z, float w)
+	{
 		this->x = x;
 		this->y = y;
 		this->z = z;
+		this->w = w;
 	};
 
-	Vector4(Vector2 position, Vector2 size) {
-		this->w = position.x;
-		this->x = position.x + size.x;
-		this->y = position.y;
-		this->z = position.y + size.y;
-	};
-
-	bool operator == (Vector4 v) { return v.w == w && v.x == x && v.y == y && v.z == z; };
-	bool operator != (Vector4 v) { return v.w != w || v.x != x || v.y != y || v.z != z; };
 };
 
 

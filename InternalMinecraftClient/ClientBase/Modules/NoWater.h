@@ -6,11 +6,9 @@ public:
 
     void OnGameTick(Actor* lp) override {
         if (lp->IsInWater || lp->isInLava()) {
-            lp->IsInWater = 0;
-            lp->stopSwimming();
-//            lp->isInWater(false);
-//            lp->hasEnteredWater(false);
+            lp->IsInWater = false;
+            lp->IsSwimming = false;
+            lp->HasEnteredWater = false;
         }
-        
     }
 };
