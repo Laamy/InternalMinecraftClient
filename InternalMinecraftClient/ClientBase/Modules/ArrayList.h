@@ -42,7 +42,7 @@ public:
 
 			// Do rainbow wave
 			long rainbowIndex = offset * 50;
-			rainbow = ctx->getRainbow(3.0f, 1.0f, 1.0f, rainbowIndex);
+			rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex);
 
 			// Get length of the string
 			float modLen = ctx->MeasureText(mod->name, font) + 4;

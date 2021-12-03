@@ -53,6 +53,7 @@ std::vector<class Module*> vMods;
 std::map<uint64_t, bool> keymap = std::map<uint64_t, bool>();
 #include "ClientBase/ModuleHandler.h"
 #include "ClientBase/CommandHandler.h"
+#include <thread>
 
 GuiData* acs;
 Actor* localPlr;
@@ -118,7 +119,8 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                 if (handler.modules[i]->enabled)
                     handler.modules[i]->OnEnable(clientInst, localPlr);
                 else handler.modules[i]->OnDisable(clientInst, localPlr);
-            } else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {//for normal modules
+            }
+            else if (!handler.modules[i]->HoldMode() && c == handler.modules[i]->keybind && v == true) {//for normal modules
                 handler.modules[i]->enabled = !handler.modules[i]->enabled;
                 if (handler.modules[i]->enabled) {
                     handler.modules[i]->OnEnable(clientInst, localPlr);
@@ -127,7 +129,8 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                         if (Notis && mod->enabled)
                             hooks->debugEcho("ModuleEnabled", "Module has been enabled");
                     }
-                } else {
+                }
+                else {
                     handler.modules[i]->OnDisable(clientInst, localPlr);
                     for (auto mod : handler.modules) {
                         auto Notis = mod->name == "Notifications";
@@ -157,20 +160,20 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
             renderUtil.Draw(Vector2(0, 0), renderUtil.guiData->scaledResolution, _RGB(33, 33, 33, 150));
             float cat = 0;
             for (std::string x : categories) {
-                renderUtil.Draw(Vector2((float)(70 + (cat * 60)), 80), Vector2(75, 10), _RGB(33, 33, 33));
+                renderUtil.Draw(Vector2((float)(20 + (cat * 60)), 80), Vector2(75, 10), _RGB(33, 33, 33));
                 auto catText = TextHolder(x); // (ctx->getLineLength(font, &catText, 1) / 2)
-                renderUtil.DrawString(Vector2(80 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 80), _RGB(255, 255, 255), catText, font, 1.f);
+                renderUtil.DrawString(Vector2(30 + (cat * 60) - (ctx->getLineLength(font, &catText, 0.6f) / 2), 80), _RGB(255, 255, 255), catText, font, 1.f);
                 int catMod = 0;
                 for (int i = 0; i < handler.modules.size(); ++i) {
                     if (handler.modules[i]->category == x) {
                         auto modInstance = handler.modules[i];
                         auto moduleBtnInfo = TextHolder(modInstance->name);
-                        auto cda = renderUtil.DrawButtonText(Vector2((float)(70.f + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(75.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
+                        auto cda = renderUtil.DrawButtonText(Vector2((float)(20 + (cat * 60.f)), 90.f + (catMod * 10.f)), Vector2(75.f, 10.f), _RGB(55, 55, 55), _RGB(44, 44, 44), _RGB(40, 40, 40), renderUtil.guiData->scaledMousePos(), keymap[(int)' '],
                             moduleBtnInfo, font, 0.6f, Vector2(24 - (ctx->getLineLength(font, &moduleBtnInfo, 0.6f) / 2), 4), handler.modules[i]->enabled, modInstance->vElement, modInstance->enabled);
                         if (cda) {
                             handler.modules[i]->drawTooltip(TextHolder(handler.modules[i]->tooltip));
                             //hooks->debugEcho("Tooltip", "Tooltips in use");
-                        }                            
+                        }
 
                         if (cda && keymap[(int)' '] && beforeKeymap[i] == false) {
                             handler.modules[i]->enabled = !handler.modules[i]->enabled;
@@ -226,8 +229,8 @@ void callback(ClientInstance* ci, void* a2) {
     clientInst = ci; acs = ci->getGuiData();
     font = ci->mcGame->defaultGameFont;
     for (auto mod : handler.modules)
-    if (ci->isInGame() && mod->enabled)
-    mod->OnTick(ci); _tick(ci, a2);
+        if (ci->isInGame() && mod->enabled)
+            mod->OnTick(ci); _tick(ci, a2);
 }
 
 int a = 0;
@@ -238,8 +241,8 @@ void playerCallback(Actor* lp, void* a2) {
         localPlr = lp;
     }
     entityList[reinterpret_cast<uint64_t>(lp)] = lp;
-    for (auto mod:handler.modules)
-    if (mod->enabled) mod->OnGameTick(lp);
+    for (auto mod : handler.modules)
+        if (mod->enabled) mod->OnGameTick(lp);
 }
 /*
 void gamemodeCallback(GameMode* gm, void* a2) {
@@ -286,7 +289,8 @@ void chatMsgCallback(void* a1, TextHolder* txt) {
             auto txt2 = ((std::string)txt->getText());
             checkCmd->Execute(split(txt2, ' '));
         }
-    } else _chatMsg(a1, txt);
+    }
+    else _chatMsg(a1, txt);
 }
 
 std::string getClipboardText() {
@@ -318,6 +322,17 @@ void setClipboardText(std::string text) {
     GlobalFree(hg);
 }
 
+void loopUntilEject() {
+lab:
+    while (clientAlive) {};
+    Sleep(1);
+    if (clientAlive)
+        goto lab;
+    MH_DisableHook(MH_ALL_HOOKS);
+    MH_RemoveHook(MH_ALL_HOOKS);
+    FreeLibraryAndExitThread(GetDllHMod(), 0);
+}
+
 void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
         handler.InitModules();
@@ -326,9 +341,9 @@ void Init(LPVOID c) {
         for (auto mod : handler.modules) {
             bool addCategory = true;
             for (auto cat : categories)
-            if (mod->category == cat) addCategory = false;
+                if (mod->category == cat) addCategory = false;
             if (addCategory)
-            categories.push_back(mod->category);
+                categories.push_back(mod->category);
         }
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
@@ -356,28 +371,23 @@ void Init(LPVOID c) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
-       /*if (MH_CreateHook((void*)gamemodeAddr, &gamemodeCallback, reinterpret_cast<LPVOID*>(&_gamemode)) == MH_OK) {
-            MH_EnableHook((void*)gamemodeAddr);
-            _logf(L"[TreroInternal]: GameMode hooked!\n");
-        };*/
-        //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
-        //    MH_EnableHook((void*)mouseAddr);
-        //    _logf(L"[TreroInternal]: KeyInfo hooked!\n");
-        //};
+        /*if (MH_CreateHook((void*)gamemodeAddr, &gamemodeCallback, reinterpret_cast<LPVOID*>(&_gamemode)) == MH_OK) {
+             MH_EnableHook((void*)gamemodeAddr);
+             _logf(L"[TreroInternal]: GameMode hooked!\n");
+         };*/
+         //if (MH_CreateHook((void*)mouseAddr, &mouseCallback, reinterpret_cast<LPVOID*>(&_mouse)) == MH_OK) {
+         //    MH_EnableHook((void*)mouseAddr);
+         //    _logf(L"[TreroInternal]: KeyInfo hooked!\n");
+         //};
         if (MH_CreateHook((void*)renderCtxAddr, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
             MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
         };
         hooks->debugEcho("InitMsg", "Client has initialized");
 
-    lab:
-        while (clientAlive) {};
-        Sleep(1);
-        if (clientAlive)
-        goto lab;
-        MH_DisableHook(MH_ALL_HOOKS);
-        MH_RemoveHook(MH_ALL_HOOKS);
-        FreeLibraryAndExitThread(GetDllHMod(), 0);
+        clientAlive = true;
+        std::thread loopThread = std::thread(loopUntilEject);
+        loopThread.join();
     }
 }
 
