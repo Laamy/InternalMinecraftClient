@@ -322,17 +322,6 @@ void setClipboardText(std::string text) {
     GlobalFree(hg);
 }
 
-void loopUntilEject() {
-lab:
-    while (clientAlive) {};
-    Sleep(1);
-    if (clientAlive)
-        goto lab;
-    MH_DisableHook(MH_ALL_HOOKS);
-    MH_RemoveHook(MH_ALL_HOOKS);
-    FreeLibraryAndExitThread(GetDllHMod(), 0);
-}
-
 void Init(LPVOID c) {
     if (MH_Initialize() == MH_OK) {
         handler.InitModules();
@@ -384,10 +373,15 @@ void Init(LPVOID c) {
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
         };
         hooks->debugEcho("InitMsg", "Client has initialized");
+    lab:
+        while (clientAlive) {};
+        Sleep(1);
+        if (clientAlive)
+            goto lab;
 
-        clientAlive = true;
-        std::thread loopThread = std::thread(loopUntilEject);
-        loopThread.join();
+        MH_DisableHook(MH_ALL_HOOKS);
+        MH_RemoveHook(MH_ALL_HOOKS);
+        FreeLibraryAndExitThread(GetDllHMod(), 0);
     }
 }
 
