@@ -147,6 +147,8 @@
     <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\FluxSwing.h" />
     <ClInclude Include="ClientBase\Modules\8BitSwing.h" />
+    <ClInclude Include="ClientBase\Modules\OldSwing.h" />
+    <ClInclude Include="ClientBase\Modules\PushSwing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

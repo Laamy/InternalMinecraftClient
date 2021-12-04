@@ -69,6 +69,8 @@
 #include "Modules/LDFreelook.h"
 #include "Modules/AutoSneak.h"
 #include "Modules/InventoryMove.h"
+#include "Modules/OldSwing.h"
+#include "Modules/PushSwing.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -153,6 +155,8 @@ public:
         modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Tracers(visual));
         modules.push_back(new EightBitSwing(visual));
+        modules.push_back(new OldSwing(visual));
+        modules.push_back(new PushSwing(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));
