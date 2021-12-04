@@ -146,6 +146,7 @@
     <ClInclude Include="SDK\LoopbackPacketSender.h" />
     <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\FluxSwing.h" />
+    <ClInclude Include="ClientBase\Modules\8BitSwing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -19,6 +19,7 @@
 #include "Modules/NoObstructionSwing.h"
 #include "Modules/FluxSwing.h"
 #include "Modules/FastWater.h"
+#include "Modules/8BitSwing.h"
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
@@ -151,6 +152,7 @@ public:
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Tracers(visual));
+        modules.push_back(new EightBitSwing(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));

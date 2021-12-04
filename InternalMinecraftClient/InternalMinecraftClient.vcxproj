@@ -168,6 +168,7 @@
     <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
+    <ClInclude Include="ClientBase\Modules\8BitSwing.h" />
     <ClInclude Include="ClientBase\Modules\AirJump.h" />
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
