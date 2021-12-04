@@ -18,9 +18,9 @@ public:
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
-		BYTE* patch = (BYTE*)"\xF3\x0F\x00\x00\x00\xF3\x0F\x00";
+		BYTE* patch = (BYTE*)"\xF3\x0F\x11\x46\x0C\x41\xC7";
 		Mem::patchBytes((BYTE*)((uintptr_t)targetAddress), patch, 5);
-		BYTE* patch2 = (BYTE*)"\xF3\x0F\x00\x00\x00\x41\xC7\x06";
+		BYTE* patch2 = (BYTE*)"\xF3\x0F\x11\x46\x0C\xF3\x0F\x10\x05";
 		Mem::patchBytes((BYTE*)((uintptr_t)targetAddress2), patch2, 5);
 	}
 };
