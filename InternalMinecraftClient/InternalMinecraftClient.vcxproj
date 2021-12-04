@@ -237,6 +237,7 @@
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GLMatrix.h" />
     <ClInclude Include="SDK\GuiData.h" />
+    <ClInclude Include="SDK\LoopbackPacketSender.h" />
     <ClInclude Include="SDK\KeyInfo.h" />
     <ClInclude Include="SDK\LevelRender.h" />
     <ClInclude Include="SDK\MinecraftGame.h" />
