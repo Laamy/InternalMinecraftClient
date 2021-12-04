@@ -33,7 +33,7 @@ public:
 		// Colors
 		_RGB translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
 		_RGB white = _RGB(255, 255, 255, 255);
-		_RGB rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f);
+		_RGB rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f, 255.f, 255.f, 255.f);
 
 		// Loop through our modules
 		for (Module* mod : vMods)
@@ -44,7 +44,7 @@ public:
 
 			// Do rainbow wave
 			long rainbowIndex = offset * 50;
-			rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex);
+			rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex, 255.f, 255.f, 255.f);
 
 			// Get length of the string
 			if (RightBar) {

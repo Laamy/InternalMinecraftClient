@@ -255,18 +255,18 @@ public:
 	}
 
 	// Gets HSV color by current MS
-	_RGB getRainbow(float speedInSeconds, float s, float v)
+	_RGB getRainbow(float speedInSeconds, float s, float v, float red, float green, float blue)
 	{
 		float hue = ((getCurrentMs()) % (int)(((int)speedInSeconds) * 1000)) / (float)(((int)speedInSeconds) * 1000);
 		float r, g, b = 0;
 		hsvToRGB(hue, s, v, r, g, b);
-		return _RGB(r*255.f, g*255.f, b*255.f, 255.f);
+		return _RGB(r * red, g * green, b * blue, 255.f);
 	}
-	_RGB getRainbow(float speedInSeconds, float s, float v, long index)
+	_RGB getRainbow(float speedInSeconds, float s, float v, long index, float red, float green, float blue)
 	{
 		float hue = ((getCurrentMs() + index) % (int)(((int)speedInSeconds) * 1000)) / (float)(((int)speedInSeconds) * 1000);
 		float r, g, b = 0;
 		hsvToRGB(hue, s, v, r, g, b);
-		return _RGB(r * 255.f, g * 255.f, b * 255.f, 255.f);
+		return _RGB(r * red, g * green, b * blue, 255.f);
 	}
 };
