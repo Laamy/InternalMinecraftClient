@@ -51,7 +51,7 @@ public:
 			// Get position of outer boxes
 			float currentYOffset = fontHeightPadding * offset;
 			Rect boxPos = Rect(resolution.x - modLen, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
-			Rect sideBoxPos = Rect(boxPos.x - 2.f, boxPos.y, boxPos.x, boxPos.w);
+			Rect sideBoxPos = Rect(boxPos.x - 1.f, boxPos.y, boxPos.x, boxPos.w);
 
 			// Render box behind text
 			ctx->Draw(boxPos, translucentBlack);
@@ -61,18 +61,18 @@ public:
 
 			// Underline
 			if (lastStartPos != 0)
-				ctx->Draw(Rect(lastStartPos - 2.f, boxPos.y, boxPos.x, boxPos.y + 2.0f), rainbow);
+				ctx->Draw(Rect(lastStartPos - 1.f, boxPos.y, boxPos.x, boxPos.y + 1.0f), rainbow);
 			lastStartPos = boxPos.x;
 			lastPos = boxPos;
 
 			// Render text
-			ctx->DrawString(Vector2(boxPos.x + 2, boxPos.y), white, TextHolder(mod->name), font);
+			ctx->DrawString(Vector2(boxPos.x + 2, boxPos.y), rainbow, TextHolder(mod->name), font);
 
 			// Increase module offset
 			offset += 1.f;
 		}
 
 		// Underline last arraylist mod
-		ctx->Draw(Rect(lastPos.x - 2.f, lastPos.w, lastPos.z, lastPos.w + 2.f), rainbow);
+		ctx->Draw(Rect(lastPos.x - 1.f, lastPos.w, lastPos.z, lastPos.w + 1.f), rainbow);
 	}
 };
