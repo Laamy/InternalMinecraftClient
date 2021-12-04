@@ -149,6 +149,7 @@
     <ClInclude Include="ClientBase\Modules\8BitSwing.h" />
     <ClInclude Include="ClientBase\Modules\OldSwing.h" />
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
+    <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

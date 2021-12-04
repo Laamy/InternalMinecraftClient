@@ -18,6 +18,7 @@
 #include "Modules/ExpandScreen.h"
 #include "Modules/NoObstructionSwing.h"
 #include "Modules/FluxSwing.h"
+#include "Modules/FloppySwing.h"
 #include "Modules/FastWater.h"
 #include "Modules/8BitSwing.h"
 #include "Modules/Godmode.h"
@@ -157,6 +158,7 @@ public:
         modules.push_back(new EightBitSwing(visual));
         modules.push_back(new OldSwing(visual));
         modules.push_back(new PushSwing(visual));
+        modules.push_back(new FloppySwing(visual));
 
         modules.push_back(new TestModule(debug));
         modules.push_back(new DebugCursor(debug));
