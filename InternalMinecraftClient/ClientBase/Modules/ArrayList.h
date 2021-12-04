@@ -1,5 +1,7 @@
 #pragma once
 
+bool RightBar = true; // set this to true for a cool Right bar
+
 class ArrayList : public Module {
 public:
 	ArrayList(std::string cat) : Module(cat, "ArrayList", "Display list of modules that are enabled", 0x07, true) {};
@@ -45,34 +47,45 @@ public:
 			rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex);
 
 			// Get length of the string
-			float modLen = ctx->MeasureText(mod->name, font) + 4;
-			mod->vElement->len = modLen;
-
-			// Get position of outer boxes
-			float currentYOffset = fontHeightPadding * offset;
-			Rect boxPos = Rect(resolution.x - modLen, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
-			Rect sideBoxPos = Rect(boxPos.x - 1.f, boxPos.y, boxPos.x, boxPos.w);
-
-			// Render box behind text
-			ctx->Draw(boxPos, translucentBlack);
-
-			// Render side box
-			ctx->Draw(sideBoxPos, rainbow);
-
-			// Underline
-			if (lastStartPos != 0)
-				ctx->Draw(Rect(lastStartPos - 1.f, boxPos.y, boxPos.x, boxPos.y + 1.0f), rainbow);
-			lastStartPos = boxPos.x;
-			lastPos = boxPos;
-
-			// Render text
-			ctx->DrawString(Vector2(boxPos.x + 2, boxPos.y), rainbow, TextHolder(mod->name), font);
-
+			if (RightBar) {
+				float modLen = ctx->MeasureText(mod->name, font) + 7;
+				mod->vElement->len = modLen;
+				// Get position of outer boxes
+				float currentYOffset = fontHeightPadding * offset;
+				Rect boxPos = Rect(resolution.x - modLen, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
+				Rect sideBoxPos = Rect(boxPos.x - 1.f, boxPos.y, boxPos.x, boxPos.w);
+				Rect RightbarPos = Rect(resolution.x - 2.f, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
+				// Render box behind text
+				ctx->Draw(boxPos, translucentBlack);
+				// Render Right Bar
+				ctx->Draw(RightbarPos, rainbow);
+				// Render text
+				ctx->DrawString(Vector2(boxPos.x + 2, boxPos.y), rainbow, TextHolder(mod->name), font);
+			}else{
+				float modLen = ctx->MeasureText(mod->name, font) + 3;
+				mod->vElement->len = modLen;
+				// Get position of outer boxes
+				float currentYOffset = fontHeightPadding * offset;
+				Rect boxPos = Rect(resolution.x - modLen, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
+				Rect sideBoxPos = Rect(boxPos.x - 1.f, boxPos.y, boxPos.x, boxPos.w);
+				Rect RightbarPos = Rect(resolution.x - 3.f, currentYOffset, resolution.x, currentYOffset + fontHeightPadding);
+				// Render box behind text
+				ctx->Draw(boxPos, translucentBlack);
+				// Render side box
+				ctx->Draw(sideBoxPos, rainbow);
+				// Underline
+				if (lastStartPos != 0)
+					ctx->Draw(Rect(lastStartPos - 1.f, boxPos.y, boxPos.x, boxPos.y + 1.0f), rainbow);
+				lastStartPos = boxPos.x;
+				lastPos = boxPos;
+				// Render text
+				ctx->DrawString(Vector2(boxPos.x + 2, boxPos.y), rainbow, TextHolder(mod->name), font);
+			}
 			// Increase module offset
 			offset += 1.f;
 		}
-
 		// Underline last arraylist mod
+		if(!RightBar)
 		ctx->Draw(Rect(lastPos.x - 1.f, lastPos.w, lastPos.z, lastPos.w + 1.f), rainbow);
 	}
 };
