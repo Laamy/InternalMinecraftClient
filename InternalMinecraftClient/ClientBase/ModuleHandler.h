@@ -20,6 +20,7 @@
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
+#include "Modules/NoSlow.h"
 #include "Modules/CreativeMode.h"
 #include "Modules/AntiImmobile.h"
 #include "Modules/Spammer.h"
@@ -157,6 +158,7 @@ public:
         modules.push_back(new Spammer(misc));
         modules.push_back(new Uninject(misc));
         modules.push_back(new ExpandScreen(misc));
+        modules.push_back(new NoSlow(misc));
         modules.push_back(new AntiImmobile(misc));
         modules.push_back(new AntiLagBack(misc));
 
