@@ -12,6 +12,7 @@ BaseClient* hooks = new BaseClient();
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
 bool cancelUiRender = false;
+bool JustToggleddMod = false;
 auto GetDllHMod(void) -> HMODULE {
     MEMORY_BASIC_INFORMATION info;
     size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
@@ -125,6 +126,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                 if (handler.modules[i]->enabled) {
                     handler.modules[i]->OnEnable(clientInst, localPlr);
                     for (auto mod : handler.modules) {
+                        JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
                             hooks->debugEcho("ModuleEnabled", "Module has been enabled");
@@ -133,6 +135,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                 else {
                     handler.modules[i]->OnDisable(clientInst, localPlr);
                     for (auto mod : handler.modules) {
+                        JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
                             hooks->debugEcho("ModuleDisabled", "Module has been disabled");

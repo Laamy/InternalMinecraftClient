@@ -28,16 +28,18 @@ public:
         Rect boxPos;
         Rect sideBoxPos;
         Rect RightbarPos;
+        _RGB translucentBlack;
+        _RGB rainbow;
         // Game values
         Vector2 resolution = ctx->guiData->scaledResolution;
         BitmapFont* font = ctx->font;
-        // Colors
-        _RGB translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
-        _RGB white = _RGB(255, 255, 255, 255);
-        _RGB rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f, 255.f, 255.f, 255.f);
-        // Do rainbow wave
-        long rainbowIndex = offset * 50;
-        rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex, 255.f, 255.f, 255.f);
+
+            // Colors
+            translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
+            rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f, 255.f, 255.f, 255.f, 255.f);
+            // Do rainbow wave
+            long rainbowIndex = offset * 50;
+            rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex, 255.f, 255.f, 255.f, 255.f);
 
 
         // Loop through our modules
@@ -47,7 +49,7 @@ public:
                 continue;
             // Get length of the string
             if (RightBar)
-                modLen = ctx->MeasureText(mod->name, font) + 5.5;
+                modLen = ctx->MeasureText(mod->name, font) + 6;
             else
                 modLen = ctx->MeasureText(mod->name, font) + 4;
             mod->vElement->len = modLen;
@@ -82,6 +84,7 @@ public:
             offset += 1.f;
         }
         // Underline last arraylist mod
+        if(!RightBar)
         ctx->Draw(Rect(lastPos.x - 1.f, lastPos.w, lastPos.z, lastPos.w + 1.f), rainbow);
     }
 };
