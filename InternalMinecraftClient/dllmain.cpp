@@ -198,12 +198,12 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
             if (notification->existedTick == notification->canExistFor/*Tick*/)
                 hooks->notifications.erase(std::remove(hooks->notifications.begin(), hooks->notifications.end(), notification),
                     hooks->notifications.end());
-            if (notification->existedTick >= (notification->canExistFor - 255)/*Tick*/)
+            if (notification->existedTick >= (notification->canExistFor - 15)/*Tick*/)
                 notification->fadeAlpha--; // make notification fade out
-            if (notification->existedTick <= 255/*Tick*/)
+            if (notification->existedTick <= 15/*Tick*/)
                 notification->fadeAlpha++; // make notification fade in
             // Render The Notification
-            renderUtil.DrawString(Vector2(25.f, 25.f + (20.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha), TextHolder(notification->notificationDesc), font, 0.8f);
+            renderUtil.DrawString(Vector2(5.f, 5.f + (13.f/*textSize*/ * loopIndex)), _RGB(255, 255, 255, (int)notification->fadeAlpha * 17), TextHolder(notification->notificationDesc), font, 0.8f);
             loopIndex++;
         }
 
