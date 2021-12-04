@@ -4,7 +4,6 @@ class Animation : public Module {
 public:
 	Animation(std::string cat) : Module(cat, "Animation", "Cool Animation", 0x07) {}
 	void* targetAddress;
-	void* targetAddress2;
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
 		if (targetAddress == nullptr)
