@@ -10,6 +10,7 @@ public:
 		/* GetSleepTimer sigs that actually work!
 		0F BF 81 0C 10 00 00 C3 CC CC CC CC CC CC CC CC
 		0F BF 81 0E 10 00 00 C3 CC CC CC CC CC CC CC CC
+		0x0100C offset for it
 		*/
 	}
 
