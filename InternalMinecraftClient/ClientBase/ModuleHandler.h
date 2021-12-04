@@ -99,7 +99,7 @@ public:
         modules.push_back(new Killaura(combat));
         //modules.push_back(new Reach(combat)); // for now because not werking :/
         modules.push_back(new SpinAttack(combat));
-        modules.push_back(new Tornado(combat));
+        //modules.push_back(new Tornado(combat)); //no point
 
         modules.push_back(new AirJump(world));
         modules.push_back(new Antibot(world));
