@@ -144,7 +144,8 @@
     <ClInclude Include="ClientBase\Modules\NoWeb.h" />
     <ClInclude Include="ClientBase\Modules\NoSlow.h" />
     <ClInclude Include="SDK\LoopbackPacketSender.h" />
-    <ClInclude Include="ClientBase\Modules\Animations.h" />
+    <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
+    <ClInclude Include="ClientBase\Modules\FluxSwing.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,7 +16,8 @@
 #include "Modules/OGMFlight.h"
 #include "Modules/Tornado.h"
 #include "Modules/ExpandScreen.h"
-#include "Modules/Animations.h"
+#include "Modules/NoObstructionSwing.h"
+#include "Modules/FluxSwing.h"
 #include "Modules/FastWater.h"
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
@@ -140,7 +141,8 @@ public:
         modules.push_back(new Freelook(visual));
         modules.push_back(new NoSwing(visual));
         modules.push_back(new Zoom(visual));
-        modules.push_back(new Animation(visual));
+        modules.push_back(new NoObstructionSwing(visual));
+        modules.push_back(new FluxSwing(visual));
         modules.push_back(new Notifications(visual));
         modules.push_back(new Watermark(visual));
         modules.push_back(new NoShadow(visual));

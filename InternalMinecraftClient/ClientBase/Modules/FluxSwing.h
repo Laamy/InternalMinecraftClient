@@ -1,8 +1,8 @@
 #pragma once
 
-class Animation : public Module {
+class FluxSwing : public Module {
 public:
-	Animation(std::string cat) : Module(cat, "Animation", "Cool Animation", 0x07) {}
+	FluxSwing(std::string cat) : Module(cat, "FluxSwing", "Makes your swing animation looks like flux (a java client)", 0x07) {}
 	void* targetAddress;
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {

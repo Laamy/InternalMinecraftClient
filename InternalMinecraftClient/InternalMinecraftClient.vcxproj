@@ -172,7 +172,7 @@
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
-    <ClInclude Include="ClientBase\Modules\Animations.h" />
+    <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
     <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
@@ -183,6 +183,7 @@
     <ClInclude Include="ClientBase\Modules\Crasher.h" />
     <ClInclude Include="ClientBase\Modules\CreativeMode.h" />
     <ClInclude Include="ClientBase\Modules\Criticals.h" />
+    <ClInclude Include="ClientBase\Modules\FluxSwing.h" />
     <ClInclude Include="ClientBase\Modules\GodMode.h" />
     <ClInclude Include="ClientBase\Modules\Hitbox.h" />
     <ClInclude Include="ClientBase\Modules\HiveFly.h" />
