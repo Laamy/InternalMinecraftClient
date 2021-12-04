@@ -216,7 +216,8 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
 
         for (auto mod : handler.modules) {
             auto Eject = mod->name == "Uninject";
-            if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L']) {
+            if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'] || keymap[VK_END]) {
+                mod->enabled = false;
                 justDisabled = true;
                 clientAlive = false;
             }
