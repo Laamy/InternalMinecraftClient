@@ -172,6 +172,7 @@
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
+    <ClInclude Include="ClientBase\Modules\Animations.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
     <ClInclude Include="ClientBase\Modules\AntiLagBack.h" />
     <ClInclude Include="ClientBase\Modules\AntiVoid.h" />
