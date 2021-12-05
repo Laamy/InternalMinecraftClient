@@ -10,7 +10,6 @@ public:
             targetAddress = (void*)Mem::findSig("00 00 40 40 DB 0F");
         BYTE* patch = (BYTE*)"\x00\x00\x7A\x44";//00 00 E0 40 DB 0F
         Mem::patchBytes((BYTE*)((uintptr_t)targetAddress), patch, 4);
-
     }
 
     void OnDisable(ClientInstance* a1, Actor* a2) override {

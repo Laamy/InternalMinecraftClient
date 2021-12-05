@@ -224,6 +224,7 @@
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
+    <ClInclude Include="ClientBase\Modules\ShulkerNest.h" />
     <ClInclude Include="ClientBase\Modules\Spammer.h" />
     <ClInclude Include="ClientBase\Modules\Spider.h" />
     <ClInclude Include="ClientBase\Modules\SpinAttack.h" />

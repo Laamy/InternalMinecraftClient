@@ -18,6 +18,7 @@
 #include "Modules/ExpandScreen.h"
 #include "Modules/NoObstructionSwing.h"
 #include "Modules/FluxSwing.h"
+#include "Modules/ShulkerNest.h"
 #include "Modules/FloppySwing.h"
 #include "Modules/FastWater.h"
 #include "Modules/8BitSwing.h"
@@ -163,6 +164,7 @@ public:
         modules.push_back(new NoSlow(misc));
         modules.push_back(new AntiImmobile(misc));
         modules.push_back(new AntiLagBack(misc));
+        modules.push_back(new ShulkerNest(misc));
         modules.push_back(new TestModule(misc));
         modules.push_back(new DebugCursor(misc));
 
