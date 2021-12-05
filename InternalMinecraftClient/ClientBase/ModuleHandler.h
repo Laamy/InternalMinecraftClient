@@ -96,8 +96,7 @@ public:
         std::string visual = "Visual"; // Visual effects
         std::string player = "Player"; // Player interacts with the world
         std::string misc = "Misc"; // other
-
-        std::string debug = "Debug"; // Debug
+        std::string swing = "Swing"; // other
 
         modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
@@ -143,10 +142,7 @@ public:
         modules.push_back(new PlayerList(visual));
         modules.push_back(new ArrayList(visual));
         modules.push_back(new Freelook(visual));
-        modules.push_back(new NoSwing(visual));
         modules.push_back(new Zoom(visual));
-        modules.push_back(new NoObstructionSwing(visual));
-        modules.push_back(new FluxSwing(visual));
         modules.push_back(new Notifications(visual));
         modules.push_back(new Watermark(visual));
         modules.push_back(new NoShadow(visual));
@@ -155,13 +151,6 @@ public:
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Tracers(visual));
-        modules.push_back(new EightBitSwing(visual));
-        modules.push_back(new OldSwing(visual));
-        modules.push_back(new PushSwing(visual));
-        modules.push_back(new FloppySwing(visual));
-
-        modules.push_back(new TestModule(debug));
-        modules.push_back(new DebugCursor(debug));
 
         modules.push_back(new Killgame(misc));
         modules.push_back(new CreativeMode(misc)); 
@@ -173,7 +162,16 @@ public:
         modules.push_back(new NoSlow(misc));
         modules.push_back(new AntiImmobile(misc));
         modules.push_back(new AntiLagBack(misc));
+        modules.push_back(new TestModule(misc));
+        modules.push_back(new DebugCursor(misc));
 
+        modules.push_back(new NoObstructionSwing(swing));
+        modules.push_back(new FluxSwing(swing));
+        modules.push_back(new EightBitSwing(swing));
+        modules.push_back(new OldSwing(swing));
+        modules.push_back(new PushSwing(swing));
+        modules.push_back(new FloppySwing(swing));
+        modules.push_back(new NoSwing(swing));
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());
 

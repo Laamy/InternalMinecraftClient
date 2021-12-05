@@ -220,7 +220,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         for (auto mod : handler.modules) {
             auto Eject = mod->name == "Uninject";
             if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'] || keymap[VK_END]) {
-                mod->enabled = false;
+                //mod->enabled = false; needs fixing bec it was being among so i went to the store and baught a among us poppet and then the man at the lemonade stand was like i got 0 grapes man idk what to do so then i went to the park and tried his lemondade and it kinda tasted like pee but then the sussy among us deemon came to my houyse and was like hey "why does mod->enabled = false; not work?" kinda among + cringe + ratio + cope + dont care + bozo. Then i went to school and we had a math test and i poopy myself but then i was like yknow, mod enabled false dosnt work so why live? There is no point if cant disable mods upon uninjecting. Then I was like hey alexa, wheres the neereast cliff? She told me to go to the coordinates 69 420 69, -69 -420 -69. So i went there and found some ginger who liked playing minecraft and modding it. So we both jumped off the cliff. As we were falling I thought about my life, my mariage to floppy and the fact that we should be able to disable modules when uninjecting. Goodbye Cruel World!
                 justDisabled = true;
                 clientAlive = false;
             }
