@@ -287,7 +287,9 @@ void chatMsgCallback(void* a1, TextHolder* txt) {
         }
     }
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
-        auto command = ((std::string)txt->getText()).erase(0, 1);
+        auto stringCmd = ((std::string)txt->getText()).erase(0, 1);
+        auto command = stringCmd.substr(0, stringCmd.find(" "));// remove everything after space 
+
         Command* checkCmd = cmdHandler.findCommand(command);
         if (checkCmd != nullptr) {
             auto txt2 = ((std::string)txt->getText());
