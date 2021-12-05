@@ -74,6 +74,7 @@
 #include "Modules/OldSwing.h"
 #include "Modules/PushSwing.h"
 #include "Modules/ViewModel.h"
+#include "Modules/AntiFreeze.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -164,6 +165,7 @@ public:
         modules.push_back(new NoSlow(misc));
         modules.push_back(new AntiImmobile(misc));
         modules.push_back(new AntiLagBack(misc));
+        modules.push_back(new AntiFreeze(misc));
         modules.push_back(new ShulkerNest(misc));
         modules.push_back(new TestModule(misc));
         modules.push_back(new DebugCursor(misc));

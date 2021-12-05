@@ -534,6 +534,9 @@ public: // Functions
 		lerpy(this, motion);
 	}
 	*/
+	/*float getHealth() {
+		return *reinterpret_cast<float*>(this + Mem::findSig("48 83 EC 28 48 8B 01 48 8D 15 EA D6 41 02 FF 90 78 06 00 00 F3 0F 10 80 84 00 00 00 48 83 C4 28 C3 CC"));
+	}*/
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1050) = v;
