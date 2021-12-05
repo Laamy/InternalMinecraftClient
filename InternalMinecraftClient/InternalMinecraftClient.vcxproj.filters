@@ -151,6 +151,7 @@
     <ClInclude Include="ClientBase\Modules\ViewModel.h" />
     <ClInclude Include="ClientBase\Modules\ShulkerNest.h" />
     <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
+    <ClInclude Include="ClientBase\Commands\TpCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
