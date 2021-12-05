@@ -7,10 +7,8 @@ public:
     ArrayList(std::string cat) : Module(cat, "ArrayList", "Display list of modules that are enabled", 0x07, true) {};
 
     // Length compare for module
-    struct moduleLengthCompare
-    {
-        inline bool operator() (const Module* l, const Module* r)
-        {
+    struct moduleLengthCompare {
+        inline bool operator() (const Module* l, const Module* r) {
             return l->vElement->len < r->vElement->len;
         }
     };
