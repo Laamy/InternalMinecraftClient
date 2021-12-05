@@ -12,9 +12,9 @@ public:
 	}
 
 	void OnGameTick(Actor* a2) {
-		a2->fallDistance = 0.9f;
+		/*a2->fallDistance = 0.9f;
 		if (a2->onGround)
-			a2->Velocity.y = 0.05f;
+			a2->Velocity.y = 0.05f;*/
 	}
 
 	void OnDisable(ClientInstance* a1, Actor* a2) override {
