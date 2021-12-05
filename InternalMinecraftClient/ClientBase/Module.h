@@ -25,7 +25,7 @@ public:
 
 public: // functions
 	virtual void drawTooltip(TextHolder tooltip) {
-		renderUtil.DrawString(Vector2(15, renderUtil.guiData->scaledResolution.y * 2 - 15 - (20 * 0.8f)), _RGB(255, 255, 255), tooltip, renderUtil.font, 0.8f);
+		renderUtil.DrawString(Vector2(15, renderUtil.guiData->scaledResolution.y - 20.f), _RGB(255, 255, 255), tooltip, renderUtil.font, 0.8f);
 	}
 	
     virtual void OnEnable(ClientInstance* ci, Actor* lp) {}
