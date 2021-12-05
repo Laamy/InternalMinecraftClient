@@ -129,7 +129,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                         JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
-                            hooks->debugEcho("ModuleEnabled", std::string("Module Enabled: " + handler.modules[i]->name).c_str());
+                            hooks->debugEcho("ModuleEnabled", std::string("Enabled: " + handler.modules[i]->name).c_str());
                     }
                 }
                 else {
@@ -138,7 +138,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                         JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
-                            hooks->debugEcho("ModuleDisabled", std::string("Module Disabled: " + handler.modules[i]->name).c_str());
+                            hooks->debugEcho("ModuleDisabled", std::string("Disabled: " + handler.modules[i]->name).c_str());
                     }
                 }
             }
