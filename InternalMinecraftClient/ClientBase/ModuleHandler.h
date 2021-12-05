@@ -129,7 +129,7 @@ public:
         modules.push_back(new AutoSneak(player));
         modules.push_back(new Phase(player));
         modules.push_back(new NoFall(player));
-        modules.push_back(new NoBrakes(player));
+       // modules.push_back(new NoBrakes(player));
         modules.push_back(new Velocity(player));
         modules.push_back(new InventoryMove(player));
         modules.push_back(new NoWeb(player));
