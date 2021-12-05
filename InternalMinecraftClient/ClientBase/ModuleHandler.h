@@ -72,6 +72,7 @@
 #include "Modules/InventoryMove.h"
 #include "Modules/OldSwing.h"
 #include "Modules/PushSwing.h"
+#include "Modules/ViewModel.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -172,6 +173,7 @@ public:
         modules.push_back(new PushSwing(swing));
         modules.push_back(new FloppySwing(swing));
         modules.push_back(new NoSwing(swing));
+        modules.push_back(new ViewModel(swing));
         // Sort modules
         std::sort(modules.begin(), modules.end(), CompareArg());
 

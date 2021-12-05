@@ -592,4 +592,9 @@ public: // Functions
 	void setShadowRadius(float v) {
 		*(float*)((uintptr_t)(this) + 0x04D0) = v;
 	}
+
+	void test(float v) {
+		*(float*)((uintptr_t)(this) + 0x0818) = v;
+		*(float*)((uintptr_t)(this) + 0x07A8) = v;
+	}
 };
