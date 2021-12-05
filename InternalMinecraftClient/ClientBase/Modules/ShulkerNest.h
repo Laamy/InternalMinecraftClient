@@ -16,7 +16,7 @@ public:
 		func->disableHook();
 	}
 
-	static bool itemAllowed() {//i understand this isint correct but it works!
+	static bool itemAllowed() {
 		return true;
 	}
 };
