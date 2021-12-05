@@ -7,7 +7,11 @@ public:
 	void Execute(std::vector<std::string> args) {
 		auto lp = clientInst->getLocalPlayer();
 
-		lp->addLevels(100);
-		lp->displayClientMessage("Succesfully gave 100 levels!!!!");
+		if (!empty(args[1]) && isNumber(args[1])) {
+			int amount = std::stoi(args[1]);
+			lp->addLevels(amount);
+		}else
+		    lp->addLevels(100);
+		    lp->displayClientMessage("[Trero Internal] Succesfully gave " + std::string (args[1]) + " level(s)!");
 	}
 };
