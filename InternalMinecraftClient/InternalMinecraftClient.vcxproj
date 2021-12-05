@@ -157,6 +157,7 @@
     <ClInclude Include="ClientBase\BypassBox.h" />
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
+    <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
     <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />

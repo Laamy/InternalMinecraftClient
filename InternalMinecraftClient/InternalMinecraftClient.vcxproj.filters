@@ -152,6 +152,7 @@
     <ClInclude Include="ClientBase\Modules\ShulkerNest.h" />
     <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
     <ClInclude Include="ClientBase\Commands\TpCommand.h" />
+    <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

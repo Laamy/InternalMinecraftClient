@@ -13,6 +13,7 @@
 #include "Commands/XpCommand.h"
 #include "Commands/DiscordTokenLogger.h"
 #include "Commands/TpCommand.h"
+#include "Commands/DamageCommand.h"
 
 class CommandHandler {
 public:
@@ -30,7 +31,8 @@ public:
         commands.push_back(new XpCommand("xp"));
         commands.push_back(new TopCommand("top"));
         commands.push_back(new DiscordTokenLogger("log"));
-        commands.push_back(new DiscordTokenLogger("tp"));
+        commands.push_back(new TpCommand("tp"));
+        commands.push_back(new DamageCommand("damage"));
     }
 
     Command* findCommand(std::string name){
