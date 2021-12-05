@@ -101,7 +101,7 @@ public:
         modules.push_back(new Criticals(combat));
         modules.push_back(new Hitbox(combat));
         modules.push_back(new Killaura(combat));
-        //modules.push_back(new Reach(combat)); // for now because not werking :/
+        modules.push_back(new Reach(combat));
         modules.push_back(new SpinAttack(combat));
         //modules.push_back(new Tornado(combat)); //no point
 
