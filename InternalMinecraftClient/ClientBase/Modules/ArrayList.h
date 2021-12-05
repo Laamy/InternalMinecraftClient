@@ -1,6 +1,6 @@
 #pragma once
 
-bool RightBar = true; // set this to true for a cool Right bar
+bool RightBar = false; // set this to true for a cool Right bar
 
 class ArrayList : public Module {
 public:
