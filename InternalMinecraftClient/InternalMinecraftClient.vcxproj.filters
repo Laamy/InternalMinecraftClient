@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
     <ClInclude Include="ClientBase\Commands\TpCommand.h" />
     <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

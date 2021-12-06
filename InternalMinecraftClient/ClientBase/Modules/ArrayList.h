@@ -32,12 +32,12 @@ public:
         Vector2 resolution = ctx->guiData->scaledResolution;
         BitmapFont* font = ctx->font;
 
-            // Colors
-            translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
-            rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f, 255.f, 255.f, 255.f, 255.f);
-            // Do rainbow wave
-            long rainbowIndex = offset * 50;
-            rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex, 255.f, 255.f, 255.f, 255.f);
+           // Colors
+           translucentBlack = _RGB(0.f, 0.f, 0.f, 127.5f);
+           rainbow = ctx->getRainbow(5.0f, 1.0f, 1.0f, 255.f, 255.f, 255.f, 255.f);
+           // Do rainbow wave
+           long rainbowIndex = offset * 50;
+           rainbow = ctx->getRainbow(5, 1.0f, 1.0f, rainbowIndex, 255.f, 255.f, 255.f, 255.f);
 
 
         // Loop through our modules
