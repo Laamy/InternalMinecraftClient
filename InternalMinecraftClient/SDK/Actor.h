@@ -519,6 +519,11 @@ public:
 	bool InfResources; //0x0990 
 
 public: // Functions
+
+	class GameMode* getGameMode() {
+		return *reinterpret_cast<class GameMode**>(this + 0x1248);
+	};
+
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
 		Camera.upper = v;

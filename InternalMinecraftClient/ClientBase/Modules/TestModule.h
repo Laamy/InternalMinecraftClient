@@ -32,5 +32,6 @@ public:
 	}
 	virtual void OnTick(ClientInstance* ci) {}
 	virtual void OnGameTick(Actor* lp) {
+
 	}
 };

@@ -16,7 +16,7 @@ public:
 	virtual float getPickRange();
 	virtual void useItem();
 	virtual void useItemOn();
-	virtual void interact(Actor*, struct Vector3*);
+	virtual void interact(Actor*, Vector3*);
 	virtual void attack(Actor*);
 	virtual void releaseUsingItem();
 	virtual void setTrialMode(bool);

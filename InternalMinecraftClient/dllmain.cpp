@@ -73,6 +73,8 @@ typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
+typedef void(__thiscall* renderText)(void* a1, MinecraftUIRenderContext* ctx);
+renderText _renderText;
 std::map<uint64_t, bool> beforeKeymap = std::map<uint64_t, bool>();
 std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
 std::vector<std::string> categories = std::vector<std::string>();
@@ -146,6 +148,9 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         }
     }
     keymap[c] = v;
+}
+void renderTextCallback(void* a1, MinecraftUIRenderContext* ctx) {
+    _renderText(a1, ctx);
 }
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
@@ -349,6 +354,7 @@ void Init(LPVOID c) {
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
         uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B"); //48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B
+        uintptr_t renderTextAddr = Mem::findSig("48 8B C4 48 89 58 18 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18 FF FF FF 48 81 EC B0 01 00 00 0F 29 70 B8 0F 29 78 A8 44 0F 29 40 98 44 0F 29 48 88 44 0F 29 90 78 FF FF FF 44 0F 29 98 68 FF FF FF 44 0F 29 A0 58 FF FF FF 48 8B 05 9F 93 1A 03 48 33 C4 48 89 45");
         uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
         _logf(L"[TreroInternal]: Hooking functions...\n");
         if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
@@ -378,6 +384,10 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)renderCtxAddr, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
             MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
+        };
+        if (MH_CreateHook((void*)renderTextAddr, &renderTextCallback, reinterpret_cast<LPVOID*>(&_renderText)) == MH_OK) {
+            MH_EnableHook((void*)renderTextAddr);
+            _logf(L"[TreroInternal]: RenderText hooked!\n");
         };
         hooks->debugEcho("InitMsg", "Client has initialized");
     lab:
