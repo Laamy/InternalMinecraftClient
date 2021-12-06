@@ -4,12 +4,12 @@ class GameMode {
 public:
 	class Actor* actorPtr; //0x0008
 	virtual void Destructor();
-	virtual void startDestroyBlock(struct iVector3 const& pos, unsigned char blockSide, bool& isDestroyedOut);
-	virtual void destroyBlock(struct iVector3*, unsigned char);
-	virtual void continueDestroyBlock(struct iVector3 const&, unsigned char blockSide, bool& isDestroyedOut);
-	virtual void stopDestroyBlock(struct iVector3 const&);
-	virtual void startBuildBlock(struct iVector3 const&, unsigned char);
-	virtual void buildBlock(struct iVector3*, unsigned char);
+	virtual void startDestroyBlock(Vector3 const& pos, unsigned char blockSide, bool& isDestroyedOut);
+	virtual void destroyBlock(Vector3 const& pos, unsigned char);
+	virtual void continueDestroyBlock(Vector3 const& pos, unsigned char blockSide, bool& isDestroyedOut);
+	virtual void stopDestroyBlock(Vector3 const& pos);
+	virtual void startBuildBlock(Vector3 const& pos, unsigned char);
+	virtual void buildBlock(Vector3* pos, unsigned char);
 	virtual void continueBuildBlock(struct iVector3 const&, unsigned char);
 	virtual void stopBuildBlock(void);
 	virtual void tick(void);
