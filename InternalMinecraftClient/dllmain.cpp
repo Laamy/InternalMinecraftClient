@@ -149,6 +149,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
     }
     keymap[c] = v;
 }
+
 void renderTextCallback(void* a1, MinecraftUIRenderContext* ctx) {
     _renderText(a1, ctx);
 }
