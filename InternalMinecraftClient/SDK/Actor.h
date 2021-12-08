@@ -691,8 +691,7 @@ public:
 	//}
 
 	void CloseContainer() {
-		keybd_event(VK_ESCAPE, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
-		keybd_event(VK_ESCAPE, 2, KEYEVENTF_KEYUP | 2, 2);
+		_key(27, true);
 	}
 };
 
