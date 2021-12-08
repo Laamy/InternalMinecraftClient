@@ -91,24 +91,6 @@ int disabledTicks = 0;
 int enabledTicks = 0;
 int frame = 0;
 //Hopefully could be used
-KeyInfo* mouse;
-bool isRightClickDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->rightClickDown;
-}
-
-bool isLeftClickDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->leftClickDown;
-}
-
-bool isWheelDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->wheelDown;
-}
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     _key(c, v);

@@ -12,3 +12,21 @@ public:
 		bool clickMap[3];
 	};
 };
+KeyInfo* mouse;
+bool isRightClickDown() {
+	if (mouse == 0)
+		return false;
+	return mouse->rightClickDown;
+}
+
+bool isLeftClickDown() {
+	if (mouse == 0)
+		return false;
+	return mouse->leftClickDown;
+}
+
+bool isWheelDown() {
+	if (mouse == 0)
+		return false;
+	return mouse->wheelDown;
+}
