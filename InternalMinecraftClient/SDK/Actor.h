@@ -679,19 +679,76 @@ public: // Functions
 };
 
 class ContainerManagement {
+	virtual __int64 destructor();
 public:
+	virtual void tick(void);
+	virtual void handleEvent(uintptr_t ScreenEvent);
+	virtual __int64 getRoute(void);
+	virtual void setScreenState(std::vector<std::pair<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>> const&);
+	virtual void onOpen(void);
+	virtual void onTerminate(void);
+	virtual void onInit(void);
+	virtual void onDelete(void);
+	virtual bool canExit(void);
+	virtual void tryExit(void);
+	virtual void areControllerTabsEnabled(void);
+	virtual void onCreation(void);
+	virtual void logCreationTime(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, double, double, UCHAR);
+	virtual void onLeave(void);
+	virtual void leaveScreen(void);
+	virtual void handleGameEventNotification(uintptr_t uiGameEventNotification);
+	virtual void bind(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, UINT, int, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, UINT, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, uintptr_t UIPropertyBag);
+	virtual void bind(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, UINT, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, uintptr_t UIPropertyBag);
+	virtual void handleLicenseChanged(void);
+	virtual void onDictationEvent(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
+	virtual void setAssociatedBlockPos(BlockPos const&);
+	virtual void setAssociatedEntityUniqueID(uint64_t);
+	virtual void setSuspendInput(bool); // <- i think this causes disabled movement in containers
+	virtual int getCallbackInterval(void);
+	virtual void onRender(void);
+	virtual void addStaticScreenVars(uintptr_t JsonValue); // what the fuck is Json::Value&?
+	virtual __int64 getAdditionalScreenInfo(void);
+	virtual __int64 getTelemetryOverride(void);
+	virtual void addEventProperties(std::unordered_map<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::hash<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::equal_to<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>&);
+	virtual int getSceneType(void);
+	virtual int getScreenVersion(void);
+	virtual bool screenHandlesGamepadMenuButton(void);
+	virtual __int64 getProxy(void);
+	virtual void onEntered(void);
+	virtual std::string getNameId(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
+	virtual bool _doesScreenHaveExitBehavior(void);
+	virtual bool _isStillValid(void);
+	virtual bool _getGamepadHelperVisible(void);
+	virtual bool _getMixedHelperVisible(void);
+	virtual bool _getKeyboardHelperVisible(void);
+	virtual std::string _getButtonADescription(void);
+	virtual std::string _getButtonBDescription(void);
+	virtual std::string _getButtonXDescription(void);
+	virtual std::string _getButtonYDescription(void);
+	virtual std::string _getButtonKeyboardDescription(void);
+	virtual void _handlePlaceAll(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _handlePlaceOne(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _handleSelectSlot(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual __int64 _getSelectedSlotInfo(void);
+	virtual __int64 _getItemStack(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual __int64 _getVisualItemStack(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual __int64 _getTakeableItemStackBase(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _onContainerSlotHovered(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _onContainerSlotSelected(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _onContainerSlotPressed(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual bool _shouldSwap(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual std::string _getCollectionName(uintptr_t UIPropertyBagPtr);
+	virtual bool _canSplit(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _sendFlyingItem(class ItemStackBase const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+
+	// ContainerScreenController::_handleAutoPlace but renamed
 	void shiftClickItems(std::string containerName, int slots) {
 		static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int)>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
 		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
 	}
 	
 	void closeContainer() { 
-		static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9"));
-		closeThingy(this);
+		this->tryExit();
 	}
-
-	//void CloseContainer() {
-		//_key(27, true);
-	//}
 };
 
