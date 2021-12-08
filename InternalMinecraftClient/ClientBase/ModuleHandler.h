@@ -75,6 +75,9 @@
 #include "Modules/InventoryMove.h"
 #include "Modules/OldSwing.h"
 #include "Modules/PushSwing.h"
+#include "Modules/AntiFreeze.h"
+#include "Modules/ElytraSpoof.h"
+#include "Modules/ViewModel.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
