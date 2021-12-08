@@ -238,7 +238,7 @@ public:
 	virtual void onEffectUpdated(MobEffectInstance&);
 	virtual void onEffectRemoved(MobEffectInstance&);
 	virtual int getAnimationComponent(void);
-	virtual void openContainerComponent(Actor*);
+	virtual void openContainerComponent(Player&);
 	virtual void swing(void);
 	virtual void useItem(class ItemStackBase&, class ItemUseMethod, bool);
 	virtual void hasOutputSignal(class uchar);
