@@ -614,9 +614,14 @@ public:
 		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
 	}
 	
-	void closeContainer() {
-		static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9 48 8B 01 FF 50 50"));
-		closeThingy(this);
+	//void closeContainer() { does dum stuff rn and idk y
+		//static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9"));
+		//closeThingy(this);
+	//}
+
+	void CloseContainer() {
+		keybd_event(VK_ESCAPE, 0, KEYEVENTF_EXTENDEDKEY | 0, 0);
+		keybd_event(VK_ESCAPE, 2, KEYEVENTF_KEYUP | 2, 2);
 	}
 };
 
