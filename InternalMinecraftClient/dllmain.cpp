@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <windows.h>
 #include <MinHook.h>
 #include <map>
@@ -66,12 +67,16 @@ typedef void(__thiscall* tick)(ClientInstance* clientinstance, void* a2);
 tick _tick;
 typedef void(__thiscall* player)(Actor* lp, void* a2);
 player _player;
+typedef void(__thiscall* container)(ContainerManagement* a1);
+container _container;
 typedef void(__thiscall* gamemode)(GameMode* gm, void* a2);
 gamemode _gamemode;
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
 key _key;
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
+typedef void(__thiscall* renderText)(void* a1, MinecraftUIRenderContext* ctx);
+renderText _renderText;
 std::map<uint64_t, bool> beforeKeymap = std::map<uint64_t, bool>();
 std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
 std::vector<std::string> categories = std::vector<std::string>();
@@ -129,7 +134,7 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                         JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
-                            hooks->debugEcho("ModuleEnabled", "Module has been enabled");
+                            hooks->debugEcho("ModuleEnabled", std::string("Enabled: " + handler.modules[i]->name).c_str());
                     }
                 }
                 else {
@@ -138,13 +143,17 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
                         JustToggleddMod = true;
                         auto Notis = mod->name == "Notifications";
                         if (Notis && mod->enabled)
-                            hooks->debugEcho("ModuleDisabled", "Module has been disabled");
+                            hooks->debugEcho("ModuleDisabled", std::string("Disabled: " + handler.modules[i]->name).c_str());
                     }
                 }
             }
         }
     }
     keymap[c] = v;
+}
+
+void renderTextCallback(void* a1, MinecraftUIRenderContext* ctx) {
+    _renderText(a1, ctx);
 }
 
 void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
@@ -220,7 +229,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         for (auto mod : handler.modules) {
             auto Eject = mod->name == "Uninject";
             if (Eject && mod->enabled || keymap[VK_CONTROL] && keymap['L'] || keymap[VK_END]) {
-                mod->enabled = false;
+                //mod->enabled = false; needs fixing bec it was being among so i went to the store and baught a among us poppet and then the man at the lemonade stand was like i got 0 grapes man idk what to do so then i went to the park and tried his lemondade and it kinda tasted like pee but then the sussy among us deemon came to my houyse and was like hey "why does mod->enabled = false; not work?" kinda among + cringe + ratio + cope + dont care + bozo. Then i went to school and we had a math test and i poopy myself but then i was like yknow, mod enabled false dosnt work so why live? There is no point if cant disable mods upon uninjecting. Then I was like hey alexa, wheres the neereast cliff? She told me to go to the coordinates 69 420 69, -69 -420 -69. So i went there and found some ginger who liked playing minecraft and modding it. So we both jumped off the cliff. As we were falling I thought about my life, my mariage to floppy and the fact that we should be able to disable modules when uninjecting. Goodbye Cruel World!
                 justDisabled = true;
                 clientAlive = false;
             }
@@ -247,6 +256,17 @@ void playerCallback(Actor* lp, void* a2) {
     entityList[reinterpret_cast<uint64_t>(lp)] = lp;
     for (auto mod : handler.modules)
         if (mod->enabled) mod->OnGameTick(lp);
+}
+
+void ContainerTickCallback(ContainerManagement* a1, Actor* lp) {
+    for (auto mod : handler.modules) {
+        if (mod->name == "ChestStealer" && mod->enabled) {
+            mod->OnContainerTick(a1, lp);
+        }
+        if (mod->name == "ChestDumper" && mod->enabled) {
+            mod->OnContainerTick(a1, lp);
+        }
+    }
 }
 /*
 void gamemodeCallback(GameMode* gm, void* a2) {
@@ -287,7 +307,9 @@ void chatMsgCallback(void* a1, TextHolder* txt) {
         }
     }
     if (txt->getText()[0] == '.') { // cancel all .command related chat msgs :p
-        auto command = ((std::string)txt->getText()).erase(0, 1);
+        auto stringCmd = ((std::string)txt->getText()).erase(0, 1);
+        auto command = stringCmd.substr(0, stringCmd.find(" "));// remove everything after space 
+
         Command* checkCmd = cmdHandler.findCommand(command);
         if (checkCmd != nullptr) {
             auto txt2 = ((std::string)txt->getText());
@@ -340,12 +362,14 @@ void Init(LPVOID c) {
         }
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
+        uintptr_t containerScreenTick = Mem::findSig("48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 E8 ? ? ? ? 48 8B 17");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t gamemodeAddr = Mem::findSig("48 8D 05 02 80 23 02 48 89 01 48 89 51 08 48 C7 41 10 FF FF FF FF C7 41 18 FF FF FF FF 44 88 61 1C");
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
-        uintptr_t renderCtxAddr = Mem::findSig("48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B"); //48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B
+        uintptr_t renderCtxAddr = Mem::findSig("48 8B ? 48 89 ? ? 55 56 57 41 ? 41 ? 41 ? 41 ? 48 8D ? ? ? ? ? 48 81 EC ? ? ? ? 0F 29 ? ? 0F 29 ? ? 48 8B ? ? ? ? ? 48 33 ? 48 89 ? ? ? ? ? 4C 8B ? 48 89 ? ? ? 4C 8B"); //48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B
+        uintptr_t renderTextAddr = Mem::findSig("48 8B C4 48 89 58 18 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 18 FF FF FF 48 81 EC B0 01 00 00 0F 29 70 B8 0F 29 78 A8 44 0F 29 40 98 44 0F 29 48 88 44 0F 29 90 78 FF FF FF 44 0F 29 98 68 FF FF FF 44 0F 29 A0 58 FF FF FF 48 8B 05 9F 93 1A 03 48 33 C4 48 89 45");
         uintptr_t chatMsgSigAddr = Mem::findSig("48 89 5C 24 ?? 55 56 57 41 54 41 55 41 56 41 57 48 8D AC 24 ?? ?? ?? ?? 48 81 EC ?? ?? ?? ?? 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 85 ?? ?? ?? ?? 4C 8B EA 4C 8B F9 48 8B 49");
         _logf(L"[TreroInternal]: Hooking functions...\n");
         if (MH_CreateHook((void*)chatMsgSigAddr, &chatMsgCallback, reinterpret_cast<LPVOID*>(&_chatMsg)) == MH_OK) {
@@ -364,6 +388,10 @@ void Init(LPVOID c) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
+        if (MH_CreateHook((void*)containerScreenTick, &ContainerTickCallback, reinterpret_cast<LPVOID*>(&_container)) == MH_OK) {
+            MH_EnableHook((void*)containerScreenTick);
+            _logf(L"[TreroInternal]: ContainerTick hooked!\n");
+        };
         /*if (MH_CreateHook((void*)gamemodeAddr, &gamemodeCallback, reinterpret_cast<LPVOID*>(&_gamemode)) == MH_OK) {
              MH_EnableHook((void*)gamemodeAddr);
              _logf(L"[TreroInternal]: GameMode hooked!\n");
@@ -375,6 +403,10 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)renderCtxAddr, &tCallback, reinterpret_cast<LPVOID*>(&_render)) == MH_OK) {
             MH_EnableHook((void*)renderCtxAddr);
             _logf(L"[TreroInternal]: RenderContext hooked!\n");
+        };
+        if (MH_CreateHook((void*)renderTextAddr, &renderTextCallback, reinterpret_cast<LPVOID*>(&_renderText)) == MH_OK) {
+            MH_EnableHook((void*)renderTextAddr);
+            _logf(L"[TreroInternal]: RenderText hooked!\n");
         };
         hooks->debugEcho("InitMsg", "Client has initialized");
     lab:

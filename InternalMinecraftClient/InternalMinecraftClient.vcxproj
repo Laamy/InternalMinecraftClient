@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;INTERNALMINECRAFTCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
     <ClInclude Include="ClientBase\Command.h" />
     <ClInclude Include="ClientBase\CommandHandler.h" />
+    <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
     <ClInclude Include="ClientBase\Commands\DieCommand.h" />
     <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
     <ClInclude Include="ClientBase\Commands\EjectCommand.h" />
@@ -165,6 +167,7 @@
     <ClInclude Include="ClientBase\Commands\TestCommand.h" />
     <ClInclude Include="ClientBase\Commands\ToggleCommand.h" />
     <ClInclude Include="ClientBase\Commands\TopCommand.h" />
+    <ClInclude Include="ClientBase\Commands\TpCommand.h" />
     <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Module.h" />
     <ClInclude Include="ClientBase\ModuleHandler.h" />
@@ -173,7 +176,6 @@
     <ClInclude Include="ClientBase\Modules\AirStuck.h" />
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
-    <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
     <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
@@ -225,6 +227,7 @@
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
     <ClInclude Include="ClientBase\Modules\Reach.h" />
     <ClInclude Include="ClientBase\Modules\ReverseStep.h" />
+    <ClInclude Include="ClientBase\Modules\ShulkerNest.h" />
     <ClInclude Include="ClientBase\Modules\Spammer.h" />
     <ClInclude Include="ClientBase\Modules\Spider.h" />
     <ClInclude Include="ClientBase\Modules\SpinAttack.h" />
@@ -237,10 +240,12 @@
     <ClInclude Include="ClientBase\Modules\Tracers.h" />
     <ClInclude Include="ClientBase\Modules\Uninject.h" />
     <ClInclude Include="ClientBase\Modules\Velocity.h" />
+    <ClInclude Include="ClientBase\Modules\ViewModel.h" />
     <ClInclude Include="ClientBase\Modules\Watermark.h" />
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
     <ClInclude Include="Memory\GameHooks.h" />
     <ClInclude Include="Memory\VirtualFuncHook.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GLMatrix.h" />
     <ClInclude Include="SDK\GuiData.h" />

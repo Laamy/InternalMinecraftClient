@@ -1,29 +1,36 @@
 #pragma once
 
-#include "../Utils/Math.h"
-#include "Actor.h"
-
 class GameMode {
 public:
-	class Actor* actorPtr; //0x0008
+	virtual __int64 startDestroyBlock(Vector3i const& pos, unsigned char blockSide, bool& isDestroyedOut);
+	virtual __int64 destroyBlock(Vector3i*, unsigned char);
+	virtual __int64 continueDestroyBlock(Vector3i const&, unsigned char blockSide, bool& isDestroyedOut);
+	virtual __int64 stopDestroyBlock(Vector3i const&);
+	virtual __int64 startBuildBlock(Vector3i const&, unsigned char);
+	virtual __int64 buildBlock(Vector3i*, unsigned char);
+	virtual __int64 continueBuildBlock(Vector3i const&, unsigned char);
+	virtual __int64 stopBuildBlock(void);
+	virtual __int64 tick(void);
 
-	virtual void Destructor();
-	virtual void startDestroyBlock(struct BlockPos const& pos, unsigned char blockSide, bool& isDestroyedOut);
-	virtual void destroyBlock(struct BlockPos*, unsigned char);
-	virtual void continueDestroyBlock(struct BlockPos const&, unsigned char blockSide, bool& isDestroyedOut);
-	virtual void stopDestroyBlock(struct BlockPos const&);
-	virtual void startBuildBlock(struct BlockPos const&, unsigned char);
-	virtual void buildBlock(struct BlockPos*, unsigned char);
-	virtual void continueBuildBlock(struct BlockPos const&, unsigned char);
-	virtual void stopBuildBlock(void);
-	virtual void tick(void);
-	virtual float getPickRange();
-	virtual void useItem();
-	virtual void useItemOn();
-	virtual void interact(Actor*, struct Vec3*);
-	virtual void attack(Actor*);
-	virtual void releaseUsingItem();
+private:
+	virtual __int64 getPickRange(__int64 const&, bool);
+	virtual __int64 useItem(__int64&);
+	virtual __int64 useItemOn(__int64&, Vector3i const&, unsigned char, Vector3 const&, __int64 const*);
+	virtual __int64 interact(Actor&, Vector3 const&);
+
+public:
+	virtual __int64 attack(Actor*);
+
+private:
+	virtual __int64 releaseUsingItem(void);
+
+public:
 	virtual void setTrialMode(bool);
 	virtual bool isInTrialMode(void);
-	virtual void registerUpsellScreenCallback();
+
+private:
+	virtual __int64 registerUpsellScreenCallback(__int64);
+
+public:
+	Actor* player;
 };

@@ -7,6 +7,5 @@ public:
 	void Execute(std::vector<std::string> args) override {
 		auto lp = clientInst->getCPlayer();
 		lp->kill();
-		lp->doFireHurt(1000000000000);
 	}
 };

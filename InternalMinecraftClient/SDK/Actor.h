@@ -519,6 +519,11 @@ public:
 	bool InfResources; //0x0990 
 
 public: // Functions
+
+	class GameMode* getGameMode() {
+		return *reinterpret_cast<class GameMode**>(this + 0x1248);
+	};
+
 	void SetRenderPosition(Vector3 v) {
 		Camera.lower = v;
 		Camera.upper = v;
@@ -527,7 +532,13 @@ public: // Functions
 	float* SwingAnimation() {
 		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C0);
 	}
-
+	/*
+	void lerpybutworky(Vector3 motion) { //if someone changes the name im gonna steal your knee caps
+		using lerpMotion2 = void(__thiscall*)(void*, Vector3);
+		static lerpMotion2 lerpy = reinterpret_cast<lerpMotion2>(Mem::findSig("8B 02 89 81 F8 04 00 00 8B 42 04 89 81 FC 04 00 00 8B 42 08 89 81 00 05 00 00 C3 CC"));
+		lerpy(this, motion);
+	}
+	*/
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1050) = v;
@@ -566,4 +577,23 @@ public: // Functions
 	void setShadowRadius(float v) {
 		*(float*)((uintptr_t)(this) + 0x04D0) = v;
 	}
+
+	void test(float v) {
+		*(float*)((uintptr_t)(this) + 0x0818) = v;
+		*(float*)((uintptr_t)(this) + 0x07A8) = v;
+	}
 };
+
+class ContainerManagement {
+public:
+	void shiftClickItems(std::string containerName, int slots) {
+		static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int)>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
+		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
+	}
+	
+	void closeContainer() {
+		static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9 48 8B 01 FF 50 50"));
+		closeThingy(this);
+	}
+};
+

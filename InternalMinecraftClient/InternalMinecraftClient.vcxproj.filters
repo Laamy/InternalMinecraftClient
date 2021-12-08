@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
@@ -148,7 +149,6 @@
     <ClInclude Include="ClientBase\Modules\OldSwing.h" />
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
-    <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
