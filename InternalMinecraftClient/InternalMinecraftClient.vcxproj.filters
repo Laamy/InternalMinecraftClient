@@ -149,6 +149,15 @@
     <ClInclude Include="ClientBase\Modules\OldSwing.h" />
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
+    <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
+    <ClInclude Include="ClientBase\Commands\TpCommand.h" />
+    <ClInclude Include="ClientBase\Modules\ShulkerNest.h" />
+    <ClInclude Include="ClientBase\Modules\ViewModel.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
+    <ClInclude Include="ClientBase\Modules\ChestDumper.h" />
+    <ClInclude Include="ClientBase\Modules\ChestStealer.h" />
+    <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
