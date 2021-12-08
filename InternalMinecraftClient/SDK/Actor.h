@@ -709,7 +709,7 @@ public:
 	virtual void addStaticScreenVars(uintptr_t JsonValue); // what the fuck is Json::Value&?
 	virtual __int64 getAdditionalScreenInfo(void);
 	virtual __int64 getTelemetryOverride(void);
-	virtual void addEventProperties(std::unordered_map<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::hash<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::equal_to<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>, std::allocator<std::pair<std::basic_string<char, std::char_traits<char>, std::allocator<char>> const, std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>>&);
+	virtual void addEventProperties(); //removed
 	virtual int getSceneType(void);
 	virtual int getScreenVersion(void);
 	virtual bool screenHandlesGamepadMenuButton(void);
