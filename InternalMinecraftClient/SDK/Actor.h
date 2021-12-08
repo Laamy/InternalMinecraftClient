@@ -11,23 +11,22 @@ class GameMode;
 
 class Actor {
 public:
-	virtual int getLastHurtByMob(void);
+	virtual __int64 getLastHurtByMob(void);
 	virtual void setLastHurtByMob(class Mob*);
-	virtual int getLastHurtByPlayer(void);
+	virtual __int64 getLastHurtByPlayer(void);
 	virtual void setLastHurtByPlayer(Player*);
-	virtual int getLastHurtMob(void);
+	virtual __int64 getLastHurtMob(void);
 	virtual void setLastHurtMob(Actor*);
-	virtual void outOfWorld(void);
+	virtual bool outOfWorld(void);
 	virtual void reloadHardcoded(); //removed
 	virtual void reloadHardcodedClient(); //removed
 	virtual void initializeComponents(); //removed
 	virtual void reloadComponents(); //removed
 	virtual void _serverInitItemStackIds(void);
 	virtual void _doInitialMove(void);
-	virtual void hasComponent(class HashedString const&);
+	virtual bool hasComponent(class HashedString const&);
 private:
 	virtual void __PlayerConstructor();
-	//virtual void ___PlayerConstructor();
 public:
 	virtual void reset(void);
 	virtual int getOnDeathExperience(void);
@@ -35,12 +34,12 @@ public:
 	virtual void remove(void);
 	virtual void setPos(Vector3 const&);
 	virtual bool isRuntimePredictedMovementEnabled(void);
-	virtual int getPredictedMovementValues(void);
-	virtual int getPos(void);
-	virtual int getPosOld(void);
+	virtual Vector3* getPredictedMovementValues(void);
+	virtual Vector3* getPos(void);
+	virtual Vector3* getPosOld(void);
 	virtual float getPosExtrapolated(float);
 	virtual float getAttachPos(class ActorLocation, float);
-	virtual int getFiringPos(void);
+	virtual Vector3* getItemFiringPos(void);
 	virtual void setRot(Vector2 const&);
 	virtual void move(Vector3 const&);
 	virtual void move(class IActorMovementProxy&, Vector3 const&);
@@ -48,7 +47,7 @@ public:
 	virtual float getInterpolatedBodyRot(float);
 	virtual float getInterpolatedHeadRot(float);
 	virtual float getInterpolatedBodyYaw(float);
-	virtual int getYawSpeedInDegreesPerSecond(void);
+	virtual float getYawSpeedInDegreesPerSecond(void);
 	virtual float getInterpolatedWalkAnimSpeed(float);
 	virtual float getInterpolatedRidingOffset(float);
 	virtual void checkBlockCollisions(); //removed
@@ -66,11 +65,11 @@ public:
 	virtual void baseTick(void);
 	virtual void vehicleTick(void);
 	virtual void positionPassenger(Actor&, float);
-	virtual int getRidingHeight(void);
+	virtual float getRidingHeight(void);
 	virtual void startRiding(Actor&);
 	virtual void addPassenger(Actor&);
 	virtual void flagPassengerToRemove(Actor&);
-	virtual int getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class InputMode);
+	virtual TextHolder getExitTip(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class InputMode);
 	virtual void intersects(Vector3 const&, Vector3 const&);
 	virtual bool isInWall(void);
 	virtual bool isInvisible(void);
@@ -80,13 +79,11 @@ public:
 private:
 	virtual void TryroFunc67();
 public:
-	virtual int getNameTagAsHash(void);
-private:
-	virtual void TryroFunc69();
-public:
+	virtual __int64 getNameTagAsHash(void);
+	virtual std::string getFormattedNameTag(void);
 	virtual void filterFormattedNameTag(class UIProfanityContext const&);
 	virtual void setNameTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
-	virtual int getAlwaysShowNameTag(void);
+	virtual bool getAlwaysShowNameTag(void);
 	virtual void setScoreTag(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 private:
 	virtual void TryroFunc74();
@@ -106,7 +103,7 @@ public:
 	virtual void canSee(Actor const&);
 	virtual void canSee(Vector3 const&);
 	virtual bool isSkyLit(float);
-	virtual float getBrightness(float);
+	virtual float getBrightnessAtBlock(float);
 	virtual void interactPreventDefault(void);
 	virtual void playerTouch(Player&);
 	virtual void onAboveBubbleColumn(bool);
@@ -142,9 +139,9 @@ public:
 	virtual void setSitting(bool);
 	virtual void onTame(void);
 	virtual void onFailedTame(void);
-	virtual int getInventorySize(void);
-	virtual int getEquipSlots(void);
-	virtual int getChestSlots(void);
+	virtual __int64 getInventorySize(void);
+	virtual __int64 getEquipSlots(void);
+	virtual __int64 getChestSlots(void);
 	virtual void setStanding(bool);
 	virtual void canPowerJump(void);
 	virtual void setCanPowerJump(bool);
@@ -155,7 +152,7 @@ public:
 	virtual void playAmbientSound(void);
 	virtual int getAmbientSound(void);
 	virtual bool isInvulnerableTo(ActorDamageSource const&);
-	virtual int getBlockDamageCause(class Block const&);
+	virtual __int64 getBlockDamageCause(class Block const&);
 	virtual void actuallyHurt(int, ActorDamageSource const&, bool);
 	virtual void animateHurt(void);
 	virtual void doFireHurt(int);
@@ -163,7 +160,7 @@ public:
 	virtual void onBounceStarted(class BlockPos const&, Block const&);
 	virtual void feed(int);
 	virtual void handleEntityEvent(class ActorEvent, int);
-	virtual int getPickRadius(void);
+	virtual float getPickRadius(void);
 	virtual int getActorRendererId(void);
 	virtual void spawnAtLocation(int, int);
 	virtual void spawnAtLocation(int, int, float);
@@ -174,17 +171,17 @@ public:
 	virtual void killed(Actor&);
 	virtual void awardKillScore(Actor&, int);
 	virtual void setArmor(class ArmorSlot, ItemStack const&);
-	virtual int getArmor(ArmorSlot);
-	virtual int getAllArmor(void);
-	virtual int getArmorMaterialTypeInSlot(ArmorSlot);
-	virtual int getArmorMaterialTextureTypeInSlot(ArmorSlot);
-	virtual int getArmorColorInSlot(ArmorSlot, int);
-	virtual int getEquippedSlot(class EquipmentSlot);
+	virtual __int64 getArmor(ArmorSlot);
+	virtual __int64 getAllArmor(void);
+	virtual __int64 getArmorMaterialTypeInSlot(ArmorSlot);
+	virtual __int64 getArmorMaterialTextureTypeInSlot(ArmorSlot);
+	virtual __int64 getArmorColorInSlot(ArmorSlot, int);
+	virtual __int64 getEquippedSlot(class EquipmentSlot);
 	virtual void setEquippedSlot(EquipmentSlot, ItemStack const&);
-	virtual int getCarriedItem(void);
+	virtual __int64 getCarriedItem(void);
 	virtual void setCarriedItem(ItemStack const&);
 	virtual void setOffhandSlot(ItemStack const&);
-	virtual int getEquippedTotem(void);
+	virtual __int64 getEquippedTotem(void);
 	virtual void consumeTotem(void);
 	virtual void save(class CompoundTag&);
 	virtual void saveWithoutId(CompoundTag&);
@@ -196,7 +193,7 @@ public:
 	virtual void thawFreezeEffect(void);
 	virtual void canFreeze(void);
 	virtual bool isWearingLeatherArmor(void);
-	virtual int getLiquidAABB(MaterialType);
+	virtual AABB getLiquidAABB(MaterialType);
 	virtual void handleInsidePortal(BlockPos const&);
 	virtual int getPortalCooldown(void);
 	virtual int getPortalWaitTime(void);
@@ -204,7 +201,7 @@ public:
 	virtual void canChangeDimensions(void);
 	virtual void changeDimension(); //removed
 	virtual void changeDimension(class ChangeDimensionPacket const&);
-	virtual int getControllingPlayer(void);
+	virtual class Actor* getControllingPlayer(void);
 	virtual void checkFallDamage(float, bool);
 	virtual void causeFallDamage(float, float, ActorDamageSource);
 	virtual void handleFallDistanceOnServer(float, float, bool);
@@ -226,8 +223,8 @@ public:
 	virtual void buildDebugInfo(std::basic_string<char, std::char_traits<char>, std::allocator<char>>&);
 	virtual int getCommandPermissionLevel(void);
 	virtual bool isClientSide(void);
-	virtual int getMutableAttribute(class Attribute const&);
-	virtual int getAttribute(class Attribute const&);
+	virtual __int64 getMutableAttribute(class Attribute const&);
+	virtual __int64 getAttribute(class Attribute const&);
 	virtual int getDeathTime(void);
 	virtual void heal(int);
 	virtual bool isInvertedHealAndHarm(void);
@@ -237,22 +234,22 @@ public:
 	virtual void onEffectAdded(MobEffectInstance&);
 	virtual void onEffectUpdated(MobEffectInstance&);
 	virtual void onEffectRemoved(MobEffectInstance&);
-	virtual int getAnimationComponent(void);
+	virtual __int64 getAnimationComponent(void);
 	virtual void openContainerComponent(Player&);
 	virtual void swing(void);
 	virtual void useItem(class ItemStackBase&, class ItemUseMethod, bool);
 	virtual void hasOutputSignal(class uchar);
-	virtual int getOutputSignal(void);
-	virtual int getDebugText(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>&);
-	virtual int getMapDecorationRotation(void);
-	virtual int getPassengerYRotation(Actor const&);
-	virtual int getYHeadRot(void);
+	virtual __int64 getOutputSignal(void);
+	virtual __int64 getDebugText(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>&);
+	virtual float getMapDecorationRotation(void);
+	virtual float getPassengerYRotation(Actor const&);
+	virtual float getYHeadRot(void);
 	virtual bool isWorldBuilder(void);
 	virtual bool isCreative(void);
 	virtual bool isAdventure(void);
 	virtual void add(ItemStack&);
 	virtual void drop(ItemStack const&, bool);
-	virtual int getInteraction(Player&, class ActorInteraction&, Vector3 const&);
+	virtual __int64 getInteraction(Player&, class ActorInteraction&, Vector3 const&);
 	virtual void canDestroyBlock(Block const&);
 	virtual void setAuxValue(int);
 	virtual void setSize(float, float);
@@ -273,7 +270,7 @@ public:
 	virtual void extractSnapshot(class PlayerSnapshotComponent&);
 	virtual void applySnapshot(PlayerSnapshotComponent const&, PlayerSnapshotComponent const&);
 	virtual float getNextStep(float);
-	virtual int getLootTable(void);
+	virtual __int64 getLootTable(void);
 	virtual void interpolatorTick(void);
 	virtual void updateEntitySpecificMolangVariables(class RenderParams&);
 	virtual void shouldTryMakeStepSound(void);
@@ -300,13 +297,13 @@ public:
 	virtual void setSprinting(bool);
 	virtual int getHurtSound(void);
 	virtual int getDeathSound(void);
-	virtual int getItemInHandIcon(ItemStack const&, int);
-	virtual int getSpeed(void);
+	virtual __int64 getItemInHandIcon(ItemStack const&, int);
+	virtual float getSpeed(void);
 	virtual void setSpeed(float);
-	virtual int getJumpPower(void);
+	virtual float getJumpPower(void);
 	virtual void hurtEffects(ActorDamageSource const&, int, bool, bool);
-	virtual int getMeleeWeaponDamageBonus(Actor);
-	virtual int getMeleeKnockbackBonus(void);
+	virtual float getMeleeWeaponDamageBonus(Actor);
+	virtual float getMeleeKnockbackBonus(void);
 	virtual void travel(float, float, float);
 	virtual void travel(class IMobMovementProxy&, float, float, float);
 	virtual void applyFinalFriction(float, bool);
@@ -332,9 +329,9 @@ public:
 	virtual void leaveCaravan(void);
 	virtual void joinCaravan(Actor);
 	virtual void hasCaravanTail(void);
-	virtual int getCaravanHead(void);
-	virtual int getArmorValue(void);
-	virtual int getArmorCoverPercentage(void);
+	virtual __int64 getCaravanHead(void);
+	virtual float getArmorValue(void);
+	virtual float getArmorCoverPercentage(void);
 	virtual void hurtArmorSlots(); //removed
 	virtual void setDamagedArmor(ArmorSlot, ItemStack const&);
 	virtual void sendArmorDamage(); //removed
@@ -342,15 +339,15 @@ public:
 	virtual void containerChanged(int);
 	virtual void updateEquipment(void);
 	virtual void clearEquipment(void);
-	virtual int getAllArmorID(void);
-	virtual int getAllHand(void);
-	virtual int getAllEquipment(void);
-	virtual int getArmorTypeHash(void);
+	virtual __int64 getAllArmorID(void);
+	virtual __int64 getAllHand(void);
+	virtual __int64 getAllEquipment(void);
+	virtual __int64 getArmorTypeHash(void);
 	virtual void dropEquipmentOnDeath(ActorDamageSource const&, int);
 	virtual void dropEquipmentOnDeath(void);
 	virtual void clearVanishEnchantedItemsOnDeath(void);
 	virtual void sendInventory(bool);
-	virtual int getDamageAfterMagicAbsorb(ActorDamageSource const&, int);
+	virtual float getDamageAfterMagicAbsorb(ActorDamageSource const&, int);
 	virtual void createAIGoals(void);
 	virtual void onBorn(Actor&, Actor&);
 	virtual void setItemSlot(EquipmentSlot, ItemStack const&);
@@ -370,8 +367,8 @@ public:
 	virtual void updateAi(void);
 	virtual void newServerAiStep(void);
 	virtual void _serverAiMobStep(void);
-	virtual int getDamageAfterEnchantReduction(ActorDamageSource const&, int);
-	virtual int getDamageAfterArmorAbsorb(ActorDamageSource const&, int);
+	virtual float getDamageAfterEnchantReduction(ActorDamageSource const&, int);
+	virtual float getDamageAfterArmorAbsorb(ActorDamageSource const&, int);
 	virtual void dropBags(void);
 	virtual void tickDeath(void);
 	virtual void updateGliding(void);
@@ -392,7 +389,7 @@ public:
 	virtual void moveView(void);
 	virtual void setName(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual void checkMovementStats(Vector3 const&);
-	virtual int getCurrentStructureFeature(void);
+	virtual __int64 getCurrentStructureFeature(void);
 	virtual bool isAutoJumpEnabled(void);
 	virtual void respawn(void);
 	virtual void resetRot(void);
@@ -431,11 +428,51 @@ public:
 	virtual void setPlayerGameType(class GameType);
 	virtual void initHUDContainerManager(void);
 	virtual void _crit(Actor&);
-	virtual int getEventing(void);
+	virtual __int64 getEventing(void);
 	virtual int getUserId(void);
 	virtual void sendEventPacket(class EventPacket&);
 	virtual void addExperience(int);
 	virtual void addLevels(int);
+	// lp funcs
+private:
+	virtual void TryroFunc416();
+	virtual void TryroFunc417();
+public:
+	virtual void inventoryChanged(uintptr_t Container, int, ItemStack const&, ItemStack const&, bool);
+private:
+	virtual void TryroFunc419();
+public:
+	virtual void deleteContainerManager(void);
+	virtual void setFieldOfViewModifier(float);
+	virtual bool is2DPositionRelevant();
+	virtual bool isEntityRelevant(Actor const&);
+private:
+	virtual void TryroFunc424();
+public:
+	virtual void onSuspension(void);
+	virtual void onLinkedSlotsChanged(void);
+	virtual void startCooldown(__int64 const* Item);
+	virtual int getItemCooldownLeft(void* hashedstring);
+	virtual int getItemCooldownLeft(ULONG);
+	virtual int getMaxItemCooldownLeft(void);
+	virtual bool isItemInCooldown(void* hashedstring);
+private:
+	virtual void TryroFunc432();
+	virtual void TryroFunc433();
+public:
+	virtual void sendNetworkPacket(void* Packet);
+private:
+	virtual void TryroFunc435();
+	virtual void TryroFunc436();
+	virtual void TryroFunc437();
+	virtual void TryroFunc438();
+public:
+	virtual void reportMovementTelemetry(void* MovementEventType);
+	virtual bool isSimulated(void);
+	virtual TextHolder getXUID(void);
+	virtual __int64 getMovementSettings(void);
+	virtual void onMovePlayerPacketNormal(class Vector3 const&, class Vector2 const&, float);
+	virtual void _createChunkSource(void* ChunkSource);
 
 private: // Variables - 0x8 (Vtable ptr)
 	char pad_0x0008[0xF8]; //0x0008
@@ -519,9 +556,27 @@ public:
 	bool InfResources; //0x0990 
 
 public: // Functions
+	// Returns the memory instance of GameMode
+	class GameMode* getGamemode() {
+		return *reinterpret_cast<class GameMode**>(reinterpret_cast<__int64>(this) + 0x1248);
+	};
 
-	class GameMode* getGameMode() {
-		return *reinterpret_cast<class GameMode**>(this + 0x1248);
+	// Someone make these classes
+
+	__int64* getLevel() {
+		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0x368);
+	};
+
+	__int64* getDimension() {
+		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0x360);
+	};
+
+	__int64* getBlockSource() {
+		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0x358);
+	};
+
+	__int64* getInventory() {
+		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0xB88);
 	};
 
 	void SetRenderPosition(Vector3 v) {
@@ -539,9 +594,6 @@ public: // Functions
 		lerpy(this, motion);
 	}
 	*/
-	/*float getHealth() {
-		return *reinterpret_cast<float*>(this + Mem::findSig("48 83 EC 28 48 8B 01 48 8D 15 EA D6 41 02 FF 90 78 06 00 00 F3 0F 10 80 84 00 00 00 48 83 C4 28 C3 CC"));
-	}*/
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1050) = v;
@@ -551,30 +603,6 @@ public: // Functions
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1050);
 	}
-
-	/*void SetPitch(float v) {
-		*(float*)((uintptr_t)(this) + 0x0138) = v;
-	}
-
-	void SetYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x013C) = v;
-	}
-
-	void SetBodyYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0748) = v;
-	}
-
-	void SetBodyYaw2(float v) {
-		*(float*)((uintptr_t)(this) + 0x074C) = v;
-	}
-
-	void SetWeirdYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0750) = v;
-	}
-
-	void SetRlyWeirdYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0754) = v;
-	}*/
 
 	PDWORD disposable;
 	float SetReach(float v) {
@@ -589,12 +617,25 @@ public: // Functions
 		return reinterpret_cast<Vector2*>((uintptr_t)(this) + 0x138);
 	}
 
-	int getGamemode() {
-		return *reinterpret_cast<int*>(this + 0x1D8C);
+	std::string Nametag() {
+		return ((TextHolder*)((uintptr_t)(this) + 0x8D8))->getText();
 	}
 
-	std::string Nametag() {
-		return *reinterpret_cast<std::string*>(this + 0x08D8);
+	std::string getType() {
+		return ((TextHolder*)((uintptr_t)(this) + 0x3F8))->getText();
+	}
+
+	std::string getName()
+	{
+		std::string name = this->getFormattedNameTag();
+		if (name.length() == 0) {
+			if (this->isPlayer())
+				name = this->Nametag();
+			else
+				name = this->getType();
+		}
+
+		return name;
 	}
 
 	void setShadowRadius(float v) {
@@ -604,6 +645,36 @@ public: // Functions
 	void test(float v) {
 		*(float*)((uintptr_t)(this) + 0x0818) = v;
 		*(float*)((uintptr_t)(this) + 0x07A8) = v;
+	}
+
+	// Reset this actor's vertical velocity
+	void resetVerticalVelocity()
+	{
+		this->Velocity.y = 0.f;
+	}
+
+	// Reset this actor's horizontal velocity
+	void resetHorizontalVelocity()
+	{
+		this->Velocity.x = 0.f;
+		this->Velocity.z = 0.f;
+	}
+
+	// Reset full velocity
+	void resetVelocity()
+	{
+		this->resetVerticalVelocity();
+		this->resetHorizontalVelocity();
+	}
+
+	// Returns vTable
+	uintptr_t** vTable()
+	{
+		return reinterpret_cast<uintptr_t**>((uintptr_t*)(this) + 0x0);
+	}
+
+	int getPlayerGameType() {
+		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
 };
 

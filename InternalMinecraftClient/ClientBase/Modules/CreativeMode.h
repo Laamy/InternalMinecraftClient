@@ -6,7 +6,7 @@ public:
 	int origGamemode;
 
 	void OnEnable(ClientInstance* ci, Actor* lp) override {
-		origGamemode = lp->getGamemode();
+		origGamemode = lp->getPlayerGameType();
 	}
 
 	void OnGameTick(Actor* lp) override {

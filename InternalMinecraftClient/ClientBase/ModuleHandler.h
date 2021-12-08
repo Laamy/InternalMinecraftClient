@@ -75,8 +75,9 @@
 #include "Modules/InventoryMove.h"
 #include "Modules/OldSwing.h"
 #include "Modules/PushSwing.h"
-#include "Modules/ViewModel.h"
 #include "Modules/AntiFreeze.h"
+#include "Modules/ElytraSpoof.h"
+#include "Modules/ViewModel.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -145,6 +146,7 @@ public:
         modules.push_back(new NoYFlight(flies));
         modules.push_back(new Jetpack(flies));
         modules.push_back(new HiveFly(flies));
+        modules.push_back(new ElytraSpoof(flies));
 
         modules.push_back(new PlayerList(visual));
         modules.push_back(new ArrayList(visual));
