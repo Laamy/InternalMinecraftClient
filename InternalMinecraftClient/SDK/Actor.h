@@ -566,10 +566,6 @@ public: // Functions
 		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
 
-	class GameMode* getGameMode() {
-		return *reinterpret_cast<class GameMode**>(this + 0x1248);
-	};
-
 	std::string Nametag() {
 		return *reinterpret_cast<std::string*>(this + 0x08D8);
 	}
