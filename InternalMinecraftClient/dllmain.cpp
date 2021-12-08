@@ -28,6 +28,9 @@ bool clientAlive = true;
 
 class BitmapFont* font;
 
+typedef void(__thiscall* key)(uint64_t keyId, bool held);
+key _key;
+
 // SDK
 #include "SDK/Actor.h"
 #include "SDK/Player.h"
@@ -71,8 +74,6 @@ typedef void(__thiscall* container)(ContainerManagement* a1);
 container _container;
 typedef void(__thiscall* gamemode)(GameMode* gm, void* a2);
 gamemode _gamemode;
-typedef void(__thiscall* key)(uint64_t keyId, bool held);
-key _key;
 typedef void(__thiscall* render)(void* a1, MinecraftUIRenderContext* ctx);
 render _render;
 typedef void(__thiscall* renderText)(void* a1, MinecraftUIRenderContext* ctx);
