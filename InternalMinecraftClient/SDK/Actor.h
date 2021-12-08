@@ -613,5 +613,10 @@ public:
 		static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int)>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
 		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
 	}
+	
+	void closeContainer() {
+		static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9 48 8B 01 FF 50 50"));
+		closeThingy(this);
+	}
 };
 
