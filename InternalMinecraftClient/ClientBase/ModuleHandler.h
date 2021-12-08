@@ -14,6 +14,7 @@
 #include "Modules/PlayerList.h"
 #include "Modules/Reach.h"
 #include "Modules/OGMFlight.h"
+#include "Modules/ChestDumper.h"
 #include "Modules/Tornado.h"
 #include "Modules/ExpandScreen.h"
 #include "Modules/NoObstructionSwing.h"
@@ -25,6 +26,7 @@
 #include "Modules/Godmode.h"
 #include "Modules/Glide.h"
 #include "Modules/ChestRay.h"
+#include "Modules/ChestStealer.h"
 #include "Modules/NoSlow.h"
 #include "Modules/CreativeMode.h"
 #include "Modules/AntiImmobile.h"
@@ -130,6 +132,8 @@ public:
         modules.push_back(new Bhop(player));
         modules.push_back(new AutoSneak(player));
         modules.push_back(new Phase(player));
+        modules.push_back(new ChestStealer(player));
+        modules.push_back(new ChestDumper(player));
         modules.push_back(new NoFall(player));
        // modules.push_back(new NoBrakes(player));
         modules.push_back(new Velocity(player));

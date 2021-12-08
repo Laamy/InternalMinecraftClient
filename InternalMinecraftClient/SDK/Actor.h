@@ -606,3 +606,21 @@ public: // Functions
 		*(float*)((uintptr_t)(this) + 0x07A8) = v;
 	}
 };
+
+class ContainerManagement {
+public:
+	void shiftClickItems(uintptr_t a1, std::string containerName, int slots) {
+		using ContainerManagement_shiftClickItems = __int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int);
+		static ContainerManagement_shiftClickItems shiftClickItem = reinterpret_cast<ContainerManagement_shiftClickItems>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
+		TextHolder name = TextHolder(containerName);
+		if (shiftClickItem != 0x0)
+			shiftClickItem(this, a1, name, slots);
+	}
+};
+class ChestManagement : public ContainerManagement {
+	//Goes to ContainerManagement
+};
+class ShulkerManagement : public ContainerManagement {
+	//Goes to ContainerManagement
+};
+

@@ -155,6 +155,8 @@
     <ClInclude Include="ClientBase\Commands\TpCommand.h" />
     <ClInclude Include="ClientBase\Commands\DamageCommand.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="ClientBase\Modules\ChestStealer.h" />
+    <ClInclude Include="ClientBase\Modules\ChestDumper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

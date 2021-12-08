@@ -67,6 +67,8 @@ typedef void(__thiscall* tick)(ClientInstance* clientinstance, void* a2);
 tick _tick;
 typedef void(__thiscall* player)(Actor* lp, void* a2);
 player _player;
+typedef void(__thiscall* container)(ChestManagement* a1);
+container _container;
 typedef void(__thiscall* gamemode)(GameMode* gm, void* a2);
 gamemode _gamemode;
 typedef void(__thiscall* key)(uint64_t keyId, bool held);
@@ -255,6 +257,17 @@ void playerCallback(Actor* lp, void* a2) {
     for (auto mod : handler.modules)
         if (mod->enabled) mod->OnGameTick(lp);
 }
+
+void containerCallback(ChestManagement* a1) {
+    for (auto mod : handler.modules) {
+        if (mod->name == "ChestStealer" && mod->enabled) {
+            mod->containerScreenTick(a1);
+        }
+        if (mod->name == "ChestDumper" && mod->enabled) {
+            mod->containerScreenTick(a1);
+        }
+    }
+}
 /*
 void gamemodeCallback(GameMode* gm, void* a2) {
     _gamemode(gm, a2);
@@ -349,6 +362,7 @@ void Init(LPVOID c) {
         }
         // Function hooks
         uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
+        uintptr_t containerScreenTick = Mem::findSig("48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 E8 ? ? ? ? 48 8B 17");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
         //uintptr_t gamemodeAddr = Mem::findSig("48 8D 05 02 80 23 02 48 89 01 48 89 51 08 48 C7 41 10 FF FF FF FF C7 41 18 FF FF FF FF 44 88 61 1C");
@@ -373,6 +387,10 @@ void Init(LPVOID c) {
         if (MH_CreateHook((void*)localPlayerAddr, &playerCallback, reinterpret_cast<LPVOID*>(&_player)) == MH_OK) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
+        };
+        if (MH_CreateHook((void*)containerScreenTick, &containerCallback, reinterpret_cast<LPVOID*>(&_container)) == MH_OK) {
+            MH_EnableHook((void*)containerScreenTick);
+            _logf(L"[TreroInternal]: ContainerTick hooked!\n");
         };
         /*if (MH_CreateHook((void*)gamemodeAddr, &gamemodeCallback, reinterpret_cast<LPVOID*>(&_gamemode)) == MH_OK) {
              MH_EnableHook((void*)gamemodeAddr);

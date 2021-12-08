@@ -34,6 +34,7 @@ public: // functions
     virtual void OnFrameRender(RenderUtils* ctx) {}
     virtual void OnTick(ClientInstance* ci) {}
     virtual void OnGameTick(Actor* lp) {}
+	virtual void containerScreenTick(ChestManagement* a1) {}
 	virtual bool HoldMode() {
 		return false;
 	}

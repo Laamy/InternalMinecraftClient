@@ -177,6 +177,8 @@
     <ClInclude Include="ClientBase\Modules\Airswim.h" />
     <ClInclude Include="ClientBase\Modules\AlwaysDay.h" />
     <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
+    <ClInclude Include="ClientBase\Modules\ChestDumper.h" />
+    <ClInclude Include="ClientBase\Modules\ChestStealer.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
     <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
