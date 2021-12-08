@@ -8,6 +8,6 @@ public:
 		for (int i = 0; i < 56; i++) {
 			a1->shiftClickItems("container_items", i);
 		}
-		a1->CloseContainer();
+		a1->closeContainer();
 	}
 };

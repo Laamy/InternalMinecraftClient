@@ -9,6 +9,6 @@ public:
 			a1->shiftClickItems("inventory_items", i);
 			a1->shiftClickItems("hotbar_items", i);
 		}
-		a1->CloseContainer();
+		a1->closeContainer();
 	}
 };
