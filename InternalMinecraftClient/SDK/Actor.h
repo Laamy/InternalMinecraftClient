@@ -238,7 +238,7 @@ public:
 	virtual void onEffectUpdated(MobEffectInstance&);
 	virtual void onEffectRemoved(MobEffectInstance&);
 	virtual int getAnimationComponent(void);
-	virtual void openContainerComponent(Player&);
+	virtual void openContainerComponent(Actor*);
 	virtual void swing(void);
 	virtual void useItem(class ItemStackBase&, class ItemUseMethod, bool);
 	virtual void hasOutputSignal(class uchar);
@@ -609,18 +609,9 @@ public: // Functions
 
 class ContainerManagement {
 public:
-	void shiftClickItems(uintptr_t a1, std::string containerName, int slots) {
-		using ContainerManagement_shiftClickItems = __int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int);
-		static ContainerManagement_shiftClickItems shiftClickItem = reinterpret_cast<ContainerManagement_shiftClickItems>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
-		TextHolder name = TextHolder(containerName);
-		if (shiftClickItem != 0x0)
-			shiftClickItem(this, a1, name, slots);
+	void shiftClickItems(std::string containerName, int slots) {
+		static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int)>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
+		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
 	}
-};
-class ChestManagement : public ContainerManagement {
-	//Goes to ContainerManagement
-};
-class ShulkerManagement : public ContainerManagement {
-	//Goes to ContainerManagement
 };
 

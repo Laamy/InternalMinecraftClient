@@ -67,7 +67,7 @@ typedef void(__thiscall* tick)(ClientInstance* clientinstance, void* a2);
 tick _tick;
 typedef void(__thiscall* player)(Actor* lp, void* a2);
 player _player;
-typedef void(__thiscall* container)(ChestManagement* a1);
+typedef void(__thiscall* container)(ContainerManagement* a1);
 container _container;
 typedef void(__thiscall* gamemode)(GameMode* gm, void* a2);
 gamemode _gamemode;
@@ -258,13 +258,13 @@ void playerCallback(Actor* lp, void* a2) {
         if (mod->enabled) mod->OnGameTick(lp);
 }
 
-void containerCallback(ChestManagement* a1) {
+void ContainerTickCallback(ContainerManagement* a1, Actor* lp) {
     for (auto mod : handler.modules) {
         if (mod->name == "ChestStealer" && mod->enabled) {
-            mod->containerScreenTick(a1);
+            mod->OnContainerTick(a1, lp);
         }
         if (mod->name == "ChestDumper" && mod->enabled) {
-            mod->containerScreenTick(a1);
+            mod->OnContainerTick(a1, lp);
         }
     }
 }
@@ -388,7 +388,7 @@ void Init(LPVOID c) {
             MH_EnableHook((void*)localPlayerAddr);
             _logf(L"[TreroInternal]: LocalPlayer hooked!\n");
         };
-        if (MH_CreateHook((void*)containerScreenTick, &containerCallback, reinterpret_cast<LPVOID*>(&_container)) == MH_OK) {
+        if (MH_CreateHook((void*)containerScreenTick, &ContainerTickCallback, reinterpret_cast<LPVOID*>(&_container)) == MH_OK) {
             MH_EnableHook((void*)containerScreenTick);
             _logf(L"[TreroInternal]: ContainerTick hooked!\n");
         };
