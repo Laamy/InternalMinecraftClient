@@ -139,7 +139,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;INTERNALMINECRAFTCLIENT_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientBase\BypassBox.h" />
@@ -249,7 +248,6 @@
     <ClInclude Include="ClientBase\Modules\Zoom.h" />
     <ClInclude Include="Memory\GameHooks.h" />
     <ClInclude Include="Memory\VirtualFuncHook.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="SDK\ClientInstance.h" />
     <ClInclude Include="SDK\GLMatrix.h" />
     <ClInclude Include="SDK\GuiData.h" />

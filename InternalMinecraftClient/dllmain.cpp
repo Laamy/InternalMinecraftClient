@@ -1,4 +1,3 @@
-#include "pch.h"
 #include <windows.h>
 #include <MinHook.h>
 #include <map>
