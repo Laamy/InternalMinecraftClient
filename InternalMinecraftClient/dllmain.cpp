@@ -12,8 +12,6 @@ BaseClient* hooks = new BaseClient();
 #define _logf(str)  OutputDebugString(str)
 typedef void(__thiscall* chatMsg)(void* a1, class TextHolder* txt);
 chatMsg _chatMsg;
-bool cancelUiRender = false;
-bool JustToggleddMod = false;
 auto GetDllHMod(void) -> HMODULE {
     MEMORY_BASIC_INFORMATION info;
     size_t len = VirtualQueryEx(GetCurrentProcess(), (void*)GetDllHMod, &info, sizeof(info));
@@ -23,8 +21,14 @@ auto GetDllHMod(void) -> HMODULE {
 
 std::map<uint64_t, class Actor*> entityList = std::map<uint64_t, class Actor*>(); // 1.17.41 entitylist
 std::map<uint64_t, class Actor*> completeEntityList = std::map<uint64_t, class Actor*>();
-
+//Bools
 bool clientAlive = true;
+bool cancelUiRender = false;
+bool cancelTextRender = false;
+bool JustToggleddMod = false;
+bool renderClickUI = false;
+bool justEnabled = true;
+bool justDisabled = false;
 
 class BitmapFont* font;
 
@@ -83,32 +87,10 @@ std::map<uint64_t, bool> mousemap = std::map<uint64_t, bool>();
 std::vector<std::string> categories = std::vector<std::string>();
 std::vector<Vector2> categoryPos = std::vector<Vector2>();
 std::map<uint64_t, bool> modulesEnabled = std::map<uint64_t, bool>();
-
-bool renderClickUI = false;
-bool justEnabled = true;
-bool justDisabled = false;
 int disabledTicks = 0;
 int enabledTicks = 0;
 int frame = 0;
 //Hopefully could be used
-KeyInfo* mouse;
-bool isRightClickDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->rightClickDown;
-}
-
-bool isLeftClickDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->leftClickDown;
-}
-
-bool isWheelDown() {
-    if (mouse == 0)
-        return false;
-    return mouse->wheelDown;
-}
 
 void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own keymap ;p
     _key(c, v);
@@ -156,6 +138,8 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
 }
 
 void renderTextCallback(void* a1, MinecraftUIRenderContext* ctx) {
+    if (cancelTextRender)
+        return;
     _renderText(a1, ctx);
 }
 
