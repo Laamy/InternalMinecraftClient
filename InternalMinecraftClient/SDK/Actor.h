@@ -685,13 +685,13 @@ public:
 		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
 	}
 	
-	//void closeContainer() { does dum stuff rn and idk y
-		//static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9"));
-		//closeThingy(this);
-	//}
-
-	void CloseContainer() {
-		_key(27, true);
+	void closeContainer() { 
+		static auto closeThingy = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*)>(Mem::findSig("48 89 5C 24 10 48 89 7C 24 18 55 48 8D 6C 24 A9 48 81 EC C0 00 00 00 48 8B F9"));
+		closeThingy(this);
 	}
+
+	//void CloseContainer() {
+		//_key(27, true);
+	//}
 };
 
