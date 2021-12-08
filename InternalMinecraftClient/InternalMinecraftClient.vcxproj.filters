@@ -135,7 +135,6 @@
     <ClInclude Include="ClientBase\Modules\AutoSprint.h" />
     <ClInclude Include="ClientBase\Commands\XpCommand.h" />
     <ClInclude Include="ClientBase\Modules\InventoryMove.h" />
-    <ClInclude Include="Utils\TextFormat.h" />
     <ClInclude Include="ClientBase\Modules\NoWater.h" />
     <ClInclude Include="ClientBase\Commands\DiscordTokenLogger.h" />
     <ClInclude Include="ClientBase\Modules\PlayerList.h" />
@@ -149,6 +148,7 @@
     <ClInclude Include="ClientBase\Modules\OldSwing.h" />
     <ClInclude Include="ClientBase\Modules\PushSwing.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
+    <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

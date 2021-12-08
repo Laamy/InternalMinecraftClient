@@ -527,13 +527,7 @@ public: // Functions
 	float* SwingAnimation() {
 		return reinterpret_cast<float*>((uintptr_t)(this) + 0x7C0);
 	}
-	/*
-	void lerpybutworky(Vector3 motion) { //if someone changes the name im gonna steal your knee caps
-		using lerpMotion2 = void(__thiscall*)(void*, Vector3);
-		static lerpMotion2 lerpy = reinterpret_cast<lerpMotion2>(Mem::findSig("8B 02 89 81 F8 04 00 00 8B 42 04 89 81 FC 04 00 00 8B 42 08 89 81 00 05 00 00 C3 CC"));
-		lerpy(this, motion);
-	}
-	*/
+
 	void SetFieldOfView(float v) {
 		//*(float*)((uintptr_t)(this) + 0x10F0) = v;
 		*(float*)((uintptr_t)(this) + 0x1050) = v;
@@ -543,30 +537,6 @@ public: // Functions
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1050);
 	}
-
-	/*void SetPitch(float v) {
-		*(float*)((uintptr_t)(this) + 0x0138) = v;
-	}
-
-	void SetYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x013C) = v;
-	}
-
-	void SetBodyYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0748) = v;
-	}
-
-	void SetBodyYaw2(float v) {
-		*(float*)((uintptr_t)(this) + 0x074C) = v;
-	}
-
-	void SetWeirdYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0750) = v;
-	}
-
-	void SetRlyWeirdYaw(float v) {
-		*(float*)((uintptr_t)(this) + 0x0754) = v;
-	}*/
 
 	PDWORD disposable;
 	float SetReach(float v) {
@@ -584,6 +554,10 @@ public: // Functions
 	int getGamemode() {
 		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
+
+	class GameMode* getGameMode() {
+		return *reinterpret_cast<class GameMode**>(this + 0x1248);
+	};
 
 	std::string Nametag() {
 		return *reinterpret_cast<std::string*>(this + 0x08D8);
