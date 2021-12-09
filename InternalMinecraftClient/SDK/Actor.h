@@ -747,7 +747,7 @@ public:
 	virtual bool _shouldSwap(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
 	virtual std::string _getCollectionName(uintptr_t UIPropertyBagPtr);
 	virtual bool _canSplit(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
-	virtual void _sendFlyingItem(class ItemStackBase const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
+	virtual void _sendFlyingItem(std::string, int);
 
 	// ContainerScreenController::_handleAutoPlace but renamed
 	void shiftClickItems(std::string containerName, int slots) {
@@ -756,6 +756,8 @@ public:
 	}
 	
 	void closeContainer() { 
+		this->leaveScreen();
+		this->canExit();
 		this->tryExit();
 	}
 };
