@@ -1,6 +1,6 @@
 #pragma once
 #include "../Utils/RenderUtils.h"
-#include "BypassBox.h"
+#include "Setting.h"
 
 class Module {
 public:
@@ -21,7 +21,7 @@ public:
     bool enabled;
 
 	// Private variables
-	std::vector<BypassBox> bypasses;
+	std::vector<Setting> settings;
 
 public: // functions
 	virtual void drawTooltip(TextHolder tooltip) {
@@ -39,8 +39,8 @@ public: // functions
 		return false;
 	}
 
-	void addBypass(BypassBox bypass) {
-		bypasses.push_back(bypass);
+	void addSetting(Setting setting) {
+		settings.push_back(setting);
 	}
 
 	double _pow(double a, double b) {
