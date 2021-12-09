@@ -679,6 +679,7 @@ public: // Functions
 };
 
 class ContainerManagement {
+private:
 	virtual __int64 destructor();
 public:
 	virtual void tick(void);
@@ -689,11 +690,18 @@ public:
 	virtual void onTerminate(void);
 	virtual void onInit(void);
 	virtual void onDelete(void);
+private:
+	virtual void Function1();
+public:
 	virtual bool canExit(void);
 	virtual void tryExit(void);
-	virtual void areControllerTabsEnabled(void);
+	virtual bool areControllerTabsEnabled(void);
 	virtual void onCreation(void);
 	virtual void logCreationTime(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, double, double, UCHAR);
+private:
+	virtual void Function2();
+	virtual void Function3();
+public:
 	virtual void onLeave(void);
 	virtual void leaveScreen(void);
 	virtual void handleGameEventNotification(uintptr_t uiGameEventNotification);
