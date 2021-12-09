@@ -100,7 +100,11 @@ void keyCallback(uint64_t c, bool v) { // Store key infomation inside our own ke
         else clientInst->releaseMouse();
     }
 
-    //if (clientInst->mcGame->canUseKeys()) return;
+    if (clientInst->getCPlayer() == nullptr) return;
+
+    if (clientInst->getGuiData()->IsInGame == false) return;
+
+    if (clientInst->getCPlayer()->canOpenContainerScreen() == false) return;
 
     for (int i = 0; i < handler.modules.size(); ++i) {
         if (!renderClickUI) {
