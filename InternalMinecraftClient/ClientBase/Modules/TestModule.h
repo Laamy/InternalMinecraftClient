@@ -7,6 +7,9 @@ public:
 	TestModule(std::string cat) : Module(cat, "TestModule", "TestModule", 0x07) {
 		uintptr_t address = Mem::findSig("41 0F 10 08 48 8B C2 0F"); //Currently Fog Color
 		func = hooks->createHook("Test", address, Test);
+		std::vector<std::string> options;
+		options.push_back("Hive");
+		addSetting(Setting(this, "TestSetting", "checkbox", options));
 		//40 53 48 83 EC 20 80 B9 8C 09 00 00 01 48 8B D9 74 4B canUseOperatorBlocks which when setting to true works in singleplayer
 		/* GetSleepTimer sigs that actually work!
 		0F BF 81 0C 10 00 00 C3 CC CC CC CC CC CC CC CC
