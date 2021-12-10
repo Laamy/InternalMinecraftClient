@@ -604,13 +604,9 @@ public: // Functions
 		return *reinterpret_cast<float*>(this + 0x1050);
 	}
 
-	PDWORD disposable;
-	float SetReach(float v) {
-		uintptr_t reachAddr = Mem::findSig("F3 0F 10 05 ?? ?? ?? ?? 41 0F 28 D9");
-		VirtualProtect((LPVOID*)reachAddr, sizeof(float), PAGE_EXECUTE_READWRITE, disposable); // i hate visual studio in general
-		auto reach = *reinterpret_cast<float*>(reachAddr);
-		v = reach;
-		return v;
+	void dropSlot(int slot) {
+		static auto dropSlot = reinterpret_cast<__int64(__fastcall*)(Actor*, int)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
+		dropSlot(this, slot);
 	}
 
 	Vector2* bodyRots() {
@@ -749,7 +745,7 @@ public:
 	virtual bool _canSplit(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, int);
 	virtual void _sendFlyingItem(std::string, int);
 
-	// ContainerScreenController::_handleAutoPlace but renamed
+	// ContainerScreenController::_handleAutoPlace but renamed and working for some reason
 	void shiftClickItems(std::string containerName, int slots) {
 		static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(ContainerManagement*, uintptr_t, TextHolder, int)>(Mem::findSig("40 55 53 56 57 41 54 41 55 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 ? 45 8B E1 49 8B F0 44 8B EA"));
 		shiftClickItem(this, 0x7FFFFFFF, containerName, slots);
@@ -760,5 +756,13 @@ public:
 		this->canExit();
 		this->tryExit();
 	}
+};
+
+class Inventory : public Actor{
+public:
+	//void dropSlot(int slot) {
+	//	static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(Inventory*, int)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
+	//	shiftClickItem(this, slot);
+	//}
 };
 

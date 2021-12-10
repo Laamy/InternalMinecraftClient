@@ -9,6 +9,7 @@
 #include "Modules/DebugCursor.h"
 #include "Modules/Watermark.h"
 #include "Modules/HiveFly.h"
+#include "Modules/InvCleaner.h"
 #include "Modules/AirStuck.h"
 #include "Modules/AutoWalk.h"
 #include "Modules/PlayerList.h"
@@ -128,6 +129,7 @@ public:
         modules.push_back(new AutoSprint(player));
         modules.push_back(new Airswim(player));
         modules.push_back(new AutoWalk(player));
+        modules.push_back(new InvCleaner(player));
         modules.push_back(new FastWater(player));
         modules.push_back(new Glide(player));
         modules.push_back(new Bhop(player));
