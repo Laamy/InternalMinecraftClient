@@ -10,6 +10,7 @@ public:
 		std::vector<std::string> options;
 		options.push_back("Hive");
 		addSetting(Setting(this, "TestSetting", "checkbox", options));
+		//48 8B 41 ? 48 8B D1 48 85 C0 74 ? 48 8B 08 48 85 C9 74 ? 48 8B 01 48 FF ?? return this to true and it makes every item enchanted, return to false and everything isint enchanted
 		//40 53 48 83 EC 20 80 B9 8C 09 00 00 01 48 8B D9 74 4B canUseOperatorBlocks which when setting to true works in singleplayer
 		/* GetSleepTimer sigs that actually work!
 		0F BF 81 0C 10 00 00 C3 CC CC CC CC CC CC CC CC
