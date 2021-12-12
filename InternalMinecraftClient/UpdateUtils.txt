@@ -25,4 +25,21 @@ RenderText:
 	Then click "Generate Signature" then click "No".
 	That should be a working rendertext signature after u capitalize all the non capitalized things.
 RenderContext:
+	**To get this sig you need to have found render text or just use an already existing sig for it**
+	Open Cheat Engine and attach it to your game.
+	Select the type as "Array of byte" and turn writable box to grey.
+	Paste the render text signature in and click "First Scan".
+	Click on the result and press Ctrl + D.
+	Copy the first 2 lines of bytes by clicking shift on the second option so the first 2 lines are highlighted.
+	Then right click and click "Copy to Clipboard -> Bytes Only (No address)"
+	Paste the copied bytes into the search bar.
+	Press new scan.
+	Shift click all the results of Minecraft.Windows.Exe and press the red arrow to copy all selected items to the address list.
+	Now u must CRTL + D every address one by one and double click where it brings you and click "Select current function" then right and replace with the word "ret" until your game stops rendering.
+	**Note: There are sometimes more then 1 address that makes your game stop rendering. It is trial and error and u have to try all of em.**
+	Once you have an address that stops rendering your game, copy the value then reload your game, paste the value in the search bar then first scan (after you reattached CE to your game).
+	CRTL + D the result and click "Select Current Function" then right click where it brings you, and click "Generate Signature -> No".
+	And to check if you have a valid Render Context paste it in renderCtxAddr and see if when injecting your game loads the arraylist, clickgui, etc...
+
+	There you go, thats how u find RenderText and RenderContext.
 }
