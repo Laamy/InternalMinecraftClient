@@ -1,0 +1,28 @@
+Update Order (Sigs First):
+RenderContext ( renderCtxAddr )
+Keymap Sig ( keymapAddr )
+ActorHook ( hookAddr )
+ClientInstance ( localPlayerAddr )
+SendChatMsg ( chatMsgSigAddr )
+RenderText ( renderTextAddr )
+Signatures in modules
+
+How to update:
+1. RenderContext & RenderText {
+RenderText:
+	Go to main menu.
+	Open Cheat Engine and attach it to your game.
+	Search Type String.
+	Go to Realms tab.
+	Search in CE "Join Realm".
+	Do find what accesses each result.
+	If you get one result it is probably the right spot.
+	Click the result and then click "Show Disassembler"
+	Then Right Click and click "Select Current Function"
+	Now double click the spot it brought you to and right "ret" then press ok
+	Go to your mc and press escape one then go back to realms tab and if there is no more text that is the right render text address.
+	Make sure you have this plugin (https://filebin.net/k4ztzj6jsh39ekwp) installed in ce (if you dont I really could care less to explain how to instal it). Right click the address (after you reloaded your game and found it again, if you dont do this it will give u a sig with the ret and nop's which isint good).
+	Then click "Generate Signature" then click "No".
+	That should be a working rendertext signature after u capitalize all the non capitalized things.
+RenderContext:
+}

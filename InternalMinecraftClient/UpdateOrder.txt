@@ -1,6 +1,0 @@
-Sigs First:
-Keymap Sig ( keymapAddr )
-RenderContext ( renderCtxAddr )
-ActorHook ( hookAddr )
-ClientInstance ( localPlayerAddr )
-SendChatMsg ( chatMsgSigAddr )

@@ -162,6 +162,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="UpdateOrder.txt" />
+    <Text Include="UpdateUtils.txt" />
   </ItemGroup>
 </Project>

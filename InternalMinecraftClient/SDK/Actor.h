@@ -191,7 +191,7 @@ public:
 	virtual void queryEntityRenderer(void);
 	virtual int getSourceUniqueID(void);
 	virtual void thawFreezeEffect(void);
-	virtual void canFreeze(void);
+	virtual bool canFreeze(void);
 	virtual bool isWearingLeatherArmor(void);
 	virtual AABB getLiquidAABB(MaterialType);
 	virtual void handleInsidePortal(BlockPos const&);
