@@ -178,6 +178,7 @@
     <ClInclude Include="ClientBase\Modules\AntiFreeze.h" />
     <ClInclude Include="ClientBase\Modules\ChestDumper.h" />
     <ClInclude Include="ClientBase\Modules\ChestStealer.h" />
+    <ClInclude Include="ClientBase\Modules\CoordsHud.h" />
     <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
     <ClInclude Include="ClientBase\Modules\InvCleaner.h" />

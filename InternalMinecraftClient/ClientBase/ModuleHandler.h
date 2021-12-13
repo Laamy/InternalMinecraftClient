@@ -79,6 +79,7 @@
 #include "Modules/AntiFreeze.h"
 #include "Modules/ElytraSpoof.h"
 #include "Modules/ViewModel.h"
+#include "Modules/CoordsHud.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -162,6 +163,7 @@ public:
         modules.push_back(new ChestRay(visual));
         modules.push_back(new AlwaysDay(visual));
         modules.push_back(new Tracers(visual));
+        modules.push_back(new CoordsHud(visual));
 
         modules.push_back(new Killgame(misc));
         modules.push_back(new CreativeMode(misc)); 
