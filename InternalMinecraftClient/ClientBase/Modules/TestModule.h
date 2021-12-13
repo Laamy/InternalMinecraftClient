@@ -20,7 +20,7 @@ public:
 	}
 
 	void OnEnable(ClientInstance* a1, Actor* a2) override {
-		auto player = clientInst->getCPlayer();
+		auto player = clientInst->getLocalPlayer();
 		hooks->debugEcho("", "Test module!");
 		func->enableHook();
 	}

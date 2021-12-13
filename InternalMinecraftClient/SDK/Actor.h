@@ -622,8 +622,7 @@ public: // Functions
 		return ((TextHolder*)((uintptr_t)(this) + 0x3F8))->getText();
 	}
 
-	std::string getName()
-	{
+	std::string getName() {
 		std::string name = this->getFormattedNameTag();
 		if (name.length() == 0) {
 			if (this->isPlayer())
@@ -631,7 +630,6 @@ public: // Functions
 			else
 				name = this->getType();
 		}
-
 		return name;
 	}
 
@@ -645,28 +643,24 @@ public: // Functions
 	}
 
 	// Reset this actor's vertical velocity
-	void resetVerticalVelocity()
-	{
+	void resetVerticalVelocity() {
 		this->Velocity.y = 0.f;
 	}
 
 	// Reset this actor's horizontal velocity
-	void resetHorizontalVelocity()
-	{
+	void resetHorizontalVelocity() {
 		this->Velocity.x = 0.f;
 		this->Velocity.z = 0.f;
 	}
 
 	// Reset full velocity
-	void resetVelocity()
-	{
+	void resetVelocity() {
 		this->resetVerticalVelocity();
 		this->resetHorizontalVelocity();
 	}
 
 	// Returns vTable
-	uintptr_t** vTable()
-	{
+	uintptr_t** vTable() {
 		return reinterpret_cast<uintptr_t**>((uintptr_t*)(this) + 0x0);
 	}
 
