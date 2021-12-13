@@ -7,8 +7,7 @@ public:
 	}
 	std::string OGName;
 	void OnEnable(ClientInstance* ci, Actor* lp) {
-		//OGName = lp->Nametag();
-		OGName = "Why are gay people so gay?";
+		OGName = lp->getName();
 	}
 	void OnGameTick(Actor* a1) override {
 		a1->setName("Streaming");

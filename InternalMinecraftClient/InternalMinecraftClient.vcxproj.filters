@@ -157,6 +157,7 @@
     <ClInclude Include="ClientBase\Modules\ChestStealer.h" />
     <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
     <ClInclude Include="ClientBase\Modules\InvCleaner.h" />
+    <ClInclude Include="ClientBase\Setting.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

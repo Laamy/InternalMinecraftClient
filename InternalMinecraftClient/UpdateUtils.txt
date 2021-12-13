@@ -21,7 +21,7 @@ RenderText:
 	Then Right Click and click "Select Current Function"
 	Now double click the spot it brought you to and right "ret" then press ok
 	Go to your mc and press escape one then go back to realms tab and if there is no more text that is the right render text address.
-	Make sure you have this plugin (https://filebin.net/k4ztzj6jsh39ekwp) installed in ce (if you dont I really could care less to explain how to instal it). Right click the address (after you reloaded your game and found it again, if you dont do this it will give u a sig with the ret and nop's which isint good).
+	Make sure you have this plugin (https://www.mediafire.com/file/ca2ue1zsagh6hwe/CESigMaker_[unknowncheats.me]_.dll/file) installed in ce (if you dont I really could care less to explain how to instal it). Right click the address (after you reloaded your game and found it again, if you dont do this it will give u a sig with the ret and nop's which isint good).
 	Then click "Generate Signature" then click "No".
 	That should be a working rendertext signature after u capitalize all the non capitalized things.
 RenderContext:
