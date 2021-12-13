@@ -9,6 +9,7 @@
 
 class BlockSource {};
 class GameMode;
+class BlockPos;
 
 class Actor {
 public:
