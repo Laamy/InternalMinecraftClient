@@ -2,7 +2,7 @@
 
 class CoordsHud : public Module {
 public:
-	CoordsHud(std::string cat) : Module(cat, "CoordsHud", "Display's your coordinates", 'J') {}
+	CoordsHud(std::string cat) : Module(cat, "CoordsHud", "Display's your coordinates (DO NOT TURN ON IF COORDS ARE ALREADY ON TRUST ME BAD THINGS HAPPEN RUN WHILE U STILL CAN!", 'J') {}
     //80 78 04 ? 74 ? B0 ? 48 83 C4 ? C3 32 C0 48 83 C4 ? C3 CC CC CC CC CC CC CC CC CC 48 83 EC
     void* targetAddress;
 
