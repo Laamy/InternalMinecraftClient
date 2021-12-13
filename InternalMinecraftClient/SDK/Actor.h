@@ -671,7 +671,7 @@ public: // Functions
 
 class ContainerManagement {
 private:
-	virtual __int64 destructor();
+	virtual __int64 Destructor();
 public:
 	virtual void tick(void);
 	virtual void handleEvent(uintptr_t ScreenEvent);
@@ -755,7 +755,7 @@ public:
 
 class Inventory : public Actor{
 public:
-	virtual void Contructor();
+	virtual void Destructor();
 	virtual void init(void);
 	virtual void serverInitItemStackIds(__int64, __int64, __int64);//kinda removed
 	virtual void addContentChangeListener(class ContainerContentChangeListener*);
