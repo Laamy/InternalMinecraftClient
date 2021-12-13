@@ -5,6 +5,7 @@
 #include "../SDK/Level.h"
 #include "GameMode.h"
 #include "../Utils/Utils.h"
+#include <functional>
 
 class BlockSource {};
 class GameMode;
@@ -760,9 +761,49 @@ public:
 
 class Inventory : public Actor{
 public:
+	virtual void Contructor();
+	virtual void init(void);
+	virtual void serverInitItemStackIds(__int64, __int64, __int64);//kinda removed
+	virtual void addContentChangeListener(class ContainerContentChangeListener*);
+	virtual void removeContentChangeListener(ContainerContentChangeListener*);
+	virtual int getItem(int);
+	virtual void hasRoomForItem(ItemStack const&);
+	virtual void addItem(ItemStack&);
+	virtual void addItemToFirstEmptySlot(ItemStack const&);
+	virtual void setItem(int, ItemStack const&);
+	virtual void setItemWithForceBalance(int, ItemStack const&, bool);
+	virtual void removeItem(int, int);
+	virtual void removeAllItems(void);
+	virtual void dropContents(BlockSource&, Vector3 const&, bool);
+	virtual int getContainerSize(void);
+	virtual int getMaxStackSize(void);
+	virtual void startOpen(Player&);
+	virtual void stopOpen(Player&);
+	virtual int getSlotCopies(void);
+	virtual int getSlots(void);
+	virtual int getItemCount(ItemStack const&);
+	virtual void findFirstSlotForItem(ItemStack const&);
+	virtual void canPushInItem(BlockSource&, int, int, class ItemInstance const&);
+	virtual void canPullOutItem(BlockSource&, int, int, ItemInstance const&);
+	virtual void setContainerChanged(int);
+	virtual void setContainerMoved(void);
+	virtual void setCustomName(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
+	virtual void hasCustomName(void);
+	virtual void readAdditionalSaveData(CompoundTag const&);
+	virtual void addAdditionalSaveData(CompoundTag&);
+	virtual void createTransactionContext();//removed
+	virtual void initializeContainerContents(BlockSource&);
+	virtual bool isEmpty(void);
+	virtual void add(ItemStack&);
+	virtual void canAdd(ItemStack const&);
+	virtual void clearSlot(int);
+	virtual void clearInventory(int);
+	virtual void load(class ListTag const&, class SemVersion const&, Level&);
+	virtual int getEmptySlotsCount(void);
+	virtual int getFirstEmptySlot(void);
+	virtual void setContainerSize(int);
 	//void dropSlot(int slot) {
 	//	static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(Inventory*, int)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
 	//	shiftClickItem(this, slot);
 	//}
 };
-
