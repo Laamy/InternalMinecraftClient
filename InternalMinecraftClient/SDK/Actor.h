@@ -755,8 +755,9 @@ public:
 };
 
 class Inventory : public Actor{
-public:
+private:
 	virtual void Destructor();
+public:
 	virtual void init(void);
 	virtual void serverInitItemStackIds(__int64, __int64, __int64);//kinda removed
 	virtual void addContentChangeListener(class ContainerContentChangeListener*);
