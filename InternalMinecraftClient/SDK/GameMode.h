@@ -6,13 +6,13 @@ public:
 private:
     virtual __int64 Destructor();
 public:
-    virtual __int64 startDestroyBlock(struct iVector3 const& pos, unsigned char blockSide, bool& isDestroyedOut);
-    virtual __int64 destroyBlock(struct iVector3*, unsigned char);
-    virtual __int64 continueDestroyBlock(struct iVector3 const&, unsigned char blockSide, bool& isDestroyedOut);
-    virtual __int64 stopDestroyBlock(struct iVector3 const&);
-    virtual __int64 startBuildBlock(struct iVector3 const&, unsigned char);
-    virtual void buildBlock(struct iVector3*, unsigned char);
-    virtual __int64 continueBuildBlock(struct iVector3 const&, unsigned char);
+    virtual __int64 startDestroyBlock(struct Vector3i const& pos, unsigned char blockSide, bool& isDestroyedOut);
+    virtual __int64 destroyBlock(struct Vector3i*, unsigned char);
+    virtual __int64 continueDestroyBlock(struct Vector3i const&, unsigned char blockSide, bool& isDestroyedOut);
+    virtual __int64 stopDestroyBlock(struct Vector3i const&);
+    virtual __int64 startBuildBlock(struct Vector3i const&, unsigned char);
+    virtual void buildBlock(struct Vector3i*, unsigned char);
+    virtual __int64 continueBuildBlock(struct Vector3i const&, unsigned char);
     virtual __int64 stopBuildBlock(void);
     virtual __int64 tick(void);
     virtual float getPickRange();
