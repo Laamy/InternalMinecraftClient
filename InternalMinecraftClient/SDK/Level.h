@@ -2,22 +2,19 @@
 
 class Level {
 private:
-	virtual void TryreoFunc1();
-	virtual void TryreoFunc2();
-	virtual void TryreoFunc3();
+	virtual void Destructor();
 public:
 	virtual void initialize(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class LevelSettings const&, class LevelData*, class Experiments const&, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const*);
 	virtual void postProcessResources(void);
 	virtual void startLeaveGame(void);
 	virtual bool isLeaveGameDone(void);
-	virtual void createDimension(); //removed
-	virtual int getDimension(); //removed
-	virtual void forEachDimension(); //removed
-	virtual void forEachDimension(class A); //removed
+	virtual void createDimension(__int64, int);//Could be broke
+	virtual int getDimension(__int64, int);//Could be broke
+	virtual void forEachDimension(__int64);//Could be broke
 	virtual int getChunkTickRange(void);
 	virtual int getPortalForcer(void);
-	virtual void requestPlayerChangeDimension(); //removed
-	virtual void entityChangeDimension(); //removed
+	virtual void requestPlayerChangeDimension(Player&, __int64);//Could be broke
+	virtual void entityChangeDimension(Actor&, __int64, int, __int64);//Could be broke
 	virtual int getSpawner(void);
 	virtual int getProjectileFactory(void);
 	virtual int getEntityDefinitions(void);
@@ -25,7 +22,6 @@ public:
 	virtual int getActorAnimationControllerGroup(void);
 	virtual int getBlockDefinitions(void);
 	virtual int getBlockComponentFactory(void);
-	virtual int getBlockComponentFactory2(void);
 	virtual int getActorPropertyGroup(void);
 	virtual int getSpawnRules(void);
 	virtual int getSpawnGroupRegistry(void);
@@ -37,18 +33,18 @@ public:
 	virtual int getDifficulty(void);
 	virtual int getInternalComponentRegistry(void);
 	virtual int getDimensionConversionData(void);
-	virtual int getSpecialMultiplier(); //removed
+	virtual int getSpecialMultiplier(__int64, int);//Could be broke
 	virtual void hasCommandsEnabled(void);
 	virtual void useMsaGamertagsOnly(void);
 	virtual void setMsaGamertagsOnly(bool);
-	virtual void registerEntity(); //removed
-	virtual void addEntity(); //removed
-	virtual void addGlobalEntity(); //removed
-	virtual void addAutonomousEntity(); //removed
-	virtual void addUser(); //removed
-	virtual void addDisplayEntity(); //removed
+	virtual void registerEntity(__int64);//Could be broke
+	virtual void addEntity(BlockSource&, __int64);//Could be broke
+	virtual void addGlobalEntity(BlockSource&, __int64);//Could be broke
+	virtual void addAutonomousEntity(BlockSource&, __int64);//Could be broke
+	virtual void addUser(__int64);//Could be broke
+	virtual void addDisplayEntity(BlockSource&, __int64);//Could be broke
 	virtual void removeDisplayEntity(class WeakEntityRef);
-	virtual void suspendPlayer(class Player&);
+	virtual void suspendPlayer(Player&);
 	virtual void resumePlayer(Player&);
 	virtual bool isPlayerSuspended(Player&);
 	virtual void removeActorAndTakeEntity(WeakEntityRef);
@@ -57,7 +53,7 @@ public:
 	virtual int getRuntimeEntity(class ActorRuntimeID, bool);
 	virtual int getMob(uint64_t);
 	virtual int getPlayer(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
-	virtual int getPlayer(); //removed
+	virtual int getPlayer(__int64 const&);//Could be broke
 	virtual int getPlayerByXuid(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual int getPlayerFromUnknownIdentifier(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual int getPlayer(uint64_t);
@@ -74,51 +70,40 @@ public:
 	virtual int getCurrentServerTick(void);
 	virtual void removeAllNonPlayerEntities(uint64_t);
 	virtual int getBiomeRegistry(void);
-	virtual int getBiomeRegistry2(void);
 	virtual int getBlockPalette(void);
-	virtual int getBlockPalette2(void);
 	virtual int getFeatureRegistry(void);
-	virtual int getFeatureRegistry2(void);
 	virtual int getFeatureTypeFactory(void);
-	virtual int getFeatureTypeFactory2(void);
 	virtual int getJigsawStructureRegistry(void);
-	virtual int getJigsawStructureRegistry2(void);
 	virtual int getStructureManager(void);
-	virtual int getStructureManager2(void);
 	virtual int getBiomeComponentFactory(void);
-	virtual int getBiomeComponentFactory2(void);
 	virtual int getSurfaceBuilderRegistry(void);
-	virtual int getSurfaceBuilderRegistry2(void);
 	virtual int getDimensionFactory(void);
-	virtual int getDimensionFactory2(void);
 	virtual int getLightTextureImageBuilderFactory(void);
-	virtual int getLightTextureImageBuilderFactory2(void);
 	virtual void addListener(class LevelListener&);
-	virtual void removeListener(class LevelListener&);
+	virtual void removeListener(LevelListener&);
 	virtual void tickEntities(void);
 	virtual void tickEntitySystems(void);
 	virtual int getPauseManager(void);
-	virtual int getPauseManager2(void);
 	virtual void onPlayerDeath(Player&, class ActorDamageSource const&);
 	virtual void tick(void);
-	virtual void directTickEntities(class BlockSource&);
-	virtual void animateTick(class Actor&);
-	virtual void explode(class BlockSource&, class Actor*, Vector3 const&, float, bool, bool, float, bool);
+	virtual void directTickEntities(BlockSource&);
+	virtual void animateTick(Actor&);
+	virtual void explode(BlockSource&, Actor*, Vector3 const&, float, bool, bool, float, bool);
 	virtual void explode(class Explosion&);
 	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Vector3 const&, Dimension*);
-	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, class Actor const&, Vector3 const&);
-	virtual void denyEffect(class BlockSource&, Vector3 const&);
-	virtual void potionSplash(); //removed
-	virtual void applyLiquidPhysicsToActor(class Actor*, class MaterialType);
-	virtual void extinguishFire(class BlockSource&, class BlockPos const&, class uchar);
-	virtual void findPath(class Actor&, int, int, int, class NavigationComponent&);
-	virtual void findPath2(class Actor&, Actor&, NavigationComponent&);
+	virtual void spawnParticleEffect(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, Actor const&, Vector3 const&);
+	virtual void denyEffect(BlockSource&, Vector3 const&);
+	virtual void potionSplash(Vector3 const&, __int64, bool);//Could be broke
+	virtual void applyLiquidPhysicsToActor(Actor*, class MaterialType);
+	virtual void extinguishFire(BlockSource&, BlockPos const&, struct uchar);
+	virtual void findPath(Actor&, int, int, int, class NavigationComponent&);
+	virtual void findPath(Actor&, Actor&, NavigationComponent&);
 	virtual void updateSleepingPlayerList(void);
 	virtual int getTime(void);
 	virtual void setTime(int);
 	virtual int getSeed(void);
 	virtual int getSharedSpawnPos(void);
-	virtual void setDefaultSpawn(class BlockPos const&);
+	virtual void setDefaultSpawn(BlockPos const&);
 	virtual int getDefaultSpawn(void);
 	virtual void setDefaultGameType(class GameType);
 	virtual int getDefaultGameType(void);
@@ -131,16 +116,16 @@ public:
 	virtual int getLANBroadcastIntent(void);
 	virtual void setLANBroadcast(bool);
 	virtual int getLANBroadcast(void);
-	virtual void setXBLBroadcastIntent(); //removed
+	virtual void setXBLBroadcastIntent(__int64);//Could be broke
 	virtual int getXBLBroadcastIntent(void);
 	virtual void hasXBLBroadcastIntent(void);
-	virtual void setXBLBroadcastMode(); //removed
+	virtual void setXBLBroadcastMode(__int64);//Could be broke
 	virtual int getXBLBroadcastMode(void);
 	virtual void hasXBLBroadcast(void);
-	virtual void setPlatformBroadcastIntent(); //removed
+	virtual void setPlatformBroadcastIntent(__int64);//Could be broke
 	virtual int getPlatformBroadcastIntent(void);
 	virtual void hasPlatformBroadcastIntent(void);
-	virtual void setPlatformBroadcastMode(); //removed
+	virtual void setPlatformBroadcastMode(__int64);//Could be broke
 	virtual int getPlatformBroadcastMode(void);
 	virtual void hasPlatformBroadcast(void);
 	virtual void setHasLockedBehaviorPack(bool);
@@ -149,9 +134,7 @@ public:
 	virtual void setWorldTemplateOptionsUnlocked(void);
 	virtual void hasLevelStorage(void);
 	virtual int getLevelStorage(void);
-	virtual int getLevelStorage2(void);
 	virtual int getLevelData(void);
-	virtual int getLevelData2(void);
 	virtual int getPhotoStorage(void);
 	virtual void createPhotoStorage(void);
 	virtual void setEducationLevelSettings(class EducationLevelSettings);
@@ -169,27 +152,27 @@ public:
 	virtual void requestTimedStorageDeferment(void);
 	virtual void _checkUserStorage(void);
 	virtual int getTickingAreasMgr(void);
-	virtual int getTickingArea(); //removed
+	virtual int getTickingArea(__int64);//Could be broke
 	virtual void addParticle(class ParticleType, Vector3 const&, Vector3 const&, int, class CompoundTag const*, bool);
 	virtual void sendServerLegacyParticle(ParticleType, Vector3 const&, Vector3 const&, int);
 	virtual void playSound(class LevelSoundEvent, Vector3 const&, int, class ActorDefinitionIdentifier const&, bool, bool);
 	virtual void playSound(LevelSoundEvent, Vector3 const&, float, float);
-	virtual void playSound(class BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void playSynchronizedSound(class BlockSource&, LevelSoundEvent, Vector3 const&, class Block const&, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void playSynchronizedSound(class BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void setRemotePlayerEventCoordinator(); //removed
+	virtual void playSound(BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
+	virtual void playSynchronizedSound(BlockSource&, LevelSoundEvent, Vector3 const&, Block const&, ActorDefinitionIdentifier const&, bool, bool);
+	virtual void playSynchronizedSound(BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
+	virtual void setRemotePlayerEventCoordinator(__int64);//Could be broke
 	virtual int getRemotePlayerEventCoordinator(void);
-	virtual void setServerPlayerEventCoordinator(); //removed
+	virtual void setServerPlayerEventCoordinator(__int64);//Could be broke
 	virtual int getServerPlayerEventCoordinator(void);
-	virtual void setClientPlayerEventCoordinator(); //removed
+	virtual void setClientPlayerEventCoordinator(__int64);//Could be broke
 	virtual int getClientPlayerEventCoordinator(void);
-	virtual void setActorEventCoordinator(); //removed
+	virtual void setActorEventCoordinator(__int64);//Could be broke
 	virtual int getActorEventCoordinator(void);
-	virtual void setBlockEventCoordinator(); //removed
+	virtual void setBlockEventCoordinator(__int64);//Could be broke
 	virtual int getBlockEventCoordinator(void);
-	virtual void setItemEventCoordinator(); //removed
+	virtual void setItemEventCoordinator(__int64);//Could be broke
 	virtual int getItemEventCoordinator(void);
-	virtual void setServerNetworkEventCoordinator(); //removed
+	virtual void setServerNetworkEventCoordinator(__int64);//Could be broke
 	virtual int getServerNetworkEventCoordinator(void);
 	virtual int getLevelEventCoordinator(void);
 	virtual void handleLevelEvent(class LevelEvent, Vector3 const&, int);
@@ -200,59 +183,53 @@ public:
 	virtual void handleStopAllSounds(void);
 	virtual void broadcastLevelEvent(LevelEvent, Vector3 const&, int, class UserEntityIdentifierComponent const*);
 	virtual void broadcastLevelEvent(LevelEvent, CompoundTag const&, UserEntityIdentifierComponent const*);
-	virtual void broadcastLocalEvent(class BlockSource&, LevelEvent, Vector3 const&, int);
-	virtual void broadcastLocalEvent(class BlockSource&, LevelEvent, Vector3 const&, Block const&);
-	virtual void broadcastSoundEvent(class BlockSource&, LevelSoundEvent, Vector3 const&, Block const&, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void broadcastSoundEvent(class BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
-	virtual void broadcastActorEvent(class Actor&, class ActorEvent, int);
+	virtual void broadcastLocalEvent(BlockSource&, LevelEvent, Vector3 const&, int);
+	virtual void broadcastLocalEvent(BlockSource&, LevelEvent, Vector3 const&, class Block const&);
+	virtual void broadcastSoundEvent(BlockSource&, LevelSoundEvent, Vector3 const&, Block const&, ActorDefinitionIdentifier const&, bool, bool);
+	virtual void broadcastSoundEvent(BlockSource&, LevelSoundEvent, Vector3 const&, int, ActorDefinitionIdentifier const&, bool, bool);
+	virtual void broadcastActorEvent(Actor&, class ActorEvent, int);
 	virtual void addBossEventListener(class BossEventListener*);
 	virtual void removeBossEventListener(BossEventListener*);
 	virtual void broadcastBossEvent(class BossEventUpdateType, uint64_t const&, class BossEventPacket const&);
 	virtual void broadcastBossEvent(BossEventUpdateType);
 	virtual void areBossEventListenersReady(void);
-	virtual void addChunkViewTracker(); //removed
+	virtual void addChunkViewTracker(__int64);//Could be broke
 	virtual void pruneChunkViewTrackers(void);
 	virtual void onChunkReload(class Bounds const&);
-private:
-	virtual void TryroFunc211();
-public:
+	virtual void onChunkReloaded(class ChunkSource&, LevelChunk&);
+	virtual int getPlayerNames(void);
 	virtual int getActivePlayerCount(void);
 	virtual int getActiveUsersCount(void);
-private:
-	virtual void TryroFunc214(); //removed chunk
-	virtual void TryroFunc215();
-	virtual void TryroFunc216();
-	virtual void TryroFunc217();
-	virtual void TryroFunc218();
-public:
+	virtual void forEachPlayer(__int64);//Could be broke
+	virtual void forEachUser(__int64);//Could be broke
+	virtual void findPlayer(__int64);//Could be broke
 	virtual int getUserCount(void);
 	virtual void countUsersWithMatchingNetworkId(class NetworkIdentifier const&);
 	virtual int getUsers(void);
-	virtual int getUsers2(void);
 	virtual int getEntities(void);
-	virtual void onSubChunkLoaded(class ChunkSource&, LevelChunk&, short);
-	virtual void onChunkLoaded(class ChunkSource&, LevelChunk&);
+	virtual void onSubChunkLoaded(ChunkSource&, LevelChunk&, short);
+	virtual void onChunkLoaded(ChunkSource&, LevelChunk&);
 	virtual void onChunkDiscarded(LevelChunk&);
-	virtual void queueEntityDestruction(); //removed
-	virtual void removeEntityReferences(class Actor&, bool);
-	virtual void removeEntity(class Actor&);
+	virtual void queueEntityDestruction(__int64, bool);//Could be broke
+	virtual void removeEntityReferences(Actor&, bool);
+	virtual void removeEntity(Actor&);
 	virtual void removeEntity(WeakEntityRef);
-	virtual void removeEntityIfExists(class Actor*);
-	virtual void forceRemoveEntity(class Actor&);
+	virtual void removeEntityIfExists(Actor*);
+	virtual void forceRemoveEntity(Actor&);
 	virtual void forceFlushRemovedPlayers(void);
 	virtual void loadFunctionManager(void);
-	virtual void levelCleanupQueueEntityRemoval(); //removed
+	virtual void levelCleanupQueueEntityRemoval(__int64, bool);//Could be broke
 	virtual void registerTemporaryPointer(class _TickPtr&);
 	virtual void unregisterTemporaryPointer(_TickPtr&);
-	virtual void destroyBlock(class BlockSource&, BlockPos const&, bool);
+	virtual void destroyBlock(BlockSource&, BlockPos const&, bool);
 	virtual void upgradeStorageVersion(class StorageVersion);
 	virtual void suspendAndSave(void);
 	virtual void waitAsyncSuspendWork(void);
-	virtual void _destroyEffect(class BlockPos const&, Block const&, int);
+	virtual void _destroyEffect(BlockPos const&, Block const&, int);
 	virtual void addParticleEffect(class HashedString const&, Vector3 const&, class MolangVariableMap const&);
-	virtual void addParticleEffect(HashedString const&, class Actor const&, HashedString const&, Vector3 const&, MolangVariableMap const&);
-	virtual void addTerrainParticleEffect(class BlockPos const&, Block const&, Vector3 const&, float, float, float);
-	virtual void addTerrainSlideEffect(class BlockPos const&, Block const&, Vector3 const&, float, float, float);
+	virtual void addParticleEffect(HashedString const&, Actor const&, HashedString const&, Vector3 const&, MolangVariableMap const&);
+	virtual void addTerrainParticleEffect(BlockPos const&, Block const&, Vector3 const&, float, float, float);
+	virtual void addTerrainSlideEffect(BlockPos const&, Block const&, Vector3 const&, float, float, float);
 	virtual void addBreakingItemParticleEffect(Vector3 const&, ParticleType, class TextureUVCoordinateSet const&, bool);
 	virtual int getNewUniqueID(void);
 	virtual int getNextRuntimeID(void);
@@ -267,12 +244,10 @@ public:
 	virtual void requestMapInfo(uint64_t, bool);
 	virtual void expandMapByID(uint64_t, bool);
 	virtual void copyAndLockMap(uint64_t, uint64_t);
-private:
-	virtual void TryroFunc261();
-	virtual void TryroFunc262();
-	virtual void TryroFunc263();
-	virtual void TryroFunc264();
-public:
+	virtual void createMapSavedData(uint64_t const&, BlockPos const&, __int64, int, int);//Could be broke
+	virtual void createMapSavedData(std::vector<uint64_t> const&, BlockPos const&, __int64, int, int);//Could be broke
+	virtual int getScreenshotsFolder(void);
+	virtual int getLevelId(void);
 	virtual void setLevelId(std::basic_string<char, std::char_traits<char>, std::allocator<char>>);
 	virtual int getSyncTasksGroup(void);
 	virtual int getIOTasksGroup(void);
@@ -280,28 +255,27 @@ public:
 	virtual int getServerResourcePackManager(void);
 	virtual int getTradeTables(void);
 	virtual void addEntryToTagCache(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
-	virtual void addEntriesToTagCache(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>, std::allocator<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>>);
+	virtual void addEntriesToTagCache(std::vector<std::basic_string<char, std::char_traits<char>, std::allocator<char>>>);
 	virtual void dropEntryFromTagCache(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);
 	virtual void clearTagCache(void);
-	virtual void decrementTagCache(); //removed
-	virtual void incrementTagCache(); //removed
+	virtual void decrementTagCache(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, __int64, __int64);//Could be broke
+	virtual void incrementTagCache(std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&, __int64, __int64);//Could be broke
 	virtual bool isEdu(void);
 	virtual int getActorFactory(void);
-	virtual int getActorFactory2(void);
 	virtual int getActorInfoRegistry(void);
 	virtual int getEntityRegistryOwner(void);
 	virtual int getEntitySystems(void);
 	virtual int getLevelEntity(void);
 	virtual void _clientHandleAddOwnedEntity(class EntityNetId);
-	virtual void _clientHandleAddWeakRefEntity(); //removed
+	virtual void _clientHandleAddWeakRefEntity(EntityNetId, __int64 const&);//Could be broke
 	virtual void _clientHandleRemoveOwnedEntity(EntityNetId);
 	virtual void _clientHandleRemoveWeakRefEntity(EntityNetId);
 	virtual void runCommand(HashedString const&, class CommandOrigin&, class CommandOriginSystem, class CurrentCmdVersion);
-	virtual void runCommand(class Command&, CommandOrigin&, CommandOriginSystem);
+	virtual void runCommand(class Command2&, CommandOrigin&, CommandOriginSystem);//Could be broke
 	virtual int getTagRegistry(void);
 	virtual int getPlayerMovementSettings(void);
 	virtual void setPlayerMovementSettings(class PlayerMovementSettings const&);
-	virtual void canUseSkin(); //removed
+	virtual void canUseSkin(class SerializedSkin const&, NetworkIdentifier const&, __int64, std::basic_string<char, std::char_traits<char>, std::allocator<char>> const&);//Could be broke
 	virtual int getPositionTrackerDBClient(void);
 	virtual int getPositionTrackerDBServer(void);
 	virtual void flushRunTimeLighting(void);
@@ -309,21 +283,18 @@ public:
 	virtual void initializeBlockDefinitionGroup(void);
 	virtual int getUnknownBlockTypeRegistry(void);
 private:
-	virtual void TryroFunc300();
+	virtual void TryroFunc298();
 public:
 	virtual bool isClientSide(void);
 	virtual int getPlayerList(void);
-	virtual int getPlayerList2(void);
-private:
-	virtual void TryroFunc304();
-	virtual void TryroFunc305();
-public:
+	virtual int getPlayerXUID(__int64 const&);//Could be broke
+	virtual int getPlayerPlatformOnlineId(__int64 const&);//Could be broke
 	virtual int getActiveUsers(void);
 	virtual int getRuntimeActorList(void);
 	virtual int getGlobalActors(void);
 	virtual int getAutonomousActors(void);
 	virtual int getAutonomousLoadedEntities(void);
-	virtual void removeAutonomousEntity(class Actor&, LevelChunk*);
+	virtual void removeAutonomousEntity(Actor&, LevelChunk*);
 	virtual void notifySubChunkRequestManager(class SubChunkPacket const&);
 	virtual int getSubChunkRequestManager(void);
 	virtual int getPacketSender(void);
@@ -331,19 +302,17 @@ public:
 	virtual int getNetEventCallback(void);
 	virtual void setNetEventCallback(class NetEventCallback*);
 	virtual int getRandom(void);
+	virtual int getThreadRandom(void);
 	virtual int getHitResult(void);
 	virtual int getLiquidHitResult(void);
-private:
-	virtual void TryroFunc321();
-public:
+	virtual int getImmersiveReaderString(void);
 	virtual void setImmersiveReaderString(std::basic_string<char, std::char_traits<char>, std::allocator<char>>);
 	virtual int getAdventureSettings(void);
 	virtual int getGameRules(void);
-	virtual int getGameRules2(void);
 	virtual void hasStartWithMapEnabled(void);
 	virtual int getDefaultAbilities(void);
 	virtual int getTearingDown(void);
-	virtual void takePicture(); //removed
+	virtual void takePicture(class ImageBuffer&, Actor*, Actor*, class ScreenshotOptions&);//Could be broke
 	virtual int getSoundPlayer(void);
 	virtual void setSimPaused(bool);
 	virtual int getSimPaused(void);
@@ -359,13 +328,14 @@ public:
 	virtual int getSpawnableTickedMobCountPrevious(void);
 	virtual int getRecipes(void);
 	virtual int getBlockReducer(void);
-	virtual void digestServerBlockProperties(class StartGamePacket const&, class uint);
+	virtual void digestServerBlockProperties(class StartGamePacket const&, struct uint);
 	virtual void digestServerItemComponents(class ItemComponentPacket const&);
 	virtual int getRegisteredBorderBlock(void);
 	virtual void asLevel(void);
 	virtual void asMultiPlayerLevel(void);
-	virtual void onSourceCreated(class BlockSource&);
-	virtual void onSourceDestroyed(class BlockSource&);
+	virtual void onSourceCreated(BlockSource&);
+	virtual void onSourceDestroyed(BlockSource&);
+	virtual void _localPlayerChangedDimension(void);
 
 private:
 	char pad_0x0000[0x518]; //0x0000
