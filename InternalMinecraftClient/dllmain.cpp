@@ -212,7 +212,7 @@ void tCallback(void* a1, MinecraftUIRenderContext* ctx) { // RenderContext
         if (justDisabled && clientInst->isInGame()) { //Eject Message
             disabledTicks++;
             if (disabledTicks == 1) {
-                localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
+                //localPlr->displayClientMessage("[TreroInternal] Client succesfuly ejected!");
             }
         }
 

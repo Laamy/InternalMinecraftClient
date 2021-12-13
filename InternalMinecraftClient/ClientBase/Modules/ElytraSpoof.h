@@ -4,7 +4,7 @@ class ElytraSpoof : public Module {
 public:
 	VirtualFuncHook* func;
 	ElytraSpoof(std::string cat) : Module(cat, "ElytraSpoof", "Spoof the game to think you're wearing elytra", 0x07) {
-		uintptr_t address = Mem::findSig("48 89 5C ? ? 57 48 81 EC ? ? ? ? 33 FF 89");
+		uintptr_t address = Mem::findSig("48 89 5C 24 10 57 48 81 EC B0 ?? ?? ?? 33 FF 89");
 		func = hooks->createHook("elytraFlightSpoof", address, isUsingElytra);
 	}
 
