@@ -12,6 +12,6 @@ public:
         std::string txt1 = std::to_string((int)d.x);
         std::string txt2 = std::to_string((int)d.y);
         std::string txt3 = std::to_string((int)d.z);
-        player->displayClientMessage("[TreroInternal]" + txt1 + ", " + txt2 + ", " + txt3);
+        player->displayClientMessage("[TreroInternal] " + txt1 + ", " + txt2 + ", " + txt3);
 	}
 };
