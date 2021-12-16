@@ -258,13 +258,7 @@ void ContainerTickCallback(ContainerManagement* a1, Actor* lp) {
         }
     }
 }
-/*
-void gamemodeCallback(GameMode* gm, void* a2) {
-    _gamemode(gm, a2);
-    for (auto mod : handler.modules)
-    if (mod->enabled) mod->OnGameTick(gm);
-}
-*/
+
 void SendChatMsg(const char txt[64]) { // i was testing please ignore!
     auto sce = TextHolder(txt);
     //DisplayObj("Sent!");
@@ -355,7 +349,6 @@ void Init(LPVOID c) {
         uintptr_t containerScreenTick = Mem::findSig("48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 E8 ? ? ? ? 48 8B 17");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("F3 0F 10 81 ? ? ? ? 41 0F 2F 00"); //VV - 83 7B 4C 01 75 1C 80 7B
-        //uintptr_t gamemodeAddr = Mem::findSig("48 8D 05 02 80 23 02 48 89 01 48 89 51 08 48 C7 41 10 FF FF FF FF C7 41 18 FF FF FF FF 44 88 61 1C");
         //uintptr_t displayObjAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 55 57 41 54 41 56 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 30 4C 8B F1");
         //uintptr_t mouseAddr = Mem::findSig("48 89 5C 24 ? 48 89 74 24 ? 48 89 7C 24 ? 55 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 8B 05 ? ? ? ? 48 33 C4 48 89 45 F0 48 8B ? E8");
         uintptr_t renderCtxAddr = Mem::findSig("48 8B ? 48 89 ? ? 55 56 57 41 ? 41 ? 41 ? 41 ? 48 8D ? ? ? ? ? 48 81 EC ? ? ? ? 0F 29 ? ? 0F 29 ? ? 48 8B ? ? ? ? ? 48 33 ? 48 89 ? ? ? ? ? 4C 8B ? 48 89 ? ? ? 4C 8B"); //48 8B C4 48 89 58 ? 55 56 57 41 54 41 55 41 56 41 57 48 8D A8 ? ? ? ? 48 81 EC ? ? ? ? 0F 29 70 B8 0F 29 78 A8 48 8B 05 ? ? ? ? 48 33 C4 48 89 85 ? ? ? ? 4C 8B FA 48 89 54 24 ? 4C 8B
