@@ -5,16 +5,18 @@
 #include "Player.h"
 #include <memory>
 
-class TimerClass2 {
-public:
-	float timer; //0x0000
-};
-
 class TimerClass {
 private:
 	char pad_0x0000[0xD0 + (0x8 * 1)]; //0x0000
 public:
-	TimerClass2* timerClass;
+	float* mainTimer;
+	float* otherTimer;
+
+	void setTimerSpeed(float tps) {
+		*this->mainTimer = tps;
+		*this->otherTimer = tps;
+		return;
+	};
 };
 
 class LoopbackSender {
@@ -72,7 +74,7 @@ public:
 	};
 
 	auto getTimerClass() {
-		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xD0); //unknown
+		return reinterpret_cast<class TimerClass*>((uintptr_t)(this) + 0xC0); 
 	};
 
 	auto getLoopbackSender() {
