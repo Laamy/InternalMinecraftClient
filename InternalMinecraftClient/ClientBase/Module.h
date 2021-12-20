@@ -21,7 +21,7 @@ public:
     bool enabled;
 
 	// Private variables
-	std::vector<Setting> settings;
+	std::vector<Setting*> settings;
 
 public: // functions
 	virtual void drawTooltip(TextHolder tooltip) {
@@ -40,7 +40,7 @@ public: // functions
 	}
 
 	void addSetting(Setting setting) {
-		settings.push_back(setting);
+		settings.push_back(&setting);
 	}
 
 	double _pow(double a, double b) {
