@@ -44,7 +44,7 @@ private:
 public:
 	class BitmapFont* defaultgameFont2; //idk, but it works lmfao
 
-	bool canUseKeys() {
-		return *reinterpret_cast<bool**>(this + 0x300);
-	}
+	auto canUseKeys() {
+        return *reinterpret_cast<bool*>((uintptr_t)(this) + 0x300);
+    };
 }; // 0x110
