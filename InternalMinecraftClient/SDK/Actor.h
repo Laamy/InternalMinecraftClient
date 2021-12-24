@@ -576,8 +576,8 @@ public: // Functions
 		return *reinterpret_cast<class BlockSource**>(reinterpret_cast<__int64>(this) + 0x358);
 	};
 
-	__int64* getInventory() {
-		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0xB88);
+	class Inventory* getInventory() {
+		return *reinterpret_cast<class Inventory**>(reinterpret_cast<__int64>(this) + 0xB88);
 	};
 
 	void SetRenderPosition(Vector3 v) {
@@ -603,11 +603,6 @@ public: // Functions
 
 	float FieldOfView() {
 		return *reinterpret_cast<float*>(this + 0x1050);
-	}
-
-	void dropSlot(int slot) {
-		static auto dropSlot = reinterpret_cast<__int64(__fastcall*)(Actor*, int, char)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
-		dropSlot(this, slot, 0);
 	}
 
 	Vector2* bodyRots() {
@@ -822,10 +817,12 @@ public:
 	virtual int getEmptySlotsCount(void);
 	virtual int getFirstEmptySlot(void);
 	virtual void setContainerSize(int);
-	//void dropSlot(int slot) {
-	//	static auto shiftClickItem = reinterpret_cast<__int64(__fastcall*)(Inventory*, int)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
-	//	shiftClickItem(this, slot);
-	//}
+	void dropSlot(int slot) {
+		using drop_t = void(__fastcall*)(Inventory*, int, char);
+		static drop_t func = reinterpret_cast<drop_t>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
+		if (func != 0)
+			func(this, slot, 0);
+	}
 };
 
 class Item {
