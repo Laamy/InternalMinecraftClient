@@ -7,7 +7,6 @@
 #include "../Utils/Utils.h"
 #include <functional>
 
-class BlockSource {};
 class GameMode;
 class BlockPos;
 
@@ -573,8 +572,8 @@ public: // Functions
 		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0x360);
 	};
 
-	__int64* getBlockSource() {
-		return *reinterpret_cast<__int64**>(reinterpret_cast<__int64>(this) + 0x358);
+	class BlockSource* getBlockSource() {
+		return *reinterpret_cast<class BlockSource**>(reinterpret_cast<__int64>(this) + 0x358);
 	};
 
 	__int64* getInventory() {
@@ -668,6 +667,31 @@ public: // Functions
 	int getPlayerGameType() {
 		return *reinterpret_cast<int*>(this + 0x1D8C);
 	}
+};
+
+class BlockSource {
+public:
+	virtual int getWeakRef(void);
+	virtual void addListener(class BlockSourceListener&);
+	virtual void removeListener(BlockSourceListener&);
+	virtual void fetchEntities(class ActorType, AABB const&, Actor const*);
+	virtual void hasChunksAt(class Bounds const&);
+	virtual void hasChunksAt(BlockPos const&, int);
+	virtual void hasChunksAt(AABB const&);
+	virtual int getBlock(int, int, int);
+	virtual int getBlock(BlockPos const&);
+	virtual int getMaterial(BlockPos const&);
+	virtual int getMaterial(int, int, int);
+	virtual void containsAnyLiquid(AABB const&);
+	virtual void containsMaterial(AABB const&, MaterialType);
+	virtual int getMinHeight(void);
+	virtual int getDimension(void);
+	virtual int getDimensionId(void);
+	virtual void fetchAABBs(AABB const&, bool);
+	virtual void fetchCollisionShapes(AABB const&, float*, bool, IActorMovementProxy*);
+	virtual int getChunkSource(void);
+private:
+	virtual void Destructor();
 };
 
 class ContainerManagement {
