@@ -6,7 +6,7 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		//not sure why not working someone pls mess with this!
-		for (int i = 0; i < 37; i++) {
+		for (int i = 0; i < 36; i++) {
 			lp->dropSlot(i);
 		}
 	}
