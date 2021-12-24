@@ -577,7 +577,7 @@ public: // Functions
 	};
 
 	class Inventory* getInventory() {
-		return *reinterpret_cast<class Inventory**>(reinterpret_cast<__int64>(this) + 0xB88);
+		return *reinterpret_cast<Inventory**>(*reinterpret_cast<uint64_t*>(reinterpret_cast<__int64>(this) + 0xB88) + 0xB0);
 	};
 
 	void SetRenderPosition(Vector3 v) {
@@ -818,10 +818,8 @@ public:
 	virtual int getFirstEmptySlot(void);
 	virtual void setContainerSize(int);
 	void dropSlot(int slot) {
-		using drop_t = void(__fastcall*)(Inventory*, int, char);
-		static drop_t func = reinterpret_cast<drop_t>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
-		if (func != 0)
-			func(this, slot, 0);
+		static auto dropSlot = reinterpret_cast<__int64(__fastcall*)(Inventory*, int, char)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
+		dropSlot(this, slot, 0);
 	}
 };
 

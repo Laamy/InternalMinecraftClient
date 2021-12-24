@@ -6,8 +6,10 @@ public:
 
 	void OnGameTick(Actor* lp) override {
 		//not sure why not working someone pls mess with this!
+		auto player = clientInst->getLocalPlayer();
+		auto inv = player->getInventory();
 		for (int i = 0; i < 36; i++) {
-		//	lp->dropSlot(i);
+			inv->dropSlot(i);
 		}
 	}
 };
