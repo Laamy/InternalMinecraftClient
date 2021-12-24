@@ -607,8 +607,8 @@ public: // Functions
 	}
 
 	void dropSlot(int slot) {
-		static auto dropSlot = reinterpret_cast<__int64(__fastcall*)(Actor*, int)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
-		dropSlot(this, slot);
+		static auto dropSlot = reinterpret_cast<__int64(__fastcall*)(Actor*, int, char)>(Mem::findSig("85 D2 0F 88 ? ? ? ? 48 89 5C 24 ? 55 56 57 41 54"));
+		dropSlot(this, slot, 0);
 	}
 
 	Vector2* bodyRots() {
