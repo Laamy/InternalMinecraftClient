@@ -81,6 +81,7 @@
 #include "Modules/ViewModel.h"
 #include "Modules/Instabreak.h"
 #include "Modules/CoordsHud.h"
+#include "Modules/BlockReach.h"
 
 // IN DEVELOPMENT!
 #include "Modules/NameTags.h"
@@ -181,6 +182,7 @@ public:
         modules.push_back(new ShulkerNest(misc));
         modules.push_back(new TestModule(misc));
         modules.push_back(new DebugCursor(misc));
+        modules.push_back(new BlockReach(misc));
 
         modules.push_back(new NoObstructionSwing(swing));
         modules.push_back(new FluxSwing(swing));

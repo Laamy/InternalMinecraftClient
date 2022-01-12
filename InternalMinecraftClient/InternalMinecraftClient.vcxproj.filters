@@ -161,6 +161,7 @@
     <ClInclude Include="ClientBase\Modules\CoordsHud.h" />
     <ClInclude Include="ClientBase\Commands\PosCommand.h" />
     <ClInclude Include="ClientBase\Modules\Instabreak.h" />
+    <ClInclude Include="ClientBase\Modules\BlockReach.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

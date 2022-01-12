@@ -18,6 +18,6 @@ public:
     }
 
     static float getDestroySpeed(class Player, Block) {
-        return 999.f;
+        return 1000.f;
     }
 };
