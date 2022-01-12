@@ -79,6 +79,7 @@
 #include "Modules/AntiFreeze.h"
 #include "Modules/ElytraSpoof.h"
 #include "Modules/ViewModel.h"
+#include "Modules/Instabreak.h"
 #include "Modules/CoordsHud.h"
 
 // IN DEVELOPMENT!
@@ -124,6 +125,7 @@ public:
         modules.push_back(new Jesus(world));
         modules.push_back(new StreamName(world));
         modules.push_back(new HighJump(world));
+        modules.push_back(new Instabreak(world));
         modules.push_back(new Spider(world));
         modules.push_back(new Step(world));
 

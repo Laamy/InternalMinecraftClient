@@ -159,6 +159,8 @@
     <ClInclude Include="ClientBase\Modules\InvCleaner.h" />
     <ClInclude Include="ClientBase\Setting.h" />
     <ClInclude Include="ClientBase\Modules\CoordsHud.h" />
+    <ClInclude Include="ClientBase\Commands\PosCommand.h" />
+    <ClInclude Include="ClientBase\Modules\Instabreak.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

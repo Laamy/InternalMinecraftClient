@@ -182,6 +182,7 @@
     <ClInclude Include="ClientBase\Modules\CoordsHud.h" />
     <ClInclude Include="ClientBase\Modules\ElytraSpoof.h" />
     <ClInclude Include="ClientBase\Modules\FloppySwing.h" />
+    <ClInclude Include="ClientBase\Modules\Instabreak.h" />
     <ClInclude Include="ClientBase\Modules\InvCleaner.h" />
     <ClInclude Include="ClientBase\Modules\NoObstructionSwing.h" />
     <ClInclude Include="ClientBase\Modules\AntiImmobile.h" />
