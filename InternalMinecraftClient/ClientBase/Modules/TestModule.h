@@ -29,8 +29,8 @@ public:
 		func->disableHook();
 	}
 
-	static float* Test(__int64 _this, float* color, __int64 a3, float a4) {
-		return color;
+	static void Test(Actor* ent, Vector3 pos) {
+		pos = Vector3(10, 17, 10);
 	}
 	virtual void OnFrameRender(RenderUtils* ctx) {
 		//ctx->FillRectAndDrawRect(Rect(10, 100, 10, 100), _RGB(0, 0, 255), _RGB(255, 0, 0), 0.25f, 1.f, 1.f);
