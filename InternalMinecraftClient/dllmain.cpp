@@ -345,7 +345,7 @@ void Init(LPVOID c) {
                 categories.push_back(mod->category);
         }
         // Function hooks
-        uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 08 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA 89");
+        uintptr_t keymapAddr = Mem::findSig("48 89 5C 24 ? 57 48 83 EC ? 8B 05 ? ? ? ? 8B DA");
         uintptr_t containerScreenTick = Mem::findSig("48 89 5C 24 ? 57 48 83 EC ? 48 8B F9 E8 ? ? ? ? 48 8B 17");
         uintptr_t hookAddr = Mem::findSig("48 8B 01 48 8D 54 24 ? FF 90 ? ? ? ? 90 48 8B 08 48 85 ? 0F 84 ? ? ? ? 48 8B 58 08 48 85 DB 74 0B F0 FF 43 08 48 8B 08 48 8B 58 08 48 89 4C 24 20 48 89 5C 24 28 48 8B 09 48 8B 01 4C 8B C7 48 8B");
         uintptr_t localPlayerAddr = Mem::findSig("73 ? B0 ? C3 32 C0 C3 CC CC CC CC CC 48 83 EC"); //VV - 83 7B 4C 01 75 1C 80 7B
